@@ -9,45 +9,45 @@ Dependency Injection (DI) is a fundamental aspect of building scalable, maintain
 
 Ideal for: Small to medium-sized projects where development speed and code readability are priorities, and performance is not the critical concern.
 
-##### Key Features:
+**Key Features:**
 
-Fluent interface for configuration
-Supports convention-based binding
-Lightweight and minimal performance overhead
+- Fluent interface for configuration
+- Supports convention-based binding
+- Lightweight and minimal performance overhead
 
 ### Autofac
 [Autofac](https://github.com/autofac/Autofac) is a feature-rich IoC container known for its flexibility and broad feature set. It supports advanced scenarios such as open generics, keyed services, and modules for organizing registration logic. Autofac is designed for complex applications that require fine-grained control over their dependency injection patterns.
 
 Ideal for: Large and complex applications that need advanced DI features, such as property and method injection, or instances that require specific lifetime management beyond the basics.
 
-##### Key Features:
+**Key Features:**
 
-Advanced lifetime management
-Modular registration support
-Property and method injection
+- Advanced lifetime management
+- Modular registration support
+- Property and method injection
 
 ### Scrutor
 [Scrutor](https://github.com/khellang/Scrutor) enhances the service collection provided by Microsoft.Extensions.DependencyInjection, adding assembly scanning and decoration capabilities. It allows developers to automatically register services following certain conventions, reducing the manual configuration typically required.
 
 Ideal for: Applications built with ASP.NET Core that need to streamline service registration without moving away from the built-in .NET Core DI container.
 
-##### Key Features:
+**Key Features:**
 
-Assembly scanning for automatic service registration
-Service decoration
-Extends Microsoft.Extensions.DependencyInjection without replacing it
+- Assembly scanning for automatic service registration
+- Service decoration
+- Extends Microsoft.Extensions.DependencyInjection without replacing it
 
 ### Bindicate
 [Bindicate](https://github.com/Tim-Maes/Bindicate) simplifies the registration of services in .NET applications by using attributes directly on the classes. This approach promotes cleaner code and easier maintainability by reducing boilerplate code and closely associating the registration logic with the service class itself.
 
 Ideal for: Projects that value simplicity and convention over configuration, where the majority of service registrations are straightforward.
 
-##### Key Features:
+**Key Features:**
 
-Attribute-based service registration
-Supports scopes, transients, and singletons
-Can register options
-Simplifies .NET configuration
+- Attribute-based service registration
+- Supports scopes, transients, singletons and keyed services
+- Can register options
+- Simplifies .NET configuration
 
 ### Comparison Summary
 
