@@ -1,4 +1,9 @@
-## Comparing .NET Dependency Injection Libraries: Bindicate, Ninject, Autofac, and Scrutor
+---
+tags: Dependency Injection
+comment_issue_id: 2
+---
+
+## Source G## Comparing .NET Dependency Injection Libraries: Bindicate, Ninject, Autofac, and Scrutor
 
 Dependency Injection (DI) is a fundamental aspect of building scalable, maintainable, and testable .NET applications. While .NET offers its built-in IoC container, several libraries enhance or extend its capabilities, each with its unique approach. In this post we are comparing three popular libraries, and a new one: Bindicate, Ninject, Autofac, and Scrutor, to help you decide which might be best suited for your project.
 

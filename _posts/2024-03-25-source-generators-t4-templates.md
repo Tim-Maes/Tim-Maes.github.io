@@ -1,3 +1,7 @@
+---
+tags: T4, Source Generator, C#, .NET
+comment_issue_id: 1
+---
 ## Source Generators: The end of T4 templates?
 
 In the evolving landscape of .NET Development, code generation has been a cornerstone for creating boilerplate code, improving developer productivity and automating processes. [T4 (Text Template Transformation Toolkit)](https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates) has been the go-to solution for well over a decade for this purpose, offering a powerful but also a somewhat uderappreciated templating engine right inside Visual Studio. They have enabled developers to generate everything from data models to fully fledged API clients.
