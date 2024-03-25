@@ -2,7 +2,7 @@
 
 In the evolving landscape of .NET Development, code generation has been a cornerstone for creating boilerplate code, improving developer productivity and automating processes. [T4 (Text Template Transformation Toolkit)](https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates) has been the go-to solution for well over a decade for this purpose, offering a powerful but also a somewhat uderappreciated templating engine right inside Visual Studio. They have enabled developers to generate everything from data models to fully fledged API clients.
 
-But, working with T4 has had issues since the start. There is no easy way to work with them, since there is no propper editor experience for them. By default you find yourself working in a 'plain text' environment, having no intellisense, syntax highlighting or language support. The open source community provided some solutions for this, but often they are incomplete.
+But, working with T4 has had issues since the start. There is no easy way to work with them, since there is no propper editor experience for them. They are hard to debug and by default you find yourself working in a 'plain text' environment, having no intellisense, syntax highlighting or language support. The open source community provided some solutions for this, but often they are incomplete.
 
 I myself have been developing tools the past few years that provide some support when working with T4 templates. T4Editor provides a minimal editor experience, and T4Executer helps you control the execution of T4 templates during build time. 
 
@@ -58,15 +58,15 @@ Source generators work by analyzing a program's structure, including its syntax 
 
 Source generators are particularly powerful in scenarios such as:
 
-**Automating Boilerplate Code Generation**: Similar to T4, but integrated into the compile-time, improving build performance and developer workflow.
-**Performance Optimizations**: Generating code that is tailored for performance-critical sections, such as serialization and deserialization routines.
-**Meta-programming**: Allowing for advanced scenarios where code can be generated based on attributes, external files, or other sources of metadata.
+- **Automating Boilerplate Code Generation**: Similar to T4, but integrated into the compile-time, improving build performance and developer workflow.
+- **Performance Optimizations**: Generating code that is tailored for performance-critical sections, such as serialization and deserialization routines.
+- **Meta-programming**: Allowing for advanced scenarios where code can be generated based on attributes, external files, or other sources of metadata.
 
 The advantages of source generators include:
 
-**Compile-Time Integration**: Since source generators are part of the compilation process, they can produce code that is immediately available to other parts of the application without additional steps.
-**Performance**: They do not significantly impact the overall build time and, in some cases, can reduce runtime overhead by generating optimized code.
-**Debugging and Tooling Support**: Being a newer technology, source generators benefit from the latest IDE features, including debugging support, making them easier to work with compared to T4 templates.
+- **Compile-Time Integration**: Since source generators are part of the compilation process, they can produce code that is immediately available to other parts of the application without additional steps.
+- **Performance**: They do not significantly impact the overall build time and, in some cases, can reduce runtime overhead by generating optimized code.
+- **Debugging and Tooling Support**: Being a newer technology, source generators benefit from the latest IDE features, including debugging support, making them easier to work with compared to T4 templates.
 
 #### Considerations and Best Practices
 
