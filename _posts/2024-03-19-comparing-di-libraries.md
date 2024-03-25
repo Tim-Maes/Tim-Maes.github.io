@@ -1,5 +1,4 @@
 ---
-tags: Dependency Injection
 comment_issue_id: 2
 ---
 

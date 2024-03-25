@@ -1,5 +1,4 @@
 ---
-tags: T4, Source Generator, C#, .NET
 comment_issue_id: 1
 ---
 ## Source Generators: The end of T4 templates?

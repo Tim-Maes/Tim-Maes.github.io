@@ -1,5 +1,4 @@
 ---
-tags: Dependency Injection, Bindicate, Autowiring
 comment_issue_id: 3
 ---
 ## Autowiring using Bindicate
