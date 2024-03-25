@@ -72,8 +72,8 @@ The advantages of source generators include:
 
 While source generators offer a powerful addition to the .NET developer’s arsenal, they come with their own considerations:
 
-**Complexity for Advanced Scenarios**: Writing source generators that handle complex scenarios can be challenging and requires a good understanding of Roslyn APIs.
-**Incremental Generation**: To optimize performance, developers should aim to make their generators incremental, only re-generating code when necessary.
+- **Complexity for Advanced Scenarios**: Writing source generators that handle complex scenarios can be challenging and requires a good understanding of Roslyn APIs.
+- **Incremental Generation**: To optimize performance, developers should aim to make their generators incremental, only re-generating code when necessary.
 
 #### The Future of Code Generation with Source Generators
 
