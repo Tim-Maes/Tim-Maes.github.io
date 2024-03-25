@@ -7,12 +7,10 @@ twitter_username: "Tim_Maes_"
 github_username: "Tim-Maes"
 linkedin_username: "tim-maes-93a82112a"
 
-#########################################################################################
-######### Nothing below needs to be changed (unless you know what you're doing) #########
-#########################################################################################
-theme: "minima"
-
 rss: rss
+
+header_pages:
+  - aboutme.md
 
 kramdown:
   syntax_highlighter_opts:
@@ -25,6 +23,8 @@ plugins:
 titles_from_headings:
   strip_title: true
   collections: true
+
+comments_repo: Tim-Maes/Tim-Maes.github.io
 
 defaults:
   - scope:
