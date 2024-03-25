@@ -46,15 +46,3 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
-
-/* HighlightJS overrides */
-.hljs {
-  max-height: {{site.code_block_max_height | default: "500px"}};
-}
-
-
-@media print {
-  .no-print {
-    display: none !important;
-  }
-}
