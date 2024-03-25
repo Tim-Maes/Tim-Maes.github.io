@@ -20,6 +20,33 @@ T4 (Text Template Transformation Toolkit) templates have long been the standard 
 
 A T4 template file (.tt) consists of two main parts: template directives and control logic. The directives provide the compiler with information about how to process the template, such as the output file type. The control logic, written in a mixture of C# or VB.NET and T4 syntax, defines the actual content generation logic. When a T4 template is executed, it reads these instructions to produce the final text output, which can be another source code file, a configuration file, or any text-based file that suits the developer's needs.
 
+#### Example
+
+**Generating DTOs from Database Models**
+
+Imagine you have a set of entity models corresponding to database tables in your .NET application. You frequently need to create Data Transfer Objects (DTOs) based on these entity models for safe data transmission over the network. Instead of manually crafting each DTO, you can use a T4 template to automate this process.
+
+```csharp
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+namespace MyApplication.DTOs
+{
+<# foreach(var model in ModelEntities) { #>
+    public class <#= model.Name #>Dto
+    {
+    <# foreach(var property in model.Properties) { #>
+        public <#= property.Type #> <#= property.Name #> { get; set; }
+    <# } #>
+    }
+<# } #>
+}
+```
+
+In this example, `ModelEntities` would be a collection of your entity models, each with Name, Properties, and other necessary metadata. This T4 template iterates over each model, generating a corresponding DTO class with matching properties. Note the syntax using `<# #>` codeblocks, which require a learning curve to master.
+
 #### Applications and Strengths
 
 T4 templates excel in scenarios where repetitive code patterns are common, such as in:
@@ -53,6 +80,72 @@ With the release of C# 9.0 and .NET 5, the .NET ecosystem was introduced to sour
 #### How Source Generators Work
 
 Source generators work by analyzing a program's structure, including its syntax trees and semantic model, and then generating additional source files as part of the compilation process. This means the generated code is available to all subsequent phases of compilation, allowing for a seamless development experience. Developers implement source generators by creating a .NET Standard library that references `Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis`, then implementing the [ISourceGenerator](https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.isourcegenerator?view=roslyn-dotnet-4.7.0) interface.
+
+#### Example
+
+Just like in the T4 example above, we want to generate DTO's based on existing entities. In this example, any class that implements `IModelEntity` will have a corresponding DTO class generated for it at compile time. The generated DTOs will be placed in the *.DTOs namespace and will include properties that mirror those of the original model classes. 
+
+```csharp
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
+using System;
+using System.Linq;
+using System.Text;
+
+[Generator]
+public class DtoGenerator : ISourceGenerator
+{
+    public void Initialize(GeneratorInitializationContext context)
+    {
+        // No initialization actions required for this example
+    }
+
+    public void Execute(GeneratorExecutionContext context)
+    {
+        // Iterate over all syntax trees in the compilation
+        foreach (var syntaxTree in context.Compilation.SyntaxTrees)
+        {
+            var semanticModel = context.Compilation.GetSemanticModel(syntaxTree);
+            var classes = syntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>();
+
+            foreach (var classDeclaration in classes)
+            {
+                var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+                if (classSymbol.Interfaces.Any(i => i.ToDisplayString() == "IModelEntity"))
+                {
+                    // Generate the DTO class source
+                    var dtoSource = GenerateDtoClassSource(classSymbol);
+                    context.AddSource($"{classSymbol.Name}Dto.g.cs", SourceText.From(dtoSource, Encoding.UTF8));
+                }
+            }
+        }
+    }
+
+    private string GenerateDtoClassSource(INamedTypeSymbol classSymbol)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("using System;");
+        sb.AppendLine($"namespace {classSymbol.ContainingNamespace.ToDisplayString()}.DTOs");
+        sb.AppendLine("{");
+        sb.AppendLine($"    public class {classSymbol.Name}Dto");
+        sb.AppendLine("    {");
+
+        foreach (var member in classSymbol.GetMembers().OfType<IPropertySymbol>())
+        {
+            sb.AppendLine($"        public {member.Type} {member.Name} {{ get; set; }}");
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+
+        return sb.ToString();
+    }
+}
+```
+
+This is 100% c# code and requires no other syntax compared to the T4 example. in other words, any C# developer can hop right in and start using Source Generators.
 
 #### Applications and Advantages
 
