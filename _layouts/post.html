@@ -30,6 +30,11 @@ layout: default
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
 
-{% if site.comments_repo %}
-  {% include comments.html %}
-{% endif %}
+<script src="https://utteranc.es/client.js"
+        repo="Tim-Maes/Tim-Maes.github.io"
+        issue-term="og:title"
+        label="Comments"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
