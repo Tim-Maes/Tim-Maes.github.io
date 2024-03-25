@@ -23,6 +23,9 @@ titles_from_headings:
   strip_title: true
   collections: true
 
+header_pages:
+  - resume.md
+
 defaults:
   - scope:
       path: ""
