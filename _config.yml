@@ -33,6 +33,3 @@ defaults:
       type: post
     values:
       tags: Other
-
-exclude:
-  - oncore
