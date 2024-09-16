@@ -24,8 +24,8 @@ function drawSVGToCanvas() {
     const url = URL.createObjectURL(svgBlob);
 
     img.onload = function () {
-        const imgWidth = img.naturalWidth;
-        const imgHeight = img.naturalHeight;
+        const imgWidth = img.naturalWidth * 1.5;
+        const imgHeight = img.naturalHeight * 1.5;
 
         ctx.drawImage(
             img,
@@ -36,7 +36,7 @@ function drawSVGToCanvas() {
         );
         URL.revokeObjectURL(url);
         createParticles();
-        svg.style.display = 'none'; // Hide the SVG after rendering
+        svg.style.display = 'none'; 
         animate();
     };
 
@@ -48,9 +48,9 @@ function createParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const data = imageData.data;
-    const particleSize = 2;
-    for (let y = 0; y < canvas.height; y += 2) {
-        for (let x = 0; x < canvas.width; x += 2) {
+    const particleSize = 1;
+    for (let y = 0; y < canvas.height; y ++) {
+        for (let x = 0; x < canvas.width; x ++) {
             const index = (y * canvas.width + x) * 4;
             const alpha = data[index + 3];
             if (alpha > 0) {
@@ -75,33 +75,28 @@ function animate() {
 
     particles.forEach((particle) => {
         if (isDragging) {
-            // Interaction logic: Pull particles towards the mouse
             const dx = mouse.x - particle.x;
             const dy = mouse.y - particle.y;
             const distSquared = dx * dx + dy * dy;
-            const interactionRadius = 100 * 100; // Adjust the radius as needed
+            const interactionRadius = 75 * 75; 
             if (distSquared < interactionRadius) {
                 const force = (interactionRadius - distSquared) / interactionRadius;
-                const acceleration = force * 0.2; // Adjust this value for effect strength
+                const acceleration = force * 0.1; 
                 particle.vx += dx * acceleration;
                 particle.vy += dy * acceleration;
             }
         } else {
-            // Move particles back to original position
             const dx = particle.originalX - particle.x;
             const dy = particle.originalY - particle.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            if (dist > 0.5) {
-                // Apply a spring force toward the original position
-                particle.vx += dx * 0.1;
-                particle.vy += dy * 0.1;
+            if (dist > 1) {
+                particle.vx += dx * 0.3;
+                particle.vy += dy * 0.3;
 
-                // Apply friction to create smooth movement
-                particle.vx *= 0.9;
-                particle.vy *= 0.9;
+                particle.vx *= 0.3;
+                particle.vy *= 0.3;
             } else {
-                // Snap particle back to original position if close enough
                 particle.x = particle.originalX;
                 particle.y = particle.originalY;
                 particle.vx = 0;
@@ -109,11 +104,9 @@ function animate() {
             }
         }
 
-        // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Draw particle
         ctx.fillStyle = particle.color;
         ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
     });
@@ -121,7 +114,7 @@ function animate() {
 
 canvas.addEventListener('mousedown', (e) => {
     isMouseDown = true;
-    isDragging = true; // Start dragging immediately
+    isDragging = true; 
     updateMousePosition(e);
 });
 
