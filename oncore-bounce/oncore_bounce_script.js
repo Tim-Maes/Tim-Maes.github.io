@@ -17,6 +17,8 @@ window.onload = () => {
         const svgWidth = svgRect.width;
         const svgHeight = svgRect.height;
 
+        const radius = svgWidth * 0.4; // Assuming the visible circle is 80% of the width
+
         let svgX = Math.random() * (containerWidth - svgWidth);
         let svgY = Math.random() * (containerHeight - svgHeight);
         let vx = (Math.random() - 0.5) * 10; // Random initial velocity
@@ -33,7 +35,8 @@ window.onload = () => {
             vy,
             width: svgWidth,
             height: svgHeight,
-            lastCollision: null, // To prevent multiple counts for the same collision
+            radius,
+            lastCollision: {},
         });
     });
 
@@ -44,7 +47,7 @@ window.onload = () => {
         const mouseY = event.clientY;
 
         svgObjects.forEach((obj) => {
-            const { svgX, svgY, width, height } = obj;
+            const { svgX, svgY, width, height, radius } = obj;
 
             const svgCenterX = svgX + width / 2;
             const svgCenterY = svgY + height / 2;
@@ -78,7 +81,7 @@ window.onload = () => {
                 const dy = (objA.svgY + objA.height / 2) - (objB.svgY + objB.height / 2);
                 const distance = Math.hypot(dx, dy);
 
-                const minDist = (objA.width + objB.width) / 2;
+                const minDist = objA.radius + objB.radius;
 
                 if (distance < minDist) {
                     const nx = dx / distance;
@@ -90,28 +93,23 @@ window.onload = () => {
                     const vnRel = vxRel * nx + vyRel * ny;
 
                     if (vnRel < 0) {
-                        const impulse = (2 * vnRel) / (1 + 1); 
+                        const impulse = (2 * vnRel) / (1 + 1); // masses are equal and cancel out
 
                         objA.vx -= impulse * nx;
                         objA.vy -= impulse * ny;
                         objB.vx += impulse * nx;
                         objB.vy += impulse * ny;
 
-                        // Increment bounce counter if this pair hasn't collided recently
                         const currentTime = Date.now();
                         const collisionKey = `${i}-${j}`;
-                        const minTimeBetweenCollisions = 100; 
+                        const minTimeBetweenCollisions = 100; // milliseconds
 
                         if (
-                            !objA.lastCollision ||
-                            !objB.lastCollision ||
+                            !objA.lastCollision[collisionKey] ||
                             currentTime - objA.lastCollision[collisionKey] > minTimeBetweenCollisions
                         ) {
                             bounceCount++;
                             bounceCounterDisplay.textContent = `Bounces: ${bounceCount}`;
-
-                            objA.lastCollision = objA.lastCollision || {};
-                            objB.lastCollision = objB.lastCollision || {};
 
                             objA.lastCollision[collisionKey] = currentTime;
                             objB.lastCollision[collisionKey] = currentTime;
@@ -138,19 +136,27 @@ window.onload = () => {
             obj.vx *= 0.98;
             obj.vy *= 0.98;
 
-            if (obj.svgX < 0) {
-                obj.svgX = 0;
+            const leftBound = 0;
+            const rightBound = containerWidth;
+            const topBound = 0;
+            const bottomBound = containerHeight;
+
+            const centerX = obj.svgX + obj.width / 2;
+            const centerY = obj.svgY + obj.height / 2;
+
+            if (centerX - obj.radius < leftBound) {
+                obj.svgX = leftBound + obj.radius - obj.width / 2;
                 obj.vx = -obj.vx;
-            } else if (obj.svgX + obj.width > containerWidth) {
-                obj.svgX = containerWidth - obj.width;
+            } else if (centerX + obj.radius > rightBound) {
+                obj.svgX = rightBound - obj.radius - obj.width / 2;
                 obj.vx = -obj.vx;
             }
 
-            if (obj.svgY < 0) {
-                obj.svgY = 0;
+            if (centerY - obj.radius < topBound) {
+                obj.svgY = topBound + obj.radius - obj.height / 2;
                 obj.vy = -obj.vy;
-            } else if (obj.svgY + obj.height > containerHeight) {
-                obj.svgY = containerHeight - obj.height;
+            } else if (centerY + obj.radius > bottomBound) {
+                obj.svgY = bottomBound - obj.radius - obj.height / 2;
                 obj.vy = -obj.vy;
             }
 
@@ -161,5 +167,6 @@ window.onload = () => {
         requestAnimationFrame(animate);
     }
 
+    // Start the animation
     animate();
 };
