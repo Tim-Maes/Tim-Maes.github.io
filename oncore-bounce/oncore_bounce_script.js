@@ -1,40 +1,38 @@
 window.onload = () => {
-    // Get references to the SVG elements and container
     const svgs = document.querySelectorAll('.logo');
     const container = document.getElementById('container');
     const progressBar = document.getElementById('progress-bar');
+    const startButton = document.getElementById('start-button');
+    const timerDisplay = document.getElementById('timer');
+    const messageDisplay = document.getElementById('message');
 
-    // Get container dimensions
     const containerRect = container.getBoundingClientRect();
     const containerWidth = containerRect.width;
     const containerHeight = containerRect.height;
 
-    // Variable to keep track of the number of bounces
     let bounceCount = 0;
-    const bounceGoal = 100; // Goal for the progress bar
+    const bounceGoal = 50; 
+    let startTime = null;
+    let elapsedTime = 0;
+    let timerInterval = null;
 
-    // Array to hold SVG objects with position and velocity
+    let gameState = 'notStarted'; 
+
     const svgObjects = [];
 
-    // Initialize each SVG's position, velocity, and radius
     svgs.forEach((svg) => {
-        // Get accurate dimensions
         const svgRect = svg.getBoundingClientRect();
 
-        // Extract dimensions
         const svgWidth = svgRect.width;
         const svgHeight = svgRect.height;
 
-        // Define the effective radius (adjust as needed)
         const radius = svgWidth * 0.4; // Adjust multiplier based on visible area
 
-        // Random initial position within container bounds
         let svgX = Math.random() * (containerWidth - svgWidth);
         let svgY = Math.random() * (containerHeight - svgHeight);
-        let vx = (Math.random() - 0.5) * 10; // Random initial velocity
-        let vy = (Math.random() - 0.5) * 10;
+        let vx = 0; // Start with zero velocity
+        let vy = 0;
 
-        // Set the initial position of the SVG
         svg.style.left = `${svgX}px`;
         svg.style.top = `${svgY}px`;
 
@@ -52,47 +50,76 @@ window.onload = () => {
         });
     });
 
-    // Add mousemove event listener to the container
+    timerDisplay.style.display = 'none';
+    progressBar.style.width = '0%';
+
+    startButton.addEventListener('click', startGame);
+
+    function startGame() {
+        gameState = 'running';
+
+        startButton.style.display = 'none';
+
+        timerDisplay.style.display = 'block';
+
+        bounceCount = 0;
+        progressBar.style.width = '0%';
+
+        startTime = Date.now();
+        elapsedTime = 0;
+
+        timerInterval = setInterval(updateTimer, 100); // Update every 100ms
+
+        svgObjects.forEach((obj) => {
+            obj.vx = (Math.random() - 0.5) * 10;
+            obj.vy = (Math.random() - 0.5) * 10;
+            obj.lastCollision = {};
+        });
+    }
+
+    function updateTimer() {
+        if (gameState === 'running') {
+            elapsedTime = (Date.now() - startTime) / 1000; // In seconds
+            timerDisplay.textContent = `Time: ${elapsedTime.toFixed(2)}s`;
+        }
+    }
+
     container.addEventListener('mousemove', onMouseMove);
 
     function onMouseMove(event) {
-        // Get mouse coordinates
+        if (gameState !== 'running') return; // Ignore mouse movements unless game is running
+
         const mouseX = event.clientX;
         const mouseY = event.clientY;
 
         svgObjects.forEach((obj) => {
             const { svgX, svgY, width, height, radius } = obj;
 
-            // Get SVG center coordinates
             const svgCenterX = svgX + width / 2;
             const svgCenterY = svgY + height / 2;
 
-            // Calculate distance between mouse and SVG center
             const dx = mouseX - svgCenterX;
             const dy = mouseY - svgCenterY;
             const distance = Math.hypot(dx, dy);
 
-            // Threshold distance to start moving the SVG
             const threshold = 200;
 
             if (distance < threshold) {
-                // Normalize the direction vector
                 const nx = dx / distance;
                 const ny = dy / distance;
 
-                // Calculate force
                 const force = (threshold - distance) / threshold;
                 const maxForce = 10;
 
-                // Update velocity
                 obj.vx -= nx * force * maxForce;
                 obj.vy -= ny * force * maxForce;
             }
         });
     }
 
-    // Function to detect and handle collisions between SVGs using circle collision detection
     function handleCollisions() {
+        if (gameState !== 'running') return; // No collision handling unless game is running
+
         for (let i = 0; i < svgObjects.length; i++) {
             for (let j = i + 1; j < svgObjects.length; j++) {
                 const objA = svgObjects[i];
@@ -105,29 +132,22 @@ window.onload = () => {
                 const minDist = objA.radius + objB.radius;
 
                 if (distance < minDist) {
-                    // Normalize the collision normal vector
                     const nx = dx / distance;
                     const ny = dy / distance;
 
-                    // Compute the relative velocity
                     const vxRel = objA.vx - objB.vx;
                     const vyRel = objA.vy - objB.vy;
 
-                    // Compute the relative velocity along the normal
                     const vnRel = vxRel * nx + vyRel * ny;
 
-                    // Only proceed if objects are moving towards each other
                     if (vnRel < 0) {
-                        // Compute impulse scalar
                         const impulse = (2 * vnRel) / (1 + 1); // masses are equal
 
-                        // Update velocities based on impulse and normal vector
                         objA.vx -= impulse * nx;
                         objA.vy -= impulse * ny;
                         objB.vx += impulse * nx;
                         objB.vy += impulse * ny;
 
-                        // Increment bounce counter if this pair hasn't collided recently
                         const currentTime = Date.now();
                         const collisionKey = `${i}-${j}`;
                         const minTimeBetweenCollisions = 100; // milliseconds
@@ -136,21 +156,21 @@ window.onload = () => {
                             !objA.lastCollision[collisionKey] ||
                             currentTime - objA.lastCollision[collisionKey] > minTimeBetweenCollisions
                         ) {
-                            // Increment the bounce counter
                             bounceCount++;
-                            if (bounceCount > bounceGoal) bounceCount = bounceGoal; // Cap at 100
+                            if (bounceCount > bounceGoal) bounceCount = bounceGoal; // Cap at goal
 
-                            // Update the progress bar
                             const progressPercentage = (bounceCount / bounceGoal) * 100;
                             progressBar.style.width = `${progressPercentage}%`;
 
-                            // Update last collision times
+                            if (bounceCount >= bounceGoal) {
+                                endGame();
+                            }
+
                             objA.lastCollision[collisionKey] = currentTime;
                             objB.lastCollision[collisionKey] = currentTime;
                         }
                     }
 
-                    // Separate overlapping objects equally
                     const overlap = (minDist - distance) / 2;
                     objA.svgX += nx * overlap;
                     objA.svgY += ny * overlap;
@@ -161,21 +181,60 @@ window.onload = () => {
         }
     }
 
-    // Animation loop to update positions and handle bouncing
+    function endGame() {
+        gameState = 'finished';
+
+        clearInterval(timerInterval);
+
+        // Display the final time
+        messageDisplay.textContent = `Congratulations!\nYour time: ${elapsedTime.toFixed(2)} seconds`;
+        messageDisplay.style.display = 'block';
+
+        svgObjects.forEach((obj) => {
+            obj.vx = 0;
+            obj.vy = 0;
+        });
+
+        setTimeout(() => {
+            resetGame();
+        }, 5000); // Reset the game after 5 seconds
+    }
+
+    function resetGame() {
+        messageDisplay.style.display = 'none';
+
+        gameState = 'notStarted';
+
+        bounceCount = 0;
+        progressBar.style.width = '0%';
+
+        timerDisplay.style.display = 'none';
+        timerDisplay.textContent = 'Time: 0.00s';
+
+        svgObjects.forEach((obj) => {
+            obj.svgX = Math.random() * (containerWidth - obj.width);
+            obj.svgY = Math.random() * (containerHeight - obj.height);
+            obj.vx = 0;
+            obj.vy = 0;
+            obj.lastCollision = {};
+
+            obj.svg.style.left = `${obj.svgX}px`;
+            obj.svg.style.top = `${obj.svgY}px`;
+        });
+
+        startButton.style.display = 'block';
+    }
+
     function animate() {
-        // Handle collisions between SVGs
         handleCollisions();
 
         svgObjects.forEach((obj) => {
-            // Update position based on velocity
             obj.svgX += obj.vx;
             obj.svgY += obj.vy;
 
-            // Apply friction to slow down over time
             obj.vx *= 0.98;
             obj.vy *= 0.98;
 
-            // Bounce off the edges of the container using circle boundaries
             const leftBound = 0;
             const rightBound = containerWidth;
             const topBound = 0;
@@ -184,7 +243,6 @@ window.onload = () => {
             const centerX = obj.svgX + obj.width / 2;
             const centerY = obj.svgY + obj.height / 2;
 
-            // Left and right walls
             if (centerX - obj.radius < leftBound) {
                 obj.svgX = leftBound + obj.radius - obj.width / 2;
                 obj.vx = -obj.vx;
@@ -193,7 +251,6 @@ window.onload = () => {
                 obj.vx = -obj.vx;
             }
 
-            // Top and bottom walls
             if (centerY - obj.radius < topBound) {
                 obj.svgY = topBound + obj.radius - obj.height / 2;
                 obj.vy = -obj.vy;
@@ -202,15 +259,12 @@ window.onload = () => {
                 obj.vy = -obj.vy;
             }
 
-            // Update the SVG's position
             obj.svg.style.left = `${obj.svgX}px`;
             obj.svg.style.top = `${obj.svgY}px`;
         });
 
-        // Continue the animation loop
         requestAnimationFrame(animate);
     }
 
-    // Start the animation
     animate();
 };
