@@ -3,8 +3,6 @@ layout: page
 title: Resume
 ---
 
-# Resume
-
 ## About Me
 
 - **Nationality:** Belgian
@@ -27,7 +25,7 @@ title: Resume
 
 - **2007 - 2017:** Various construction & insulation works, team lead, subcontractor
 - **2017:** .NET Technical Consultant at AllPhi
-- **2018 - Present:** .NET Software Engineer at Cronos aan de Leie - Noest
+- **2018 - Present:** .NET Software Engineer at Cronos
 
 ## Project Details
 

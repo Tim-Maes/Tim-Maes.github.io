@@ -4,8 +4,6 @@ title: Projects
 permalink: /projects/
 ---
 
-# Projects
-
 Projects I have been working on in my spare time.
 
 | Project     | Description                                                      | Link                                             |
