@@ -80,6 +80,12 @@ title: Resume
 
 Author and maintainer of open-source projects (NuGet and VSIX).
 
+### Facet
+
+- **Year:** 2025 - Present
+- **Technologies:** Incremental source generator
+- **Description:** Source generator that instantly scaffolds DTOs, typed LINQ projections, and ViewModels without any runtime overhead.
+
 ### Bindicate
 
 - **Year:** 2023 - Present

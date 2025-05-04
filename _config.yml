@@ -24,8 +24,10 @@ titles_from_headings:
   collections: true
 
 header_pages:
-  - resume.md
-  - archive.md
+  - index.html    
+  - resume.md     
+  - projects.md   
+  - archive.md    
 
 defaults:
   - scope:
