@@ -11,7 +11,7 @@ layout: home
     <p>My name is Tim, I'm a software engineer from Belgium with a focus on .NET technologies. Welcome to my blog.</p>
   </div>
 </div>
-<p>
+<!-- <p>
   <a href="https://visualstudio.microsoft.com/">
     <img src="https://img.shields.io/badge/Visual%20Studio-2022-blue?logo=visual-studio&logoColor=white" alt="Visual Studio" />
   </a>
@@ -24,7 +24,9 @@ layout: home
   <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">
     <img src="https://img.shields.io/badge/Blazor-.NET%20WebAssembly-%230512BD?logo=blazor&logoColor=white" alt="Blazor" />
   </a>
-</p>
-<p><p>
+</p> -->
+<br>
+<p>
 
+</p>
 <p>You can find some of my projects on the <a href="https://marketplace.visualstudio.com/Publishers/TimMaes">Visual Studio Marketplace</a> and on <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>.</p>
