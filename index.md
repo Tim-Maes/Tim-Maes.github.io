@@ -3,7 +3,7 @@ layout: home
 ---
 
 <div style="display: flex; align-items: center; margin-bottom: 2rem;">
-  <img src="{{ '/_resources/Tim.jpg' | relative_url }}"
+  <img src="{{ '/resources/Tim.jpg' | relative_url }}"
        alt="Tim Maes"
        style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-right: 1.5rem;">
   <div>
