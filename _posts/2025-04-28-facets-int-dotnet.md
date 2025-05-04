@@ -96,7 +96,7 @@ public partial record PersonRecord;
 
 ### Custom Mapping Logic
 
-Implement IFacetMapConfiguration<TSource,TTarget> to add derived or formatted fields:
+Implement `IFacetMapConfiguration<TSource,TTarget>` to add derived or formatted fields:
 
 ```csharp
 public class UserMapConfig : IFacetMapConfiguration<User, UserDto>
