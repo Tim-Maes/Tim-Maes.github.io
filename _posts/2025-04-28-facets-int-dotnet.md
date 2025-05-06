@@ -10,7 +10,7 @@ Ever find yourself drowning in hand-written DTOs, mapping methods, and endless A
 
 **Facet on [GitHub](https://github.com/Tim-Maes/Facet) & Facet on [NuGet](https://www.nuget.org/packages/Facet)**
 
-**Facet** is a C# source generator that emits partial classes or records with:
+**Facet** is a C# source generator that emits partial classes, records, structs or record structs with:
 
 - Public properties/fields matching your source type  
 - Strongly-typed constructors  
@@ -87,11 +87,21 @@ var dtos = dbContext.People
 
 ### Record-style Facets
 
-Switch to record semantics:
-
 ```csharp
 [Facet(typeof(Person), Kind = FacetKind.Record)]
 public partial record PersonRecord;
+```
+
+### Struct & Record-Struct Facets
+
+Switch to record semantics:
+
+```csharp
+[Facet(typeof(MyStruct), Kind = FacetKind.Struct, IncludeFields = true)]
+public partial struct MyStructDto;
+
+[Facet(typeof(MyRecordStruct), Kind = FacetKind.RecordStruct)]
+public partial record struct MyRecordStructDto;
 ```
 
 ### Custom Mapping Logic
