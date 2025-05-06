@@ -10,7 +10,7 @@ Ever find yourself drowning in hand-written DTOs, mapping methods, and endless A
 
 **Facet on [GitHub](https://github.com/Tim-Maes/Facet) & Facet on [NuGet](https://www.nuget.org/packages/Facet)**
 
-**Facet** is a C# source generator that emits partial classes, records, structs or record structs with:
+**Facet** is a C# source generator that emits partial **classes**, **records**, **structs** or **record structs** with:
 
 - Public properties/fields matching your source type  
 - Strongly-typed constructors  
