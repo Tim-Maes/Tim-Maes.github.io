@@ -520,8 +520,6 @@ The web is a dangerous place, but with the right tools and practices, we can bui
 </div>
 </h1>
 
----
-
 ## Resources
 
 - **BlazorFrame Documentation**: [Complete documentation and examples](https://github.com/Tim-Maes/BlazorFrame/blob/master/docs/readme.md)
