@@ -197,7 +197,7 @@ body {
 /* Hero Section */
 .hero {
     position: relative;
-    min-height: 50vh;
+    min-height: 55vh;
     display: flex;
     align-items: center;
     background: var(--hero-gradient);

