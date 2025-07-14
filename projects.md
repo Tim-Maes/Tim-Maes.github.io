@@ -8,6 +8,7 @@ Projects I have been working on in my spare time.
 
 | Project     | Description                                                      | Link                                             |
 |-------------|------------------------------------------------------------------|--------------------------------------------------|
+| BlazorFrame | A secure, easy-to-use library for integrating iframes into Blazor applications with built-in security features. | [GitHub](https://github.com/Tim-Maes/BlazorFrame) |
 | Facet       | SSource generator that instantly scaffolds DTOs, typed LINQ projections, and ViewModels without any runtime overhead. | [GitHub](https://github.com/Tim-Maes/Facet)      |
 | Bindicate   | An autowiring library for .NET.  | [GitHub](https://github.com/Tim-Maes/Bindicate)  |
 | T4Editor    | A Visual Studio extension adding rich editing for T4 templates.  | [GitHub](https://github.com/Tim-Maes/T4Editor)   |

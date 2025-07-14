@@ -78,6 +78,13 @@ title: Resume
 
 Author and maintainer of open-source projects (NuGet and VSIX).
 
+### BlazorFrame
+
+- **Year:** 2025 - Present
+- **Technologies:** An enhanced Blazor iframe component
+- **Description:** A secure, easy-to-use library for integrating iframes into Blazor applications with built-in security features.
+
+
 ### Facet
 
 - **Year:** 2025 - Present
