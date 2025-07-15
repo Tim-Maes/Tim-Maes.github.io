@@ -82,33 +82,14 @@
     <!-- Projects Section -->
     <section class="blog-posts-section">
         <div class="container">
-            <!-- Coming Soon Message -->
-            <div style="text-align: center; padding: var(--space-3xl) 0;">
-                <h2 style="color: var(--dark-blue); margin-bottom: var(--space-lg);">?? Coming Soon</h2>
-                <p style="font-size: var(--font-size-lg); color: var(--medium-gray); margin-bottom: var(--space-xl);">
-                    I'm currently working on showcasing my open source projects and contributions.<br>
-                    This page will feature detailed information about my .NET tools and libraries.
-                </p>
-                
-                <!-- Quick Links -->
-                <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
-                    <a href="https://github.com/Tim-Maes" target="_blank" class="btn btn-primary">
-                        View GitHub Profile
-                    </a>
-                    <a href="resume.html" class="btn btn-outline">
-                        See Resume Projects
-                    </a>
-                </div>
-            </div>
-
             <!-- Preview of Projects (Placeholder) -->
-            <div class="blog-posts-grid" style="opacity: 0.6;">
-                
+            <div class="blog-posts-grid">
+
                 <!-- BlazorFrame Project Preview -->
                 <article class="blog-post-card">
                     <div class="blog-post-image">
-                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem;">
-                            ???
+                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                            🛡️
                         </div>
                     </div>
                     <div class="blog-post-content">
@@ -118,47 +99,47 @@
                         </div>
                         <h3 class="blog-post-title">BlazorFrame</h3>
                         <p class="blog-post-excerpt">
-                            A security-first, enhanced Blazor iframe component with built-in security features and sandbox controls.
+                            A secure, easy-to-use library for integrating iframes into Blazor applications with built-in security features and sandbox controls.
                         </p>
                         <div class="blog-post-tags">
                             <span class="tag">Blazor</span>
                             <span class="tag">Security</span>
                             <span class="tag">NuGet</span>
                         </div>
-                        <span class="blog-post-link" style="color: var(--medium-gray);">Details Coming Soon</span>
+                        <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank" class="blog-post-link">View on GitHub</a>
                     </div>
                 </article>
 
-                <!-- Facet Project Preview -->
+                <!-- Facet Project -->
                 <article class="blog-post-card">
                     <div class="blog-post-image">
-                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem;">
-                            ??
+                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                            💎
                         </div>
                     </div>
                     <div class="blog-post-content">
                         <div class="blog-post-header">
-                            <span class="blog-post-date">2024</span>
+                            <span class="blog-post-date">2025</span>
                             <span class="blog-category">Code Generation</span>
                         </div>
                         <h3 class="blog-post-title">Facet</h3>
                         <p class="blog-post-excerpt">
-                            Compile-time code generation for lightweight projections. No boilerplate, zero runtime cost.
+                            Source generator that instantly scaffolds DTOs, typed LINQ projections, and ViewModels without any runtime overhead.
                         </p>
                         <div class="blog-post-tags">
                             <span class="tag">Source Generators</span>
                             <span class="tag">DTOs</span>
                             <span class="tag">Performance</span>
                         </div>
-                        <span class="blog-post-link" style="color: var(--medium-gray);">Details Coming Soon</span>
+                        <a href="https://github.com/Tim-Maes/Facet" target="_blank" class="blog-post-link">View on GitHub</a>
                     </div>
                 </article>
 
-                <!-- Bindicate Project Preview -->
+                <!-- Bindicate Project -->
                 <article class="blog-post-card">
                     <div class="blog-post-image">
-                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem;">
-                            ??
+                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                            🔗
                         </div>
                     </div>
                     <div class="blog-post-content">
@@ -168,17 +149,81 @@
                         </div>
                         <h3 class="blog-post-title">Bindicate</h3>
                         <p class="blog-post-excerpt">
-                            Attribute-based service registration for .NET dependency injection with decorators and keyed services.
+                            An autowiring library for .NET that enables attribute-based service registration with decorators and keyed services.
                         </p>
                         <div class="blog-post-tags">
                             <span class="tag">DI</span>
                             <span class="tag">Attributes</span>
                             <span class="tag">Autowiring</span>
                         </div>
-                        <span class="blog-post-link" style="color: var(--medium-gray);">Details Coming Soon</span>
+                        <a href="https://github.com/Tim-Maes/Bindicate" target="_blank" class="blog-post-link">View on GitHub</a>
                     </div>
                 </article>
 
+                <!-- T4Editor Project -->
+                <article class="blog-post-card">
+                    <div class="blog-post-image">
+                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                            📝
+                        </div>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-header">
+                            <span class="blog-post-date">2019</span>
+                            <span class="blog-category">Visual Studio</span>
+                        </div>
+                        <h3 class="blog-post-title">T4Editor</h3>
+                        <p class="blog-post-excerpt">
+                            A Visual Studio extension adding rich editing for T4 templates with syntax highlighting, code completion, and IntelliSense.
+                        </p>
+                        <div class="blog-post-tags">
+                            <span class="tag">VSIX</span>
+                            <span class="tag">T4 Templates</span>
+                            <span class="tag">Editor</span>
+                        </div>
+                        <a href="https://github.com/Tim-Maes/T4Editor" target="_blank" class="blog-post-link">View on GitHub</a>
+                    </div>
+                </article>
+
+                <!-- T4Executer Project -->
+                <article class="blog-post-card">
+                    <div class="blog-post-image">
+                        <div class="blog-post-placeholder" style="background: var(--hero-gradient); color: white; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                            ⚙️
+                        </div>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-header">
+                            <span class="blog-post-date">2018</span>
+                            <span class="blog-category">Visual Studio</span>
+                        </div>
+                        <h3 class="blog-post-title">T4Executer</h3>
+                        <p class="blog-post-excerpt">
+                            VSIX tool to manage and automate T4 template execution events, integrating template generation with build workflows.
+                        </p>
+                        <div class="blog-post-tags">
+                            <span class="tag">VSIX</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Build
+
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div style="text-align: center; padding: var(--space-3xl) 0;">
+
+
+                <!-- Quick Links -->
+                <div style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
+                    <a href="https://github.com/Tim-Maes" target="_blank" class="btn btn-primary">
+                        View GitHub Profile
+                    </a>
+                    <a href="resume.html" class="btn btn-outline">
+                        See Resume Projects
+                    </a>
+                </div>
             </div>
         </div>
     </section>
