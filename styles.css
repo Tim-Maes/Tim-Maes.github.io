@@ -226,6 +226,7 @@ body {
     font-weight: 700;
     margin-bottom: var(--space-md);
     line-height: 1.2;
+    width:1000px;
 }
 
 .hero-subtitle {
