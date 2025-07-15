@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facets in .NET - Tim Maes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="shield-icon"></div>
+                    <span>Tim Maes</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-date">January 15, 2024</span>
+                <span class="article-category">Open Source</span>
+            </div>
+            <h1 class="article-title">Facets in .NET</h1>
+            <p class="article-subtitle">
+                Compile-time code generation for lightweight projections - no boilerplate, zero runtime cost
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <blockquote>
+                    One part of an object, situation, subject that has many parts.
+                </blockquote>
+
+                <p>Ever find yourself drowning in hand-written DTOs, mapping methods, and endless AutoMapper profiles? Facetting brings compile-time code generation: define lightweight projections (DTOs, API models, ViewModels) directly from your domain models - no boilerplate, zero runtime cost.</p>
+
+                <p><strong>Facet on <a href="https://github.com/Tim-Maes/Facet" target="_blank">GitHub</a> & Facet on <a href="https://www.nuget.org/packages/Facet" target="_blank">NuGet</a></strong></p>
+
+                <p><strong>Facet</strong> is a C# source generator that emits partial <strong>classes</strong>, <strong>records</strong>, <strong>structs</strong> or <strong>record structs</strong> with:</p>
+
+                <ul>
+                    <li>Public properties/fields matching your source type</li>
+                    <li>Strongly-typed constructors</li>
+                    <li>LINQ-ready projection expressions</li>
+                    <li>Pluggable custom mappings</li>
+                    <li>EF Core integration through <code>Facet.Extensions</code></li>
+                </ul>
+
+                <p>...all at compile time, with zero runtime penalty.</p>
+
+                <h2>What is Facetting?</h2>
+
+                <p>Facetting is the process of carving out focused views of a richer model at compile time. Instead of manually writing DTOs, mapper classes, and projection lambdas, you declare which members you care about - and the generator writes the rest.</p>
+
+                <p>Instead of manually writing separate DTOs, mappers, and projections, Facet allows you to declare what you want to keep - and generates everything else.</p>
+
+                <p>Imagine your domain model as a diamond: <strong>Facet</strong> chisels out exactly the face you need, leaving the rest intact.</p>
+
+                <h2>Why Facetting?</h2>
+
+                <ul>
+                    <li><strong>Reduce boilerplate</strong><br>
+                        Eliminate repeated DTO/mapping code across your solution.</li>
+                    <li><strong>Zero runtime overhead</strong><br>
+                        All mapping logic is generated at compile time - no reflection or IL emit at runtime.</li>
+                    <li><strong>Strongly Typed & Nullable-Aware</strong><br>
+                        Full C# compile-time safety, including nullability contracts.</li>
+                    <li><strong>DRY & Performant</strong><br>
+                        Stay DRY without sacrificing LINQ/EF Core efficiency</li>
+                </ul>
+
+                <h2>Quick start</h2>
+
+                <h3>1. Install the package</h3>
+
+                <pre><code class="language-bash">dotnet add package Facet</code></pre>
+
+                <h3>2. Define a Facet</h3>
+
+                <pre><code class="language-csharp">using Facet;
+
+public class Person
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public int Age { get; set; }
+}
+
+// Generate a DTO that excludes Email
+[Facet(typeof(Person), exclude: nameof(Person.Email))]
+public partial class PersonDto;</code></pre>
+
+                <p>This generates:</p>
+
+                <ul>
+                    <li>A <code>PersonDto(Person source)</code> constructor</li>
+                    <li>Public properties for Name and Age (but not Email)</li>
+                    <li>A static <code>Expression&lt;Func&lt;Person,PersonDto&gt;&gt;</code> Projection</li>
+                </ul>
+
+                <h3>3. Use your generated Facets</h3>
+
+                <pre><code class="language-csharp">var person = new Person { Name = "Alice", Email = "alice@example.com", Age = 30 };
+
+// Constructor-based mapping
+var dto = new PersonDto(person);
+
+// LINQ projection
+var dtos = dbContext.People
+    .Select(PersonDto.Projection)
+    .ToList();</code></pre>
+
+                <h2>Advanced scenarios</h2>
+
+                <h3>Record-style Facets</h3>
+
+                <pre><code class="language-csharp">[Facet(typeof(Person), Kind = FacetKind.Record)]
+public partial record PersonRecord;</code></pre>
+
+                <h3>Struct & Record-Struct Facets</h3>
+
+                <p>Switch to record semantics:</p>
+
+                <pre><code class="language-csharp">[Facet(typeof(MyStruct), Kind = FacetKind.Struct, IncludeFields = true)]
+public partial struct MyStructDto;
+
+[Facet(typeof(MyRecordStruct), Kind = FacetKind.RecordStruct)]
+public partial record struct MyRecordStructDto;</code></pre>
+
+                <h3>Custom Mapping Logic</h3>
+
+                <p>Implement <code>IFacetMapConfiguration&lt;TSource,TTarget&gt;</code> to add derived or formatted fields:</p>
+
+                <pre><code class="language-csharp">public class UserMapConfig : IFacetMapConfiguration&lt;User, UserDto&gt;
+{
+    public static void Map(User source, UserDto target)
+    {
+        target.FullName = $"{source.FirstName} {source.LastName}";
+    }
+}
+
+[Facet(typeof(User), Configuration = typeof(UserMapConfig))]
+public partial class UserDto;</code></pre>
+
+                <p>Facet will invoke your <code>Map(...)</code> after the default constructor copy, letting you add derived properties or formatting.</p>
+
+                <h2>LINQ/EF Core integration</h2>
+
+                <h3>Install Facet.Extensions:</h3>
+
+                <pre><code class="language-bash">dotnet add package Facet.Extensions</code></pre>
+
+                <pre><code class="language-csharp">using Facet.Extensions;
+
+// Single-object mapping
+var dto = person.ToFacet&lt;Person, PersonDto&gt;();
+
+// Enumerable mapping (in-memory)
+var dtos = people.SelectFacets&lt;Person, PersonDto&gt;().ToList();
+
+// IQueryable projection (deferred)
+var query = dbContext.People.SelectFacet&lt;Person, PersonDto&gt;();
+var list  = query.ToList();
+
+// Async with EF Core 6+
+var dtosAsync = await dbContext.People
+    .SelectFacet&lt;Person, PersonDto&gt;()
+    .ToFacetsAsync(cancellationToken);
+
+var firstDto = await dbContext.People
+    .FirstFacetAsync&lt;Person, PersonDto&gt;(cancellationToken);</code></pre>
+
+                <p><strong>Facet</strong> lets you declare once and use everywhere, with zero runtime overhead. Check out the GitHub repo, feel free to contribute, open an issue, or give it a star!</p>
+
+                <h2>Additional Resources</h2>
+
+                <ul>
+                    <li><a href="https://github.com/Tim-Maes/Facet" target="_blank">Facet GitHub Repository</a></li>
+                    <li><a href="https://www.nuget.org/packages/Facet" target="_blank">Facet NuGet Package</a></li>
+                    <li><a href="https://www.nuget.org/packages/Facet.Extensions" target="_blank">Facet.Extensions NuGet Package</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>Building secure and innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="index.html#about">About</a>
+                        <a href="#resume">Resume</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+    </script>
+</body>
+</html>

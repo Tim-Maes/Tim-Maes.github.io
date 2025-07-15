@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Tim Maes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="shield-icon"></div>
+                    <span>Tim Maes</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <div class="blog-header-content">
+                <h1 class="blog-header-title">Blog</h1>
+                <p class="blog-header-subtitle">Thoughts on development, security, and technology</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-posts-section">
+        <div class="container">
+            <!--<div class="blog-filters">
+                <button class="filter-btn active" data-filter="all">All Posts</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="development">Development</button>
+                <button class="filter-btn" data-filter="tutorial">Tutorial</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+            </div>-->
+
+            <div class="blog-posts-grid">
+
+                <article class="blog-post-card" data-category="security">
+                    <div class="blog-post-image">
+                        <div class="blog-post-placeholder"></div>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-header">
+                            <span class="blog-post-date">Date Placeholder</span>
+                            <span class="blog-category">Title Placeholder</span>
+                        </div>
+                        <h3 class="blog-post-title">Understanding Modern Web Security</h3>
+                        <p class="blog-post-excerpt">
+                            Coming soon - migrating all my posts!
+                        </p>
+                        <div class="blog-post-tags">
+                            <span class="tag">TAG</span>
+                            <span class="tag">TAG</span>
+                            <span class="tag">TAG</span>
+                        </div>
+                        <a href="blog/coming-soong.html" class="blog-post-link">Read Full Article soon!</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Load More Button -->
+            <div class="blog-load-more">
+                <button class="btn btn-outline">Load More Posts</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Stay Updated</h2>
+                <!--<p class="newsletter-subtitle">Get notified when I publish new articles</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" class="newsletter-input">
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>.NET Developer with a focus on Microsoft .NET technologies</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="index.html#about">About</a>
+                        <a href="resume.html">Resume</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/in/tim-maes-93a82112a/" target="_blank">LinkedIn</a>
+                        <a href="mailto:tim.maes91@gmail.com">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Blog filters
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const blogCards = document.querySelectorAll('.blog-post-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                // Show/hide blog posts based on filter
+                blogCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Newsletter form
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.querySelector('.newsletter-input').value;
+                if (email) {
+                    alert('Thank you for subscribing! (This is a demo - implement real subscription logic)');
+                    document.querySelector('.newsletter-input').value = '';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

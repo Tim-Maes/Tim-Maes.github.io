@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[BLOG POST TITLE] - Tim Maes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="shield-icon"></div>
+                    <span>Tim Maes</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-date">[DATE]</span>
+                <span class="article-category">[CATEGORY]</span>
+            </div>
+            <h1 class="article-title">[BLOG POST TITLE]</h1>
+            <p class="article-subtitle">
+                [BLOG POST SUBTITLE/DESCRIPTION]
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <!-- Replace this content with your blog post content -->
+                <p>Your introduction paragraph goes here...</p>
+
+                <h2>Main Section Heading</h2>
+                <p>Your content for this section...</p>
+
+                <h3>Subsection Heading</h3>
+                <p>More detailed content...</p>
+
+                <h4>Sub-subsection Heading</h4>
+                <p>Even more detailed content...</p>
+
+                <!-- Code examples -->
+                <pre><code class="language-csharp">// Your code example
+public class Example 
+{
+    public string Property { get; set; }
+}</code></pre>
+
+                <!-- Lists -->
+                <ul>
+                    <li>List item 1</li>
+                    <li>List item 2</li>
+                    <li>List item 3</li>
+                </ul>
+
+                <!-- Links -->
+                <p>Check out this <a href="https://example.com" target="_blank">external link</a>.</p>
+
+                <!-- Blockquotes -->
+                <blockquote>
+                    This is a quote or important callout.
+                </blockquote>
+
+                <h2>Conclusion</h2>
+                <p>Your conclusion paragraph...</p>
+
+                <h2>Additional Resources</h2>
+                <ul>
+                    <li><a href="#" target="_blank">Resource 1</a></li>
+                    <li><a href="#" target="_blank">Resource 2</a></li>
+                    <li><a href="#" target="_blank">Resource 3</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>Building secure and innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="index.html#about">About</a>
+                        <a href="#resume">Resume</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+    </script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Generators: The end of T4 templates? - Tim Maes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="shield-icon"></div>
+                    <span>Tim Maes</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-date">February 25, 2024</span>
+                <span class="article-category">Development</span>
+            </div>
+            <h1 class="article-title">Source Generators: The end of T4 templates?</h1>
+            <p class="article-subtitle">
+                Exploring the evolution from T4 templates to modern Source Generators in .NET development
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <p>In the evolving landscape of .NET Development, code generation has been a cornerstone for creating boilerplate code, improving developer productivity and automating processes. <a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates" target="_blank">T4 (Text Template Transformation Toolkit)</a> has been the go-to solution for well over a decade for this purpose, offering a powerful but also a somewhat underappreciated templating engine right inside Visual Studio. They have enabled developers to generate everything from data models to fully fledged API clients.</p>
+
+                <p>But, working with T4 has had issues since the start. There is no easy way to work with them, since there is no proper editor experience for them. They are hard to debug and by default you find yourself working in a 'plain text' environment, having no intellisense, syntax highlighting or language support. The open source community provided some solutions for this, but often they are incomplete.</p>
+
+                <p>I myself have been developing tools the past few years that provide some support when working with T4 templates. T4Editor provides a minimal editor experience, and T4Executer helps you control the execution of T4 templates during build time.</p>
+
+                <h2>The birth of Source Generators</h2>
+
+                <p>The introduction of source generators in C# 9.0 and .NET 5 marks a significant evolution in how .NET developers approach code generation. Built on the <a href="https://github.com/dotnet/roslyn" target="_blank">Roslyn</a> compiler platform, source generators promise to enhance, or can we say revolutionize code generation by integrating directly into the compile-time environment, offering a fluent and more performant alternative to traditional methods.</p>
+
+                <p>This leads to the question - are source generators here to make T4 templates a thing from the past? In this post we provide a high level overview and comparison between these tools.</p>
+
+                <h2>T4 Templates</h2>
+
+                <p>T4 (Text Template Transformation Toolkit) templates have long been the standard for code generation within the .NET ecosystem. Embedded within Visual Studio, T4 templates offer a dynamic way to generate textual content based on predefined templates. These templates can include any sort of text, ranging from HTML and XML to fully functional C# code, making them incredibly versatile for a wide range of applications.</p>
+
+                <h3>How T4 Templates Work</h3>
+
+                <p>A T4 template file (.tt) consists of two main parts: template directives and control logic. The directives provide the compiler with information about how to process the template, such as the output file type. The control logic, written in a mixture of C# or VB.NET and T4 syntax, defines the actual content generation logic. When a T4 template is executed, it reads these instructions to produce the final text output, which can be another source code file, a configuration file, or any text-based file that suits the developer's needs.</p>
+
+                <h3>Example</h3>
+
+                <p><strong>Generating DTOs from Database Models</strong></p>
+
+                <p>Imagine you have a set of entity models corresponding to database tables in your .NET application. You frequently need to create Data Transfer Objects (DTOs) based on these entity models for safe data transmission over the network. Instead of manually crafting each DTO, you can use a T4 template to automate this process.</p>
+
+                <pre><code class="language-csharp">&lt;#@ template debug="false" hostspecific="false" language="C#" #&gt;
+&lt;#@ output extension=".cs" #&gt;
+&lt;#@ assembly name="System.Core" #&gt;
+&lt;#@ import namespace="System.Collections.Generic" #&gt;
+
+namespace MyApplication.DTOs
+{
+&lt;# foreach(var model in ModelEntities) { #&gt;
+    public class &lt;#= model.Name #&gt;Dto
+    {
+    &lt;# foreach(var property in model.Properties) { #&gt;
+        public &lt;#= property.Type #&gt; &lt;#= property.Name #&gt; { get; set; }
+    &lt;# } #&gt;
+    }
+&lt;# } #&gt;
+}</code></pre>
+
+                <p>In this example, <code>ModelEntities</code> would be a collection of your entity models, each with Name, Properties, and other necessary metadata. This T4 template iterates over each model, generating a corresponding DTO class with matching properties. Note the syntax using <code>&lt;# #&gt;</code> codeblocks, which require a learning curve to master.</p>
+
+                <h3>Applications and Strengths</h3>
+
+                <p>T4 templates excel in scenarios where repetitive code patterns are common, such as in:</p>
+
+                <ul>
+                    <li>Data model generation based on database schemas</li>
+                    <li>Generating boilerplate code for repetitive tasks (e.g., CRUD operations)</li>
+                    <li>Automatic generation of configuration files or localization resources</li>
+                </ul>
+
+                <p>The key strengths of T4 templates include:</p>
+
+                <ul>
+                    <li><strong>Integration with Visual Studio</strong>: They offer a seamless development experience, with Visual Studio providing direct support for creating, editing, and executing T4 templates.</li>
+                    <li><strong>Flexibility</strong>: T4 templates can generate any text-based file, making them extremely versatile.</li>
+                    <li><strong>Customizability</strong>: Developers have full control over the generation process, allowing for highly customized outputs based on complex logic.</li>
+                </ul>
+
+                <h3>Challenges and Limitations</h3>
+
+                <p>Despite their strengths, T4 templates come with their own set of challenges:</p>
+
+                <ul>
+                    <li><strong>Learning Curve</strong>: The syntax and setup for T4 can be daunting for newcomers.</li>
+                    <li><strong>Debugging Difficulty</strong>: Debugging T4 templates can be cumbersome, as it often requires attaching a debugger to the Visual Studio process.</li>
+                    <li><strong>Performance</strong>: For large projects, T4 template execution can be slow, impacting overall development time.</li>
+                </ul>
+
+                <h3>The Role of T4 Templates Today</h3>
+
+                <p>I still use T4 templates in some projects today, and they have stood the test of time, proving their worth by automating tedious coding tasks and ensuring consistency across large codebases. However, with the introduction of source generators, developers are beginning to question the future role of T4 templates in .NET development.</p>
+
+                <h2>Source Generators in .NET</h2>
+
+                <p>With the release of C# 9.0 and .NET 5, the .NET ecosystem was introduced to source generators, a compelling new feature designed to enhance the developer's toolkit for code generation. Unlike T4 templates that operate outside the compilation process, source generators are intricately woven into the compilation pipeline itself. This integration allows for the dynamic generation of C# source code during compilation, effectively bridging the gap between the initial code written by developers and the final assembly produced by the compiler.</p>
+
+                <h3>How Source Generators Work</h3>
+
+                <p>Source generators work by analyzing a program's structure, including its syntax trees and semantic model, and then generating additional source files as part of the compilation process. This means the generated code is available to all subsequent phases of compilation, allowing for a seamless development experience. Developers implement source generators by creating a .NET Standard library that references <code>Microsoft.CodeAnalysis.CSharp</code> and <code>Microsoft.CodeAnalysis</code>, then implementing the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.isourcegenerator?view=roslyn-dotnet-4.7.0" target="_blank">ISourceGenerator</a> interface.</p>
+
+                <h3>Example</h3>
+
+                <p>Just like in the T4 example above, we want to generate DTO's based on existing entities. In this example, any class that implements <code>IModelEntity</code> will have a corresponding DTO class generated for it at compile time. The generated DTOs will be placed in the *.DTOs namespace and will include properties that mirror those of the original model classes.</p>
+
+                <pre><code class="language-csharp">using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
+using System;
+using System.Linq;
+using System.Text;
+
+[Generator]
+public class DtoGenerator : ISourceGenerator
+{
+    public void Initialize(GeneratorInitializationContext context)
+    {
+        // No initialization actions required for this example
+    }
+
+    public void Execute(GeneratorExecutionContext context)
+    {
+        // Iterate over all syntax trees in the compilation
+        foreach (var syntaxTree in context.Compilation.SyntaxTrees)
+        {
+            var semanticModel = context.Compilation.GetSemanticModel(syntaxTree);
+            var classes = syntaxTree.GetRoot().DescendantNodes().OfType&lt;ClassDeclarationSyntax&gt;();
+
+            foreach (var classDeclaration in classes)
+            {
+                var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+                if (classSymbol.Interfaces.Any(i =&gt; i.ToDisplayString() == "IModelEntity"))
+                {
+                    // Generate the DTO class source
+                    var dtoSource = GenerateDtoClassSource(classSymbol);
+                    context.AddSource($"{classSymbol.Name}Dto.g.cs", SourceText.From(dtoSource, Encoding.UTF8));
+                }
+            }
+        }
+    }
+
+    private string GenerateDtoClassSource(INamedTypeSymbol classSymbol)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("using System;");
+        sb.AppendLine($"namespace {classSymbol.ContainingNamespace.ToDisplayString()}.DTOs");
+        sb.AppendLine("{");
+        sb.AppendLine($"    public class {classSymbol.Name}Dto");
+        sb.AppendLine("    {");
+
+        foreach (var member in classSymbol.GetMembers().OfType&lt;IPropertySymbol&gt;())
+        {
+            sb.AppendLine($"        public {member.Type} {member.Name} {{ get; set; }}");
+        }
+
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+
+        return sb.ToString();
+    }
+}</code></pre>
+
+                <p>This is 100% C# code and requires no other syntax compared to the T4 example. In other words, any C# developer can hop right in and start using Source Generators.</p>
+
+                <h3>Applications and Advantages</h3>
+
+                <p>Source generators are particularly powerful in scenarios such as:</p>
+
+                <ul>
+                    <li><strong>Automating Boilerplate Code Generation</strong>: Similar to T4, but integrated into the compile-time, improving build performance and developer workflow.</li>
+                    <li><strong>Performance Optimizations</strong>: Generating code that is tailored for performance-critical sections, such as serialization and deserialization routines.</li>
+                    <li><strong>Meta-programming</strong>: Allowing for advanced scenarios where code can be generated based on attributes, external files, or other sources of metadata.</li>
+                </ul>
+
+                <p>The advantages of source generators include:</p>
+
+                <ul>
+                    <li><strong>Compile-Time Integration</strong>: Since source generators are part of the compilation process, they can produce code that is immediately available to other parts of the application without additional steps.</li>
+                    <li><strong>Performance</strong>: They do not significantly impact the overall build time and, in some cases, can reduce runtime overhead by generating optimized code.</li>
+                    <li><strong>Debugging and Tooling Support</strong>: Being a newer technology, source generators benefit from the latest IDE features, including debugging support, making them easier to work with compared to T4 templates.</li>
+                </ul>
+
+                <h3>Considerations and Best Practices</h3>
+
+                <p>While source generators offer a powerful addition to the .NET developer's arsenal, they come with their own considerations:</p>
+
+                <ul>
+                    <li><strong>Complexity for Advanced Scenarios</strong>: Writing source generators that handle complex scenarios can be challenging and requires a good understanding of Roslyn APIs.</li>
+                    <li><strong>Incremental Generation</strong>: To optimize performance, developers should aim to make their generators incremental, only re-generating code when necessary.</li>
+                </ul>
+
+                <h3>The Future of Code Generation with Source Generators</h3>
+
+                <p>As source generators continue to mature, they promise to redefine the landscape of code generation in .NET. By offering a tightly integrated, performant, and versatile solution, they may indeed pose a significant shift away from traditional methods like T4 templates, catering to modern development practices and performance needs.</p>
+
+                <h2>Choosing between T4 and Source Generators</h2>
+
+                <p>The decision to use T4 templates or source generators does not have to be binary. Each tool serves its purpose and excels under different circumstances:</p>
+
+                <ul>
+                    <li><strong>T4 Templates</strong> may still be the tool of choice for projects that require generating non-C# files or that heavily rely on the specific templating capabilities and customizations that T4 provides. They are also beneficial in scenarios where developers are already familiar with T4 and the project's existing infrastructure is built around it.</li>
+                    <li><strong>Source Generators</strong> are particularly well-suited for projects that benefit from performance optimizations at compile time, require generation of C# code based on the project's codebase itself, and aim to leverage the latest .NET features with minimal impact on the build process.</li>
+                </ul>
+
+                <p>Ultimately, the choice depends on the specific needs of the project, the team's familiarity with the technologies, and the desired outcomes in terms of development efficiency and application performance.</p>
+
+                <h2>Looking Ahead</h2>
+
+                <p>As the .NET ecosystem continues to evolve, so too will the tools and methodologies for code generation. You should stay informed about the latest updates from Microsoft and the broader .NET community, as enhancements to both T4 templates and source generators are likely to expand their capabilities and use cases.</p>
+
+                <h2>Additional resources</h2>
+
+                <p><strong>Documentation:</strong></p>
+                <ul>
+                    <li><a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates?view=vs-2022" target="_blank">Official T4 Documentation</a></li>
+                    <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview" target="_blank">Official Source Generators Documentation</a></li>
+                </ul>
+
+                <p><strong>T4 Tools:</strong></p>
+                <ul>
+                    <li><a href="https://github.com/Tim-Maes/T4Editor" target="_blank">T4Editor</a> by me, <a href="https://github.com/bricelam/T4Language" target="_blank">T4Language</a> by Brice Lambson</li>
+                    <li><a href="https://github.com/Tim-Maes/T4Executer" target="_blank">T4Executer</a> by me</li>
+                    <li><a href="https://github.com/olegsych/T4Toolbox" target="_blank">T4Toolbox</a> by Oleg Sych</li>
+                </ul>
+
+                <p><strong>Also check out:</strong></p>
+                <ul>
+                    <li><a href="https://somecallmechief.medium.com/code-generation-fail-an-all-the-kings-horses-tragedy-36dcd412ad05" target="_blank">Code Generation Fail: An all the king's horses tragedy</a></li>
+                    <li><a href="https://medium.com/@david.zhao.blog/t4-text-template-editors-comparison-d58487db4ad3" target="_blank">T4 Editors</a> by David Zhao</li>
+                    <li><a href="https://reynders.co/blog/unleashing-the-power-of-source-generators-in-net/" target="_blank">Unleashing the power of Source Generators</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>Building secure and innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="index.html#about">About</a>
+                        <a href="#resume">Resume</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
