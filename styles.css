@@ -197,7 +197,7 @@ body {
 /* Hero Section */
 .hero {
     position: relative;
-    min-height: 55vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     background: var(--hero-gradient);
@@ -890,8 +890,10 @@ body {
 
 .footer-links {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
 }
+
 
 .footer-section h4 {
     color: var(--primary-blue);
