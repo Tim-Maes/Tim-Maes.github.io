@@ -58,7 +58,7 @@
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="blog.html" class="nav-link active">Blog</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -82,14 +82,6 @@
     <!-- Blog Posts -->
     <section class="blog-posts-section">
         <div class="container">
-            <!--<div class="blog-filters">
-                <button class="filter-btn active" data-filter="all">All Posts</button>
-                <button class="filter-btn" data-filter="security">Security</button>
-                <button class="filter-btn" data-filter="development">Development</button>
-                <button class="filter-btn" data-filter="tutorial">Tutorial</button>
-                <button class="filter-btn" data-filter="cloud">Cloud</button>
-            </div>-->
-
             <div class="blog-posts-grid">
 
                 <article class="blog-post-card" data-category="security">
@@ -98,26 +90,92 @@
                     </div>
                     <div class="blog-post-content">
                         <div class="blog-post-header">
-                            <span class="blog-post-date">Date Placeholder</span>
-                            <span class="blog-category">Title Placeholder</span>
+                            <span class="blog-post-date">July 13th, 2025</span>
+                            <span class="blog-category">Blazor</span>
                         </div>
-                        <h3 class="blog-post-title">Understanding Modern Web Security</h3>
+                        <h3 class="blog-post-title">BlazorFrame: Enhanced iframes in Blazor</h3>
                         <p class="blog-post-excerpt">
-                            Coming soon - migrating all my posts!
+                            A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications.
                         </p>
                         <div class="blog-post-tags">
-                            <span class="tag">TAG</span>
-                            <span class="tag">TAG</span>
-                            <span class="tag">TAG</span>
+                            <span class="tag">Blazor</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">iframe</span>
                         </div>
-                        <a href="blog/coming-soong.html" class="blog-post-link">Read Full Article soon!</a>
+                        <a href="blazorframe-enhanced-iframes.html" class="blog-post-link">Read Full Article</a>
+                    </div>
+                </article>
+
+                <article class="blog-post-card" data-category="development">
+                    <div class="blog-post-image">
+                        <div class="blog-post-placeholder"></div>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-header">
+                            <span class="blog-post-date">April 25th, 2025</span>
+                            <span class="blog-category">Code Generation</span>
+                        </div>
+                        <h3 class="blog-post-title">Facets in .NET</h3>
+                        <p class="blog-post-excerpt">
+                            Compile-time code generation for lightweight projections - no boilerplate, zero runtime cost.
+                        </p>
+                        <div class="blog-post-tags">
+                            <span class="tag">Code Generation</span>
+                            <span class="tag">Source Generators</span>
+                            <span class="tag">DTOs</span>
+                        </div>
+                        <a href="facets-in-dotnet.html" class="blog-post-link">Read Full Article</a>
+                    </div>
+                </article>
+
+                <article class="blog-post-card" data-category="development">
+                    <div class="blog-post-image">
+                        <div class="blog-post-placeholder"></div>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-header">
+                            <span class="blog-post-date">March 18th, 2024</span>
+                            <span class="blog-category">Dependency Injection</span>
+                        </div>
+                        <h3 class="blog-post-title">Autowiring using Bindicate</h3>
+                        <p class="blog-post-excerpt">
+                            Streamline your .NET dependency injection with attribute-based service registration, decorators, and keyed services.
+                        </p>
+                        <div class="blog-post-tags">
+                            <span class="tag">Dependency Injection</span>
+                            <span class="tag">Autowiring</span>
+                            <span class="tag">.NET</span>
+                        </div>
+                        <a href="autowiring-using-bindicate.html" class="blog-post-link">Read Full Article</a>
+                    </div>
+                </article>
+
+                <article class="blog-post-card" data-category="development">
+                    <div class="blog-post-image">
+                        <div class="blog-post-placeholder"></div>
+                    </div>
+                    <div class="blog-post-content">
+                        <div class="blog-post-header">
+                            <span class="blog-post-date">February 25th, 2023</span>
+                            <span class="blog-category">Code Generation</span>
+                        </div>
+                        <h3 class="blog-post-title">Source Generators: The end of T4 templates?</h3>
+                        <p class="blog-post-excerpt">
+                            Exploring the evolution from T4 templates to modern Source Generators in .NET development.
+                        </p>
+                        <div class="blog-post-tags">
+                            <span class="tag">Source Generators</span>
+                            <span class="tag">T4 Templates</span>
+                            <span class="tag">Code Generation</span>
+                        </div>
+                        <a href="source-generators-vs-t4.html" class="blog-post-link">Read Full Article</a>
                     </div>
                 </article>
 
             </div>
 
-            <!-- Load More Button -->
-            <div class="blog-load-more">
+            <!-- Load More Button (Hidden for now since you have 4 posts) -->
+            <div class="blog-load-more" style="display: none;">
                 <button class="btn btn-outline">Load More Posts</button>
             </div>
         </div>
@@ -128,112 +186,4 @@
         <div class="container">
             <div class="newsletter-content">
                 <h2 class="newsletter-title">Stay Updated</h2>
-                <!--<p class="newsletter-subtitle">Get notified when I publish new articles</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" class="newsletter-input">
-                    <button class="btn btn-primary">Subscribe</button>
-                </div>-->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <div class="shield-icon"></div>
-                        <span>Tim Maes</span>
-                    </div>
-                    <p>.NET Developer with a focus on Microsoft .NET technologies</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Navigation</h4>
-                        <a href="index.html">Home</a>
-                        <a href="blog.html">Blog</a>
-                        <a href="index.html#about">About</a>
-                        <a href="resume.html">Resume</a>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Connect</h4>
-                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
-                        <a href="https://www.linkedin.com/in/tim-maes-93a82112a/" target="_blank">LinkedIn</a>
-                        <a href="mailto:tim.maes91@gmail.com">Email</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Blog filters
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const blogCards = document.querySelectorAll('.blog-post-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
-
-                const filter = btn.getAttribute('data-filter');
-
-                // Show/hide blog posts based on filter
-                blogCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 100);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Newsletter form
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.querySelector('.newsletter-input').value;
-                if (email) {
-                    alert('Thank you for subscribing! (This is a demo - implement real subscription logic)');
-                    document.querySelector('.newsletter-input').value = '';
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+                <p class="newsletter

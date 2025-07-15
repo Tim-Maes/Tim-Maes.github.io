@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autowiring using Bindicate - Tim Maes</title>
+    
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
+    <link rel="shortcut icon" href="/assets/Tim.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover Bindicate - a powerful NuGet package for attribute-based service registration in .NET. Streamline your dependency injection with decorators, keyed services, and options configuration.">
+    <meta name="keywords" content="Bindicate, .NET, dependency injection, IoC, autowiring, service registration, attributes, C#, NuGet, Tim Maes">
+    <meta name="author" content="Tim Maes">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Autowiring using Bindicate">
+    <meta property="og:description" content="Discover Bindicate - a powerful NuGet package for attribute-based service registration in .NET. Streamline your dependency injection with decorators, keyed services, and options configuration.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://tim-maes.github.io/autowiring-using-bindicate.html">
+    <meta property="og:site_name" content="Tim Maes - Developer Blog">
+    <meta property="og:image" content="https://github.com/Tim-Maes/Bindicate/raw/main/assets/bindicate-logo.png">
+    <meta property="og:image:alt" content="Bindicate - Attribute-based dependency injection for .NET">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Article-specific Open Graph Tags -->
+    <meta property="article:author" content="Tim Maes">
+    <meta property="article:published_time" content="2024-12-15">
+    <meta property="article:section" content="Technology">
+    <meta property="article:tag" content=".NET">
+    <meta property="article:tag" content="Dependency Injection">
+    <meta property="article:tag" content="IoC">
+    <meta property="article:tag" content="Bindicate">
+    <meta property="article:tag" content="Open Source">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Tim_Maes_">
+    <meta name="twitter:creator" content="@Tim_Maes_">
+    <meta name="twitter:title" content="Autowiring using Bindicate">
+    <meta name="twitter:description" content="Discover Bindicate - a powerful NuGet package for attribute-based service registration in .NET. Streamline your dependency injection with decorators, keyed services, and options configuration.">
+    <meta name="twitter:image" content="https://github.com/Tim-Maes/Bindicate/raw/main/assets/bindicate-logo.png">
+    <meta name="twitter:image:alt" content="Bindicate - Attribute-based dependency injection for .NET">
+    
+    <!-- Additional Meta Tags -->
+    <link rel="canonical" href="https://tim-maes.github.io/autowiring-using-bindicate.html">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Existing stylesheets and scripts -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <div class="shield-icon"></div>
+                    <span>Tim Maes</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="container">
+            <div class="article-meta">
+                <span class="article-date">December 15th, 2024</span>
+                <span class="article-category">Dependency Injection</span>
+                <span class="article-category">Open Source</span>
+            </div>
+            <h1 class="article-title">Autowiring using Bindicate</h1>
+            <p class="article-subtitle">
+                Streamline your .NET dependency injection with attribute-based service registration, decorators, and keyed services
+            </p>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <p>As .NET developers, we've all been there, adding a new service to an application and realizing that we need to jump through hoops to wire it up in the IoC container. This often involves navigating through layers of code, digging through <code>Startup.cs</code> or equivalent files, and explicitly adding the new service. Wouldn't it be great if there was a way to streamline this? Imagine a flag or marker that simply tells the framework, "Hey, I'm here, and I need to be registered with this scope."</p>
+
+                <p>Well, that's precisely what <strong>Bindicate</strong> aims to achieve.</p>
+
+                <h2>What is Bindicate?</h2>
+
+                <p>Bindicate is a powerful NuGet package designed to declutter your .NET configuration by enabling attribute-based service registration. By using attributes, you can dictate how your classes should be registered in the IoC container. It supports all standard service lifetimes (Scoped, Transient, Singleton), their "TryAdd" and "TryAddEnumerable" variants, keyed services for .NET 8+, decorators, and options configuration.</p>
+
+                <h3>Key Benefits</h3>
+
+                <ul>
+                    <li><strong>Clean Code</strong> - You no longer have to comb through a mountain of <code>services.Add...&lt;,&gt;()</code> lines. Bindicate allows you to specify the registration logic at the service class level, keeping related concerns together.</li>
+                    <li><strong>Better Maintainability</strong> - When the registration is closely associated with the service class, it's easier to change the scope of the service without hunting down the registration code in a different part of the project.</li>
+                    <li><strong>Comprehensive Feature Set</strong> - Bindicate supports advanced scenarios including decorator patterns, multiple implementations, generic interfaces, and configuration options.</li>
+                </ul>
+
+                <h2>Feature Matrix</h2>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: left;">Feature</th>
+                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Regular</th>
+                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Keyed (.NET 8)</th>
+                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">TryAdd</th>
+                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">TryAddEnumerable</th>
+                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Decorators</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddTransient</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddScoped</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddSingleton</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Getting Started</h2>
+
+                <h3>Installation</h3>
+
+                <p>To get started, install the package from NuGet:</p>
+
+                <pre><code class="language-bash">Install-Package Bindicate</code></pre>
+
+                <p>or</p>
+
+                <pre><code class="language-bash">dotnet add package Bindicate</code></pre>
+
+                <h3>Basic Service Registration</h3>
+
+                <p>Once installed, you can start decorating your service classes with Bindicate attributes:</p>
+
+                <pre><code class="language-csharp">[AddScoped]
+public class UserRepository : IUserRepository
+{
+    private readonly DbContext _context;
+
+    public UserRepository(DbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;User&gt; GetByIdAsync(int id)
+    {
+        return await _context.Users.FindAsync(id);
+    }
+}
+
+public interface IUserRepository
+{
+    Task&lt;User&gt; GetByIdAsync(int id);
+}</code></pre>
+
+                <p>Or specify the interface explicitly:</p>
+
+                <pre><code class="language-csharp">[AddTransient(typeof(IEmailService))]
+public class EmailService : IEmailService
+{
+    public async Task SendEmailAsync(string to, string subject, string body)
+    {
+        // Implementation
+    }
+}</code></pre>
+
+                <h3>Bootstrapping</h3>
+
+                <p>After your services are appropriately decorated, initialize Bindicate in your <code>Program.cs</code>:</p>
+
+                <h4>.NET 6+ in Program.cs</h4>
+
+                <pre><code class="language-csharp">builder.Services
+    .AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
+    .Register();</code></pre>
+
+                <h4>For older versions in Startup.cs</h4>
+
+                <pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
+        .Register();
+    
+    // Other configurations
+}</code></pre>
+
+                <blockquote>
+                    <strong>Important:</strong> Don't forget to call <code>.Register()</code> at the end!
+                </blockquote>
+
+                <h2>Advanced Features</h2>
+
+                <h3>Keyed Services (.NET 8+)</h3>
+
+                <p>Keyed services allow you to register multiple implementations of the same interface, identified by a unique key:</p>
+
+                <pre><code class="language-csharp">public enum PaymentProvider
+{
+    Stripe,
+    PayPal,
+    Square
+}
+
+[AddKeyedScoped(PaymentProvider.Stripe, typeof(IPaymentProcessor))]
+public class StripePaymentProcessor : IPaymentProcessor
+{
+    public async Task ProcessPaymentAsync(decimal amount)
+    {
+        // Stripe implementation
+    }
+}
+
+[AddKeyedScoped(PaymentProvider.PayPal, typeof(IPaymentProcessor))]
+public class PayPalPaymentProcessor : IPaymentProcessor
+{
+    public async Task ProcessPaymentAsync(decimal amount)
+    {
+        // PayPal implementation
+    }
+}</code></pre>
+
+                <p>Usage in your service:</p>
+
+                <pre><code class="language-csharp">public class OrderService
+{
+    private readonly IPaymentProcessor _stripeProcessor;
+
+    public OrderService([FromKeyedServices(PaymentProvider.Stripe)] IPaymentProcessor processor)
+    {
+        _stripeProcessor = processor;
+    }
+}</code></pre>
+
+                <h4>Bootstrapping Keyed Services</h4>
+
+                <p>Add the <code>ForKeyedServices()</code> method call to your configuration:</p>
+
+                <pre><code class="language-csharp">builder.Services
+    .AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
+    .ForKeyedServices()
+    .Register();</code></pre>
+
+                <h3>Multiple Service Implementations (TryAddEnumerable)</h3>
+
+                <p>When you need multiple implementations of the same interface available simultaneously:</p>
+
+                <pre><code class="language-csharp">public interface INotificationHandler
+{
+    Task HandleAsync(string message);
+}
+
+[TryAddEnumerable(Lifetime.TryAddEnumerableTransient, typeof(INotificationHandler))]
+public class EmailNotificationHandler : INotificationHandler
+{
+    public async Task HandleAsync(string message)
+    {
+        // Send email notification
+    }
+}
+
+[TryAddEnumerable(Lifetime.TryAddEnumerableTransient, typeof(INotificationHandler))]
+public class SmsNotificationHandler : INotificationHandler
+{
+    public async Task HandleAsync(string message)
+    {
+        // Send SMS notification
+    }
+}</code></pre>
+
+                <p>All implementations available via <code>IEnumerable&lt;INotificationHandler&gt;</code>:</p>
+
+                <pre><code class="language-csharp">public class NotificationService
+{
+    private readonly IEnumerable&lt;INotificationHandler&gt; _handlers;
+
+    public NotificationService(IEnumerable&lt;INotificationHandler&gt; handlers)
+    {
+        _handlers = handlers;
+    }
+
+    public async Task NotifyAllAsync(string message)
+    {
+        await Task.WhenAll(_handlers.Select(h =&gt; h.HandleAsync(message)));
+    }
+}</code></pre>
+
+                <h3>Decorator Pattern</h3>
+
+                <p>Bindicate supports the decorator pattern, allowing you to wrap services with additional behavior like logging, caching, or validation:</p>
+
+                <pre><code class="language-csharp">public interface IOrderService
+{
+    Task&lt;Order&gt; CreateOrderAsync(CreateOrderRequest request);
+}
+
+[AddScoped(typeof(IOrderService))]
+public class OrderService : IOrderService
+{
+    public async Task&lt;Order&gt; CreateOrderAsync(CreateOrderRequest request)
+    {
+        // Core business logic
+        return new Order { Id = Guid.NewGuid(), Total = request.Total };
+    }
+}
+
+[RegisterDecorator(typeof(IOrderService), order: 1)]
+public class LoggingOrderDecorator : IOrderService
+{
+    private readonly IOrderService _inner;
+    private readonly ILogger&lt;LoggingOrderDecorator&gt; _logger;
+
+    public LoggingOrderDecorator(IOrderService inner, ILogger&lt;LoggingOrderDecorator&gt; logger)
+    {
+        _inner = inner;
+        _logger = logger;
+    }
+
+    public async Task&lt;Order&gt; CreateOrderAsync(CreateOrderRequest request)
+    {
+        _logger.LogInformation("Creating order for amount: {Amount}", request.Total);
+        var order = await _inner.CreateOrderAsync(request);
+        _logger.LogInformation("Order created with ID: {OrderId}", order.Id);
+        return order;
+    }
+}
+
+[RegisterDecorator(typeof(IOrderService), order: 2)]
+public class CachingOrderDecorator : IOrderService
+{
+    private readonly IOrderService _inner;
+    private readonly IMemoryCache _cache;
+
+    public CachingOrderDecorator(IOrderService inner, IMemoryCache cache)
+    {
+        _inner = inner;
+        _cache = cache;
+    }
+
+    public async Task&lt;Order&gt; CreateOrderAsync(CreateOrderRequest request)
+    {
+        // Caching logic would go here
+        return await _inner.CreateOrderAsync(request);
+    }
+}</code></pre>
+
+                <p>Decorators are applied automatically when you call <code>Register()</code>. The <code>order</code> parameter controls the application sequence (lower values are applied first).</p>
+
+                <h3>Generic Interface Support</h3>
+
+                <p>Bindicate can automatically register generic interfaces:</p>
+
+                <pre><code class="language-csharp">[RegisterGenericInterface]
+public interface IRepository&lt;T&gt; where T : class
+{
+    Task&lt;T&gt; GetByIdAsync(int id);
+    Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
+}
+
+[AddScoped(typeof(IRepository&lt;&gt;))]
+public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
+{
+    private readonly DbContext _context;
+
+    public Repository(DbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;T&gt; GetByIdAsync(int id)
+    {
+        return await _context.Set&lt;T&gt;().FindAsync(id);
+    }
+
+    public async Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync()
+    {
+        return await _context.Set&lt;T&gt;().ToListAsync();
+    }
+}</code></pre>
+
+                <h3>Options Configuration</h3>
+
+                <p>Register and configure options classes directly from <code>appsettings.json</code>:</p>
+
+                <pre><code class="language-csharp">[RegisterOptions("EmailSettings")]
+public class EmailOptions
+{
+    public string SmtpServer { get; set; } = "";
+    public int Port { get; set; }
+    public string Username { get; set; } = "";
+    public string Password { get; set; } = "";
+}</code></pre>
+
+                <p><code>appsettings.json</code>:</p>
+
+                <pre><code class="language-json">{
+  "EmailSettings": {
+    "SmtpServer": "smtp.gmail.com",
+    "Port": 587,
+    "Username": "your-email@gmail.com",
+    "Password": "your-password"
+  }
+}</code></pre>
+
+                <p>Then update your service registration to include options:</p>
+
+                <pre><code class="language-csharp">builder.Services
+    .AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
+    .WithOptions(builder.Configuration)  // Pass configuration here
+    .Register();</code></pre>
+
+                <h3>Multi-Assembly Support</h3>
+
+                <p>For larger applications with multiple assemblies:</p>
+
+                <pre><code class="language-csharp">builder.Services
+    .AddAutowiringForAssembly(typeof(DataService).Assembly)      // Data layer
+    .AddAutowiringForAssembly(typeof(BusinessService).Assembly)  // Business layer
+    .AddAutowiringForAssembly(typeof(ApiController).Assembly)    // API layer
+    .ForKeyedServices()
+    .WithOptions(builder.Configuration)
+    .Register();</code></pre>
+
+                <h2>Best Practices</h2>
+
+                <ol>
+                    <li><strong>Performance</strong>: Only scan assemblies that contain your services to improve startup performance</li>
+                    <li><strong>Decorator Ordering</strong>: Use the order parameter thoughtfully to control decorator application sequence</li>
+                    <li><strong>Keyed Services</strong>: Use meaningful keys (enums or constants) rather than magic strings</li>
+                    <li><strong>Options Validation</strong>: Combine with <code>IValidateOptions&lt;T&gt;</code> for robust configuration validation</li>
+                    <li><strong>Assembly Organization</strong>: Group related services in the same assembly for easier management</li>
+                </ol>
+
+                <h2>Troubleshooting</h2>
+
+                <h3>Common Issues</h3>
+
+                <ul>
+                    <li><strong>Services not found</strong>: Ensure you're scanning the correct assembly containing your services</li>
+                    <li><strong>Circular dependencies</strong>: Consider using factory patterns or lazy initialization</li>
+                    <li><strong>Missing Register() call</strong>: Don't forget to call <code>.Register()</code> at the end of your fluent chain</li>
+                    <li><strong>Keyed service not resolved</strong>: Make sure you've called <code>.ForKeyedServices()</code> in your configuration</li>
+                    <li><strong>Decorator not applied</strong>: Ensure the original service is registered before applying decorators</li>
+                </ul>
+
+                <h3>Debugging Tips</h3>
+
+                <p>Check what services are registered:</p>
+
+                <pre><code class="language-csharp">var services = new ServiceCollection();
+services.AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
+    .Register();
+
+// Inspect the registered services
+foreach (var service in services)
+{
+    Console.WriteLine($"{service.ServiceType.Name} -> {service.ImplementationType?.Name ?? "Factory"}");
+}</code></pre>
+
+                <h2>Current Limitations</h2>
+
+                <ul>
+                    <li><strong>Single Registration Policy</strong>: One primary registration attribute per class (decorators are separate)</li>
+                    <li><strong>Assembly Scanning</strong>: Requires explicit assembly specification for each library</li>
+                    <li><strong>Keyed Services</strong>: TryAdd variants not yet supported for keyed services</li>
+                    <li><strong>.NET 8 Requirement</strong>: Keyed services require .NET 8 or later</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+
+                <p>Bindicate transforms dependency injection in .NET applications from a configuration chore into an elegant, declarative system. By moving service registration closer to the service definitions themselves, it promotes cleaner, more maintainable code while supporting advanced scenarios like decorators, keyed services, and multiple implementations.</p>
+
+                <p>Whether you're building a simple web API or a complex enterprise application, Bindicate's attribute-based approach will streamline your dependency injection setup and make your codebase more readable and maintainable.</p>
+
+                <p>The library continues to evolve with new features and improvements, making it an excellent choice for modern .NET applications targeting .NET 8 and beyond.</p>
+
+                <h2>Resources</h2>
+
+                <ul>
+                    <li><strong>Bindicate on NuGet</strong>: <a href="https://www.nuget.org/packages/Bindicate" target="_blank">Install Bindicate</a></li>
+                    <li><strong>Bindicate on GitHub</strong>: <a href="https://github.com/Tim-Maes/Bindicate" target="_blank">Source Code and Documentation</a></li>
+                    <li><strong>Current version</strong>: 1.7.1 - Now with decorator support!</li>
+                </ul>
+
+                <!-- Comments Section -->
+                <section class="comments-section">
+                    <h2>Comments</h2>
+                    <div class="comments-container">
+                        <script src="https://utteranc.es/client.js"
+                                repo="Tim-Maes/Tim-Maes.github.io"
+                                issue-term="title"
+                                label="blog-comments"
+                                theme="github-light"
+                                crossorigin="anonymous"
+                                async>
+                        </script>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>Building secure and innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="index.html#about">About</a>
+                        <a href="#resume">Resume</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
