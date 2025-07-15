@@ -1088,6 +1088,49 @@ body {
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
+/* Comments Section */
+.comments-section {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-3xl);
+    border-top: 2px solid var(--light-gray);
+}
+
+.comments-section h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    position: relative;
+}
+
+.comments-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--hero-gradient);
+    border-radius: var(--radius-sm);
+}
+
+.comments-container {
+    margin-top: var(--space-xl);
+}
+
+/* Utterances theme customization */
+.utterances {
+    max-width: 100% !important;
+}
+
+.utterances-frame {
+    border-radius: var(--radius-lg) !important;
+    border: 1px solid rgba(0, 191, 255, 0.2) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
