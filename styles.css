@@ -1342,6 +1342,10 @@ body {
     font-size: var(--font-size-sm);
     transition: all var(--transition-fast);
     border: 2px solid transparent;
+    min-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .featured-project-link.primary {
