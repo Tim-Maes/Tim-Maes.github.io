@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Tim Maes</title>
-    
+
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
     <meta name="theme-color" content="#2563eb">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Tim Maes developer blog - Thoughts on .NET development, security, and modern technology. Explore articles about C#, Blazor, code generation, and open source projects.">
     <meta name="keywords" content="Tim Maes, blog, .NET, C#, Blazor, code generation, open source, software development, security">
     <meta name="author" content="Tim Maes">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Blog - Tim Maes">
     <meta property="og:description" content="Thoughts on .NET development, security, and modern technology">
@@ -27,7 +27,7 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Tim_Maes_">
@@ -36,11 +36,11 @@
     <meta name="twitter:description" content="Thoughts on .NET development, security, and modern technology">
     <meta name="twitter:image" content="https://tim-maes.github.io/assets/Tim.jpg">
     <meta name="twitter:image:alt" content="Tim Maes - Software Engineer Blog">
-    
+
     <!-- Additional Meta Tags -->
     <link rel="canonical" href="https://tim-maes.github.io/blog.html">
     <meta name="robots" content="index, follow">
-    
+
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -187,7 +187,7 @@
         <div class="container">
             <div class="newsletter-content">
                 <h2 class="newsletter-title">Stay Updated</h2>
-                <p class="newsletter
+                <p class="newsletter-subtitle">Subscribe to get my latest content by email.</p>
             </div>
         </div>
     </section>
@@ -195,15 +195,53 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-section">
-                <h4>Navigation</h4>
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="projects.html">Projects</a>
-                <a href="index.html#about">About</a>
-                <a href="resume.html">Resume</a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="shield-icon"></div>
+                        <span>Tim Maes</span>
+                    </div>
+                    <p>Building secure and innovative solutions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>My work</h4>
+                        <a href="https://marketplace.visualstudio.com/publishers/tim-maes">VS Marketplace</a>
+                        <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
