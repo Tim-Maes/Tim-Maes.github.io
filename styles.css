@@ -1223,7 +1223,7 @@ body {
 
 .featured-projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-xl);
     margin-bottom: var(--space-2xl);
 }
@@ -1253,6 +1253,23 @@ body {
     margin-bottom: var(--space-lg);
     text-align: center;
     opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.featured-project-icon img {
+    max-width: 64px;
+    max-height: 64px;
+    object-fit: contain;
+    filter: brightness(0.9);
+    transition: all var(--transition-normal);
+}
+
+.featured-project-card:hover .featured-project-icon img {
+    filter: brightness(1);
+    transform: scale(1.05);
 }
 
 .featured-project-header {
