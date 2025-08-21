@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facets in .NET - Tim Maes</title>
-    
+
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
     <meta name="theme-color" content="#2563eb">
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Compile-time code generation for lightweight projections in .NET. Eliminate boilerplate DTOs and mapping code with Facet - zero runtime cost, strongly typed projections.">
-    <meta name="keywords" content=".NET, C#, code generation, source generators, DTOs, mapping, Facet, projections, Tim Maes">
+    <meta name="description" content="Compile-time code generation for lightweight projections in .NET. Eliminate boilerplate DTOs and mapping code with Facet - zero runtime cost, strongly typed projections with async support and dependency injection.">
+    <meta name="keywords" content=".NET, C#, code generation, source generators, DTOs, mapping, Facet, projections, async mapping, dependency injection, EF Core, Tim Maes">
     <meta name="author" content="Tim Maes">
-    
+
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Facets in .NET">
-    <meta property="og:description" content="Compile-time code generation for lightweight projections - no boilerplate, zero runtime cost">
+    <meta property="og:title" content="Facets in .NET - Advanced Compile-Time Projections">
+    <meta property="og:description" content="Complete guide to Facet - compile-time code generation for lightweight projections with async mapping, dependency injection, and EF Core integration">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://tim-maes.github.io/facets-in-dotnet.html">
     <meta property="og:site_name" content="Tim Maes - Developer Blog">
@@ -27,30 +27,33 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
-    
+
     <!-- Article-specific Open Graph Tags -->
     <meta property="article:author" content="Tim Maes">
     <meta property="article:published_time" content="2024-01-15">
+    <meta property="article:modified_time" content="2024-08-21">
     <meta property="article:section" content="Technology">
     <meta property="article:tag" content=".NET">
     <meta property="article:tag" content="C#">
     <meta property="article:tag" content="Code Generation">
     <meta property="article:tag" content="Source Generators">
     <meta property="article:tag" content="Open Source">
-    
+    <meta property="article:tag" content="Async Programming">
+    <meta property="article:tag" content="Dependency Injection">
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@timmaes_dev">
     <meta name="twitter:creator" content="@timmaes_dev">
-    <meta name="twitter:title" content="Facets in .NET">
-    <meta name="twitter:description" content="Compile-time code generation for lightweight projections - no boilerplate, zero runtime cost">
+    <meta name="twitter:title" content="Facets in .NET - Advanced Compile-Time Projections">
+    <meta name="twitter:description" content="Complete guide to Facet - compile-time code generation for lightweight projections with async mapping, dependency injection, and EF Core integration">
     <meta name="twitter:image" content="https://github.com/Tim-Maes/Facet/raw/main/assets/facet-logo.png">
     <meta name="twitter:image:alt" content="Facet - Compile-time code generation for .NET projections">
-    
+
     <!-- Additional Meta Tags -->
     <link rel="canonical" href="https://tim-maes.github.io/facets-in-dotnet.html">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Existing stylesheets and scripts -->
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -87,12 +90,12 @@
     <section class="article-header">
         <div class="container">
             <div class="article-meta">
-                <span class="article-date">January 15, 2024</span>
+                <span class="article-date">Updated: August 21, 2024</span>
                 <span class="article-category">Open Source</span>
             </div>
             <h1 class="article-title">Facets in .NET</h1>
             <p class="article-subtitle">
-                Compile-time code generation for lightweight projections - no boilerplate, zero runtime cost
+                The complete guide to compile-time code generation for lightweight projections - zero boilerplate, zero runtime cost, with async mapping and dependency injection
             </p>
         </div>
     </section>
@@ -101,157 +104,549 @@
     <article class="article-content">
         <div class="container">
             <div class="article-body">
+
                 <blockquote>
-                    One part of an object, situation, subject that has many parts.
+                    One part of an object, situation, or subject that has many parts.
                 </blockquote>
 
-                <p>Ever find yourself drowning in hand-written DTOs, mapping methods, and endless AutoMapper profiles? Facetting brings compile-time code generation: define lightweight projections (DTOs, API models, ViewModels) directly from your domain models - no boilerplate, zero runtime cost.</p>
+                <p>In modern .NET development, we constantly find ourselves writing the same boilerplate code: DTOs for APIs, ViewModels for UI, projection classes for database queries, and endless mapping logic between them. Therer is a way to eliminate 90% of this repetitive work while maintaining strong typing, improving performance, and supporting advanced scenarios like async operations and dependency injection.</p>
+
+                <p><strong>Introducing Facet</strong> - a C# source generator that significantly revises how we handle projections and mapping in .NET applications.</p>
+
+                <div align="center">
+                    <img src="https://raw.githubusercontent.com/Tim-Maes/Facet/master/assets/Facet.png"
+                         alt="Facet logo"
+                         width="800">
+                </div>
+
+                <!-- Table of Contents -->
+                <nav class="table-of-contents">
+                    <div class="toc-header">
+                        <h2>Contents</h2>
+                    </div>
+                    <ol class="toc-list">
+                        <li><a href="#the-problem">The Problem: Projection Proliferation</a></li>
+                        <li><a href="#facetting">Facetting</a></li>
+                        <li>
+                            <a href="#what-makes-facetting-special">What makes Facetting special?</a>
+                            <ol>
+                                <li><a href="#zero-runtime-cost">Zero runtime cost</a></li>
+                                <li><a href="#strongly-typed">Strongly typed & nullable-aware</a></li>
+                                <li><a href="#multiple-target-types">Multiple target types</a></li>
+                                <li><a href="#async-mapping">Advanced Async mapping</a></li>
+                                <li><a href="#modular-architecture">Modular architecture</a></li>
+                            </ol>
+                        </li>
+                        <li><a href="#quick-start">Quick Start</a></li>
+                        <li>
+                            <a href="#advanced-scenarios">Advanced Scenarios</a>
+                            <ol>
+                                <li><a href="#different-output-types">Different Output Types</a></li>
+                                <li><a href="#custom-sync-mapping">Custom synchronous mapping</a></li>
+                                <li><a href="#async-mapping-di">Async mapping with Dependency Injection</a></li>
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#ef-core-integration">Entity Framework Core: Beyond Simple Projections</a>
+                            <ol>
+                                <li><a href="#forward-mapping">Forward Mapping (Database → DTO)</a></li>
+                                <li><a href="#reverse-mapping">Reverse Mapping (DTO → Database)</a></li>
+                            </ol>
+                        </li>
+                        <li>
+                            <a href="#performance-best-practices">Performance & Best Practices</a>
+                            <ol>
+                                <li><a href="#collection-processing">Collection Processing Guidelines</a></li>
+                                <li><a href="#hybrid-mapping">Hybrid Mapping for Optimal Performance</a></li>
+                            </ol>
+                        </li>
+                        <li><a href="#real-world-example">Real-World Example: E-Commerce Product API</a></li>
+                        <li><a href="#why-choose-facet">Why Choose Facet?</a></li>
+                        <li><a href="#getting-started-today">Getting Started Today</a></li>
+                        <li><a href="#additional-resources">Additional Resources</a></li>
+                    </ol>
+                </nav>
+
+                <h2 id="the-problem">The Problem: Projection Proliferation</h2>
+
+                <p>Consider a typical e-commerce application. You have a <code>Product</code> entity with dozens of properties, but different parts of your application need different views of this data:</p>
+
+                <ul>
+                    <li><strong>API responses</strong>: Need public properties but exclude internal fields</li>
+                    <li><strong>Search results</strong>: Need only name, price, and thumbnail</li>
+                    <li><strong>Admin panels</strong>: Need everything including audit fields</li>
+                    <li><strong>Email templates</strong>: Need formatted strings and computed properties</li>
+                    <li><strong>Mobile apps</strong>: Need lightweight versions with different property names</li>
+                </ul>
+
+                <p>Traditionally, this means:</p>
+                <ol>
+                    <li>Writing separate DTO classes for each scenario</li>
+                    <li>Creating mapping methods or AutoMapper profiles</li>
+                    <li>Maintaining LINQ projection expressions for database efficiency</li>
+                    <li>Handling async operations for computed properties</li>
+                    <li>Managing dependencies for complex mapping logic</li>
+                </ol>
+
+                <p>This can result in hundreds of lines of repetitive, error-prone boilerplate code that you need to manually maintain and test.</p>
+
+                <h2 id="facetting">Facetting</h2>
+
+                <p><strong>Facetting</strong> is the process of carving out focused, lightweight views of richer models at compile time. Think of it like a diamond cutter carefully selecting which facets to polish and display, leaving others hidden.</p>
+
+                <p>Instead of manually writing DTOs, mappers, and projections, you simply declare what you want to keep - and <strong>Facet</strong> generates everything else. The beauty is that this happens entirely at compile time, meaning zero runtime overhead and full IntelliSense support.</p>
 
                 <p><strong>Facet on <a href="https://github.com/Tim-Maes/Facet" target="_blank">GitHub</a> & Facet on <a href="https://www.nuget.org/packages/Facet" target="_blank">NuGet</a></strong></p>
 
-                <p><strong>Facet</strong> is a C# source generator that emits partial <strong>classes</strong>, <strong>records</strong>, <strong>structs</strong> or <strong>record structs</strong> with:</p>
+                <h2 id="what-makes-facetting-special">What makes Facetting special?</h2>
 
+                <h3 id="zero-runtime-cost">🚀 Zero runtime cost</h3>
+                <p>Everything is generated at compile time. No reflection, no IL emit, no performance penalties. Your projections run as fast as hand-written code because they <em>are</em> hand-written code - just not by you.</p>
+
+                <h3 id="strongly-typed">🔒 Strongly typed & nullable-aware</h3>
+                <p>Full C# compile-time safety with complete nullability contract support. If your source property is nullable, your facet property will be too.</p>
+
+                <h3 id="multiple-target-types">🎯 Multiple target types</h3>
+                <p>Generate <code>classes</code>, <code>records</code>, <code>structs</code>, or <code>record structs</code> depending on your needs. Perfect for modern C# development patterns.</p>
+
+                <h3 id="async-mapping">⚡ Advanced Async mapping</h3>
+                <p>Support for complex async operations like database lookups, API calls, and file I/O during mapping - with full dependency injection support.</p>
+
+                <h3 id="modular-architecture">🏗️ Modular architecture</h3>
+                <p>Four focused NuGet packages that work together:</p>
                 <ul>
-                    <li>Public properties/fields matching your source type</li>
-                    <li>Strongly-typed constructors</li>
-                    <li>LINQ-ready projection expressions</li>
-                    <li>Pluggable custom mappings</li>
-                    <li>EF Core integration through <code>Facet.Extensions</code></li>
+                    <li><strong>Facet</strong>: Core source generator</li>
+                    <li><strong>Facet.Extensions</strong>: Provider-agnostic mapping helpers</li>
+                    <li><strong>Facet.Mapping</strong>: Advanced async mapping with dependency injection</li>
+                    <li><strong>Facet.Extensions.EFCore</strong>: Entity Framework Core integration</li>
                 </ul>
 
-                <p>...all at compile time, with zero runtime penalty.</p>
-
-                <h2>What is Facetting?</h2>
-
-                <p>Facetting is the process of carving out focused views of a richer model at compile time. Instead of manually writing DTOs, mapper classes, and projection lambdas, you declare which members you care about - and the generator writes the rest.</p>
-
-                <p>Instead of manually writing separate DTOs, mappers, and projections, Facet allows you to declare what you want to keep - and generates everything else.</p>
-
-                <p>Imagine your domain model as a diamond: <strong>Facet</strong> chisels out exactly the face you need, leaving the rest intact.</p>
-
-                <h2>Why Facetting?</h2>
-
-                <ul>
-                    <li><strong>Reduce boilerplate</strong><br>
-                        Eliminate repeated DTO/mapping code across your solution.</li>
-                    <li><strong>Zero runtime overhead</strong><br>
-                        All mapping logic is generated at compile time - no reflection or IL emit at runtime.</li>
-                    <li><strong>Strongly Typed & Nullable-Aware</strong><br>
-                        Full C# compile-time safety, including nullability contracts.</li>
-                    <li><strong>DRY & Performant</strong><br>
-                        Stay DRY without sacrificing LINQ/EF Core efficiency</li>
-                </ul>
-
-                <h2>Quick start</h2>
+                <h2 id="quick-start">Quick Start:</h2>
 
                 <h3>1. Install the package</h3>
+                <pre><code class="language-bash">dotnet add package Facet
+dotnet add package Facet.Extensions
+dotnet add package Facet.Extensions.EFCore  # For EF Core integration</code></pre>
 
-                <pre><code class="language-bash">dotnet add package Facet</code></pre>
+                <h3>2. Define your domain model</h3>
+                <pre><code class="language-csharp">public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string PasswordHash { get; set; }  // Sensitive data
+    public DateTime CreatedAt { get; set; }
+    public DateTime? LastLoginAt { get; set; }
+    public bool IsEmailVerified { get; set; }
+}</code></pre>
 
-                <h3>2. Define a Facet</h3>
-
+                <h3>3. Create your first Facet</h3>
                 <pre><code class="language-csharp">using Facet;
 
-public class Person
-{
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public int Age { get; set; }
-}
-
-// Generate a DTO that excludes Email
-[Facet(typeof(Person), exclude: nameof(Person.Email))]
-public partial class PersonDto;</code></pre>
+// Simple DTO excluding sensitive data
+[Facet(typeof(User), exclude: new[] { nameof(User.PasswordHash) })]
+public partial class UserDto;</code></pre>
 
                 <p>This generates:</p>
-
                 <ul>
-                    <li>A <code>PersonDto(Person source)</code> constructor</li>
-                    <li>Public properties for Name and Age (but not Email)</li>
-                    <li>A static <code>Expression&lt;Func&lt;Person,PersonDto&gt;&gt;</code> Projection</li>
+                    <li>A <code>UserDto(User source)</code> constructor</li>
+                    <li>All properties from <code>User</code> except <code>PasswordHash</code></li>
+                    <li>A static <code>Expression&lt;Func&lt;User, UserDto&gt;&gt; Projection</code> for LINQ</li>
                 </ul>
 
-                <h3>3. Use your generated Facets</h3>
+                <h3>4. Use your generated Facet</h3>
+                <pre><code class="language-csharp">using Facet.Extensions;
 
-                <pre><code class="language-csharp">var person = new Person { Name = "Alice", Email = "alice@example.com", Age = 30 };
+// Constructor mapping
+var user = GetUserFromDatabase();
+var dto = new UserDto(user);
 
-// Constructor-based mapping
-var dto = new PersonDto(person);
+// Or even simpler
+var dto = user.ToFacet&lt;UserDto&gt;();
 
-// LINQ projection
-var dtos = dbContext.People
-    .Select(PersonDto.Projection)
-    .ToList();</code></pre>
+// LINQ projection for database queries
+var userDtos = await dbContext.Users
+    .Where(u => u.IsEmailVerified)
+    .SelectFacet&lt;UserDto&gt;()
+    .ToListAsync();</code></pre>
 
-                <h2>Advanced scenarios</h2>
+                <h2 id="advanced-scenarios">Advanced Scenarios:</h2>
 
-                <h3>Record-style Facets</h3>
+                <h3 id="different-output-types">Different Output Types</h3>
+                <pre><code class="language-csharp">// Immutable record for API responses
+[Facet(typeof(User), Kind = FacetKind.Record)]
+public partial record UserRecord;
 
-                <pre><code class="language-csharp">[Facet(typeof(Person), Kind = FacetKind.Record)]
-public partial record PersonRecord;</code></pre>
+// Value type for performance-critical scenarios
+[Facet(typeof(User), Kind = FacetKind.Struct)]
+public partial struct UserStruct;
 
-                <h3>Struct & Record-Struct Facets</h3>
+// Modern immutable value type
+[Facet(typeof(User), Kind = FacetKind.RecordStruct)]
+public partial record struct UserRecordStruct;</code></pre>
 
-                <p>Switch to record semantics:</p>
+                <h3 id="custom-sync-mapping">Custom synchronous mapping</h3>
+                <pre><code class="language-csharp">using Facet.Mapping;
 
-                <pre><code class="language-csharp">[Facet(typeof(MyStruct), Kind = FacetKind.Struct, IncludeFields = true)]
-public partial struct MyStructDto;
-
-[Facet(typeof(MyRecordStruct), Kind = FacetKind.RecordStruct)]
-public partial record struct MyRecordStructDto;</code></pre>
-
-                <h3>Custom Mapping Logic</h3>
-
-                <p>Implement <code>IFacetMapConfiguration&lt;TSource,TTarget&gt;</code> to add derived or formatted fields:</p>
-
-                <pre><code class="language-csharp">public class UserMapConfig : IFacetMapConfiguration&lt;User, UserDto&gt;
+public class UserMapper : IFacetMapConfiguration&lt;User, UserDto&gt;
 {
     public static void Map(User source, UserDto target)
     {
+        // Computed properties
         target.FullName = $"{source.FirstName} {source.LastName}";
+        target.DisplayEmail = source.Email.ToLower();
+        target.AccountAge = DateTime.UtcNow - source.CreatedAt;
+        
+        // Conditional logic
+        target.IsActive = source.LastLoginAt.HasValue && 
+                         source.LastLoginAt > DateTime.UtcNow.AddDays(-30);
     }
 }
 
-[Facet(typeof(User), Configuration = typeof(UserMapConfig))]
-public partial class UserDto;</code></pre>
+[Facet(typeof(User), Configuration = typeof(UserMapper))]
+public partial class UserDto 
+{
+    public string FullName { get; set; }
+    public string DisplayEmail { get; set; }
+    public TimeSpan AccountAge { get; set; }
+    public bool IsActive { get; set; }
+}</code></pre>
 
-                <p>Facet will invoke your <code>Map(...)</code> after the default constructor copy, letting you add derived properties or formatting.</p>
+                <h3 id="async-mapping-di">Async mapping with Dependency Injection</h3>
+                <p>This is where Facet really shines (pun intended). Need to load related data from databases, call external APIs, or perform file operations during mapping? No problem:</p>
 
-                <h2>LINQ/EF Core integration</h2>
+                <pre><code class="language-csharp">public interface IProfilePictureService
+{
+    Task&lt;string&gt; GetProfilePictureAsync(int userId, CancellationToken cancellationToken = default);
+}
 
-                <h3>Install Facet.Extensions:</h3>
+public interface IReputationService  
+{
+    Task&lt;decimal&gt; CalculateReputationAsync(string email, CancellationToken cancellationToken = default);
+}
 
-                <pre><code class="language-bash">dotnet add package Facet.Extensions</code></pre>
+public class UserAsyncMapper : IFacetMapConfigurationAsyncInstance&lt;User, EnrichedUserDto&gt;
+{
+    private readonly IProfilePictureService _profileService;
+    private readonly IReputationService _reputationService;
+    private readonly ILogger&lt;UserAsyncMapper&gt; _logger;
 
-                <pre><code class="language-csharp">using Facet.Extensions;
+    public UserAsyncMapper(
+        IProfilePictureService profileService,
+        IReputationService reputationService,
+        ILogger&lt;UserAsyncMapper&gt; logger)
+    {
+        _profileService = profileService;
+        _reputationService = reputationService;
+        _logger = logger;
+    }
 
-// Single-object mapping
-var dto = person.ToFacet&lt;Person, PersonDto&gt;();
+    public async Task MapAsync(User source, EnrichedUserDto target, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            // Async database lookup
+            target.ProfilePictureUrl = await _profileService.GetProfilePictureAsync(source.Id, cancellationToken);
+            
+            // Async API call
+            target.ReputationScore = await _reputationService.CalculateReputationAsync(source.Email, cancellationToken);
+            
+            // Computed properties
+            target.FullName = $"{source.FirstName} {source.LastName}";
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to enrich user data for {UserId}", source.Id);
+            // Set defaults on error
+            target.ProfilePictureUrl = "/images/default-avatar.png";
+            target.ReputationScore = 0m;
+        }
+    }
+}
 
-// Enumerable mapping (in-memory)
-var dtos = people.SelectFacets&lt;Person, PersonDto&gt;().ToList();
+[Facet(typeof(User))]
+public partial class EnrichedUserDto 
+{
+    public string FullName { get; set; }
+    public string ProfilePictureUrl { get; set; }
+    public decimal ReputationScore { get; set; }
+}</code></pre>
 
-// IQueryable projection (deferred)
-var query = dbContext.People.SelectFacet&lt;Person, PersonDto&gt;();
-var list  = query.ToList();
+                <h3>Using Async Mappers with Dependency Injection</h3>
+                <pre><code class="language-csharp">// Register in your DI container
+services.AddScoped&lt;IProfilePictureService, ProfilePictureService&gt;();
+services.AddScoped&lt;IReputationService, ReputationService&gt;();
+services.AddScoped&lt;UserAsyncMapper&gt;();
 
-// Async with EF Core 6+
-var dtosAsync = await dbContext.People
-    .SelectFacet&lt;Person, PersonDto&gt;()
-    .ToFacetsAsync(cancellationToken);
+// Use in your controllers
+public class UserController : ControllerBase
+{
+    private readonly UserAsyncMapper _userMapper;
+    
+    public UserController(UserAsyncMapper userMapper)
+    {
+        _userMapper = userMapper;
+    }
+    
+    [HttpGet("{id}")]
+    public async Task&lt;EnrichedUserDto&gt; GetUser(int id)
+    {
+        var user = await dbContext.Users.FindAsync(id);
+        
+        // Single instance async mapping with DI
+        return await user.ToFacetAsync(_userMapper);
+    }
+    
+    [HttpGet]
+    public async Task&lt;List&lt;EnrichedUserDto&gt;&gt; GetUsers()
+    {
+        var users = await dbContext.Users.ToListAsync();
+        
+        // Collection async mapping with DI (parallel processing)
+        return await users.ToFacetsParallelAsync(_userMapper, maxDegreeOfParallelism: 4);
+    }
+}</code></pre>
 
-var firstDto = await dbContext.People
-    .FirstFacetAsync&lt;Person, PersonDto&gt;(cancellationToken);</code></pre>
+                <h2 id="ef-core-integration">Entity Framework Core: Beyond Simple Projections</h2>
 
-                <p><strong>Facet</strong> lets you declare once and use everywhere, with zero runtime overhead. Check out the GitHub repo, feel free to contribute, open an issue, or give it a star!</p>
+                <p>Facet's EF Core integration goes far beyond basic SELECT projections. It supports full bidirectional mapping for update scenarios:</p>
 
-                <h2>Additional Resources</h2>
+                <h3 id="forward-mapping">Forward Mapping (Database → DTO)</h3>
+                <pre><code class="language-csharp">using Facet.Extensions.EFCore;
+
+// High-performance async projections
+var userDtos = await dbContext.Users
+    .Where(u => u.IsEmailVerified)
+    .ToFacetsAsync&lt;UserDto&gt;(cancellationToken);
+
+// Single record with null safety
+var userDto = await dbContext.Users
+    .Where(u => u.Id == userId)
+    .FirstFacetAsync&lt;UserDto&gt;(cancellationToken);</code></pre>
+
+                <h3 id="reverse-mapping">Reverse Mapping (DTO → Database)</h3>
+                <p>Perfect for update operations - only modified properties are marked as changed:</p>
+
+                <pre><code class="language-csharp">[Facet(typeof(User))]
+public partial class UpdateUserDto { }
+
+[HttpPut("{id}")]
+public async Task&lt;IActionResult&gt; UpdateUser(int id, UpdateUserDto dto)
+{
+    var user = await context.Users.FindAsync(id);
+    if (user == null) return NotFound();
+    
+    // Only updates properties that actually changed
+    user.UpdateFromFacet(dto, context);
+    
+    await context.SaveChangesAsync();
+    return NoContent();
+}
+
+// With change tracking for auditing
+var result = user.UpdateFromFacetWithChanges(dto, context);
+if (result.HasChanges)
+{
+    logger.LogInformation("User {UserId} updated. Changed: {Properties}", 
+        user.Id, string.Join(", ", result.ChangedProperties));
+}</code></pre>
+
+                <h2 id="performance-best-practices">Performance & Best Practices</h2>
+
+                <h3 id="collection-processing">Collection Processing Guidelines</h3>
+                <pre><code class="language-csharp">// Small collections (&lt; 100 items) - sequential processing
+var results = await users.ToFacetsAsync(mapper);
+
+// Large collections - parallel processing  
+var results = await users.ToFacetsParallelAsync(mapper, maxDegreeOfParallelism: Environment.ProcessorCount);
+
+// Database-heavy operations - limit concurrency to avoid overwhelming the database
+var results = await users.ToFacetsParallelAsync(mapper, maxDegreeOfParallelism: 2);</code></pre>
+
+                <h3 id="hybrid-mapping">Hybrid Mapping for Optimal Performance</h3>
+                <p>Combine fast synchronous operations with expensive async operations:</p>
+
+                <pre><code class="language-csharp">public class UserHybridMapper : IFacetMapConfigurationHybridInstance&lt;User, UserDto&gt;
+{
+    private readonly IExternalService _externalService;
+    
+    public UserHybridMapper(IExternalService externalService)
+    {
+        _externalService = externalService;
+    }
+
+    // Fast synchronous operations first
+    public void Map(User source, UserDto target)
+    {
+        target.FullName = $"{source.FirstName} {source.LastName}";
+        target.DisplayEmail = source.Email.ToLower();
+        target.AgeCategory = CalculateAgeCategory(source.BirthDate);
+    }
+
+    // Expensive async operations only when needed
+    public async Task MapAsync(User source, UserDto target, CancellationToken cancellationToken = default)
+    {
+        target.ExternalData = await _externalService.GetDataAsync(source.Id, cancellationToken);
+    }
+}</code></pre>
+
+                <h2 id="real-world-example">Real-World Example: E-Commerce Product API</h2>
+
+                <p>Let's see how all these features work together in a real-world scenario:</p>
+
+                <pre><code class="language-csharp">// Domain model
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public decimal Price { get; set; }
+    public int CategoryId { get; set; }
+    public string ImagePath { get; set; }
+    public int StockQuantity { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public bool IsActive { get; set; }
+}
+
+// Search results facet - minimal data for list views
+[Facet(typeof(Product), exclude: new[] { nameof(Product.Description), nameof(Product.CreatedAt) })]
+public partial record ProductSearchResult;
+
+// Detailed view with computed properties and external data
+public class ProductDetailMapper : IFacetMapConfigurationAsyncInstance&lt;Product, ProductDetailDto&gt;
+{
+    private readonly ICategoryService _categoryService;
+    private readonly IImageService _imageService;
+    private readonly IReviewService _reviewService;
+
+    public ProductDetailMapper(ICategoryService categoryService, IImageService imageService, IReviewService reviewService)
+    {
+        _categoryService = categoryService;
+        _imageService = imageService;
+        _reviewService = reviewService;
+    }
+
+    public async Task MapAsync(Product source, ProductDetailDto target, CancellationToken cancellationToken = default)
+    {
+        // Parallel async operations for better performance
+        var categoryTask = _categoryService.GetCategoryNameAsync(source.CategoryId, cancellationToken);
+        var imageUrlTask = _imageService.GetOptimizedImageUrlAsync(source.ImagePath, cancellationToken);
+        var avgRatingTask = _reviewService.GetAverageRatingAsync(source.Id, cancellationToken);
+
+        await Task.WhenAll(categoryTask, imageUrlTask, avgRatingTask);
+
+        target.CategoryName = await categoryTask;
+        target.OptimizedImageUrl = await imageUrlTask;
+        target.AverageRating = await avgRatingTask;
+        target.IsInStock = source.StockQuantity > 0;
+        target.FormattedPrice = source.Price.ToString("C");
+    }
+}
+
+[Facet(typeof(Product), Configuration = typeof(ProductDetailMapper))]
+public partial class ProductDetailDto 
+{
+    public string CategoryName { get; set; }
+    public string OptimizedImageUrl { get; set; }
+    public decimal AverageRating { get; set; }
+    public bool IsInStock { get; set; }
+    public string FormattedPrice { get; set; }
+}
+
+// API Controller using all facet types
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
+{
+    private readonly AppDbContext _context;
+    private readonly ProductDetailMapper _detailMapper;
+
+    public ProductsController(AppDbContext context, ProductDetailMapper detailMapper)
+    {
+        _context = context;
+        _detailMapper = detailMapper;
+    }
+
+    [HttpGet("search")]
+    public async Task&lt;List&lt;ProductSearchResult&gt;&gt; Search([FromQuery] string query)
+    {
+        return await _context.Products
+            .Where(p => p.IsActive && p.Name.Contains(query))
+            .ToFacetsAsync&lt;ProductSearchResult&gt;();
+    }
+
+    [HttpGet("{id}")]
+    public async Task&lt;ProductDetailDto&gt; GetProduct(int id)
+    {
+        var product = await _context.Products.FindAsync(id);
+        return await product.ToFacetAsync(_detailMapper);
+    }
+
+    [HttpPut("{id}")]
+    public async Task&lt;IActionResult&gt; UpdateProduct(int id, UpdateProductDto dto)
+    {
+        var product = await _context.Products.FindAsync(id);
+        if (product == null) return NotFound();
+
+        var result = product.UpdateFromFacetWithChanges(dto, _context);
+        if (result.HasChanges)
+        {
+            await _context.SaveChangesAsync();
+            return Ok(new { changedProperties = result.ChangedProperties });
+        }
+
+        return Ok(new { message = "No changes detected" });
+    }
+}</code></pre>
+
+                <h2 id="why-choose-facet">Why Choose Facet?</h2>
+
+                <h3>✅ Eliminate Boilerplate</h3>
+                <p>Reduce 90% of repetitive DTO and mapping code across your solution. Focus on business logic, not plumbing.</p>
+
+                <h3>✅ Zero Runtime Overhead</h3>
+                <p>All code generation happens at compile time. Your projections are as fast as hand-written code.</p>
+
+                <h3>✅ Modern C# Support</h3>
+                <p>Full support for records, record structs, nullable reference types, and init-only properties.</p>
+
+                <h3>✅ Async-First Design</h3>
+                <p>Built-in support for async operations with dependency injection, perfect for modern microservice architectures.</p>
+
+                <h3>✅ EF Core Integration</h3>
+                <p>Seamless integration with Entity Framework Core for both query projections and update operations.</p>
+
+                <h3>✅ Gradual Adoption</h3>
+                <p>Start simple with basic projections and gradually add complexity as needed. All features are opt-in.</p>
+
+                <h3>✅ IntelliSense Support</h3>
+                <p>Full IDE support with autocomplete, refactoring, and debugging because the generated code is just C#.</p>
+
+                <h2 id="getting-started-today">Getting Started Today</h2>
+
+                <p>Ready to eliminate boilerplate and supercharge your .NET applications? Here's your action plan:</p>
+
+                <ol>
+                    <li><strong>Install Facet</strong>: <code>dotnet add package Facet</code></li>
+                    <li><strong>Start simple</strong>: Create your first facet with just the <code>[Facet]</code> attribute</li>
+                    <li><strong>Add extensions</strong>: Install <code>Facet.Extensions</code> for mapping helpers</li>
+                    <li><strong>Integrate with EF Core</strong>: Add <code>Facet.Extensions.EFCore</code> for database projections</li>
+                    <li><strong>Go advanced</strong>: Explore async mapping with <code>Facet.Mapping</code> when you need it</li>
+                </ol>
+
+                <h2 id="additional-resources">Additional Resources</h2>
 
                 <ul>
-                    <li><a href="https://github.com/Tim-Maes/Facet" target="_blank">Facet GitHub Repository</a></li>
-                    <li><a href="https://www.nuget.org/packages/Facet" target="_blank">Facet NuGet Package</a></li>
-                    <li><a href="https://www.nuget.org/packages/Facet.Extensions" target="_blank">Facet.Extensions NuGet Package</a></li>
+                    <li><a href="https://github.com/Tim-Maes/Facet" target="_blank">📁 Facet GitHub Repository</a> - Source code, issues, and contributing</li>
+                    <li><a href="https://www.nuget.org/packages/Facet" target="_blank">📦 Facet NuGet Package</a> - Core source generator</li>
+                    <li><a href="https://www.nuget.org/packages/Facet.Extensions" target="_blank">📦 Facet.Extensions NuGet Package</a> - Mapping helpers</li>
+                    <li><a href="https://www.nuget.org/packages/Facet.Extensions.EFCore" target="_blank">📦 Facet.Extensions.EFCore NuGet Package</a> - EF Core integration</li>
+                    <li><a href="https://www.nuget.org/packages/Facet.Mapping" target="_blank">📦 Facet.Mapping NuGet Package</a> - Advanced async mapping</li>
+                    <li><a href="https://github.com/Tim-Maes/Facet/tree/main/docs" target="_blank">📚 Complete Documentation</a> - Detailed guides and examples</li>
                 </ul>
+
+                <p>Have questions, suggestions, or want to contribute? The Facet project welcomes community involvement. Star the repository, open an issue, or submit a pull reques, every contribution makes the project better!</p>
 
                 <!-- Comments Section -->
                 <section class="comments-section">
@@ -262,8 +657,7 @@ var firstDto = await dbContext.People
                                 issue-term="pathname"
                                 theme="github-light"
                                 crossorigin="anonymous"
-                                async>
-                        </script>
+                                async></script>
                     </div>
                 </section>
             </div>
