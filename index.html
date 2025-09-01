@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tim Maes - Developer Blog</title>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX'); // Replace with your actual GA4 tracking ID
-    </script>
+    <title>Tim Maes - .NET Developer & Open Source Contributor</title>
 
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0a0e27">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Belgium-based software engineer specializing in .NET, C#, Blazor, and open source development. Exploring innovative solutions and sharing insights about modern software development.">
-    <meta name="keywords" content="Tim Maes, software engineer, .NET, C#, Blazor, open source, Belgium, developer blog, code generation, software development">
+    <meta name="description" content="Tim Maes - Belgium-based .NET developer and open source contributor. Creator of BlazorFrame, Facet, T4Editor and more. Specializing in Blazor, code generation, and developer tools.">
+    <meta name="keywords" content="Tim Maes, .NET developer, Blazor, open source, C#, code generation, Belgium developer, BlazorFrame, Facet, T4Editor">
     <meta name="author" content="Tim Maes">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Tim Maes - Developer Blog">
-    <meta property="og:description" content="Belgium-based software engineer specializing in .NET, C#, Blazor, and open source development">
+    <meta property="og:title" content="Tim Maes - .NET Developer & Open Source Contributor">
+    <meta property="og:description" content="Belgium-based .NET developer and open source contributor specializing in Blazor, code generation, and developer tools">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tim-maes.github.io/">
-    <meta property="og:site_name" content="Tim Maes - Developer Blog">
+    <meta property="og:site_name" content="Tim Maes">
     <meta property="og:image" content="https://tim-maes.github.io/assets/Tim.jpg">
-    <meta property="og:image:alt" content="Tim Maes - Software Engineer">
+    <meta property="og:image:alt" content="Tim Maes - .NET Developer">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
@@ -44,461 +32,635 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Tim_Maes_">
     <meta name="twitter:creator" content="@Tim_Maes_">
-    <meta name="twitter:title" content="Tim Maes - Developer Blog">
-    <meta name="twitter:description" content="Belgium-based software engineer specializing in .NET, C#, Blazor, and open source development">
+    <meta name="twitter:title" content="Tim Maes - .NET Developer & Open Source Contributor">
+    <meta name="twitter:description" content="Belgium-based .NET developer and open source contributor specializing in Blazor, code generation, and developer tools">
     <meta name="twitter:image" content="https://tim-maes.github.io/assets/Tim.jpg">
-    <meta name="twitter:image:alt" content="Tim Maes - Software Engineer">
 
-    <!-- Performance Optimizations -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Additional Meta Tags -->
-    <link rel="canonical" href="https://tim-maes.github.io/">
-    <link rel="alternate" type="application/rss+xml" title="Tim Maes - Developer Blog" href="https://tim-maes.github.io/rss.xml">
-    <meta name="robots" content="index, follow">
-    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
     <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Tim Maes",
-        "jobTitle": "Software Engineer",
-        "description": "Belgium-based software engineer specializing in .NET, C#, Blazor, and open source development",
-        "url": "https://tim-maes.github.io/",
-        "email": "hello@timmaes.dev",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Harelbeke",
-            "addressCountry": "Belgium"
-        },
-        "sameAs": [
-            "https://github.com/Tim-Maes",
-            "https://linkedin.com/in/tim-maes",
-            "https://marketplace.visualstudio.com/publishers/TimMaes",
-            "https://www.nuget.org/profiles/Tim-Maes"
-        ],
-        "worksFor": {
-            "@type": "Organization",
-            "name": "Software Development"
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Tim Maes",
+            "jobTitle": ".NET Developer",
+            "description": "Belgium-based .NET developer and open source contributor specializing in Blazor, code generation, and developer tools",
+            "url": "https://tim-maes.github.io/",
+            "email": "hello@timmaes.dev",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Harelbeke",
+                "addressCountry": "Belgium"
+            },
+            "sameAs": [
+                "https://github.com/Tim-Maes",
+                "https://linkedin.com/in/tim-maes",
+                "https://marketplace.visualstudio.com/publishers/TimMaes",
+                "https://www.nuget.org/profiles/Tim-Maes"
+            ]
         }
-    }
     </script>
-    
-    <!-- Existing stylesheets -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="theme-toggle.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <!-- Accessibility Skip Link -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo">
-                    <div class="shield-icon"></div>
-                    <span>.NET Development</span>
-                </div>
+                <span class="brand-text">Tim<span class="accent">Maes</span></span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#index.html" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
-                <!--<li><a href="#contact" class="nav-link">Contact</a></li>-->
-                <li><!--<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>--></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <main id="main-content">
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-image">
-                    <img src="assets/TimMountain.png" alt="Tim Maes" class="hero-profile-photo">
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="hero-particles"></div>
+            <div class="hero-grid"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span>Available for collaboration</span>
                 </div>
-                <div class="hero-text">
-                    <h1 class="hero-title">Tim Maes</h1>
-                    <p class="hero-subtitle">Software Engineer with a focus on .NET technologies</p>
-                    <p class="hero-description">
-                        Welcome to my website. Here you will find my blogposts and information on projects that I authored and maintain.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="https://github.com/Tim-Maes" target="_blank" class="btn btn-primary">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;">
-                                <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                            </svg>
-                            GitHub
-                        </a>
-                        <a href="https://marketplace.visualstudio.com/publishers/TimMaes" target="_blank" class="btn btn-primary">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;">
-                                <path d="M17.5 0L6.5 0C5.672 0 5 .672 5 1.5v21c0 .828.672 1.5 1.5 1.5h11c.828 0 1.5-.672 1.5-1.5v-21C19 .672 18.328 0 17.5 0zM12 21.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm5.5-3.5H6.5V2h11v16z" />
-                            </svg>
-                            VS Marketplace
-                        </a>
-                        <a href="https://www.nuget.org/profiles/Tim-Maes" target="_blank" class="btn btn-primary">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;">
-                                <path d="M12 0L0 12l12 12 12-12L12 0zm-1.5 18h-3v-6h3v6zm0-9h-3v-3h3v3zm6 9h-3v-9h3v9zm0-12h-3v-3h3v3z" />
-                            </svg>
-                            NuGet
-                        </a>
+
+                <h1 class="hero-title">
+                    <span class="hero-greeting">Hi, I'm</span>
+                    <span class="hero-name">Tim Maes</span>
+                    <span class="hero-role">.NET Developer & Open Source Contributor</span>
+                </h1>
+
+                <p class="hero-description">
+                    Crafting innovative developer tools and secure solutions with <strong>Blazor</strong>, <strong>C#</strong>, and <strong>code generation</strong>.
+                    Creator of BlazorFrame, Facet, and other open source projects trusted by thousands of developers worldwide.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">70K+</span>
+                        <span class="stat-label">Downloads</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">800+</span>
+                        <span class="stat-label">GitHub Stars</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Active Projects</span>
                     </div>
                 </div>
-            </div>
-            <div class="hero-background"></div>
-        </section>
 
-        <!-- Recent Blog Posts -->
-        <section id="blog" class="blog-section">
-            <div class="container">
-                <h2 class="section-title">Highlighted Blog Posts</h2>
-                <div class="blog-grid">
-
-                    <article class="blog-card">
-                        <div class="blog-card-header">
-                            <span class="blog-date">July 13th, 2025</span>
-                            <span class="blog-category">Blazor</span>
-                        </div>
-                        <h3 class="blog-title">Introducing: BlazorFrame</h3>
-                        <p class="blog-excerpt">
-                            A security-first, enhanced Blazor iframe component.
-                        </p>
-                        <a href="blazorframe-enhanced-iframes.html" class="blog-link">Read More</a>
-                    </article>
-
-                    <article class="blog-card">
-                        <div class="blog-card-header">
-                            <span class="blog-date">April 28th, 2025</span>
-                            <span class="blog-category">Code Generation</span>
-                        </div>
-                        <h3 class="blog-title">Facets in .NET</h3>
-                        <p class="blog-excerpt">
-                            Source generator for creating compile-time facets of your models, features mapping and LINQ projections, zero runtime overhead.
-                        </p>
-                        <a href="facets-in-dotnet.html" class="blog-link">Read More</a>
-                    </article>
-
-                    <article class="blog-card">
-                        <div class="blog-card-header">
-                            <span class="blog-date">March 25th, 2023</span>
-                            <span class="blog-category">Code Generation</span>
-                        </div>
-                        <h3 class="blog-title">Source Generators VS T4 Templates</h3>
-                        <p class="blog-excerpt">
-                            Exploring the evolution from T4 templates to modern Source Generators in .NET development.
-                        </p>
-                        <a href="source-generators-vs-t4.html" class="blog-link">Read More</a>
-                    </article>
-
-                </div>
-                <div class="blog-more">
-                    <a href="blog.html" class="btn btn-outline">View All Posts</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Projects Section -->
-        <section class="featured-projects-section">
-            <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="featured-projects-grid">
-
-                    <!-- BlazorFrame Project -->
-                    <article class="featured-project-card">
-                        <div class="featured-project-icon">
-                            <img src="assets/BlazorFrame.png" alt="BlazorFrame Logo">
-                        </div>
-                        <div class="featured-project-header">
-                            <h3 class="featured-project-title">BlazorFrame</h3>
-                            <span class="featured-project-category">Blazor</span>
-                        </div>
-                        <p class="featured-project-description">
-                            A secure, easy-to-use library for integrating iframes into Blazor applications with built-in security features, sandbox controls, and seamless integration.
-                        </p>
-                        <div class="featured-project-stats">
-                            <span>📦 NuGet Package</span>
-                            <span>⭐ Latest Release</span>
-                        </div>
-                        <div class="featured-project-tags">
-                            <span class="featured-project-tag">Blazor</span>
-                            <span class="featured-project-tag">Security</span>
-                            <span class="featured-project-tag">Components</span>
-                            <span class="featured-project-tag">iframes</span>
-                        </div>
-                        <div class="featured-project-links">
-                            <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank" class="featured-project-link primary">
-                                View on GitHub
-                            </a>
-                            <a href="https://www.nuget.org/packages/BlazorFrame" target="_blank" class="featured-project-link secondary">
-                                NuGet Package
-                            </a>
-                        </div>
-                    </article>
-
-                    <!-- Facet Project -->
-                    <article class="featured-project-card">
-                        <div class="featured-project-icon">💎</div>
-                        <div class="featured-project-header">
-                            <h3 class="featured-project-title">Facet</h3>
-                            <span class="featured-project-category">Code Generation</span>
-                        </div>
-                        <p class="featured-project-description">
-                            Source generator that instantly scaffolds DTOs, typed LINQ projections, and ViewModels without any runtime overhead. Compile-time magic for cleaner code.
-                        </p>
-                        <div class="featured-project-stats">
-                            <span>🔧 Source Generator</span>
-                            <span>📈 600+ stars</span>
-                        </div>
-                        <div class="featured-project-tags">
-                            <span class="featured-project-tag">Source Generators</span>
-                            <span class="featured-project-tag">DTOs</span>
-                            <span class="featured-project-tag">LINQ</span>
-                            <span class="featured-project-tag">Performance</span>
-                        </div>
-                        <div class="featured-project-links">
-                            <a href="https://github.com/Tim-Maes/Facet" target="_blank" class="featured-project-link primary">
-                                View on GitHub
-                            </a>
-                            <a href="https://www.nuget.org/packages/Facet" target="_blank" class="featured-project-link secondary">
-                                NuGet Package
-                            </a>
-                        </div>
-                    </article>
-
-                    <!-- T4Editor Project -->
-                    <article class="featured-project-card">
-                        <div class="featured-project-icon">
-                            <img src="assets/T4Editor.jpg" alt="T4Editor Logo">
-                        </div>
-                        <div class="featured-project-header">
-                            <h3 class="featured-project-title">T4Editor</h3>
-                            <span class="featured-project-category">Visual Studio</span>
-                        </div>
-                        <p class="featured-project-description">
-                            Enhanced Visual Studio extension for T4 templates with syntax highlighting, IntelliSense, and advanced editing features for improved productivity.
-                        </p>
-                        <div class="featured-project-stats">
-                            <span>🔌 VS Extension</span>
-                            <span>📈 50k+ Downloads</span>
-                        </div>
-                        <div class="featured-project-tags">
-                            <span class="featured-project-tag">VSIX</span>
-                            <span class="featured-project-tag">T4 Templates</span>
-                            <span class="featured-project-tag">IntelliSense</span>
-                            <span class="featured-project-tag">Editor</span>
-                        </div>
-                        <div class="featured-project-links">
-                            <a href="https://github.com/Tim-Maes/T4Editor" target="_blank" class="featured-project-link primary">
-                                View on GitHub
-                            </a>
-                            <a href="https://marketplace.visualstudio.com/items?itemName=tim-maes.t4-editor" target="_blank" class="featured-project-link secondary">
-                                VS Extension
-                            </a>
-                        </div>
-                    </article>
-
-                </div>
-
-                <div class="featured-projects-cta">
-                    <a href="projects.html" class="btn btn-primary">
-                        View All Projects
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View My Work</span>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                        </svg>
+                    </a>
+                    <a href="https://github.com/Tim-Maes" target="_blank" class="btn btn-secondary">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                        </svg>
+                        <span>GitHub</span>
                     </a>
                 </div>
             </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2 class="section-title">About Me</h2>
-                        <p>
-                            I'm a passionate developer with a focus on creating secure, efficient, and user-friendly software.
-                            On a professional level, I'm mostly experienced in enteprise manufacturing systems build on .NET technologies. In my free time, I authored and maintain some open source projects.
+            <div class="hero-visual">
+                <div class="hero-image-container">
+                    <img src="assets/TimMountain.png" alt="Tim Maes" class="hero-image">
+                    <div class="hero-image-glow"></div>
+                </div>
+
+                <div class="hero-code-block">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="code-title">Developer.cs</span>
+                    </div>
+                    <div class="code-content">
+                        <code>
+                            <span class="code-keyword">public class</span> <span class="code-class">Developer</span>
+                            {
+                            <span class="code-keyword">public string</span> Name => <span class="code-string">"Tim Maes"</span>;
+                            <span class="code-keyword">public string[]</span> Skills =>
+                            {
+                            <span class="code-string">".NET"</span>, <span class="code-string">"Blazor"</span>, <span class="code-string">"C#"</span>,
+                            <span class="code-string">"Open Source"</span>, <span class="code-string">"DevTools"</span>
+                            };
+
+                            <span class="code-keyword">public void</span> <span class="code-method">CreateAwesome</span>() =>
+                            Console.WriteLine(<span class="code-string">"Building the future!"</span>);
+                            }
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Get to know me</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-intro">
+                        <p>I'm a passionate <strong>.NET developer</strong> from Belgium with a deep love for creating tools that make other developers' lives easier. My journey in software development has led me to specialize in <strong>Blazor</strong>, <strong>code generation</strong>, and <strong>developer productivity tools</strong>.</p>
+
+                        <p>When I'm not crafting code, you'll find me in the gym, spending quality time with my kids, or headbanging to some Rammstein!</p>
+                    </div>
+
+                    <div class="about-highlights">
+                        <div class="highlight">
+                            <div class="highlight-icon">></div>
+                            <div class="highlight-content">
+                                <h4>Professional Focus</h4>
+                                <p>Enterprise manufacturing systems built on .NET technologies</p>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="highlight-icon">></div>
+                            <div class="highlight-content">
+                                <h4>Open Source Passion</h4>
+                                <p>Author and maintainer of multiple open source projects</p>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <div class="highlight-icon">></div>
+                            <div class="highlight-content">
+                                <h4>Core Mission</h4>
+                                <p>Building secure, efficient, and user-friendly software solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-image">
+                    <img src="assets/Tim.jpg" alt="Tim Maes" class="about-photo">
+                    <div class="about-photo-frame"></div>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Technologies I Love</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">.NET</div>
+                    <div class="tech-item">C#</div>
+                    <div class="tech-item">Blazor</div>
+                    <div class="tech-item">Code Generation</div>
+                    <div class="tech-item">Source Generators</div>
+                    <div class="tech-item">VSIX</div>
+                    <div class="tech-item">JavaScript</div>
+                    <div class="tech-item">TypeScript</div>
+                    <div class="tech-item">SQL Server</div>
+                    <div class="tech-item">Git</div>
+                    <div class="tech-item">DevOps</div>
+                    <div class="tech-item">Open Source</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">What I've built</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-description">Open source tools and libraries that developers love to use</p>
+            </div>
+
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="blazor">Blazor</button>
+                <button class="filter-btn" data-filter="tools">Developer Tools</button>
+                <button class="filter-btn" data-filter="codegen">Code Generation</button>
+            </div>
+
+            <div class="projects-grid">
+                <!-- BlazorFrame -->
+                <div class="project-card" data-category="blazor">
+                    <div class="project-image">
+                        <img src="assets/BlazorFrameLogo.png" alt="BlazorFrame">
+                        <div class="project-overlay">
+                            <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank" class="project-link">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                </svg>
+                            </a>
+                            <a href="https://www.nuget.org/packages/BlazorFrame" target="_blank" class="project-link">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 14.5 0h-13zM1 1.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-13z" />
+                                    <path d="M5.5 4a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5h-5zM6 5h4v6H6V5z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>BlazorFrame</h3>
+                            <span class="project-year">2025</span>
+                        </div>
+                        <p class="project-description">
+                            Security-first iframe component for Blazor applications with built-in protection, sandbox controls, and seamless integration.
                         </p>
-                        <p>
-                            When I'm not coding, you can find me in the gym, just living life with my kids and listening to Rammstein music!
+                        <div class="project-tech">
+                            <span>Blazor</span>
+                            <span>Security</span>
+                            <span>Components</span>
+                        </div>
+                        <div class="project-stats">
+                            <span>?? NuGet Package</span>
+                            <span>? Latest Release</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BlazorSnap -->
+                <div class="project-card" data-category="blazor tools">
+                    <div class="project-image">
+                        <div class="project-icon"></></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>BlazorSnap</h3>
+                            <span class="project-year">2025</span>
+                        </div>
+                        <p class="project-description">
+                            Convert any HTML element into reusable Blazor components with exact visual reproduction. Browser extension with dual conversion modes.
                         </p>
-                        <div class="about-skills">
-                            <span class="skill-tag">.NET</span>
-                            <span class="skill-tag">C#</span>
-                            <span class="skill-tag">Blazor</span>
-                            <span class="skill-tag">Code Generation</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">API</span>
-                            <span class="skill-tag">DevOps</span>
-                            <span class="skill-tag">Open Source</span>
+                        <div class="project-tech">
+                            <span>Browser Extension</span>
+                            <span>HTML Conversion</span>
+                            <span>Developer Tools</span>
+                        </div>
+                        <div class="project-stats">
+                            <span>> Chrome & Edge</span>
+                            <span>>> Right-click Convert</span>
                         </div>
                     </div>
-                    <div class="about-image">
-                        <img src="assets/Tim.jpg" alt="Tim Maes" class="about-profile-photo">
+                </div>
+
+                <!-- Facet -->
+                <div class="project-card" data-category="codegen">
+                    <div class="project-image">
+                        <img src="assets/FacetLogo.png" alt="Facet">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Facet</h3>
+                            <span class="project-year">2025</span>
+                        </div>
+                        <p class="project-description">
+                            Source generator for compile-time DTOs, LINQ projections, and ViewModels. Zero runtime overhead with async mapping support.
+                        </p>
+                        <div class="project-tech">
+                            <span>Source Generators</span>
+                            <span>DTOs</span>
+                            <span>Performance</span>
+                        </div>
+                        <div class="project-stats">
+                            <span>> 600+ Stars</span>
+                            <span>>> Multiple Packages</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bindicate -->
+                <div class="project-card" data-category="tools">
+                    <div class="project-image">
+                        <img src="assets/BindicateLogo.png" alt="Bindicate">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Bindicate</h3>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <p class="project-description">
+                            Attribute-based dependency injection library for .NET with decorators, keyed services, and autowiring capabilities.
+                        </p>
+                        <div class="project-tech">
+                            <span>Dependency Injection</span>
+                            <span>Attributes</span>
+                            <span>Autowiring</span>
+                        </div>
+                        <div class="project-stats">
+                            <span>>> NuGet Package</span>
+                            <span>>> Production Ready</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- T4Editor -->
+                <div class="project-card" data-category="tools">
+                    <div class="project-image">
+                        <div class="project-icon"></></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>T4Editor</h3>
+                            <span class="project-year">2019</span>
+                        </div>
+                        <p class="project-description">
+                            Enhanced Visual Studio extension for T4 templates with syntax highlighting, IntelliSense, and advanced editing features.
+                        </p>
+                        <div class="project-tech">
+                            <span>Visual Studio</span>
+                            <span>T4 Templates</span>
+                            <span>Editor</span>
+                        </div>
+                        <div class="project-stats">
+                            <span>>> 50K+ Downloads</span>
+                            <span>>> VS Extension</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PrintZPL -->
+                <div class="project-card" data-category="tools">
+                    <div class="project-image">
+                        <div class="project-icon"></></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>PrintZPL</h3>
+                            <span class="project-year">2023</span>
+                        </div>
+                        <p class="project-description">
+                            REST API service for discovering Zebra printers and sending ZPL templates. Supports batch printing and Windows service deployment.
+                        </p>
+                        <div class="project-tech">
+                            <span>REST API</span>
+                            <span>Zebra Printers</span>
+                            <span>Service</span>
+                        </div>
+                        <div class="project-stats">
+                            <span>> Industrial Ready</span>
+                            <span>>> Batch Processing</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Contact Section -->
-        <!--<section id="contact" class="contact-section">
-            <div class="container">
-                <h2 class="section-title">Get in Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <h3>📧 Email</h3>
-                            <p><a href="mailto:tim.maes91@gmail.com">Email me!</a></p>
+            <div class="projects-cta">
+                <a href="projects.html" class="btn btn-outline">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Latest insights</span>
+                <h2 class="section-title">Recent Blog Posts</h2>
+                <p class="section-description">Thoughts on .NET development, security, and modern technology</p>
+            </div>
+
+            <div class="blog-grid">
+                <article class="blog-card featured">
+                    <div class="blog-image">
+                        <img src="assets/FacetLogo.png" alt="Facet Blog Post">
+                        <div class="blog-category">Code Generation</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">April 28, 2025</span>
+                            <span class="blog-read-time">12 min read</span>
                         </div>
-                        <div class="contact-item">
-                            <h3>💼 LinkedIn</h3>
-                            <p><a href="https://www.linkedin.com/in/tim-maes-93a82112a/" target="_blank">Connect with me</a></p>
+                        <h3>Facets in .NET</h3>
+                        <p>Complete guide to compile-time code generation for lightweight projections with zero runtime overhead.</p>
+                        <a href="facets-in-dotnet.html" class="blog-link">
+                            Read More
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="assets/BlazorFrameLogo.png" alt="BlazorFrame Blog Post">
+                        <div class="blog-category">Blazor</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">July 13, 2025</span>
+                            <span class="blog-read-time">8 min read</span>
                         </div>
-                        <div class="contact-item">
-                            <h3>💻 GitHub</h3>
-                            <p><a href="https://github.com/Tim-Maes" target="_blank">Follow my work</a></p>
+                        <h3>Introducing BlazorFrame</h3>
+                        <p>A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications.</p>
+                        <a href="blazorframe-enhanced-iframes.html" class="blog-link">
+                            Read More
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                            </svg>
                         </div>
-                        <div class="contact-item">
-                            <h3>📍 Location</h3>
-                            <p>Harelbeke, Belgium</p>
+                        <div class="blog-category">Development</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">March 25, 2023</span>
+                            <span class="blog-read-time">6 min read</span>
+                        </div>
+                        <h3>Source Generators vs T4 Templates</h3>
+                        <p>Exploring the evolution from T4 templates to modern Source Generators in .NET development.</p>
+                        <a href="source-generators-vs-t4.html" class="blog-link">
+                            Read More
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="blog-cta">
+                <a href="blog.html" class="btn btn-outline">Read All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Let's connect</span>
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">Always interested in new opportunities and collaborations</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon"><></div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <a href="mailto:hello@timmaes.dev">tim.maes91@gmail.com</a>
                         </div>
                     </div>
-                    <div class="contact-form">
-                        <h3>Send me a message</h3>
-                        <form action="https://formspree.io/f/your-form-id" method="POST">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </form>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><></div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <span>Harelbeke, Belgium</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><></div>
+                        <div class="contact-details">
+                            <h4>Status</h4>
+                            <span>Available for collaboration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-links">
+                    <a href="https://github.com/Tim-Maes" target="_blank" class="contact-link">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+
+                    <a href="https://linkedin.com/in/tim-maes" target="_blank" class="contact-link">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+
+                    <a href="https://marketplace.visualstudio.com/publishers/TimMaes" target="_blank" class="contact-link">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0Z" />
+                            <path d="M6 8a2 2 0 1 1 4 0 2 2 0 0 1-4 0Z" />
+                        </svg>
+                        <span>VS Marketplace</span>
+                    </a>
+
+                    <a href="https://www.nuget.org/profiles/Tim-Maes" target="_blank" class="contact-link">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm0 1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+                            <path d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                        </svg>
+                        <span>NuGet</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                    <p>Building secure and innovative solutions for the .NET ecosystem</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#blog">Blog</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Projects</h4>
+                        <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank">BlazorFrame</a>
+                        <a href="https://github.com/Tim-Maes/Facet" target="_blank">Facet</a>
+                        <a href="https://github.com/Tim-Maes/Bindicate" target="_blank">Bindicate</a>
+                        <a href="projects.html">View All</a>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+                        <a href="mailto:hello@timmaes.dev">Email</a>
+                        <a href="resume.html">Resume</a>
                     </div>
                 </div>
             </div>
-        </section>-->
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <div class="logo">
-                            <div class="shield-icon"></div>
-                            <span>Tim Maes</span>
-                        </div>
-                        <p>Building secure and innovative solutions</p>
-                    </div>
-                    <div class="footer-links">
-                        <div class="footer-section">
-                            <h4>My work</h4>
-                            <a href="https://marketplace.visualstudio.com/publishers/TimMaes">VS Marketplace</a>
-                            <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>
-                        </div>
-                        <div class="footer-section">
-                            <h4>Connect</h4>
-                            <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
-                            <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
-                            <a href="mailto:hello@timmaes.dev">Email</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span>Made with ?? in Belgium</span>
+                    <span>�</span>
+                    <span>Open Source Enthusiast</span>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <script>
-            // Dark mode functionality
-            const themeToggle = document.getElementById('theme-toggle');
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            
-            // Initialize theme
-            const currentTheme = localStorage.getItem('theme') || 
-                (prefersDarkScheme.matches ? 'dark' : 'light');
-            
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            updateThemeIcon(currentTheme);
-            
-            function updateThemeIcon(theme) {
-                themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-            }
-            
-            themeToggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcon(newTheme);
-            });
-            
-            // Listen for system theme changes
-            prefersDarkScheme.addEventListener('change', (e) => {
-                if (!localStorage.getItem('theme')) {
-                    const theme = e.matches ? 'dark' : 'light';
-                    document.documentElement.setAttribute('data-theme', theme);
-                    updateThemeIcon(theme);
-                }
-            });
-
-            // Mobile menu toggle
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Header scroll effect
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('.header');
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        </script>
-    </main>
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
-
 </html>

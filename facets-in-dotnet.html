@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0a0e27">
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Compile-time code generation for lightweight projections in .NET. Eliminate boilerplate DTOs and mapping code with Facet - zero runtime cost, strongly typed projections with async support and dependency injection.">
@@ -30,206 +30,230 @@
 
     <!-- Article-specific Open Graph Tags -->
     <meta property="article:author" content="Tim Maes">
-    <meta property="article:published_time" content="2024-01-15">
-    <meta property="article:modified_time" content="2024-08-21">
+    <meta property="article:published_time" content="2025-04-28">
     <meta property="article:section" content="Technology">
     <meta property="article:tag" content=".NET">
     <meta property="article:tag" content="C#">
     <meta property="article:tag" content="Code Generation">
     <meta property="article:tag" content="Source Generators">
-    <meta property="article:tag" content="Open Source">
-    <meta property="article:tag" content="Async Programming">
-    <meta property="article:tag" content="Dependency Injection">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@timmaes_dev">
-    <meta name="twitter:creator" content="@timmaes_dev">
+    <meta name="twitter:site" content="@Tim_Maes_">
+    <meta name="twitter:creator" content="@Tim_Maes_">
     <meta name="twitter:title" content="Facets in .NET">
     <meta name="twitter:description" content="Complete guide to Facet - compile-time code generation for lightweight projections with async mapping, dependency injection, and EF Core integration">
     <meta name="twitter:image" content="https://github.com/Tim-Maes/Facet/raw/main/assets/facet-logo.png">
-    <meta name="twitter:image:alt" content="Facet - Compile-time code generation for .NET projections">
 
     <!-- Additional Meta Tags -->
     <link rel="canonical" href="https://tim-maes.github.io/facets-in-dotnet.html">
     <meta name="robots" content="index, follow">
 
-    <!-- Existing stylesheets and scripts -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/css/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo">
-                    <div class="shield-icon"></div>
-                    <span>Tim Maes</span>
-                </div>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                </a>
             </div>
-            <ul class="nav-menu">
+            
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Article Header -->
     <section class="article-header">
         <div class="container">
-            <div class="article-meta">
-                <span class="article-date">Updated: August 21, 2025</span>
-                <span class="article-category">Open Source</span>
+            <div class="article-header-bg">
+                <div class="article-particles"></div>
             </div>
-            <h1 class="article-title">Facets in .NET</h1>
-            <p class="article-subtitle">
-                The complete guide to compile-time code generation for lightweight projections - zero boilerplate, zero runtime cost, with async mapping and dependency injection
-            </p>
+            
+            <div class="article-header-content">
+                <div class="article-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <a href="blog.html">Blog</a>
+                    <span>/</span>
+                    <span>Facets in .NET</span>
+                </div>
+                
+                <div class="article-meta">
+                    <span class="article-date">April 28, 2025</span>
+                    <span class="article-category">Code Generation</span>
+                    <span class="article-read-time">12 min read</span>
+                </div>
+                
+                <h1 class="article-title">Facets in .NET</h1>
+                <p class="article-subtitle">
+                    Source generator for creating compile-time facets of your models, features mapping and LINQ projections, zero runtime overhead.
+                </p>
+                
+                <div class="article-tags">
+                    <span>Source Generators</span>
+                    <span>DTOs</span>
+                    <span>LINQ</span>
+                    <span>Performance</span>
+                </div>
+                
+                <div class="article-author">
+                    <img src="assets/Tim.jpg" alt="Tim Maes" class="author-photo">
+                    <div class="author-info">
+                        <span class="author-name">Tim Maes</span>
+                        <span class="author-title">.NET Developer & Open Source Contributor</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Article Content -->
     <article class="article-content">
         <div class="container">
-            <div class="article-body">
-
-                <blockquote>
-                    One part of an object, situation, or subject that has many parts.
-                </blockquote>
-
-                <p>In modern .NET development, we constantly find ourselves writing the same boilerplate code: DTOs for APIs, ViewModels for UI, projection classes for database queries, and endless mapping logic between them. Therer is a way to eliminate 90% of this repetitive work while maintaining strong typing, improving performance, and supporting advanced scenarios like async operations and dependency injection.</p>
-
-                <p><strong>Introducing Facet</strong> - a C# source generator that significantly revises how we handle projections and mapping in .NET applications.</p>
-
-                <div align="center">
-                    <img src="https://raw.githubusercontent.com/Tim-Maes/Facet/master/assets/Facet.png"
-                         alt="Facet logo"
-                         width="800">
-                </div>
-
+            <div class="article-layout">
                 <!-- Table of Contents -->
-                <nav class="table-of-contents">
-                    <div class="toc-header">
-                        <h2>Contents</h2>
+                <aside class="article-toc">
+                    <h3>Table of Contents</h3>
+                    <nav class="toc-nav">
+                        <ul>
+                            <li><a href="#the-problem">The Problem</a></li>
+                            <li><a href="#facetting">Facetting</a></li>
+                            <li><a href="#what-makes-facetting-special">What makes it special?</a></li>
+                            <li><a href="#quick-start">Quick Start</a></li>
+                            <li><a href="#advanced-scenarios">Advanced Scenarios</a></li>
+                            <li><a href="#ef-core-integration">EF Core Integration</a></li>
+                            <li><a href="#performance-best-practices">Performance Tips</a></li>
+                            <li><a href="#real-world-example">Real-World Example</a></li>
+                            <li><a href="#why-choose-facet">Why Choose Facet?</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                
+                <!-- Main Article Body -->
+                <div class="article-body">
+                    <blockquote>
+                        One part of an object, situation, or subject that has many parts.
+                    </blockquote>
+
+                    <p>In modern .NET development, we constantly find ourselves writing the same boilerplate code: DTOs for APIs, ViewModels for UI, projection classes for database queries, and endless mapping logic between them. There is a way to eliminate 90% of this repetitive work while maintaining strong typing, improving performance, and supporting advanced scenarios like async operations and dependency injection.</p>
+
+                    <p><strong>Introducing Facet</strong> - a C# source generator that significantly revises how we handle projections and mapping in .NET applications.</p>
+
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="https://raw.githubusercontent.com/Tim-Maes/Facet/master/assets/Facet.png"
+                             alt="Facet logo"
+                             style="max-width: 100%; width: 300px; border-radius: var(--radius-lg);">
                     </div>
-                    <ol class="toc-list">
-                        <li><a href="#the-problem">The Problem: Projection Proliferation</a></li>
-                        <li><a href="#facetting">Facetting</a></li>
-                        <li>
-                            <a href="#what-makes-facetting-special">What makes Facetting special?</a>
-                            <ol>
-                                <li><a href="#zero-runtime-cost">Zero runtime cost</a></li>
-                                <li><a href="#strongly-typed">Strongly typed & nullable-aware</a></li>
-                                <li><a href="#multiple-target-types">Multiple target types</a></li>
-                                <li><a href="#async-mapping">Advanced Async mapping</a></li>
-                                <li><a href="#modular-architecture">Modular architecture</a></li>
-                            </ol>
-                        </li>
-                        <li><a href="#quick-start">Quick Start</a></li>
-                        <li>
-                            <a href="#advanced-scenarios">Advanced Scenarios</a>
-                            <ol>
-                                <li><a href="#different-output-types">Different Output Types</a></li>
-                                <li><a href="#custom-sync-mapping">Custom synchronous mapping</a></li>
-                                <li><a href="#async-mapping-di">Async mapping with Dependency Injection</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#ef-core-integration">Entity Framework Core: Beyond Simple Projections</a>
-                            <ol>
-                                <li><a href="#forward-mapping">Forward Mapping (Database → DTO)</a></li>
-                                <li><a href="#reverse-mapping">Reverse Mapping (DTO → Database)</a></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <a href="#performance-best-practices">Performance & Best Practices</a>
-                            <ol>
-                                <li><a href="#collection-processing">Collection Processing Guidelines</a></li>
-                                <li><a href="#hybrid-mapping">Hybrid Mapping for Optimal Performance</a></li>
-                            </ol>
-                        </li>
-                        <li><a href="#real-world-example">Real-World Example: E-Commerce Product API</a></li>
-                        <li><a href="#why-choose-facet">Why Choose Facet?</a></li>
-                        <li><a href="#getting-started-today">Getting Started Today</a></li>
-                        <li><a href="#additional-resources">Additional Resources</a></li>
-                    </ol>
-                </nav>
 
-                <h2 id="the-problem">The Problem: Projection Proliferation</h2>
+                    <section id="the-problem">
+                        <h2>The Problem: Projection Proliferation</h2>
 
-                <p>Consider a typical e-commerce application. You have a <code>Product</code> entity with dozens of properties, but different parts of your application need different views of this data:</p>
+                        <p>Consider a typical e-commerce application. You have a <code>Product</code> entity with dozens of properties, but different parts of your application need different views of this data:</p>
 
-                <ul>
-                    <li><strong>API responses</strong>: Need public properties but exclude internal fields</li>
-                    <li><strong>Search results</strong>: Need only name, price, and thumbnail</li>
-                    <li><strong>Admin panels</strong>: Need everything including audit fields</li>
-                    <li><strong>Email templates</strong>: Need formatted strings and computed properties</li>
-                    <li><strong>Mobile apps</strong>: Need lightweight versions with different property names</li>
-                </ul>
+                        <ul>
+                            <li><strong>API responses</strong>: Need public properties but exclude internal fields</li>
+                            <li><strong>Search results</strong>: Need only name, price, and thumbnail</li>
+                            <li><strong>Admin panels</strong>: Need everything including audit fields</li>
+                            <li><strong>Email templates</strong>: Need formatted strings and computed properties</li>
+                            <li><strong>Mobile apps</strong>: Need lightweight versions with different property names</li>
+                        </ul>
 
-                <p>Traditionally, this means:</p>
-                <ol>
-                    <li>Writing separate DTO classes for each scenario</li>
-                    <li>Creating mapping methods or AutoMapper profiles</li>
-                    <li>Maintaining LINQ projection expressions for database efficiency</li>
-                    <li>Handling async operations for computed properties</li>
-                    <li>Managing dependencies for complex mapping logic</li>
-                </ol>
+                        <p>Traditionally, this means:</p>
+                        <ol>
+                            <li>Writing separate DTO classes for each scenario</li>
+                            <li>Creating mapping methods or AutoMapper profiles</li>
+                            <li>Maintaining LINQ projection expressions for database efficiency</li>
+                            <li>Handling async operations for computed properties</li>
+                            <li>Managing dependencies for complex mapping logic</li>
+                        </ol>
 
-                <p>This can result in hundreds of lines of repetitive, error-prone boilerplate code that you need to manually maintain and test.</p>
+                        <p>This can result in hundreds of lines of repetitive, error-prone boilerplate code that you need to manually maintain and test.</p>
+                    </section>
 
-                <h2 id="facetting">Facetting</h2>
+                    <section id="facetting">
+                        <h2>Facetting</h2>
 
-                <p><strong>Facetting</strong> is the process of carving out focused, lightweight views of richer models at compile time. Think of it like a diamond cutter carefully selecting which facets to polish and display, leaving others hidden.</p>
+                        <p><strong>Facetting</strong> is the process of carving out focused, lightweight views of richer models at compile time. Think of it like a diamond cutter carefully selecting which facets to polish and display, leaving others hidden.</p>
 
-                <p>Instead of manually writing DTOs, mappers, and projections, you simply declare what you want to keep - and <strong>Facet</strong> generates everything else. The beauty is that this happens entirely at compile time, meaning zero runtime overhead and full IntelliSense support.</p>
+                        <p>Instead of manually writing DTOs, mappers, and projections, you simply declare what you want to keep - and <strong>Facet</strong> generates everything else. The beauty is that this happens entirely at compile time, meaning zero runtime overhead and full IntelliSense support.</p>
 
-                <p><strong>Facet on <a href="https://github.com/Tim-Maes/Facet" target="_blank">GitHub</a> & Facet on <a href="https://www.nuget.org/packages/Facet" target="_blank">NuGet</a></strong></p>
+                        <div class="code-callout">
+                            <h4>?? Links</h4>
+                            <p><strong>Facet on <a href="https://github.com/Tim-Maes/Facet" target="_blank">GitHub</a> & Facet on <a href="https://www.nuget.org/packages/Facet" target="_blank">NuGet</a></strong></p>
+                        </div>
+                    </section>
 
-                <h2 id="what-makes-facetting-special">What makes Facetting special?</h2>
+                    <section id="what-makes-facetting-special">
+                        <h2>What makes Facetting special?</h2>
 
-                <h3 id="zero-runtime-cost">🚀 Zero runtime cost</h3>
-                <p>Everything is generated at compile time. No reflection, no IL emit, no performance penalties. Your projections run as fast as hand-written code because they <em>are</em> hand-written code - just not by you.</p>
+                        <h3>?? Zero runtime cost</h3>
+                        <p>Everything is generated at compile time. No reflection, no IL emit, no performance penalties. Your projections run as fast as hand-written code because they <em>are</em> hand-written code - just not by you.</p>
 
-                <h3 id="strongly-typed">🔒 Strongly typed & nullable-aware</h3>
-                <p>Full C# compile-time safety with complete nullability contract support. If your source property is nullable, your facet property will be too.</p>
+                        <h3>?? Strongly typed & nullable-aware</h3>
+                        <p>Full C# compile-time safety with complete nullability contract support. If your source property is nullable, your facet property will be too.</p>
 
-                <h3 id="multiple-target-types">🎯 Multiple target types</h3>
-                <p>Generate <code>classes</code>, <code>records</code>, <code>structs</code>, or <code>record structs</code> depending on your needs. Perfect for modern C# development patterns.</p>
+                        <h3>?? Multiple target types</h3>
+                        <p>Generate <code>classes</code>, <code>records</code>, <code>structs</code>, or <code>record structs</code> depending on your needs. Perfect for modern C# development patterns.</p>
 
-                <h3 id="async-mapping">⚡ Advanced Async mapping</h3>
-                <p>Support for complex async operations like database lookups, API calls, and file I/O during mapping - with full dependency injection support.</p>
+                        <h3>? Advanced Async mapping</h3>
+                        <p>Support for complex async operations like database lookups, API calls, and file I/O during mapping - with full dependency injection support.</p>
 
-                <h3 id="modular-architecture">🏗️ Modular architecture</h3>
-                <p>Four focused NuGet packages that work together:</p>
-                <ul>
-                    <li><strong>Facet</strong>: Core source generator</li>
-                    <li><strong>Facet.Extensions</strong>: Provider-agnostic mapping helpers</li>
-                    <li><strong>Facet.Mapping</strong>: Advanced async mapping with dependency injection</li>
-                    <li><strong>Facet.Extensions.EFCore</strong>: Entity Framework Core integration</li>
-                </ul>
+                        <h3>??? Modular architecture</h3>
+                        <p>Four focused NuGet packages that work together:</p>
+                        <ul>
+                            <li><strong>Facet</strong>: Core source generator</li>
+                            <li><strong>Facet.Extensions</strong>: Provider-agnostic mapping helpers</li>
+                            <li><strong>Facet.Mapping</strong>: Advanced async mapping with dependency injection</li>
+                            <li><strong>Facet.Extensions.EFCore</strong>: Entity Framework Core integration</li>
+                        </ul>
+                    </section>
 
-                <h2 id="quick-start">Quick Start:</h2>
+                    <section id="quick-start">
+                        <h2>Quick Start</h2>
 
-                <h3>1. Install the package</h3>
-                <pre><code class="language-bash">dotnet add package Facet
+                        <h3>1. Install the package</h3>
+                        <pre><code class="language-bash">dotnet add package Facet
 dotnet add package Facet.Extensions
 dotnet add package Facet.Extensions.EFCore  # For EF Core integration</code></pre>
 
-                <h3>2. Define your domain model</h3>
-                <pre><code class="language-csharp">public class User
+                        <h3>2. Define your domain model</h3>
+                        <pre><code class="language-csharp">public class User
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
@@ -241,22 +265,22 @@ dotnet add package Facet.Extensions.EFCore  # For EF Core integration</code></pr
     public bool IsEmailVerified { get; set; }
 }</code></pre>
 
-                <h3>3. Create your first Facet</h3>
-                <pre><code class="language-csharp">using Facet;
+                        <h3>3. Create your first Facet</h3>
+                        <pre><code class="language-csharp">using Facet;
 
 // Simple DTO excluding sensitive data
 [Facet(typeof(User), exclude: new[] { nameof(User.PasswordHash) })]
 public partial class UserDto;</code></pre>
 
-                <p>This generates:</p>
-                <ul>
-                    <li>A <code>UserDto(User source)</code> constructor</li>
-                    <li>All properties from <code>User</code> except <code>PasswordHash</code></li>
-                    <li>A static <code>Expression&lt;Func&lt;User, UserDto&gt;&gt; Projection</code> for LINQ</li>
-                </ul>
+                        <p>This generates:</p>
+                        <ul>
+                            <li>A <code>UserDto(User source)</code> constructor</li>
+                            <li>All properties from <code>User</code> except <code>PasswordHash</code></li>
+                            <li>A static <code>Expression&lt;Func&lt;User, UserDto&gt;&gt; Projection</code> for LINQ</li>
+                        </ul>
 
-                <h3>4. Use your generated Facet</h3>
-                <pre><code class="language-csharp">using Facet.Extensions;
+                        <h3>4. Use your generated Facet</h3>
+                        <pre><code class="language-csharp">using Facet.Extensions;
 
 // Constructor mapping
 var user = GetUserFromDatabase();
@@ -270,11 +294,13 @@ var userDtos = await dbContext.Users
     .Where(u => u.IsEmailVerified)
     .SelectFacet&lt;UserDto&gt;()
     .ToListAsync();</code></pre>
+                    </section>
 
-                <h2 id="advanced-scenarios">Advanced Scenarios:</h2>
+                    <section id="advanced-scenarios">
+                        <h2>Advanced Scenarios</h2>
 
-                <h3 id="different-output-types">Different Output Types</h3>
-                <pre><code class="language-csharp">// Immutable record for API responses
+                        <h3>Different Output Types</h3>
+                        <pre><code class="language-csharp">// Immutable record for API responses
 [Facet(typeof(User), Kind = FacetKind.Record)]
 public partial record UserRecord;
 
@@ -286,8 +312,8 @@ public partial struct UserStruct;
 [Facet(typeof(User), Kind = FacetKind.RecordStruct)]
 public partial record struct UserRecordStruct;</code></pre>
 
-                <h3 id="custom-sync-mapping">Custom synchronous mapping</h3>
-                <pre><code class="language-csharp">using Facet.Mapping;
+                        <h3>Custom synchronous mapping</h3>
+                        <pre><code class="language-csharp">using Facet.Mapping;
 
 public class UserMapper : IFacetMapConfiguration&lt;User, UserDto&gt;
 {
@@ -313,107 +339,19 @@ public partial class UserDto
     public bool IsActive { get; set; }
 }</code></pre>
 
-                <h3 id="async-mapping-di">Async mapping with Dependency Injection</h3>
-                <p>This is where Facet really shines (pun intended). Need to load related data from databases, call external APIs, or perform file operations during mapping? No problem:</p>
+                        <div class="code-callout">
+                            <h4>?? Pro Tip</h4>
+                            <p>Use async mapping for expensive operations like database lookups, API calls, or file I/O. Facet supports full dependency injection for these scenarios.</p>
+                        </div>
+                    </section>
 
-                <pre><code class="language-csharp">public interface IProfilePictureService
-{
-    Task&lt;string&gt; GetProfilePictureAsync(int userId, CancellationToken cancellationToken = default);
-}
+                    <section id="ef-core-integration">
+                        <h2>Entity Framework Core: Beyond Simple Projections</h2>
 
-public interface IReputationService  
-{
-    Task&lt;decimal&gt; CalculateReputationAsync(string email, CancellationToken cancellationToken = default);
-}
+                        <p>Facet's EF Core integration goes far beyond basic SELECT projections. It supports full bidirectional mapping for update scenarios:</p>
 
-public class UserAsyncMapper : IFacetMapConfigurationAsyncInstance&lt;User, EnrichedUserDto&gt;
-{
-    private readonly IProfilePictureService _profileService;
-    private readonly IReputationService _reputationService;
-    private readonly ILogger&lt;UserAsyncMapper&gt; _logger;
-
-    public UserAsyncMapper(
-        IProfilePictureService profileService,
-        IReputationService reputationService,
-        ILogger&lt;UserAsyncMapper&gt; logger)
-    {
-        _profileService = profileService;
-        _reputationService = reputationService;
-        _logger = logger;
-    }
-
-    public async Task MapAsync(User source, EnrichedUserDto target, CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            // Async database lookup
-            target.ProfilePictureUrl = await _profileService.GetProfilePictureAsync(source.Id, cancellationToken);
-            
-            // Async API call
-            target.ReputationScore = await _reputationService.CalculateReputationAsync(source.Email, cancellationToken);
-            
-            // Computed properties
-            target.FullName = $"{source.FirstName} {source.LastName}";
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "Failed to enrich user data for {UserId}", source.Id);
-            // Set defaults on error
-            target.ProfilePictureUrl = "/images/default-avatar.png";
-            target.ReputationScore = 0m;
-        }
-    }
-}
-
-[Facet(typeof(User))]
-public partial class EnrichedUserDto 
-{
-    public string FullName { get; set; }
-    public string ProfilePictureUrl { get; set; }
-    public decimal ReputationScore { get; set; }
-}</code></pre>
-
-                <h3>Using Async Mappers with Dependency Injection</h3>
-                <pre><code class="language-csharp">// Register in your DI container
-services.AddScoped&lt;IProfilePictureService, ProfilePictureService&gt;();
-services.AddScoped&lt;IReputationService, ReputationService&gt;();
-services.AddScoped&lt;UserAsyncMapper&gt;();
-
-// Use in your controllers
-public class UserController : ControllerBase
-{
-    private readonly UserAsyncMapper _userMapper;
-    
-    public UserController(UserAsyncMapper userMapper)
-    {
-        _userMapper = userMapper;
-    }
-    
-    [HttpGet("{id}")]
-    public async Task&lt;EnrichedUserDto&gt; GetUser(int id)
-    {
-        var user = await dbContext.Users.FindAsync(id);
-        
-        // Single instance async mapping with DI
-        return await user.ToFacetAsync(_userMapper);
-    }
-    
-    [HttpGet]
-    public async Task&lt;List&lt;EnrichedUserDto&gt;&gt; GetUsers()
-    {
-        var users = await dbContext.Users.ToListAsync();
-        
-        // Collection async mapping with DI (parallel processing)
-        return await users.ToFacetsParallelAsync(_userMapper, maxDegreeOfParallelism: 4);
-    }
-}</code></pre>
-
-                <h2 id="ef-core-integration">Entity Framework Core: Beyond Simple Projections</h2>
-
-                <p>Facet's EF Core integration goes far beyond basic SELECT projections. It supports full bidirectional mapping for update scenarios:</p>
-
-                <h3 id="forward-mapping">Forward Mapping (Database → DTO)</h3>
-                <pre><code class="language-csharp">using Facet.Extensions.EFCore;
+                        <h3>Forward Mapping (Database ? DTO)</h3>
+                        <pre><code class="language-csharp">using Facet.Extensions.EFCore;
 
 // High-performance async projections
 var userDtos = await dbContext.Users
@@ -425,10 +363,10 @@ var userDto = await dbContext.Users
     .Where(u => u.Id == userId)
     .FirstFacetAsync&lt;UserDto&gt;(cancellationToken);</code></pre>
 
-                <h3 id="reverse-mapping">Reverse Mapping (DTO → Database)</h3>
-                <p>Perfect for update operations - only modified properties are marked as changed:</p>
+                        <h3>Reverse Mapping (DTO ? Database)</h3>
+                        <p>Perfect for update operations - only modified properties are marked as changed:</p>
 
-                <pre><code class="language-csharp">[Facet(typeof(User))]
+                        <pre><code class="language-csharp">[Facet(typeof(User))]
 public partial class UpdateUserDto { }
 
 [HttpPut("{id}")]
@@ -442,20 +380,14 @@ public async Task&lt;IActionResult&gt; UpdateUser(int id, UpdateUserDto dto)
     
     await context.SaveChangesAsync();
     return NoContent();
-}
-
-// With change tracking for auditing
-var result = user.UpdateFromFacetWithChanges(dto, context);
-if (result.HasChanges)
-{
-    logger.LogInformation("User {UserId} updated. Changed: {Properties}", 
-        user.Id, string.Join(", ", result.ChangedProperties));
 }</code></pre>
+                    </section>
 
-                <h2 id="performance-best-practices">Performance & Best Practices</h2>
+                    <section id="performance-best-practices">
+                        <h2>Performance & Best Practices</h2>
 
-                <h3 id="collection-processing">Collection Processing Guidelines</h3>
-                <pre><code class="language-csharp">// Small collections (&lt; 100 items) - sequential processing
+                        <h3>Collection Processing Guidelines</h3>
+                        <pre><code class="language-csharp">// Small collections (&lt; 100 items) - sequential processing
 var results = await users.ToFacetsAsync(mapper);
 
 // Large collections - parallel processing  
@@ -463,39 +395,14 @@ var results = await users.ToFacetsParallelAsync(mapper, maxDegreeOfParallelism: 
 
 // Database-heavy operations - limit concurrency to avoid overwhelming the database
 var results = await users.ToFacetsParallelAsync(mapper, maxDegreeOfParallelism: 2);</code></pre>
+                    </section>
 
-                <h3 id="hybrid-mapping">Hybrid Mapping for Optimal Performance</h3>
-                <p>Combine fast synchronous operations with expensive async operations:</p>
+                    <section id="real-world-example">
+                        <h2>Real-World Example: E-Commerce Product API</h2>
 
-                <pre><code class="language-csharp">public class UserHybridMapper : IFacetMapConfigurationHybridInstance&lt;User, UserDto&gt;
-{
-    private readonly IExternalService _externalService;
-    
-    public UserHybridMapper(IExternalService externalService)
-    {
-        _externalService = externalService;
-    }
+                        <p>Let's see how all these features work together in a real-world scenario:</p>
 
-    // Fast synchronous operations first
-    public void Map(User source, UserDto target)
-    {
-        target.FullName = $"{source.FirstName} {source.LastName}";
-        target.DisplayEmail = source.Email.ToLower();
-        target.AgeCategory = CalculateAgeCategory(source.BirthDate);
-    }
-
-    // Expensive async operations only when needed
-    public async Task MapAsync(User source, UserDto target, CancellationToken cancellationToken = default)
-    {
-        target.ExternalData = await _externalService.GetDataAsync(source.Id, cancellationToken);
-    }
-}</code></pre>
-
-                <h2 id="real-world-example">Real-World Example: E-Commerce Product API</h2>
-
-                <p>Let's see how all these features work together in a real-world scenario:</p>
-
-                <pre><code class="language-csharp">// Domain model
+                        <pre><code class="language-csharp">// Domain model
 public class Product
 {
     public int Id { get; set; }
@@ -513,59 +420,16 @@ public class Product
 [Facet(typeof(Product), exclude: new[] { nameof(Product.Description), nameof(Product.CreatedAt) })]
 public partial record ProductSearchResult;
 
-// Detailed view with computed properties and external data
-public class ProductDetailMapper : IFacetMapConfigurationAsyncInstance&lt;Product, ProductDetailDto&gt;
-{
-    private readonly ICategoryService _categoryService;
-    private readonly IImageService _imageService;
-    private readonly IReviewService _reviewService;
-
-    public ProductDetailMapper(ICategoryService categoryService, IImageService imageService, IReviewService reviewService)
-    {
-        _categoryService = categoryService;
-        _imageService = imageService;
-        _reviewService = reviewService;
-    }
-
-    public async Task MapAsync(Product source, ProductDetailDto target, CancellationToken cancellationToken = default)
-    {
-        // Parallel async operations for better performance
-        var categoryTask = _categoryService.GetCategoryNameAsync(source.CategoryId, cancellationToken);
-        var imageUrlTask = _imageService.GetOptimizedImageUrlAsync(source.ImagePath, cancellationToken);
-        var avgRatingTask = _reviewService.GetAverageRatingAsync(source.Id, cancellationToken);
-
-        await Task.WhenAll(categoryTask, imageUrlTask, avgRatingTask);
-
-        target.CategoryName = await categoryTask;
-        target.OptimizedImageUrl = await imageUrlTask;
-        target.AverageRating = await avgRatingTask;
-        target.IsInStock = source.StockQuantity > 0;
-        target.FormattedPrice = source.Price.ToString("C");
-    }
-}
-
-[Facet(typeof(Product), Configuration = typeof(ProductDetailMapper))]
-public partial class ProductDetailDto 
-{
-    public string CategoryName { get; set; }
-    public string OptimizedImageUrl { get; set; }
-    public decimal AverageRating { get; set; }
-    public bool IsInStock { get; set; }
-    public string FormattedPrice { get; set; }
-}
-
 // API Controller using all facet types
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
     private readonly AppDbContext _context;
-    private readonly ProductDetailMapper _detailMapper;
 
-    public ProductsController(AppDbContext context, ProductDetailMapper detailMapper)
+    public ProductsController(AppDbContext context)
     {
         _context = context;
-        _detailMapper = detailMapper;
     }
 
     [HttpGet("search")]
@@ -575,148 +439,769 @@ public class ProductsController : ControllerBase
             .Where(p => p.IsActive && p.Name.Contains(query))
             .ToFacetsAsync&lt;ProductSearchResult&gt;();
     }
-
-    [HttpGet("{id}")]
-    public async Task&lt;ProductDetailDto&gt; GetProduct(int id)
-    {
-        var product = await _context.Products.FindAsync(id);
-        return await product.ToFacetAsync(_detailMapper);
-    }
-
-    [HttpPut("{id}")]
-    public async Task&lt;IActionResult&gt; UpdateProduct(int id, UpdateProductDto dto)
-    {
-        var product = await _context.Products.FindAsync(id);
-        if (product == null) return NotFound();
-
-        var result = product.UpdateFromFacetWithChanges(dto, _context);
-        if (result.HasChanges)
-        {
-            await _context.SaveChangesAsync();
-            return Ok(new { changedProperties = result.ChangedProperties });
-        }
-
-        return Ok(new { message = "No changes detected" });
-    }
 }</code></pre>
+                    </section>
 
-                <h2 id="why-choose-facet">Why Choose Facet?</h2>
+                    <section id="why-choose-facet">
+                        <h2>Why Choose Facet?</h2>
 
-                <h3>✅ Eliminate Boilerplate</h3>
-                <p>Reduce 90% of repetitive DTO and mapping code across your solution. Focus on business logic, not plumbing.</p>
+                        <h3>? Eliminate Boilerplate</h3>
+                        <p>Reduce 90% of repetitive DTO and mapping code across your solution. Focus on business logic, not plumbing.</p>
 
-                <h3>✅ Zero Runtime Overhead</h3>
-                <p>All code generation happens at compile time. Your projections are as fast as hand-written code.</p>
+                        <h3>? Zero Runtime Overhead</h3>
+                        <p>All code generation happens at compile time. Your projections are as fast as hand-written code.</p>
 
-                <h3>✅ Modern C# Support</h3>
-                <p>Full support for records, record structs, nullable reference types, and init-only properties.</p>
+                        <h3>? Modern C# Support</h3>
+                        <p>Full support for records, record structs, nullable reference types, and init-only properties.</p>
 
-                <h3>✅ Async-First Design</h3>
-                <p>Built-in support for async operations with dependency injection, perfect for modern microservice architectures.</p>
+                        <h3>? Async-First Design</h3>
+                        <p>Built-in support for async operations with dependency injection, perfect for modern microservice architectures.</p>
 
-                <h3>✅ EF Core Integration</h3>
-                <p>Seamless integration with Entity Framework Core for both query projections and update operations.</p>
+                        <h3>? EF Core Integration</h3>
+                        <p>Seamless integration with Entity Framework Core for both query projections and update operations.</p>
 
-                <h3>✅ Gradual Adoption</h3>
-                <p>Start simple with basic projections and gradually add complexity as needed. All features are opt-in.</p>
+                        <h3>? Gradual Adoption</h3>
+                        <p>Start simple with basic projections and gradually add complexity as needed. All features are opt-in.</p>
 
-                <h3>✅ IntelliSense Support</h3>
-                <p>Full IDE support with autocomplete, refactoring, and debugging because the generated code is just C#.</p>
+                        <h3>? IntelliSense Support</h3>
+                        <p>Full IDE support with autocomplete, refactoring, and debugging because the generated code is just C#.</p>
+                    </section>
 
-                <h2 id="getting-started-today">Getting Started Today</h2>
+                    <h2>Getting Started Today</h2>
 
-                <p>Ready to eliminate boilerplate and supercharge your .NET applications? Here's your action plan:</p>
+                    <p>Ready to eliminate boilerplate and supercharge your .NET applications? Here's your action plan:</p>
 
-                <ol>
-                    <li><strong>Install Facet</strong>: <code>dotnet add package Facet</code></li>
-                    <li><strong>Start simple</strong>: Create your first facet with just the <code>[Facet]</code> attribute</li>
-                    <li><strong>Add extensions</strong>: Install <code>Facet.Extensions</code> for mapping helpers</li>
-                    <li><strong>Integrate with EF Core</strong>: Add <code>Facet.Extensions.EFCore</code> for database projections</li>
-                    <li><strong>Go advanced</strong>: Explore async mapping with <code>Facet.Mapping</code> when you need it</li>
-                </ol>
+                    <ol>
+                        <li><strong>Install Facet</strong>: <code>dotnet add package Facet</code></li>
+                        <li><strong>Start simple</strong>: Create your first facet with just the <code>[Facet]</code> attribute</li>
+                        <li><strong>Add extensions</strong>: Install <code>Facet.Extensions</code> for mapping helpers</li>
+                        <li><strong>Integrate with EF Core</strong>: Add <code>Facet.Extensions.EFCore</code> for database projections</li>
+                        <li><strong>Go advanced</strong>: Explore async mapping with <code>Facet.Mapping</code> when you need it</li>
+                    </ol>
 
-                <h2 id="additional-resources">Additional Resources</h2>
-
-                <ul>
-                    <li><a href="https://github.com/Tim-Maes/Facet" target="_blank">📁 Facet GitHub Repository</a> - Source code, issues, and contributing</li>
-                    <li><a href="https://www.nuget.org/packages/Facet" target="_blank">📦 Facet NuGet Package</a> - Core source generator</li>
-                    <li><a href="https://www.nuget.org/packages/Facet.Extensions" target="_blank">📦 Facet.Extensions NuGet Package</a> - Mapping helpers</li>
-                    <li><a href="https://www.nuget.org/packages/Facet.Extensions.EFCore" target="_blank">📦 Facet.Extensions.EFCore NuGet Package</a> - EF Core integration</li>
-                    <li><a href="https://www.nuget.org/packages/Facet.Mapping" target="_blank">📦 Facet.Mapping NuGet Package</a> - Advanced async mapping</li>
-                    <li><a href="https://github.com/Tim-Maes/Facet/tree/main/docs" target="_blank">📚 Complete Documentation</a> - Detailed guides and examples</li>
-                </ul>
-
-                <p>Have questions, suggestions, or want to contribute? The Facet project welcomes community involvement. Star the repository, open an issue, or submit a pull reques, every contribution makes the project better!</p>
-
-                <!-- Comments Section -->
-                <section class="comments-section">
-                    <h2>Comments</h2>
-                    <div class="comments-container">
-                        <script src="https://utteranc.es/client.js"
-                                repo="Tim-Maes/Tim-Maes.github.io"
-                                issue-term="pathname"
-                                theme="github-light"
-                                crossorigin="anonymous"
-                                async></script>
-                    </div>
-                </section>
+                    <!-- Additional Resources -->
+                    <section class="resources-section">
+                        <h2>Additional Resources</h2>
+                        <div class="resources-grid">
+                            <div class="resource-item">
+                                <h4>?? Documentation</h4>
+                                <ul>
+                                    <li><a href="https://github.com/Tim-Maes/Facet" target="_blank">GitHub Repository</a></li>
+                                    <li><a href="https://github.com/Tim-Maes/Facet/tree/main/docs" target="_blank">Complete Documentation</a></li>
+                                    <li><a href="https://github.com/Tim-Maes/Facet/tree/main/samples" target="_blank">Sample Projects</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="resource-item">
+                                <h4>?? NuGet Packages</h4>
+                                <ul>
+                                    <li><a href="https://www.nuget.org/packages/Facet" target="_blank">Facet (Core)</a></li>
+                                    <li><a href="https://www.nuget.org/packages/Facet.Extensions" target="_blank">Facet.Extensions</a></li>
+                                    <li><a href="https://www.nuget.org/packages/Facet.Extensions.EFCore" target="_blank">Facet.Extensions.EFCore</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="resource-item">
+                                <h4>?? Related Articles</h4>
+                                <ul>
+                                    <li><a href="source-generators-vs-t4.html">Source Generators vs T4</a></li>
+                                    <li><a href="blazorframe-enhanced-iframes.html">BlazorFrame</a></li>
+                                    <li><a href="blog.html">All Blog Posts</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
+
+            <!-- Article Footer -->
+            <div class="article-footer">
+                <div class="article-sharing">
+                    <h3>Share this article</h3>
+                    <div class="sharing-buttons">
+                        <a href="https://twitter.com/intent/tweet?text=Facets in .NET&url=https://tim-maes.github.io/facets-in-dotnet.html&via=Tim_Maes_" class="share-btn twitter" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                            Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tim-maes.github.io/facets-in-dotnet.html" class="share-btn linkedin" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <button class="share-btn copy" onclick="copyToClipboard()">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="article-navigation">
+                    <a href="source-generators-vs-t4.html" class="nav-btn prev">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        Source Generators vs T4
+                    </a>
+                    <a href="blazorframe-enhanced-iframes.html" class="nav-btn next">
+                        BlazorFrame
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <section class="comments-section">
+                <h2>Comments</h2>
+                <div class="comments-container">
+                    <script src="https://utteranc.es/client.js"
+                            repo="Tim-Maes/Tim-Maes.github.io"
+                            issue-term="pathname"
+                            theme="github-dark"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>
+            </section>
         </div>
     </article>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Stay Updated</h3>
+                <p>Get notified when I publish new articles about .NET development, security, and modern software engineering practices.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button class="newsletter-btn">Subscribe</button>
+                </div>
+                <p class="newsletter-note">No spam, unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="logo">
-                        <div class="shield-icon"></div>
-                        <span>Tim Maes</span>
-                    </div>
-                    <p>Building secure and innovative solutions</p>
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                    <p>Building secure and innovative solutions for the .NET ecosystem</p>
                 </div>
+                
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>My work</h4>
-                        <a href="https://marketplace.visualstudio.com/publishers/TimMaes">VS Marketplace</a>
-                        <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="blog.html">Blog</a>
                     </div>
+                    
+                    <div class="footer-section">
+                        <h4>Popular Posts</h4>
+                        <a href="blazorframe-enhanced-iframes.html">BlazorFrame</a>
+                        <a href="facets-in-dotnet.html">Facets in .NET</a>
+                        <a href="source-generators-vs-t4.html">Source Generators vs T4</a>
+                        <a href="autowiring-using-bindicate.html">Autowiring with Bindicate</a>
+                    </div>
+                    
                     <div class="footer-section">
                         <h4>Connect</h4>
                         <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
                         <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
                         <a href="mailto:hello@timmaes.dev">Email</a>
+                        <a href="resume.html">Resume</a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span>Made with ?? in Belgium</span>
+                    <span>�</span>
+                    <span>Open Source Enthusiast</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Include the styles from the template - same as BlazorFrame post -->
+    <style>
+        .article-header {
+            padding: calc(var(--space-4xl) + 80px) 0 var(--space-4xl);
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+        .article-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        .article-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 85%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+
+        .article-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .article-breadcrumb a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .article-breadcrumb a:hover {
+            color: var(--text-primary);
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .article-category {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-xl);
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .article-tags span {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--accent-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .author-photo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-primary);
+        }
+
+        .author-name {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .author-title {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .article-content {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-secondary);
+        }
+
+        .article-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: var(--space-4xl);
+            align-items: start;
+        }
+
+        .article-toc {
+            position: sticky;
+            top: calc(80px + var(--space-lg));
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .article-toc h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            font-size: 1rem;
+        }
+
+        .toc-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-nav li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .toc-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+            line-height: 1.4;
+        }
+
+        .toc-nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .article-body {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-4xl);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            min-height: 100vh;
+        }
+
+        .article-body h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: var(--space-4xl) 0 var(--space-lg);
+            position: relative;
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-body h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--space-2xl) 0 var(--space-md);
+        }
+
+        .article-body h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--space-xl) 0 var(--space-sm);
+        }
+
+        .article-body p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            font-size: 1.125rem;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-xl);
+            color: var(--text-secondary);
+        }
+
+        .article-body li {
+            margin-bottom: var(--space-sm);
+            line-height: 1.7;
+            font-size: 1.125rem;
+        }
+
+        .article-body a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--transition-fast);
+        }
+
+        .article-body a:hover {
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .article-body blockquote {
+            background: rgba(100, 255, 218, 0.05);
+            border-left: 4px solid var(--accent-primary);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-style: italic;
+        }
+
+        .article-body blockquote p {
+            color: var(--text-primary);
+            margin-bottom: 0;
+        }
+
+        .article-body pre {
+            background: #1a1a1a;
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin: var(--space-xl) 0;
+            overflow-x: auto;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .article-body code {
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+        }
+
+        .article-body :not(pre) > code {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .code-callout {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .code-callout h4 {
+            color: var(--text-primary);
+            margin: 0 0 var(--space-sm);
+        }
+
+        .code-callout p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .resources-section {
+            margin-top: var(--space-4xl);
+            padding-top: var(--space-4xl);
+            border-top: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-lg);
+        }
+
+        .resource-item h4 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .resource-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-item li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .article-footer {
+            margin-top: var(--space-4xl);
+            padding-top: var(--space-2xl);
+            border-top: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .article-sharing {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .article-sharing h3 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .sharing-buttons {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+
+        .share-btn.twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+
+        .share-btn.linkedin {
+            background: #0A66C2;
+            color: white;
+        }
+
+        .share-btn.copy {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-lg);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: var(--accent-primary);
+        }
+
+        .comments-section {
+            margin-top: var(--space-4xl);
+            padding-top: var(--space-2xl);
+            border-top: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .comments-section h2 {
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .newsletter-section {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .newsletter-content p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-secondary);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .newsletter-btn {
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .newsletter-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
             }
-        });
+
+            .article-toc {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .article-body {
+                padding: var(--space-xl);
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+
+            .sharing-buttons {
+                flex-direction: column;
+            }
+
+            .article-navigation {
+                flex-direction: column;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        // Copy to clipboard functionality
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                const btn = document.querySelector('.share-btn.copy');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
 
         // Initialize syntax highlighting
         hljs.highlightAll();
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>

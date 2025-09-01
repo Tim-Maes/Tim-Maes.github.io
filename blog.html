@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Tim Maes</title>
-
+    <title>Blog - Tim Maes | .NET Developer & Open Source Contributor</title>
+    
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0a0e27">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Tim Maes developer blog - Thoughts on .NET development, security, and modern technology. Explore articles about C#, Blazor, code generation, and open source projects.">
-    <meta name="keywords" content="Tim Maes, blog, .NET, C#, Blazor, code generation, open source, software development, security">
+    <meta name="description" content="Read Tim Maes' insights on .NET development, Blazor, code generation, security, and modern software development practices. In-depth technical articles and tutorials.">
+    <meta name="keywords" content="Tim Maes, blog, .NET, C#, Blazor, code generation, security, software development, technical articles, tutorials">
     <meta name="author" content="Tim Maes">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Blog - Tim Maes">
-    <meta property="og:description" content="Thoughts on .NET development, security, and modern technology">
+    <meta property="og:description" content="Read Tim Maes' insights on .NET development, Blazor, code generation, security, and modern software development practices">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tim-maes.github.io/blog.html">
-    <meta property="og:site_name" content="Tim Maes - Developer Blog">
+    <meta property="og:site_name" content="Tim Maes">
     <meta property="og:image" content="https://tim-maes.github.io/assets/Tim.jpg">
-    <meta property="og:image:alt" content="Tim Maes - Software Engineer Blog">
+    <meta property="og:image:alt" content="Tim Maes - Developer Blog">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
@@ -33,148 +33,278 @@
     <meta name="twitter:site" content="@Tim_Maes_">
     <meta name="twitter:creator" content="@Tim_Maes_">
     <meta name="twitter:title" content="Blog - Tim Maes">
-    <meta name="twitter:description" content="Thoughts on .NET development, security, and modern technology">
+    <meta name="twitter:description" content="Read Tim Maes' insights on .NET development, Blazor, code generation, security, and modern software development practices">
     <meta name="twitter:image" content="https://tim-maes.github.io/assets/Tim.jpg">
-    <meta name="twitter:image:alt" content="Tim Maes - Software Engineer Blog">
 
-    <!-- Additional Meta Tags -->
-    <link rel="canonical" href="https://tim-maes.github.io/blog.html">
-    <meta name="robots" content="index, follow">
-
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="blog-layout.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo">
-                    <div class="shield-icon"></div>
-                    <span>Tim Maes</span>
-                </div>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                </a>
             </div>
-            <ul class="nav-menu">
+            
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="#blog" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Blog Header -->
     <section class="blog-header">
         <div class="container">
-            <h1 class="blog-header-title">Blog</h1>
-            <p class="blog-header-subtitle">Insights, tutorials, and thoughts about software development</p>
+            <div class="blog-header-bg">
+                <div class="blog-particles"></div>
+            </div>
             
+            <div class="blog-header-content">
+                <span class="section-subtitle">Latest insights</span>
+                <h1 class="blog-title">Developer Blog</h1>
+                <p class="blog-description">
+                    Deep dives into .NET development, security practices, modern frameworks, and the future of software engineering.
+                    Learn from real-world experiences and cutting-edge techniques.
+                </p>
+                
+                <div class="blog-search">
+                    <input type="text" id="blog-search" placeholder="Search articles..." class="blog-search-input">
+                    <button class="blog-search-btn" onclick="searchPosts()">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Filters -->
+    <section class="blog-filter-section">
+        <div class="container">
+            <div class="blog-filters">
+                <button class="filter-btn active" data-filter="all">All Posts</button>
+                <button class="filter-btn" data-filter="blazor">Blazor</button>
+                <button class="filter-btn" data-filter="codegen">Code Generation</button>
+                <button class="filter-btn" data-filter="security">Security</button>
+                <button class="filter-btn" data-filter="tools">Developer Tools</button>
+                <button class="filter-btn" data-filter="dotnet">.NET</button>
+            </div>
         </div>
     </section>
 
     <!-- Blog Posts -->
-    <section class="blog-posts-section">
+    <section id="blog" class="blog-posts">
         <div class="container">
-            <div class="blog-posts-list">
-
-                <article class="blog-post-item" data-category="security">
-                    <div class="blog-post-content">
-                        <div class="blog-post-header">
-                            <span class="blog-post-date">July 13th, 2025</span>
-                            <span class="blog-category">Blazor</span>
+            <div class="blog-grid">
+                <!-- Featured Blog Post -->
+                <article class="blog-card featured" data-category="blazor security">
+                    <div class="blog-featured-badge">Featured</div>
+                    <div class="blog-image">
+                        <img src="assets/BlazorFrameLogo.png" alt="BlazorFrame Blog Post">
+                        <div class="blog-category">Blazor</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">July 13, 2025</span>
+                            <span class="blog-read-time">8 min read</span>
                         </div>
-                        <h3 class="blog-post-title">BlazorFrame: Enhanced iframes in Blazor</h3>
-                        <p class="blog-post-excerpt">
-                            A security-first, enhanced Blazor iframe component that addresses the security landscape of iframes in modern .NET applications.
-                        </p>
-                        <div class="blog-post-tags">
-                            <span class="tag">Blazor</span>
-                            <span class="tag">Security</span>
-                            <span class="tag">iframe</span>
+                        <h2>Introducing BlazorFrame</h2>
+                        <p>A comprehensive look at building security-first iframe components for Blazor applications. Learn about the security challenges, implementation details, and real-world use cases that drove the creation of BlazorFrame.</p>
+                        <div class="blog-tags">
+                            <span>Blazor</span>
+                            <span>Security</span>
+                            <span>Components</span>
+                            <span>Web Safety</span>
                         </div>
-                        <a href="blazorframe-enhanced-iframes.html" class="blog-post-link">Read Full Article</a>
+                        <a href="blazorframe-enhanced-iframes.html" class="blog-link">
+                            Read Full Article
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z"/>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <article class="blog-post-item" data-category="development">
-                    <div class="blog-post-content">
-                        <div class="blog-post-header">
-                            <span class="blog-post-date">April 25th, 2025</span>
-                            <span class="blog-category">Code Generation</span>
+                <!-- Regular Blog Posts -->
+                <article class="blog-card" data-category="codegen dotnet">
+                    <div class="blog-image">
+                        <img src="assets/FacetLogo.png" alt="Facet Blog Post">
+                        <div class="blog-category">Code Generation</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">April 28, 2025</span>
+                            <span class="blog-read-time">12 min read</span>
                         </div>
-                        <h3 class="blog-post-title">Facets in .NET</h3>
-                        <p class="blog-post-excerpt">
-                            Compile-time code generation for lightweight projections - no boilerplate, zero runtime cost.
-                        </p>
-                        <div class="blog-post-tags">
-                            <span class="tag">Code Generation</span>
-                            <span class="tag">Source Generators</span>
-                            <span class="tag">DTOs</span>
+                        <h3>Facets in .NET</h3>
+                        <p>Master the art of compile-time code generation with source generators. Build lightweight, performant projections that eliminate runtime overhead while maintaining type safety.</p>
+                        <div class="blog-tags">
+                            <span>Source Generators</span>
+                            <span>Performance</span>
+                            <span>DTOs</span>
                         </div>
-                        <a href="facets-in-dotnet.html" class="blog-post-link">Read Full Article</a>
+                        <a href="facets-in-dotnet.html" class="blog-link">
+                            Read More
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z"/>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <article class="blog-post-item" data-category="development">
-                    <div class="blog-post-content">
-                        <div class="blog-post-header">
-                            <span class="blog-post-date">March 18th, 2024</span>
-                            <span class="blog-category">Dependency Injection</span>
+                <article class="blog-card" data-category="codegen tools">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
                         </div>
-                        <h3 class="blog-post-title">Autowiring using Bindicate</h3>
-                        <p class="blog-post-excerpt">
-                            Streamline your .NET dependency injection with attribute-based service registration, decorators, and keyed services.
-                        </p>
-                        <div class="blog-post-tags">
-                            <span class="tag">Dependency Injection</span>
-                            <span class="tag">Autowiring</span>
-                            <span class="tag">.NET</span>
+                        <div class="blog-category">Development</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">March 25, 2023</span>
+                            <span class="blog-read-time">6 min read</span>
                         </div>
-                        <a href="autowiring-using-bindicate.html" class="blog-post-link">Read Full Article</a>
+                        <h3>Source Generators vs T4 Templates</h3>
+                        <p>An in-depth comparison of traditional T4 templates and modern source generators. Discover when to use each approach and how to migrate existing solutions.</p>
+                        <div class="blog-tags">
+                            <span>Source Generators</span>
+                            <span>T4 Templates</span>
+                            <span>Code Generation</span>
+                        </div>
+                        <a href="source-generators-vs-t4.html" class="blog-link">
+                            Read More
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z"/>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <article class="blog-post-item" data-category="development">
-                    <div class="blog-post-content">
-                        <div class="blog-post-header">
-                            <span class="blog-post-date">February 25th, 2023</span>
-                            <span class="blog-category">Code Generation</span>
+                <article class="blog-card" data-category="dotnet tools">
+                    <div class="blog-image">
+                        <img src="assets/BindicateLogo.png" alt="Bindicate Blog Post">
+                        <div class="blog-category">Development</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">February 15, 2024</span>
+                            <span class="blog-read-time">10 min read</span>
                         </div>
-                        <h3 class="blog-post-title">Source Generators: The end of T4 templates?</h3>
-                        <p class="blog-post-excerpt">
-                            Exploring the evolution from T4 templates to modern Source Generators in .NET development.
-                        </p>
-                        <div class="blog-post-tags">
-                            <span class="tag">Source Generators</span>
-                            <span class="tag">T4 Templates</span>
-                            <span class="tag">Code Generation</span>
+                        <h3>Autowiring using Bindicate</h3>
+                        <p>Simplify dependency injection in .NET applications with attribute-based registration. Learn how Bindicate can clean up your service configurations and improve maintainability.</p>
+                        <div class="blog-tags">
+                            <span>Dependency Injection</span>
+                            <span>Attributes</span>
+                            <span>Clean Code</span>
                         </div>
-                        <a href="source-generators-vs-t4.html" class="blog-post-link">Read Full Article</a>
+                        <a href="autowiring-using-bindicate.html" class="blog-link">
+                            Read More
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v2H6.5a.5.5 0 0 0 0 1h1.636v2a.5.5 0 0 0 .5.5h.364a.5.5 0 0 0 .5-.5V7H11a.5.5 0 0 0 0-1H9.136V4a.5.5 0 0 0-.5-.5h-.364z"/>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
+                <!-- More posts can be added here -->
+                <article class="blog-card coming-soon" data-category="blazor">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </div>
+                        <div class="blog-category">Coming Soon</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">Coming Soon</span>
+                            <span class="blog-read-time">~ min read</span>
+                        </div>
+                        <h3>Advanced Blazor Security Patterns</h3>
+                        <p>Deep dive into security best practices for Blazor applications, covering authentication, authorization, and protection against common web vulnerabilities.</p>
+                        <div class="blog-tags">
+                            <span>Blazor</span>
+                            <span>Security</span>
+                            <span>Best Practices</span>
+                        </div>
+                        <div class="blog-link coming-soon-link">
+                            Coming Soon
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card coming-soon" data-category="tools">
+                    <div class="blog-image">
+                        <div class="blog-placeholder">
+                            <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </div>
+                        <div class="blog-category">Coming Soon</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">Coming Soon</span>
+                            <span class="blog-read-time">~ min read</span>
+                        </div>
+                        <h3>Building Developer Tools That Matter</h3>
+                        <p>Lessons learned from creating Visual Studio extensions, NuGet packages, and developer utilities that solve real problems.</p>
+                        <div class="blog-tags">
+                            <span>Developer Tools</span>
+                            <span>VS Extensions</span>
+                            <span>Open Source</span>
+                        </div>
+                        <div class="blog-link coming-soon-link">
+                            Coming Soon
+                        </div>
+                    </div>
+                </article>
             </div>
 
-            <!-- Load More Button (Hidden for now since you have 4 posts) -->
-            <div class="blog-load-more" style="display: none;">
-                <button class="btn btn-outline">Load More Posts</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Signup -->
-    <section class="newsletter-section">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2 class="newsletter-title">Stay Updated</h2>
-                <p class="newsletter-subtitle">Subscribe to get my latest content by email.</p>
+            <!-- Newsletter Signup -->
+            <div class="blog-newsletter">
+                <div class="newsletter-content">
+                    <h3>Stay Updated</h3>
+                    <p>Get notified when I publish new articles about .NET development, security, and modern software engineering practices.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input">
+                        <button class="newsletter-btn">Subscribe</button>
+                    </div>
+                    <p class="newsletter-note">No spam, unsubscribe at any time.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -184,50 +314,351 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="logo">
-                        <div class="shield-icon"></div>
-                        <span>Tim Maes</span>
-                    </div>
-                    <p>Building secure and innovative solutions</p>
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                    <p>Building secure and innovative solutions for the .NET ecosystem</p>
                 </div>
+                
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>My work</h4>
-                        <a href="https://marketplace.visualstudio.com/publishers/TimMaes">VS Marketplace</a>
-                        <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="#blog">Blog</a>
                     </div>
+                    
+                    <div class="footer-section">
+                        <h4>Popular Posts</h4>
+                        <a href="blazorframe-enhanced-iframes.html">BlazorFrame</a>
+                        <a href="facets-in-dotnet.html">Facets in .NET</a>
+                        <a href="source-generators-vs-t4.html">Source Generators vs T4</a>
+                        <a href="autowiring-using-bindicate.html">Autowiring with Bindicate</a>
+                    </div>
+                    
                     <div class="footer-section">
                         <h4>Connect</h4>
                         <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
                         <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
                         <a href="mailto:hello@timmaes.dev">Email</a>
+                        <a href="resume.html">Resume</a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span>Made with ?? in Belgium</span>
+                    <span>�</span>
+                    <span>Open Source Enthusiast</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- Additional styles for blog page -->
+    <style>
+        .blog-header {
+            padding: calc(var(--space-4xl) + 80px) 0 var(--space-4xl);
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+        .blog-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        .blog-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+
+        .blog-header-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: var(--space-lg);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blog-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .blog-search {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .blog-search-input {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(20, 25, 51, 0.8);
+            border: none;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .blog-search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .blog-search-input:focus {
+            outline: none;
+            background: rgba(20, 25, 51, 0.9);
+        }
+
+        .blog-search-btn {
+            background: var(--accent-primary);
+            border: none;
+            padding: var(--space-md) var(--space-lg);
+            color: var(--bg-primary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .blog-search-btn:hover {
+            background: var(--interactive-primary);
+        }
+
+        .blog-filter-section {
+            padding: var(--space-2xl) 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .blog-filters {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+
+        .blog-posts {
+            padding: var(--space-4xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .blog-featured-badge {
+            position: absolute;
+            top: var(--space-md);
+            left: var(--space-md);
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .blog-card.featured {
+            grid-column: span 2;
+        }
+
+        .blog-card.coming-soon {
+            opacity: 0.7;
+            border: 1px dashed rgba(100, 255, 218, 0.3);
+        }
+
+        .blog-card.coming-soon .blog-category {
+            background: var(--text-muted);
+        }
+
+        .coming-soon-link {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: default;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-lg);
+        }
+
+        .blog-tags span {
+            background: rgba(124, 58, 237, 0.2);
+            color: var(--accent-primary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .blog-newsletter {
+            margin-top: var(--space-4xl);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-4xl) var(--space-2xl);
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .newsletter-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .newsletter-content p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-md);
+            max-width: 400px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-primary);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .newsletter-btn {
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .newsletter-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: var(--space-md);
+        }
+
+        /* Search functionality */
+        .blog-card.hidden {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .blog-card.featured {
+                grid-column: span 1;
             }
+        }
+
+        @media (max-width: 768px) {
+            .blog-search {
+                margin: var(--space-lg) var(--space-md) 0;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <script>
+        // Search functionality
+        function searchPosts() {
+            const searchTerm = document.getElementById('blog-search').value.toLowerCase();
+            const blogCards = document.querySelectorAll('.blog-card:not(.coming-soon)');
+            
+            blogCards.forEach(card => {
+                const title = card.querySelector('h2, h3').textContent.toLowerCase();
+                const content = card.querySelector('p').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.blog-tags span')).map(tag => tag.textContent.toLowerCase());
+                
+                const matches = title.includes(searchTerm) || 
+                               content.includes(searchTerm) || 
+                               tags.some(tag => tag.includes(searchTerm));
+                
+                if (matches || searchTerm === '') {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Real-time search
+        document.getElementById('blog-search').addEventListener('input', searchPosts);
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                const blogCards = document.querySelectorAll('.blog-card');
+                
+                blogCards.forEach(card => {
+                    const categories = card.getAttribute('data-category');
+                    if (filter === 'all' || !categories || categories.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
         });
     </script>
 </body>
