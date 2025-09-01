@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://tim-maes.github.io/sitemap.xml
+
+# Block common bot traps
+Disallow: /private/
+Disallow: /temp/
+Disallow: *.json$
+Disallow: *.log$
+
+# Allow CSS and JS files
+Allow: /styles.css
+Allow: *.js
+Allow: *.css
+
+# Crawl delay for good citizenship
+Crawl-delay: 1

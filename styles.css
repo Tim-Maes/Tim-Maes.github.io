@@ -1,3 +1,53 @@
+/* Accessibility improvements */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 0 0 4px 4px;
+    z-index: 10000;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Focus indicators */
+*:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+.btn:focus,
+.nav-link:focus,
+.theme-toggle:focus {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-blue: #0000FF;
+        --dark-blue: #000080;
+        --medium-gray: #000000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* CSS Variables for Logo-Inspired Color Scheme */
 :root {
     /* Primary Blues from the logo */
@@ -295,6 +345,58 @@ body {
 .blog-posts-section {
     padding: var(--space-3xl) 0;
     background: var(--light-gray);
+}
+
+/* Blog Search */
+.blog-search {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-xl);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.blog-search-input {
+    flex: 1;
+    padding: var(--space-md) var(--space-lg);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    font-size: var(--font-size-base);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    backdrop-filter: blur(10px);
+}
+
+.blog-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.blog-search-input:focus {
+    outline: none;
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.blog-search-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-left: none;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    padding: var(--space-md) var(--space-lg);
+    color: var(--white);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.blog-search-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .blog-search {
+        margin: var(--space-xl) var(--space-md) 0;
+    }
 }
 
 /* Blog Filters */
@@ -1381,12 +1483,6 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.featured-projects-cta .btn:hover {
-    background: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
 /* Responsive adjustments for featured projects */
 @media (max-width: 768px) {
     .featured-projects-grid {
@@ -1471,4 +1567,74 @@ body {
             padding-left: 1rem;
         }
 }
+/* Utterances theme customization */
+
+/* Dark mode styles */
+[data-theme="dark"] {
+    --primary-blue: #60A5FA;
+    --secondary-blue: #3B82F6;
+    --dark-blue: #1D4ED8;
+    --navy-blue: #1E3A8A;
+    --light-cyan: #BFDBFE;
+    --steel-blue: #64748B;
+    --white: #1F2937;
+    --light-gray: #111827;
+    --medium-gray: #D1D5DB;
+    --dark-gray: #F9FAFB;
+    --charcoal: #F3F4F6;
+    --card-gradient: linear-gradient(145deg, #374151 0%, #1F2937 100%);
+}
+
+[data-theme="dark"] .header {
+    background: rgba(31, 41, 55, 0.95);
+    border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+}
+
+[data-theme="dark"] .nav-menu {
+    background: var(--white);
+}
+
+[data-theme="dark"] .blog-post-card,
+[data-theme="dark"] .blog-card,
+[data-theme="dark"] .featured-project-card {
+    background: #374151;
+    border-color: rgba(96, 165, 250, 0.2);
+}
+
+[data-theme="dark"] .contact-form {
+    background: #374151;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+    background: #1F2937;
+    border-color: #4B5563;
+    color: #F9FAFB;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--primary-blue);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    margin-left: var(--space-md);
+}
+
+.theme-toggle:hover {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        margin-left: 0;
+        margin-top: var(--space-md);
+    }
+}
+
 /* Utterances theme customization */

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tim Maes - Developer Blog</title>
+    <description>Belgium-based software engineer specializing in .NET, C#, Blazor, and open source development</description>
+    <link>https://tim-maes.github.io/</link>
+    <atom:link href="https://tim-maes.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Jan 2025 12:00:00 GMT</lastBuildDate>
+    <managingEditor>hello@timmaes.dev (Tim Maes)</managingEditor>
+    <webMaster>hello@timmaes.dev (Tim Maes)</webMaster>
+    
+    <item>
+      <title>Introducing: BlazorFrame</title>
+      <description>A security-first, enhanced Blazor iframe component.</description>
+      <link>https://tim-maes.github.io/blazorframe-enhanced-iframes.html</link>
+      <guid>https://tim-maes.github.io/blazorframe-enhanced-iframes.html</guid>
+      <pubDate>Sun, 13 Jul 2025 12:00:00 GMT</pubDate>
+      <category>Blazor</category>
+    </item>
+    
+    <item>
+      <title>Facets in .NET</title>
+      <description>Source generator for creating compile-time facets of your models, features mapping and LINQ projections, zero runtime overhead.</description>
+      <link>https://tim-maes.github.io/facets-in-dotnet.html</link>
+      <guid>https://tim-maes.github.io/facets-in-dotnet.html</guid>
+      <pubDate>Mon, 28 Apr 2025 12:00:00 GMT</pubDate>
+      <category>Code Generation</category>
+    </item>
+    
+    <item>
+      <title>Autowiring using Bindicate</title>
+      <description>Streamline your .NET dependency injection with attribute-based service registration, decorators, and keyed services.</description>
+      <link>https://tim-maes.github.io/autowiring-using-bindicate.html</link>
+      <guid>https://tim-maes.github.io/autowiring-using-bindicate.html</guid>
+      <pubDate>Sun, 15 Dec 2024 12:00:00 GMT</pubDate>
+      <category>Dependency Injection</category>
+    </item>
+    
+    <item>
+      <title>Source Generators VS T4 Templates</title>
+      <description>Exploring the evolution from T4 templates to modern Source Generators in .NET development.</description>
+      <link>https://tim-maes.github.io/source-generators-vs-t4.html</link>
+      <guid>https://tim-maes.github.io/source-generators-vs-t4.html</guid>
+      <pubDate>Sat, 25 Mar 2023 12:00:00 GMT</pubDate>
+      <category>Code Generation</category>
+    </item>
+  </channel>
+</rss>
