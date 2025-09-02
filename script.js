@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initTypingEffect();
     initParticles();
     
-    console.log('?? Tim Maes website loaded successfully!');
+    console.log('✅ Tim Maes website loaded successfully!');
 });
 
 // ===== LOADER ANIMATION =====
@@ -415,7 +415,22 @@ document.addEventListener('keydown', (e) => {
         konamiCode.shift();
     }
     
-    if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+    // Check QWERTY, AZERTY, and alternative AZERTY variations
+    const azertySequence1 = [
+        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+        'KeyQ', 'KeyA'  // AZERTY: Q where B is on QWERTY, A same position
+    ];
+    
+    const azertySequence2 = [
+        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+        'KeyB', 'KeyQ'  // Alternative AZERTY interpretation
+    ];
+    
+    if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence) || 
+        JSON.stringify(konamiCode) === JSON.stringify(azertySequence1) ||
+        JSON.stringify(konamiCode) === JSON.stringify(azertySequence2)) {
         triggerEasterEgg();
         konamiCode = [];
     }
@@ -427,7 +442,7 @@ function triggerEasterEgg() {
     
     // Show a fun message
     const message = document.createElement('div');
-    message.textContent = '?? You found the secret! Tim loves easter eggs! ??';
+    message.textContent = '🎉 You found the secret! Tim loves easter eggs! 🥚';
     message.style.cssText = `
         position: fixed;
         top: 50%;
@@ -468,12 +483,12 @@ function triggerEasterEgg() {
 
 // ===== CONSOLE MESSAGE =====
 console.log(`
-%c?? Welcome to Tim Maes' Portfolio! ??
+%c🎯 Welcome to Tim Maes' Portfolio! 👋
 %cBuilt with love using vanilla JavaScript, modern CSS, and a lot of coffee ?
 %cInterested in the code? Check out the GitHub repo!
 %chttps://github.com/Tim-Maes/Tim-Maes.github.io
 
-%cPro tip: Try the Konami Code for a surprise! ??
+%cPro tip: Try the Konami Code for a surprise! 🎮
 `, 
 'color: #64ffda; font-size: 16px; font-weight: bold;',
 'color: #b8c5d6; font-size: 12px;',
