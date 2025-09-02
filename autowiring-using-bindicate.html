@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0a0e27">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Discover Bindicate - a powerful NuGet package for attribute-based service registration in .NET. Streamline your dependency injection with decorators, keyed services, and options configuration.">
@@ -51,130 +51,199 @@
     <link rel="canonical" href="https://tim-maes.github.io/autowiring-using-bindicate.html">
     <meta name="robots" content="index, follow">
     
-    <!-- Existing stylesheets and scripts -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo">
-                    <div class="shield-icon"></div>
-                    <span>Tim Maes</span>
-                </div>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                </a>
             </div>
-            <ul class="nav-menu">
+            
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Article Header -->
     <section class="article-header">
         <div class="container">
-            <div class="article-meta">
-                <span class="article-date">December 15th, 2024</span>
-                <span class="article-category">Dependency Injection</span>
-                <span class="article-category">Open Source</span>
+            <div class="article-header-bg">
+                <div class="article-particles"></div>
             </div>
-            <h1 class="article-title">Autowiring using Bindicate</h1>
-            <p class="article-subtitle">
-                Streamline your .NET dependency injection with attribute-based service registration, decorators, and keyed services
-            </p>
+            
+            <div class="article-header-content">
+                <div class="article-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <a href="blog.html">Blog</a>
+                    <span>/</span>
+                    <span>Autowiring using Bindicate</span>
+                </div>
+                
+                <div class="article-meta">
+                    <span class="article-date">December 15, 2024</span>
+                    <span class="article-category">Dependency Injection</span>
+                    <span class="article-category">Open Source</span>
+                    <span class="article-read-time">10 min read</span>
+                </div>
+                
+                <h1 class="article-title">Autowiring using Bindicate</h1>
+                <p class="article-subtitle">
+                    Streamline your .NET dependency injection with attribute-based service registration, decorators, and keyed services
+                </p>
+                
+                <div class="article-tags">
+                    <span>.NET</span>
+                    <span>Dependency Injection</span>
+                    <span>Attributes</span>
+                    <span>.NET 8</span>
+                </div>
+                
+                <div class="article-author">
+                    <img src="assets/Tim.jpg" alt="Tim Maes" class="author-photo">
+                    <div class="author-info">
+                        <span class="author-name">Tim Maes</span>
+                        <span class="author-title">.NET Developer & Open Source Contributor</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Article Content -->
     <article class="article-content">
         <div class="container">
-            <div class="article-body">
-                <p>As .NET developers, we've all been there, adding a new service to an application and realizing that we need to jump through hoops to wire it up in the IoC container. This often involves navigating through layers of code, digging through <code>Startup.cs</code> or equivalent files, and explicitly adding the new service. Wouldn't it be great if there was a way to streamline this? Imagine a flag or marker that simply tells the framework, "Hey, I'm here, and I need to be registered with this scope."</p>
+            <div class="article-layout">
+                <!-- Optional TOC -->
+                <aside class="article-toc">
+                    <h3>Table of Contents</h3>
+                    <nav class="toc-nav">
+                        <ul>
+                            <li><a href="#what-is-bindicate">What is Bindicate?</a></li>
+                            <li><a href="#feature-matrix">Feature Matrix</a></li>
+                            <li><a href="#getting-started">Getting Started</a></li>
+                            <li><a href="#advanced-features">Advanced Features</a></li>
+                            <li><a href="#best-practices">Best Practices</a></li>
+                            <li><a href="#troubleshooting">Troubleshooting</a></li>
+                            <li><a href="#current-limitations">Current Limitations</a></li>
+                            <li><a href="#conclusion">Conclusion</a></li>
+                            <li><a href="#resources">Resources</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                
+                <!-- Main Article Body -->
+                <div class="article-body">
+                    <p>As .NET developers, we've all been there, adding a new service to an application and realizing that we need to jump through hoops to wire it up in the IoC container. This often involves navigating through layers of code, digging through <code>Startup.cs</code> or equivalent files, and explicitly adding the new service. Wouldn't it be great if there was a way to streamline this? Imagine a flag or marker that simply tells the framework, "Hey, I'm here, and I need to be registered with this scope."</p>
 
-                <p>Well, that's precisely what <strong>Bindicate</strong> aims to achieve.</p>
+                    <p>Well, that's precisely what <strong>Bindicate</strong> aims to achieve.</p>
 
-                <h2>What is Bindicate?</h2>
+                    <h2 id="what-is-bindicate">What is Bindicate?</h2>
 
-                <p>Bindicate is a powerful NuGet package designed to declutter your .NET configuration by enabling attribute-based service registration. By using attributes, you can dictate how your classes should be registered in the IoC container. It supports all standard service lifetimes (Scoped, Transient, Singleton), their "TryAdd" and "TryAddEnumerable" variants, keyed services for .NET 8+, decorators, and options configuration.</p>
+                    <p>Bindicate is a powerful NuGet package designed to declutter your .NET configuration by enabling attribute-based service registration. By using attributes, you can dictate how your classes should be registered in the IoC container. It supports all standard service lifetimes (Scoped, Transient, Singleton), their "TryAdd" and "TryAddEnumerable" variants, keyed services for .NET 8+, decorators, and options configuration.</p>
 
-                <h3>Key Benefits</h3>
+                    <h3>Key Benefits</h3>
 
-                <ul>
-                    <li><strong>Clean Code</strong> - You no longer have to comb through a mountain of <code>services.Add...&lt;,&gt;()</code> lines. Bindicate allows you to specify the registration logic at the service class level, keeping related concerns together.</li>
-                    <li><strong>Better Maintainability</strong> - When the registration is closely associated with the service class, it's easier to change the scope of the service without hunting down the registration code in a different part of the project.</li>
-                    <li><strong>Comprehensive Feature Set</strong> - Bindicate supports advanced scenarios including decorator patterns, multiple implementations, generic interfaces, and configuration options.</li>
-                </ul>
+                    <ul>
+                        <li><strong>Clean Code</strong> - You no longer have to comb through a mountain of <code>services.Add...&lt;,&gt;()</code> lines. Bindicate allows you to specify the registration logic at the service class level, keeping related concerns together.</li>
+                        <li><strong>Better Maintainability</strong> - When the registration is closely associated with the service class, it's easier to change the scope of the service without hunting down the registration code in a different part of the project.</li>
+                        <li><strong>Comprehensive Feature Set</strong> - Bindicate supports advanced scenarios including decorator patterns, multiple implementations, generic interfaces, and configuration options.</li>
+                    </ul>
 
-                <h2>Feature Matrix</h2>
+                    <h2 id="feature-matrix">Feature Matrix</h2>
 
-                <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
-                    <thead>
-                        <tr style="background-color: #f8f9fa;">
-                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: left;">Feature</th>
-                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Regular</th>
-                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Keyed (.NET 8)</th>
-                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">TryAdd</th>
-                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">TryAddEnumerable</th>
-                            <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Decorators</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddTransient</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                        </tr>
-                        <tr style="background-color: #f8f9fa;">
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddScoped</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddSingleton</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                            <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
+                        <thead>
+                            <tr style="background-color: #f8f9fa;">
+                                <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: left;">Feature</th>
+                                <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Regular</th>
+                                <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Keyed (.NET 8)</th>
+                                <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">TryAdd</th>
+                                <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">TryAddEnumerable</th>
+                                <th style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">Decorators</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddTransient</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            </tr>
+                            <tr style="background-color: #f8f9fa;">
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddScoped</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem;">AddSingleton</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                                <td style="border: 1px solid #dee2e6; padding: 0.75rem; text-align: center;">?</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                <h2>Getting Started</h2>
+                    <h2 id="getting-started">Getting Started</h2>
 
-                <h3>Installation</h3>
+                    <h3>Installation</h3>
 
-                <p>To get started, install the package from NuGet:</p>
+                    <p>To get started, install the package from NuGet:</p>
 
-                <pre><code class="language-bash">Install-Package Bindicate</code></pre>
+                    <pre><code class="language-bash">Install-Package Bindicate</code></pre>
 
-                <p>or</p>
+                    <p>or</p>
 
-                <pre><code class="language-bash">dotnet add package Bindicate</code></pre>
+                    <pre><code class="language-bash">dotnet add package Bindicate</code></pre>
 
-                <h3>Basic Service Registration</h3>
+                    <h3>Basic Service Registration</h3>
 
-                <p>Once installed, you can start decorating your service classes with Bindicate attributes:</p>
+                    <p>Once installed, you can start decorating your service classes with Bindicate attributes:</p>
 
-                <pre><code class="language-csharp">[AddScoped]
+                    <pre><code class="language-csharp">[AddScoped]
 public class UserRepository : IUserRepository
 {
     private readonly DbContext _context;
@@ -195,9 +264,9 @@ public interface IUserRepository
     Task&lt;User&gt; GetByIdAsync(int id);
 }</code></pre>
 
-                <p>Or specify the interface explicitly:</p>
+                    <p>Or specify the interface explicitly:</p>
 
-                <pre><code class="language-csharp">[AddTransient(typeof(IEmailService))]
+                    <pre><code class="language-csharp">[AddTransient(typeof(IEmailService))]
 public class EmailService : IEmailService
 {
     public async Task SendEmailAsync(string to, string subject, string body)
@@ -206,19 +275,19 @@ public class EmailService : IEmailService
     }
 }</code></pre>
 
-                <h3>Bootstrapping</h3>
+                    <h3>Bootstrapping</h3>
 
-                <p>After your services are appropriately decorated, initialize Bindicate in your <code>Program.cs</code>:</p>
+                    <p>After your services are appropriately decorated, initialize Bindicate in your <code>Program.cs</code>:</p>
 
-                <h4>.NET 6+ in Program.cs</h4>
+                    <h4>.NET 6+ in Program.cs</h4>
 
-                <pre><code class="language-csharp">builder.Services
+                    <pre><code class="language-csharp">builder.Services
     .AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
     .Register();</code></pre>
 
-                <h4>For older versions in Startup.cs</h4>
+                    <h4>For older versions in Startup.cs</h4>
 
-                <pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
+                    <pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
 {
     services.AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
         .Register();
@@ -226,17 +295,17 @@ public class EmailService : IEmailService
     // Other configurations
 }</code></pre>
 
-                <blockquote>
-                    <strong>Important:</strong> Don't forget to call <code>.Register()</code> at the end!
-                </blockquote>
+                    <blockquote>
+                        <strong>Important:</strong> Don't forget to call <code>.Register()</code> at the end!
+                    </blockquote>
 
-                <h2>Advanced Features</h2>
+                    <h2 id="advanced-features">Advanced Features</h2>
 
-                <h3>Keyed Services (.NET 8+)</h3>
+                    <h3>Keyed Services (.NET 8+)</h3>
 
-                <p>Keyed services allow you to register multiple implementations of the same interface, identified by a unique key:</p>
+                    <p>Keyed services allow you to register multiple implementations of the same interface, identified by a unique key:</p>
 
-                <pre><code class="language-csharp">public enum PaymentProvider
+                    <pre><code class="language-csharp">public enum PaymentProvider
 {
     Stripe,
     PayPal,
@@ -261,9 +330,9 @@ public class PayPalPaymentProcessor : IPaymentProcessor
     }
 }</code></pre>
 
-                <p>Usage in your service:</p>
+                    <p>Usage in your service:</p>
 
-                <pre><code class="language-csharp">public class OrderService
+                    <pre><code class="language-csharp">public class OrderService
 {
     private readonly IPaymentProcessor _stripeProcessor;
 
@@ -273,20 +342,20 @@ public class PayPalPaymentProcessor : IPaymentProcessor
     }
 }</code></pre>
 
-                <h4>Bootstrapping Keyed Services</h4>
+                    <h4>Bootstrapping Keyed Services</h4>
 
-                <p>Add the <code>ForKeyedServices()</code> method call to your configuration:</p>
+                    <p>Add the <code>ForKeyedServices()</code> method call to your configuration:</p>
 
-                <pre><code class="language-csharp">builder.Services
+                    <pre><code class="language-csharp">builder.Services
     .AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
     .ForKeyedServices()
     .Register();</code></pre>
 
-                <h3>Multiple Service Implementations (TryAddEnumerable)</h3>
+                    <h3>Multiple Service Implementations (TryAddEnumerable)</h3>
 
-                <p>When you need multiple implementations of the same interface available simultaneously:</p>
+                    <p>When you need multiple implementations of the same interface available simultaneously:</p>
 
-                <pre><code class="language-csharp">public interface INotificationHandler
+                    <pre><code class="language-csharp">public interface INotificationHandler
 {
     Task HandleAsync(string message);
 }
@@ -309,9 +378,9 @@ public class SmsNotificationHandler : INotificationHandler
     }
 }</code></pre>
 
-                <p>All implementations available via <code>IEnumerable&lt;INotificationHandler&gt;</code>:</p>
+                    <p>All implementations available via <code>IEnumerable&lt;INotificationHandler&gt;</code>:</p>
 
-                <pre><code class="language-csharp">public class NotificationService
+                    <pre><code class="language-csharp">public class NotificationService
 {
     private readonly IEnumerable&lt;INotificationHandler&gt; _handlers;
 
@@ -326,11 +395,11 @@ public class SmsNotificationHandler : INotificationHandler
     }
 }</code></pre>
 
-                <h3>Decorator Pattern</h3>
+                    <h3>Decorator Pattern</h3>
 
-                <p>Bindicate supports the decorator pattern, allowing you to wrap services with additional behavior like logging, caching, or validation:</p>
+                    <p>Bindicate supports the decorator pattern, allowing you to wrap services with additional behavior like logging, caching, or validation:</p>
 
-                <pre><code class="language-csharp">public interface IOrderService
+                    <pre><code class="language-csharp">public interface IOrderService
 {
     Task&lt;Order&gt; CreateOrderAsync(CreateOrderRequest request);
 }
@@ -385,13 +454,13 @@ public class CachingOrderDecorator : IOrderService
     }
 }</code></pre>
 
-                <p>Decorators are applied automatically when you call <code>Register()</code>. The <code>order</code> parameter controls the application sequence (lower values are applied first).</p>
+                    <p>Decorators are applied automatically when you call <code>Register()</code>. The <code>order</code> parameter controls the application sequence (lower values are applied first).</p>
 
-                <h3>Generic Interface Support</h3>
+                    <h3>Generic Interface Support</h3>
 
-                <p>Bindicate can automatically register generic interfaces:</p>
+                    <p>Bindicate can automatically register generic interfaces:</p>
 
-                <pre><code class="language-csharp">[RegisterGenericInterface]
+                    <pre><code class="language-csharp">[RegisterGenericInterface]
 public interface IRepository&lt;T&gt; where T : class
 {
     Task&lt;T&gt; GetByIdAsync(int id);
@@ -419,11 +488,11 @@ public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
     }
 }</code></pre>
 
-                <h3>Options Configuration</h3>
+                    <h3>Options Configuration</h3>
 
-                <p>Register and configure options classes directly from <code>appsettings.json</code>:</p>
+                    <p>Register and configure options classes directly from <code>appsettings.json</code>:</p>
 
-                <pre><code class="language-csharp">[RegisterOptions("EmailSettings")]
+                    <pre><code class="language-csharp">[RegisterOptions("EmailSettings")]
 public class EmailOptions
 {
     public string SmtpServer { get; set; } = "";
@@ -432,9 +501,9 @@ public class EmailOptions
     public string Password { get; set; } = "";
 }</code></pre>
 
-                <p><code>appsettings.json</code>:</p>
+                    <p><code>appsettings.json</code>:</p>
 
-                <pre><code class="language-json">{
+                    <pre><code class="language-json">{
   "EmailSettings": {
     "SmtpServer": "smtp.gmail.com",
     "Port": 587,
@@ -443,18 +512,18 @@ public class EmailOptions
   }
 }</code></pre>
 
-                <p>Then update your service registration to include options:</p>
+                    <p>Then update your service registration to include options:</p>
 
-                <pre><code class="language-csharp">builder.Services
+                    <pre><code class="language-csharp">builder.Services
     .AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
     .WithOptions(builder.Configuration)  // Pass configuration here
     .Register();</code></pre>
 
-                <h3>Multi-Assembly Support</h3>
+                    <h3>Multi-Assembly Support</h3>
 
-                <p>For larger applications with multiple assemblies:</p>
+                    <p>For larger applications with multiple assemblies:</p>
 
-                <pre><code class="language-csharp">builder.Services
+                    <pre><code class="language-csharp">builder.Services
     .AddAutowiringForAssembly(typeof(DataService).Assembly)      // Data layer
     .AddAutowiringForAssembly(typeof(BusinessService).Assembly)  // Business layer
     .AddAutowiringForAssembly(typeof(ApiController).Assembly)    // API layer
@@ -462,33 +531,33 @@ public class EmailOptions
     .WithOptions(builder.Configuration)
     .Register();</code></pre>
 
-                <h2>Best Practices</h2>
+                    <h2 id="best-practices">Best Practices</h2>
 
-                <ol>
-                    <li><strong>Performance</strong>: Only scan assemblies that contain your services to improve startup performance</li>
-                    <li><strong>Decorator Ordering</strong>: Use the order parameter thoughtfully to control decorator application sequence</li>
-                    <li><strong>Keyed Services</strong>: Use meaningful keys (enums or constants) rather than magic strings</li>
-                    <li><strong>Options Validation</strong>: Combine with <code>IValidateOptions&lt;T&gt;</code> for robust configuration validation</li>
-                    <li><strong>Assembly Organization</strong>: Group related services in the same assembly for easier management</li>
-                </ol>
+                    <ol>
+                        <li><strong>Performance</strong>: Only scan assemblies that contain your services to improve startup performance</li>
+                        <li><strong>Decorator Ordering</strong>: Use the order parameter thoughtfully to control decorator application sequence</li>
+                        <li><strong>Keyed Services</strong>: Use meaningful keys (enums or constants) rather than magic strings</li>
+                        <li><strong>Options Validation</strong>: Combine with <code>IValidateOptions&lt;T&gt;</code> for robust configuration validation</li>
+                        <li><strong>Assembly Organization</strong>: Group related services in the same assembly for easier management</li>
+                    </ol>
 
-                <h2>Troubleshooting</h2>
+                    <h2 id="troubleshooting">Troubleshooting</h2>
 
-                <h3>Common Issues</h3>
+                    <h3>Common Issues</h3>
 
-                <ul>
-                    <li><strong>Services not found</strong>: Ensure you're scanning the correct assembly containing your services</li>
-                    <li><strong>Circular dependencies</strong>: Consider using factory patterns or lazy initialization</li>
-                    <li><strong>Missing Register() call</strong>: Don't forget to call <code>.Register()</code> at the end of your fluent chain</li>
-                    <li><strong>Keyed service not resolved</strong>: Make sure you've called <code>.ForKeyedServices()</code> in your configuration</li>
-                    <li><strong>Decorator not applied</strong>: Ensure the original service is registered before applying decorators</li>
-                </ul>
+                    <ul>
+                        <li><strong>Services not found</strong>: Ensure you're scanning the correct assembly containing your services</li>
+                        <li><strong>Circular dependencies</strong>: Consider using factory patterns or lazy initialization</li>
+                        <li><strong>Missing Register() call</strong>: Don't forget to call <code>.Register()</code> at the end of your fluent chain</li>
+                        <li><strong>Keyed service not resolved</strong>: Make sure you've called <code>.ForKeyedServices()</code> in your configuration</li>
+                        <li><strong>Decorator not applied</strong>: Ensure the original service is registered before applying decorators</li>
+                    </ul>
 
-                <h3>Debugging Tips</h3>
+                    <h3>Debugging Tips</h3>
 
-                <p>Check what services are registered:</p>
+                    <p>Check what services are registered:</p>
 
-                <pre><code class="language-csharp">var services = new ServiceCollection();
+                    <pre><code class="language-csharp">var services = new ServiceCollection();
 services.AddAutowiringForAssembly(Assembly.GetExecutingAssembly())
     .Register();
 
@@ -498,102 +567,274 @@ foreach (var service in services)
     Console.WriteLine($"{service.ServiceType.Name} -> {service.ImplementationType?.Name ?? "Factory"}");
 }</code></pre>
 
-                <h2>Current Limitations</h2>
+                    <h2 id="current-limitations">Current Limitations</h2>
 
-                <ul>
-                    <li><strong>Single Registration Policy</strong>: One primary registration attribute per class (decorators are separate)</li>
-                    <li><strong>Assembly Scanning</strong>: Requires explicit assembly specification for each library</li>
-                    <li><strong>Keyed Services</strong>: TryAdd variants not yet supported for keyed services</li>
-                    <li><strong>.NET 8 Requirement</strong>: Keyed services require .NET 8 or later</li>
-                </ul>
+                    <ul>
+                        <li><strong>Single Registration Policy</strong>: One primary registration attribute per class (decorators are separate)</li>
+                        <li><strong>Assembly Scanning</strong>: Requires explicit assembly specification for each library</li>
+                        <li><strong>Keyed Services</strong>: TryAdd variants not yet supported for keyed services</li>
+                        <li><strong>.NET 8 Requirement</strong>: Keyed services require .NET 8 or later</li>
+                    </ul>
 
-                <h2>Conclusion</h2>
+                    <h2 id="conclusion">Conclusion</h2>
 
-                <p>Bindicate transforms dependency injection in .NET applications from a configuration chore into an elegant, declarative system. By moving service registration closer to the service definitions themselves, it promotes cleaner, more maintainable code while supporting advanced scenarios like decorators, keyed services, and multiple implementations.</p>
+                    <p>Bindicate transforms dependency injection in .NET applications from a configuration chore into an elegant, declarative system. By moving service registration closer to the service definitions themselves, it promotes cleaner, more maintainable code while supporting advanced scenarios like decorators, keyed services, and multiple implementations.</p>
 
-                <p>Whether you're building a simple web API or a complex enterprise application, Bindicate's attribute-based approach will streamline your dependency injection setup and make your codebase more readable and maintainable.</p>
+                    <p>Whether you're building a simple web API or a complex enterprise application, Bindicate's attribute-based approach will streamline your dependency injection setup and make your codebase more readable and maintainable.</p>
 
-                <p>The library continues to evolve with new features and improvements, making it an excellent choice for modern .NET applications targeting .NET 8 and beyond.</p>
+                    <p>The library continues to evolve with new features and improvements, making it an excellent choice for modern .NET applications targeting .NET 8 and beyond.</p>
 
-                <h2>Resources</h2>
+                    <h2 id="resources">Resources</h2>
 
-                <ul>
-                    <li><strong>Bindicate on NuGet</strong>: <a href="https://www.nuget.org/packages/Bindicate" target="_blank">Install Bindicate</a></li>
-                    <li><strong>Bindicate on GitHub</strong>: <a href="https://github.com/Tim-Maes/Bindicate" target="_blank">Source Code and Documentation</a></li>
-                    <li><strong>Current version</strong>: 1.7.1 - Now with decorator support!</li>
-                </ul>
-
-                <!-- Comments Section -->
-                <section class="comments-section">
-                    <h2>Comments</h2>
-                    <div class="comments-container">
-                        <script src="https://utteranc.es/client.js"
-                                repo="Tim-Maes/Tim-Maes.github.io"
-                                issue-term="title"
-                                label="blog-comments"
-                                theme="github-light"
-                                crossorigin="anonymous"
-                                async>
-                        </script>
-                    </div>
-                </section>
+                    <ul>
+                        <li><strong>Bindicate on NuGet</strong>: <a href="https://www.nuget.org/packages/Bindicate" target="_blank">Install Bindicate</a></li>
+                        <li><strong>Bindicate on GitHub</strong>: <a href="https://github.com/Tim-Maes/Bindicate" target="_blank">Source Code and Documentation</a></li>
+                        <li><strong>Current version</strong>: 1.7.1 - Now with decorator support!</li>
+                    </ul>
+                </div>
             </div>
+
+            <!-- Article Footer -->
+            <div class="article-footer">
+                <div class="article-sharing">
+                    <h3>Share this article</h3>
+                    <div class="sharing-buttons">
+                        <a href="https://twitter.com/intent/tweet?text=Autowiring using Bindicate&url=https://tim-maes.github.io/autowiring-using-bindicate.html&via=Tim_Maes_" class="share-btn twitter" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                            Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tim-maes.github.io/autowiring-using-bindicate.html" class="share-btn linkedin" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <button class="share-btn copy" onclick="copyToClipboard()">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <section class="comments-section">
+                <h2>Comments</h2>
+                <div class="comments-container">
+                    <script src="https://utteranc.es/client.js"
+                            repo="Tim-Maes/Tim-Maes.github.io"
+                            issue-term="pathname"
+                            theme="github-dark"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>
+            </section>
         </div>
     </article>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Stay Updated</h3>
+                <p>Get notified when I publish new articles about .NET development, security, and modern software engineering practices.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button class="newsletter-btn">Subscribe</button>
+                </div>
+                <p class="newsletter-note">No spam, unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="logo">
-                        <div class="shield-icon"></div>
-                        <span>Tim Maes</span>
-                    </div>
-                    <p>Building secure and innovative solutions</p>
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                    <p>Building secure and innovative solutions for the .NET ecosystem</p>
                 </div>
+                
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>My work</h4>
-                        <a href="https://marketplace.visualstudio.com/publishers/TimMaes">VS Marketplace</a>
-                        <a href="https://www.nuget.org/profiles/Tim-Maes">NuGet</a>
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="index.html#about">About</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="blog.html">Blog</a>
                     </div>
+                    
+                    <div class="footer-section">
+                        <h4>Popular Posts</h4>
+                        <a href="blazorframe-enhanced-iframes.html">BlazorFrame</a>
+                        <a href="facets-in-dotnet.html">Facets in .NET</a>
+                        <a href="source-generators-vs-t4.html">Source Generators vs T4</a>
+                        <a href="autowiring-using-bindicate.html">Autowiring with Bindicate</a>
+                    </div>
+                    
                     <div class="footer-section">
                         <h4>Connect</h4>
                         <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
                         <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
                         <a href="mailto:hello@timmaes.dev">Email</a>
+                        <a href="resume.html">Resume</a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span>Made with 💡 in Belgium</span>
+                    <span>•</span>
+                    <span>Open Source Enthusiast</span>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="script.js"></script>
+
+    <!-- Additional styles for blog post -->
+    <style>
+        .article-header {
+            padding: calc(var(--space-4xl) + 80px) 0 var(--space-4xl);
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .article-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 85%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .article-breadcrumb { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); font-size: 0.875rem; color: var(--text-muted); }
+        .article-breadcrumb a { color: var(--accent-primary); text-decoration: none; transition: color var(--transition-fast); }
+        .article-breadcrumb a:hover { color: var(--text-primary); }
+        .article-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-size: 0.875rem; color: var(--text-muted); }
+        .article-category { background: var(--accent-primary); color: var(--bg-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .article-title { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: var(--space-lg); background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .article-subtitle { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-xl); }
+        .article-tags { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl); }
+        .article-tags span { background: rgba(124, 58, 237, 0.2); color: var(--accent-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 500; }
+        .article-author { display: flex; align-items: center; gap: var(--space-md); }
+        .author-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-primary); }
+        .author-name { display: block; color: var(--text-primary); font-weight: 600; }
+        .author-title { display: block; color: var(--text-muted); font-size: 0.875rem; }
+
+        .article-content { padding: var(--space-4xl) 0; background: var(--bg-secondary); }
+        .article-layout { display: grid; grid-template-columns: 250px 1fr; gap: var(--space-4xl); align-items: start; }
+        .article-toc { position: sticky; top: calc(80px + var(--space-lg)); background: var(--bg-primary); border-radius: var(--radius-lg); padding: var(--space-lg); border: 1px solid rgba(100, 255, 218, 0.1); }
+        .article-toc h3 { color: var(--text-primary); font-weight: 600; margin-bottom: var(--space-md); font-size: 1rem; }
+        .toc-nav ul { list-style: none; padding: 0; }
+        .toc-nav li { margin-bottom: var(--space-sm); }
+        .toc-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color var(--transition-fast); line-height: 1.4; }
+        .toc-nav a:hover { color: var(--accent-primary); }
+
+        .article-body { background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--space-4xl); border: 1px solid rgba(100, 255, 218, 0.1); }
+        .article-body h2 { font-size: 1.875rem; font-weight: 700; color: var(--text-primary); margin: var(--space-4xl) 0 var(--space-lg); position: relative; padding-bottom: var(--space-sm); border-bottom: 2px solid rgba(100, 255, 218, 0.2); }
+        .article-body h2:first-child { margin-top: 0; }
+        .article-body h3 { font-size: 1.375rem; font-weight: 600; color: var(--text-primary); margin: var(--space-2xl) 0 var(--space-md); }
+        .article-body h4 { font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin: var(--space-xl) 0 var(--space-sm); }
+        .article-body p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); font-size: 1.125rem; }
+        .article-body ul, .article-body ol { margin-bottom: var(--space-lg); padding-left: var(--space-xl); color: var(--text-secondary); }
+        .article-body li { margin-bottom: var(--space-sm); line-height: 1.7; font-size: 1.125rem; }
+        .article-body a { color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--transition-fast); }
+        .article-body a:hover { border-bottom-color: var(--accent-primary); }
+        .article-body blockquote { background: rgba(100, 255, 218, 0.05); border-left: 4px solid var(--accent-primary); padding: var(--space-lg); margin: var(--space-xl) 0; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-style: italic; }
+        .article-body blockquote p { color: var(--text-primary); margin-bottom: 0; }
+        .article-body pre { background: #1a1a1a; border-radius: var(--radius-lg); padding: var(--space-xl); margin: var(--space-xl) 0; overflow-x: auto; border: 1px solid rgba(100, 255, 218, 0.1); }
+        .article-body code { font-family: var(--font-mono); font-size: 0.9em; }
+        .article-body :not(pre) > code { background: rgba(100, 255, 218, 0.1); color: var(--accent-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); }
+
+        .article-footer { margin-top: var(--space-4xl); padding-top: var(--space-2xl); border-top: 2px solid rgba(100, 255, 218, 0.2); }
+        .article-sharing { margin-bottom: var(--space-2xl); }
+        .article-sharing h3 { color: var(--text-primary); font-weight: 600; margin-bottom: var(--space-md); }
+        .sharing-buttons { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-lg); text-decoration: none; font-weight: 500; border: none; cursor: pointer; transition: all var(--transition-fast); font-family: inherit; font-size: 0.875rem; }
+        .share-btn.twitter { background: #1DA1F2; color: white; }
+        .share-btn.linkedin { background: #0A66C2; color: white; }
+        .share-btn.copy { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid rgba(100, 255, 218, 0.2); }
+        .share-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .comments-section { margin-top: var(--space-4xl); padding-top: var(--space-2xl); border-top: 2px solid rgba(100, 255, 218, 0.2); }
+        .comments-section h2 { color: var(--text-primary); font-weight: 700; margin-bottom: var(--space-xl); text-align: center; }
+
+        .newsletter-section { padding: var(--space-4xl) 0; background: var(--bg-primary); }
+        .newsletter-content { text-align: center; max-width: 600px; margin: 0 auto; }
+        .newsletter-content h3 { font-size: 2rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--text-primary); }
+        .newsletter-content p { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: var(--space-xl); }
+        .newsletter-form { display: flex; gap: var(--space-md); margin-bottom: var(--space-md); }
+        .newsletter-input { flex: 1; padding: var(--space-md) var(--space-lg); background: var(--bg-secondary); border: 1px solid rgba(100, 255, 218, 0.2); border-radius: var(--radius-lg); color: var(--text-primary); font-size: 1rem; }
+        .newsletter-input::placeholder { color: var(--text-muted); }
+        .newsletter-input:focus { outline: none; border-color: var(--accent-primary); }
+        .newsletter-btn { background: var(--accent-gradient); color: var(--bg-primary); border: none; padding: var(--space-md) var(--space-xl); border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; transition: all var(--transition-fast); }
+        .newsletter-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-accent); }
+        .newsletter-note { font-size: 0.875rem; color: var(--text-muted); }
+
+        @media (max-width: 1024px) {
+            .article-layout { grid-template-columns: 1fr; gap: var(--space-2xl); }
+            .article-toc { position: static; order: -1; }
+        }
+
+        @media (max-width: 768px) {
+            .article-body { padding: var(--space-xl); }
+            .article-meta { flex-direction: column; gap: var(--space-sm); }
+            .sharing-buttons { flex-direction: column; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+
     <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        // Copy to clipboard functionality
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                const btn = document.querySelector('.share-btn.copy');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>Copied!';
+                setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+            });
+        }
 
         // Initialize syntax highlighting
         hljs.highlightAll();
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>

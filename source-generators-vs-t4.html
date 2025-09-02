@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
     <link rel="shortcut icon" href="/assets/Tim.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Tim.ico">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0a0e27">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Exploring the evolution from T4 templates to modern Source Generators in .NET development. A comprehensive comparison of code generation approaches in C# and .NET.">
@@ -39,8 +39,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@timmaes_dev">
-    <meta name="twitter:creator" content="@timmaes_dev">
+    <meta name="twitter:site" content="@Tim_Maes_">
+    <meta name="twitter:creator" content="@Tim_Maes_">
     <meta name="twitter:title" content="Source Generators: The end of T4 templates?">
     <meta name="twitter:description" content="Exploring the evolution from T4 templates to modern Source Generators in .NET development">
     <meta name="twitter:image" content="https://tim-maes.github.io/assets/source-generators-preview.png">
@@ -50,82 +50,154 @@
     <link rel="canonical" href="https://tim-maes.github.io/source-generators-vs-t4.html">
     <meta name="robots" content="index, follow">
     
-    <!-- Existing stylesheets and scripts -->
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader">
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+            <div class="loader-cube"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo">
-                    <div class="shield-icon"></div>
-                    <span>Tim Maes</span>
-                </div>
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                </a>
             </div>
-            <ul class="nav-menu">
+            
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li><a href="resume.html" class="nav-link">Resume</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Article Header -->
     <section class="article-header">
         <div class="container">
-            <div class="article-meta">
-                <span class="article-date">February 25, 2024</span>
-                <span class="article-category">Development</span>
+            <div class="article-header-bg">
+                <div class="article-particles"></div>
             </div>
-            <h1 class="article-title">Source Generators: The end of T4 templates?</h1>
-            <p class="article-subtitle">
-                Exploring the evolution from T4 templates to modern Source Generators in .NET development
-            </p>
+            
+            <div class="article-header-content">
+                <div class="article-breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <a href="blog.html">Blog</a>
+                    <span>/</span>
+                    <span>Source Generators vs T4</span>
+                </div>
+                
+                <div class="article-meta">
+                    <span class="article-date">February 25, 2024</span>
+                    <span class="article-category">Development</span>
+                    <span class="article-read-time">15 min read</span>
+                </div>
+                
+                <h1 class="article-title">Source Generators: The end of T4 templates?</h1>
+                <p class="article-subtitle">
+                    Exploring the evolution from T4 templates to modern Source Generators in .NET development
+                </p>
+                
+                <div class="article-tags">
+                    <span>Source Generators</span>
+                    <span>T4 Templates</span>
+                    <span>.NET</span>
+                    <span>Code Generation</span>
+                </div>
+                
+                <div class="article-author">
+                    <img src="assets/Tim.jpg" alt="Tim Maes" class="author-photo">
+                    <div class="author-info">
+                        <span class="author-name">Tim Maes</span>
+                        <span class="author-title">.NET Developer & Open Source Contributor</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Article Content -->
     <article class="article-content">
         <div class="container">
-            <div class="article-body">
-                <p>In the evolving landscape of .NET Development, code generation has been a cornerstone for creating boilerplate code, improving developer productivity and automating processes. <a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates" target="_blank">T4 (Text Template Transformation Toolkit)</a> has been the go-to solution for well over a decade for this purpose, offering a powerful but also a somewhat underappreciated templating engine right inside Visual Studio. They have enabled developers to generate everything from data models to fully fledged API clients.</p>
+            <div class="article-layout">
+                <!-- Table of Contents -->
+                <aside class="article-toc">
+                    <h3>Table of Contents</h3>
+                    <nav class="toc-nav">
+                        <ul>
+                            <li><a href="#introduction">Introduction</a></li>
+                            <li><a href="#t4-templates">T4 Templates</a></li>
+                            <li><a href="#source-generators">Source Generators</a></li>
+                            <li><a href="#comparison">Comparison</a></li>
+                            <li><a href="#choosing">Choosing Between Them</a></li>
+                            <li><a href="#looking-ahead">Looking Ahead</a></li>
+                            <li><a href="#resources">Resources</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                
+                <!-- Main Article Body -->
+                <div class="article-body">
+                    <section id="introduction">
+                        <p>In the evolving landscape of .NET Development, code generation has been a cornerstone for creating boilerplate code, improving developer productivity and automating processes. <a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates" target="_blank">T4 (Text Template Transformation Toolkit)</a> has been the go-to solution for well over a decade for this purpose, offering a powerful but also a somewhat underappreciated templating engine right inside Visual Studio. They have enabled developers to generate everything from data models to fully fledged API clients.</p>
 
-                <p>But, working with T4 has had issues since the start. There is no easy way to work with them, since there is no proper editor experience for them. They are hard to debug and by default you find yourself working in a 'plain text' environment, having no intellisense, syntax highlighting or language support. The open source community provided some solutions for this, but often they are incomplete.</p>
+                        <p>But, working with T4 has had issues since the start. There is no easy way to work with them, since there is no proper editor experience for them. They are hard to debug and by default you find yourself working in a 'plain text' environment, having no intellisense, syntax highlighting or language support. The open source community provided some solutions for this, but often they are incomplete.</p>
 
-                <p>I myself have been developing tools the past few years that provide some support when working with T4 templates. T4Editor provides a minimal editor experience, and T4Executer helps you control the execution of T4 templates during build time.</p>
+                        <p>I myself have been developing tools the past few years that provide some support when working with T4 templates. T4Editor provides a minimal editor experience, and T4Executer helps you control the execution of T4 templates during build time.</p>
+                    </section>
 
-                <h2>The birth of Source Generators</h2>
+                    <section id="source-generators">
+                        <h2>The birth of Source Generators</h2>
 
-                <p>The introduction of source generators in C# 9.0 and .NET 5 marks a significant evolution in how .NET developers approach code generation. Built on the <a href="https://github.com/dotnet/roslyn" target="_blank">Roslyn</a> compiler platform, source generators promise to enhance, or can we say revolutionize code generation by integrating directly into the compile-time environment, offering a fluent and more performant alternative to traditional methods.</p>
+                        <p>The introduction of source generators in C# 9.0 and .NET 5 marks a significant evolution in how .NET developers approach code generation. Built on the <a href="https://github.com/dotnet/roslyn" target="_blank">Roslyn</a> compiler platform, source generators promise to enhance, or can we say revolutionize code generation by integrating directly into the compile-time environment, offering a fluent and more performant alternative to traditional methods.</p>
 
-                <p>This leads to the question - are source generators here to make T4 templates a thing from the past? In this post we provide a high level overview and comparison between these tools.</p>
+                        <p>This leads to the question - are source generators here to make T4 templates a thing from the past? In this post we provide a high level overview and comparison between these tools.</p>
+                    </section>
 
-                <h2>T4 Templates</h2>
+                    <section id="t4-templates">
+                        <h2>T4 Templates</h2>
 
-                <p>T4 (Text Template Transformation Toolkit) templates have long been the standard for code generation within the .NET ecosystem. Embedded within Visual Studio, T4 templates offer a dynamic way to generate textual content based on predefined templates. These templates can include any sort of text, ranging from HTML and XML to fully functional C# code, making them incredibly versatile for a wide range of applications.</p>
+                        <p>T4 (Text Template Transformation Toolkit) templates have long been the standard for code generation within the .NET ecosystem. Embedded within Visual Studio, T4 templates offer a dynamic way to generate textual content based on predefined templates. These templates can include any sort of text, ranging from HTML and XML to fully functional C# code, making them incredibly versatile for a wide range of applications.</p>
 
-                <h3>How T4 Templates Work</h3>
+                        <h3>How T4 Templates Work</h3>
 
-                <p>A T4 template file (.tt) consists of two main parts: template directives and control logic. The directives provide the compiler with information about how to process the template, such as the output file type. The control logic, written in a mixture of C# or VB.NET and T4 syntax, defines the actual content generation logic. When a T4 template is executed, it reads these instructions to produce the final text output, which can be another source code file, a configuration file, or any text-based file that suits the developer's needs.</p>
+                        <p>A T4 template file (.tt) consists of two main parts: template directives and control logic. The directives provide the compiler with information about how to process the template, such as the output file type. The control logic, written in a mixture of C# or VB.NET and T4 syntax, defines the actual content generation logic. When a T4 template is executed, it reads these instructions to produce the final text output, which can be another source code file, a configuration file, or any text-based file that suits the developer's needs.</p>
 
-                <h3>Example</h3>
+                        <h3>Example</h3>
 
-                <p><strong>Generating DTOs from Database Models</strong></p>
+                        <p><strong>Generating DTOs from Database Models</strong></p>
 
-                <p>Imagine you have a set of entity models corresponding to database tables in your .NET application. You frequently need to create Data Transfer Objects (DTOs) based on these entity models for safe data transmission over the network. Instead of manually crafting each DTO, you can use a T4 template to automate this process.</p>
+                        <p>Imagine you have a set of entity models corresponding to database tables in your .NET application. You frequently need to create Data Transfer Objects (DTOs) based on these entity models for safe data transmission over the network. Instead of manually crafting each DTO, you can use a T4 template to automate this process.</p>
 
-                <pre><code class="language-csharp">&lt;#@ template debug="false" hostspecific="false" language="C#" #&gt;
+                        <pre><code class="language-csharp">&lt;#@ template debug="false" hostspecific="false" language="C#" #&gt;
 &lt;#@ output extension=".cs" #&gt;
 &lt;#@ assembly name="System.Core" #&gt;
 &lt;#@ import namespace="System.Collections.Generic" #&gt;
@@ -142,53 +214,55 @@ namespace MyApplication.DTOs
 &lt;# } #&gt;
 }</code></pre>
 
-                <p>In this example, <code>ModelEntities</code> would be a collection of your entity models, each with Name, Properties, and other necessary metadata. This T4 template iterates over each model, generating a corresponding DTO class with matching properties. Note the syntax using <code>&lt;# #&gt;</code> codeblocks, which require a learning curve to master.</p>
+                        <p>In this example, <code>ModelEntities</code> would be a collection of your entity models, each with Name, Properties, and other necessary metadata. This T4 template iterates over each model, generating a corresponding DTO class with matching properties. Note the syntax using <code>&lt;# #&gt;</code> codeblocks, which require a learning curve to master.</p>
 
-                <h3>Applications and Strengths</h3>
+                        <h3>Applications and Strengths</h3>
 
-                <p>T4 templates excel in scenarios where repetitive code patterns are common, such as in:</p>
+                        <p>T4 templates excel in scenarios where repetitive code patterns are common, such as in:</p>
 
-                <ul>
-                    <li>Data model generation based on database schemas</li>
-                    <li>Generating boilerplate code for repetitive tasks (e.g., CRUD operations)</li>
-                    <li>Automatic generation of configuration files or localization resources</li>
-                </ul>
+                        <ul>
+                            <li>Data model generation based on database schemas</li>
+                            <li>Generating boilerplate code for repetitive tasks (e.g., CRUD operations)</li>
+                            <li>Automatic generation of configuration files or localization resources</li>
+                        </ul>
 
-                <p>The key strengths of T4 templates include:</p>
+                        <p>The key strengths of T4 templates include:</p>
 
-                <ul>
-                    <li><strong>Integration with Visual Studio</strong>: They offer a seamless development experience, with Visual Studio providing direct support for creating, editing, and executing T4 templates.</li>
-                    <li><strong>Flexibility</strong>: T4 templates can generate any text-based file, making them extremely versatile.</li>
-                    <li><strong>Customizability</strong>: Developers have full control over the generation process, allowing for highly customized outputs based on complex logic.</li>
-                </ul>
+                        <ul>
+                            <li><strong>Integration with Visual Studio</strong>: They offer a seamless development experience, with Visual Studio providing direct support for creating, editing, and executing T4 templates.</li>
+                            <li><strong>Flexibility</strong>: T4 templates can generate any text-based file, making them extremely versatile.</li>
+                            <li><strong>Customizability</strong>: Developers have full control over the generation process, allowing for highly customized outputs based on complex logic.</li>
+                        </ul>
 
-                <h3>Challenges and Limitations</h3>
+                        <h3>Challenges and Limitations</h3>
 
-                <p>Despite their strengths, T4 templates come with their own set of challenges:</p>
+                        <p>Despite their strengths, T4 templates come with their own set of challenges:</p>
 
-                <ul>
-                    <li><strong>Learning Curve</strong>: The syntax and setup for T4 can be daunting for newcomers.</li>
-                    <li><strong>Debugging Difficulty</strong>: Debugging T4 templates can be cumbersome, as it often requires attaching a debugger to the Visual Studio process.</li>
-                    <li><strong>Performance</strong>: For large projects, T4 template execution can be slow, impacting overall development time.</li>
-                </ul>
+                        <ul>
+                            <li><strong>Learning Curve</strong>: The syntax and setup for T4 can be daunting for newcomers.</li>
+                            <li><strong>Debugging Difficulty</strong>: Debugging T4 templates can be cumbersome, as it often requires attaching a debugger to the Visual Studio process.</li>
+                            <li><strong>Performance</strong>: For large projects, T4 template execution can be slow, impacting overall development time.</li>
+                        </ul>
 
-                <h3>The Role of T4 Templates Today</h3>
+                        <h3>The Role of T4 Templates Today</h3>
 
-                <p>I still use T4 templates in some projects today, and they have stood the test of time, proving their worth by automating tedious coding tasks and ensuring consistency across large codebases. However, with the introduction of source generators, developers are beginning to question the future role of T4 templates in .NET development.</p>
+                        <p>I still use T4 templates in some projects today, and they have stood the test of time, proving their worth by automating tedious coding tasks and ensuring consistency across large codebases. However, with the introduction of source generators, developers are beginning to question the future role of T4 templates in .NET development.</p>
+                    </section>
 
-                <h2>Source Generators in .NET</h2>
+                    <section id="source-generators">
+                        <h2>Source Generators in .NET</h2>
 
-                <p>With the release of C# 9.0 and .NET 5, the .NET ecosystem was introduced to source generators, a compelling new feature designed to enhance the developer's toolkit for code generation. Unlike T4 templates that operate outside the compilation process, source generators are intricately woven into the compilation pipeline itself. This integration allows for the dynamic generation of C# source code during compilation, effectively bridging the gap between the initial code written by developers and the final assembly produced by the compiler.</p>
+                        <p>With the release of C# 9.0 and .NET 5, the .NET ecosystem was introduced to source generators, a compelling new feature designed to enhance the developer's toolkit for code generation. Unlike T4 templates that operate outside the compilation process, source generators are intricately woven into the compilation pipeline itself. This integration allows for the dynamic generation of C# source code during compilation, effectively bridging the gap between the initial code written by developers and the final assembly produced by the compiler.</p>
 
-                <h3>How Source Generators Work</h3>
+                        <h3>How Source Generators Work</h3>
 
-                <p>Source generators work by analyzing a program's structure, including its syntax trees and semantic model, and then generating additional source files as part of the compilation process. This means the generated code is available to all subsequent phases of compilation, allowing for a seamless development experience. Developers implement source generators by creating a .NET Standard library that references <code>Microsoft.CodeAnalysis.CSharp</code> and <code>Microsoft.CodeAnalysis</code>, then implementing the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.isourcegenerator?view=roslyn-dotnet-4.7.0" target="_blank">ISourceGenerator</a> interface.</p>
+                        <p>Source generators work by analyzing a program's structure, including its syntax trees and semantic model, and then generating additional source files as part of the compilation process. This means the generated code is available to all subsequent phases of compilation, allowing for a seamless development experience. Developers implement source generators by creating a .NET Standard library that references <code>Microsoft.CodeAnalysis.CSharp</code> and <code>Microsoft.CodeAnalysis</code>, then implementing the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.isourcegenerator?view=roslyn-dotnet-4.7.0" target="_blank">ISourceGenerator</a> interface.</p>
 
-                <h3>Example</h3>
+                        <h3>Example</h3>
 
-                <p>Just like in the T4 example above, we want to generate DTO's based on existing entities. In this example, any class that implements <code>IModelEntity</code> will have a corresponding DTO class generated for it at compile time. The generated DTOs will be placed in the *.DTOs namespace and will include properties that mirror those of the original model classes.</p>
+                        <p>Just like in the T4 example above, we want to generate DTO's based on existing entities. In this example, any class that implements <code>IModelEntity</code> will have a corresponding DTO class generated for it at compile time. The generated DTOs will be placed in the *.DTOs namespace and will include properties that mirror those of the original model classes.</p>
 
-                <pre><code class="language-csharp">using Microsoft.CodeAnalysis;
+                        <pre><code class="language-csharp">using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
@@ -246,149 +320,326 @@ public class DtoGenerator : ISourceGenerator
     }
 }</code></pre>
 
-                <p>This is 100% C# code and requires no other syntax compared to the T4 example. In other words, any C# developer can hop right in and start using Source Generators.</p>
+                        <p>This is 100% C# code and requires no other syntax compared to the T4 example. In other words, any C# developer can hop right in and start using Source Generators.</p>
 
-                <h3>Applications and Advantages</h3>
+                        <h3>Applications and Advantages</h3>
 
-                <p>Source generators are particularly powerful in scenarios such as:</p>
+                        <p>Source generators are particularly powerful in scenarios such as:</p>
 
-                <ul>
-                    <li><strong>Automating Boilerplate Code Generation</strong>: Similar to T4, but integrated into the compile-time, improving build performance and developer workflow.</li>
-                    <li><strong>Performance Optimizations</strong>: Generating code that is tailored for performance-critical sections, such as serialization and deserialization routines.</li>
-                    <li><strong>Meta-programming</strong>: Allowing for advanced scenarios where code can be generated based on attributes, external files, or other sources of metadata.</li>
-                </ul>
+                        <ul>
+                            <li><strong>Automating Boilerplate Code Generation</strong>: Similar to T4, but integrated into the compile-time, improving build performance and developer workflow.</li>
+                            <li><strong>Performance Optimizations</strong>: Generating code that is tailored for performance-critical sections, such as serialization and deserialization routines.</li>
+                            <li><strong>Meta-programming</strong>: Allowing for advanced scenarios where code can be generated based on attributes, external files, or other sources of metadata.</li>
+                        </ul>
 
-                <p>The advantages of source generators include:</p>
+                        <p>The advantages of source generators include:</p>
 
-                <ul>
-                    <li><strong>Compile-Time Integration</strong>: Since source generators are part of the compilation process, they can produce code that is immediately available to other parts of the application without additional steps.</li>
-                    <li><strong>Performance</strong>: They do not significantly impact the overall build time and, in some cases, can reduce runtime overhead by generating optimized code.</li>
-                    <li><strong>Debugging and Tooling Support</strong>: Being a newer technology, source generators benefit from the latest IDE features, including debugging support, making them easier to work with compared to T4 templates.</li>
-                </ul>
+                        <ul>
+                            <li><strong>Compile-Time Integration</strong>: Since source generators are part of the compilation process, they can produce code that is immediately available to other parts of the application without additional steps.</li>
+                            <li><strong>Performance</strong>: They do not significantly impact the overall build time and, in some cases, can reduce runtime overhead by generating optimized code.</li>
+                            <li><strong>Debugging and Tooling Support</strong>: Being a newer technology, source generators benefit from the latest IDE features, including debugging support, making them easier to work with compared to T4 templates.</li>
+                        </ul>
 
-                <h3>Considerations and Best Practices</h3>
+                        <h3>Considerations and Best Practices</h3>
 
-                <p>While source generators offer a powerful addition to the .NET developer's arsenal, they come with their own considerations:</p>
+                        <p>While source generators offer a powerful addition to the .NET developer's arsenal, they come with their own considerations:</p>
 
-                <ul>
-                    <li><strong>Complexity for Advanced Scenarios</strong>: Writing source generators that handle complex scenarios can be challenging and requires a good understanding of Roslyn APIs.</li>
-                    <li><strong>Incremental Generation</strong>: To optimize performance, developers should aim to make their generators incremental, only re-generating code when necessary.</li>
-                </ul>
+                        <ul>
+                            <li><strong>Complexity for Advanced Scenarios</strong>: Writing source generators that handle complex scenarios can be challenging and requires a good understanding of Roslyn APIs.</li>
+                            <li><strong>Incremental Generation</strong>: To optimize performance, developers should aim to make their generators incremental, only re-generating code when necessary.</li>
+                        </ul>
 
-                <h3>The Future of Code Generation with Source Generators</h3>
+                        <h3>The Future of Code Generation with Source Generators</h3>
 
-                <p>As source generators continue to mature, they promise to redefine the landscape of code generation in .NET. By offering a tightly integrated, performant, and versatile solution, they may indeed pose a significant shift away from traditional methods like T4 templates, catering to modern development practices and performance needs.</p>
+                        <p>As source generators continue to mature, they promise to redefine the landscape of code generation in .NET. By offering a tightly integrated, performant, and versatile solution, they may indeed pose a significant shift away from traditional methods like T4 templates, catering to modern development practices and performance needs.</p>
+                    </section>
 
-                <h2>Choosing between T4 and Source Generators</h2>
+                    <section id="comparison">
+                        <h2>Choosing between T4 and Source Generators</h2>
 
-                <p>The decision to use T4 templates or source generators does not have to be binary. Each tool serves its purpose and excels under different circumstances:</p>
+                        <p>The decision to use T4 templates or source generators does not have to be binary. Each tool serves its purpose and excels under different circumstances:</p>
 
-                <ul>
-                    <li><strong>T4 Templates</strong> may still be the tool of choice for projects that require generating non-C# files or that heavily rely on the specific templating capabilities and customizations that T4 provides. They are also beneficial in scenarios where developers are already familiar with T4 and the project's existing infrastructure is built around it.</li>
-                    <li><strong>Source Generators</strong> are particularly well-suited for projects that benefit from performance optimizations at compile time, require generation of C# code based on the project's codebase itself, and aim to leverage the latest .NET features with minimal impact on the build process.</li>
-                </ul>
+                        <ul>
+                            <li><strong>T4 Templates</strong> may still be the tool of choice for projects that require generating non-C# files or that heavily rely on the specific templating capabilities and customizations that T4 provides. They are also beneficial in scenarios where developers are already familiar with T4 and the project's existing infrastructure is built around it.</li>
+                            <li><strong>Source Generators</strong> are particularly well-suited for projects that benefit from performance optimizations at compile time, require generation of C# code based on the project's codebase itself, and aim to leverage the latest .NET features with minimal impact on the build process.</li>
+                        </ul>
 
-                <p>Ultimately, the choice depends on the specific needs of the project, the team's familiarity with the technologies, and the desired outcomes in terms of development efficiency and application performance.</p>
+                        <p>Ultimately, the choice depends on the specific needs of the project, the team's familiarity with the technologies, and the desired outcomes in terms of development efficiency and application performance.</p>
+                    </section>
 
-                <h2>Looking Ahead</h2>
+                    <section id="looking-ahead">
+                        <h2>Looking Ahead</h2>
 
-                <p>As the .NET ecosystem continues to evolve, so too will the tools and methodologies for code generation. You should stay informed about the latest updates from Microsoft and the broader .NET community, as enhancements to both T4 templates and source generators are likely to expand their capabilities and use cases.</p>
+                        <p>As the .NET ecosystem continues to evolve, so too will the tools and methodologies for code generation. You should stay informed about the latest updates from Microsoft and the broader .NET community, as enhancements to both T4 templates and source generators are likely to expand their capabilities and use cases.</p>
+                    </section>
 
-                <h2>Additional resources</h2>
+                    <section id="resources">
+                        <h2>Additional resources</h2>
 
-                <p><strong>Documentation:</strong></p>
-                <ul>
-                    <li><a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates?view=vs-2022" target="_blank">Official T4 Documentation</a></li>
-                    <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview" target="_blank">Official Source Generators Documentation</a></li>
-                </ul>
+                        <p><strong>Documentation:</strong></p>
+                        <ul>
+                            <li><a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates?view=vs-2022" target="_blank">Official T4 Documentation</a></li>
+                            <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview" target="_blank">Official Source Generators Documentation</a></li>
+                        </ul>
 
-                <p><strong>T4 Tools:</strong></p>
-                <ul>
-                    <li><a href="https://github.com/Tim-Maes/T4Editor" target="_blank">T4Editor</a> by me, <a href="https://github.com/bricelam/T4Language" target="_blank">T4Language</a> by Brice Lambson</li>
-                    <li><a href="https://github.com/Tim-Maes/T4Executer" target="_blank">T4Executer</a> by me</li>
-                    <li><a href="https://github.com/olegsych/T4Toolbox" target="_blank">T4Toolbox</a> by Oleg Sych</li>
-                </ul>
+                        <p><strong>T4 Tools:</strong></p>
+                        <ul>
+                            <li><a href="https://github.com/Tim-Maes/T4Editor" target="_blank">T4Editor</a> by me, <a href="https://github.com/bricelam/T4Language" target="_blank">T4Language</a> by Brice Lambson</li>
+                            <li><a href="https://github.com/Tim-Maes/T4Executer" target="_blank">T4Executer</a> by me</li>
+                            <li><a href="https://github.com/olegsych/T4Toolbox" target="_blank">T4Toolbox</a> by Oleg Sych</li>
+                        </ul>
 
-                <p><strong>Also check out:</strong></p>
-                <ul>
-                    <li><a href="https://somecallmechief.medium.com/code-generation-fail-an-all-the-kings-horses-tragedy-36dcd412ad05" target="_blank">Code Generation Fail: An all the king's horses tragedy</a></li>
-                    <li><a href="https://medium.com/@david.zhao.blog/t4-text-template-editors-comparison-d58487db4ad3" target="_blank">T4 Editors</a> by David Zhao</li>
-                    <li><a href="https://reynders.co/blog/unleashing-the-power-of-source-generators-in-net/" target="_blank">Unleashing the power of Source Generators</a></li>
-                </ul>
-
-                <!-- Comments Section -->
-                <section class="comments-section">
-                    <h2>Comments</h2>
-                    <div class="comments-container">
-                        <script src="https://utteranc.es/client.js"
-                                repo="Tim-Maes/Tim-Maes.github.io"
-                                issue-term="pathname"
-                                theme="github-light"
-                                crossorigin="anonymous"
-                                async>
-                        </script>
-                    </div>
-                </section>
+                        <p><strong>Also check out:</strong></p>
+                        <ul>
+                            <li><a href="https://somecallmechief.medium.com/code-generation-fail-an-all-the-kings-horses-tragedy-36dcd412ad05" target="_blank">Code Generation Fail: An all the king's horses tragedy</a></li>
+                            <li><a href="https://medium.com/@david.zhao.blog/t4-text-template-editors-comparison-d58487db4ad3" target="_blank">T4 Editors</a> by David Zhao</li>
+                            <li><a href="https://reynders.co/blog/unleashing-the-power-of-source-generators-in-net/" target="_blank">Unleashing the power of Source Generators</a></li>
+                        </ul>
+                    </section>
+                </div>
             </div>
+
+            <!-- Article Footer -->
+            <div class="article-footer">
+                <div class="article-sharing">
+                    <h3>Share this article</h3>
+                    <div class="sharing-buttons">
+                        <a href="https://twitter.com/intent/tweet?text=Source Generators: The end of T4 templates?&url=https://tim-maes.github.io/source-generators-vs-t4.html&via=Tim_Maes_" class="share-btn twitter" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                            Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://tim-maes.github.io/source-generators-vs-t4.html" class="share-btn linkedin" target="_blank">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <button class="share-btn copy" onclick="copyToClipboard()">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <section class="comments-section">
+                <h2>Comments</h2>
+                <div class="comments-container">
+                    <script src="https://utteranc.es/client.js"
+                            repo="Tim-Maes/Tim-Maes.github.io"
+                            issue-term="pathname"
+                            theme="github-dark"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>
+            </section>
         </div>
     </article>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Stay Updated</h3>
+                <p>Get notified when I publish new articles about .NET development, security, and modern software engineering practices.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button class="newsletter-btn">Subscribe</button>
+                </div>
+                <p class="newsletter-note">No spam, unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="logo">
-                        <div class="shield-icon"></div>
-                        <span>Tim Maes</span>
-                    </div>
-                    <p>Building secure and innovative solutions</p>
+                    <span class="brand-text">Tim<span class="accent">Maes</span></span>
+                    <p>Building secure and innovative solutions for the .NET ecosystem</p>
                 </div>
+                
                 <div class="footer-links">
                     <div class="footer-section">
                         <h4>Navigation</h4>
                         <a href="index.html">Home</a>
-                        <a href="blog.html">Blog</a>
-                        <a href="projects.html">Projects</a>
                         <a href="index.html#about">About</a>
-                        <a href="resume.html">Resume</a>
+                        <a href="projects.html">Projects</a>
+                        <a href="blog.html">Blog</a>
                     </div>
+                    
+                    <div class="footer-section">
+                        <h4>Popular Posts</h4>
+                        <a href="blazorframe-enhanced-iframes.html">BlazorFrame</a>
+                        <a href="facets-in-dotnet.html">Facets in .NET</a>
+                        <a href="source-generators-vs-t4.html">Source Generators vs T4</a>
+                        <a href="autowiring-using-bindicate.html">Autowiring with Bindicate</a>
+                    </div>
+                    
                     <div class="footer-section">
                         <h4>Connect</h4>
                         <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
                         <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
                         <a href="mailto:hello@timmaes.dev">Email</a>
+                        <a href="resume.html">Resume</a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 Tim Maes. All rights reserved.</p>
+                <p>&copy; 2025 Tim Maes. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span>Made with 💡 in Belgium</span>
+                    <span>•</span>
+                    <span>Open Source Enthusiast</span>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="script.js"></script>
+
+    <!-- Additional styles for blog post -->
+    <style>
+        .article-header {
+            padding: calc(var(--space-4xl) + 80px) 0 var(--space-4xl);
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .article-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 85%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .article-breadcrumb { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); font-size: 0.875rem; color: var(--text-muted); }
+        .article-breadcrumb a { color: var(--accent-primary); text-decoration: none; transition: color var(--transition-fast); }
+        .article-breadcrumb a:hover { color: var(--text-primary); }
+        .article-meta { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); font-size: 0.875rem; color: var(--text-muted); }
+        .article-category { background: var(--accent-primary); color: var(--bg-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .article-title { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: var(--space-lg); background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .article-subtitle { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-xl); }
+        .article-tags { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl); }
+        .article-tags span { background: rgba(124, 58, 237, 0.2); color: var(--accent-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 500; }
+        .article-author { display: flex; align-items: center; gap: var(--space-md); }
+        .author-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-primary); }
+        .author-name { display: block; color: var(--text-primary); font-weight: 600; }
+        .author-title { display: block; color: var(--text-muted); font-size: 0.875rem; }
+
+        .article-content { padding: var(--space-4xl) 0; background: var(--bg-secondary); }
+        .article-layout { display: grid; grid-template-columns: 250px 1fr; gap: var(--space-4xl); align-items: start; }
+        .article-toc { position: sticky; top: calc(80px + var(--space-lg)); background: var(--bg-primary); border-radius: var(--radius-lg); padding: var(--space-lg); border: 1px solid rgba(100, 255, 218, 0.1); }
+        .article-toc h3 { color: var(--text-primary); font-weight: 600; margin-bottom: var(--space-md); font-size: 1rem; }
+        .toc-nav ul { list-style: none; padding: 0; }
+        .toc-nav li { margin-bottom: var(--space-sm); }
+        .toc-nav a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color var(--transition-fast); line-height: 1.4; }
+        .toc-nav a:hover { color: var(--accent-primary); }
+
+        .article-body { background: var(--bg-primary); border-radius: var(--radius-xl); padding: var(--space-4xl); border: 1px solid rgba(100, 255, 218, 0.1); }
+        .article-body h2 { font-size: 1.875rem; font-weight: 700; color: var(--text-primary); margin: var(--space-4xl) 0 var(--space-lg); position: relative; padding-bottom: var(--space-sm); border-bottom: 2px solid rgba(100, 255, 218, 0.2); }
+        .article-body h2:first-child { margin-top: 0; }
+        .article-body h3 { font-size: 1.375rem; font-weight: 600; color: var(--text-primary); margin: var(--space-2xl) 0 var(--space-md); }
+        .article-body h4 { font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin: var(--space-xl) 0 var(--space-sm); }
+        .article-body p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); font-size: 1.125rem; }
+        .article-body ul, .article-body ol { margin-bottom: var(--space-lg); padding-left: var(--space-xl); color: var(--text-secondary); }
+        .article-body li { margin-bottom: var(--space-sm); line-height: 1.7; font-size: 1.125rem; }
+        .article-body a { color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--transition-fast); }
+        .article-body a:hover { border-bottom-color: var(--accent-primary); }
+        .article-body blockquote { background: rgba(100, 255, 218, 0.05); border-left: 4px solid var(--accent-primary); padding: var(--space-lg); margin: var(--space-xl) 0; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-style: italic; }
+        .article-body blockquote p { color: var(--text-primary); margin-bottom: 0; }
+        .article-body pre { background: #1a1a1a; border-radius: var(--radius-lg); padding: var(--space-xl); margin: var(--space-xl) 0; overflow-x: auto; border: 1px solid rgba(100, 255, 218, 0.1); }
+        .article-body code { font-family: var(--font-mono); font-size: 0.9em; }
+        .article-body :not(pre) > code { background: rgba(100, 255, 218, 0.1); color: var(--accent-primary); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); }
+
+        .article-footer { margin-top: var(--space-4xl); padding-top: var(--space-2xl); border-top: 2px solid rgba(100, 255, 218, 0.2); }
+        .article-sharing { margin-bottom: var(--space-2xl); }
+        .article-sharing h3 { color: var(--text-primary); font-weight: 600; margin-bottom: var(--space-md); }
+        .sharing-buttons { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-lg); text-decoration: none; font-weight: 500; border: none; cursor: pointer; transition: all var(--transition-fast); font-family: inherit; font-size: 0.875rem; }
+        .share-btn.twitter { background: #1DA1F2; color: white; }
+        .share-btn.linkedin { background: #0A66C2; color: white; }
+        .share-btn.copy { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid rgba(100, 255, 218, 0.2); }
+        .share-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .comments-section { margin-top: var(--space-4xl); padding-top: var(--space-2xl); border-top: 2px solid rgba(100, 255, 218, 0.2); }
+        .comments-section h2 { color: var(--text-primary); font-weight: 700; margin-bottom: var(--space-xl); text-align: center; }
+
+        .newsletter-section { padding: var(--space-4xl) 0; background: var(--bg-primary); }
+        .newsletter-content { text-align: center; max-width: 600px; margin: 0 auto; }
+        .newsletter-content h3 { font-size: 2rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--text-primary); }
+        .newsletter-content p { font-size: 1.125rem; color: var(--text-secondary); margin-bottom: var(--space-xl); }
+        .newsletter-form { display: flex; gap: var(--space-md); margin-bottom: var(--space-md); }
+        .newsletter-input { flex: 1; padding: var(--space-md) var(--space-lg); background: var(--bg-secondary); border: 1px solid rgba(100, 255, 218, 0.2); border-radius: var(--radius-lg); color: var(--text-primary); font-size: 1rem; }
+        .newsletter-input::placeholder { color: var(--text-muted); }
+        .newsletter-input:focus { outline: none; border-color: var(--accent-primary); }
+        .newsletter-btn { background: var(--accent-gradient); color: var(--bg-primary); border: none; padding: var(--space-md) var(--space-xl); border-radius: var(--radius-lg); font-weight: 600; cursor: pointer; transition: all var(--transition-fast); }
+        .newsletter-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-accent); }
+        .newsletter-note { font-size: 0.875rem; color: var(--text-muted); }
+
+        @media (max-width: 1024px) {
+            .article-layout { grid-template-columns: 1fr; gap: var(--space-2xl); }
+            .article-toc { position: static; order: -1; }
+        }
+
+        @media (max-width: 768px) {
+            .article-body { padding: var(--space-xl); }
+            .article-meta { flex-direction: column; gap: var(--space-sm); }
+            .sharing-buttons { flex-direction: column; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+
     <script>
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        // Copy to clipboard functionality
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                const btn = document.querySelector('.share-btn.copy');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>Copied!';
+                setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+            });
+        }
 
         // Initialize syntax highlighting
         hljs.highlightAll();
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
