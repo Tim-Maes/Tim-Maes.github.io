@@ -411,7 +411,7 @@ public partial class RepositoryDto&lt;T&gt; where T : class
                         <p>Though we currently infer type from source, Facet supports four distinct output types, each optimized for different use cases:</p>
 
                         <h4>4.3.1 Class Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(User), Kind = FacetKind.Class)]
+                        <pre><code class="language-csharp">[Facet(typeof(User)]
 public partial class UserDto
 {
     // Traditional mutable reference type
@@ -419,7 +419,7 @@ public partial class UserDto
 }</code></pre>
 
                         <h4>4.3.2 Record Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(User), Kind = FacetKind.Record)]
+                        <pre><code class="language-csharp">[Facet(typeof(User)]
 public partial record UserRecord
 {
     // Immutable reference type with value semantics
@@ -427,7 +427,7 @@ public partial record UserRecord
 }</code></pre>
 
                         <h4>4.3.3 Struct Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(Point), Kind = FacetKind.Struct)]
+                        <pre><code class="language-csharp">[Facet(typeof(Point)]
 public partial struct PointDto
 {
     // Stack-allocated value type
@@ -435,7 +435,7 @@ public partial struct PointDto
 }</code></pre>
 
                         <h4>4.3.4 Record Struct Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(Coordinate), Kind = FacetKind.RecordStruct)]
+                        <pre><code class="language-csharp">[Facet(typeof(Coordinate)]
 public partial record struct CoordinateDto
 {
     // Immutable value type with value semantics
