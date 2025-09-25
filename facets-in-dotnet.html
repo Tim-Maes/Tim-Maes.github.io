@@ -2595,7 +2595,7 @@ public partial class UserDto
         @media (max-width: 1024px) {
             .article-layout {
                 grid-template-columns: 1fr;
-                gap: var(--space-2xl);
+                gap: var(--space-xl);
                 max-width: 100%;
                 padding: 0 var(--space-md);
             }
@@ -2611,16 +2611,78 @@ public partial class UserDto
         }
 
         @media (max-width: 768px) {
-            .article-body {
-                padding: var(--space-xl);
+            .article-header-content {
+                padding: 0 var(--space-md);
+            }
+
+            .article-content {
+                padding: var(--space-2xl) 0;
             }
 
             .article-layout {
-                padding: 0 var(--space-sm);
+                padding: 0 var(--space-xs);
+                gap: var(--space-lg);
+            }
+
+            .article-body {
+                padding: var(--space-lg);
+                margin: 0;
+                border-radius: var(--radius-md);
+            }
+
+            .article-body h2 {
+                margin: var(--space-2xl) 0 var(--space-md);
+                font-size: 1.5rem;
+            }
+
+            .article-body h3 {
+                margin: var(--space-xl) 0 var(--space-sm);
+                font-size: 1.25rem;
+            }
+
+            .article-body h4 {
+                margin: var(--space-lg) 0 var(--space-xs);
+                font-size: 1.1rem;
+            }
+
+            .article-body p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: var(--space-md);
+            }
+
+            .article-body ul,
+            .article-body ol {
+                padding-left: var(--space-lg);
+                margin-bottom: var(--space-md);
+            }
+
+            .article-body li {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: var(--space-xs);
+            }
+
+            .article-body pre {
+                padding: var(--space-md);
+                margin: var(--space-md) 0;
+                border-radius: var(--radius-md);
+                font-size: 0.85rem;
+                overflow-x: auto;
+            }
+
+            .article-body code {
+                font-size: 0.8em;
+                word-break: break-word;
+            }
+
+            .article-body blockquote {
+                padding: var(--space-md);
+                margin: var(--space-md) 0;
             }
 
             .container {
-                padding: 0 var(--space-sm);
+                padding: 0 var(--space-xs);
             }
 
             .article-meta {
@@ -2655,12 +2717,87 @@ public partial class UserDto
             }
 
             .comparison-table, .maintenance-table, .performance-table {
-                font-size: 0.875rem;
+                font-size: 0.75rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                border: 1px solid rgba(100, 255, 218, 0.1);
+                border-radius: var(--radius-md);
             }
 
             .comparison-table th, .maintenance-table th, .performance-table th,
             .comparison-table td, .maintenance-table td, .performance-table td {
+                padding: var(--space-xs);
+                min-width: 100px;
+            }
+
+            /* Better mobile table scrolling */
+            .comparison-table, .maintenance-table, .performance-table {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Improve code readability on mobile */
+            .article-body pre code {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+
+            /* Reduce spacing for nested lists */
+            .article-body ul ul,
+            .article-body ol ol {
+                margin-bottom: var(--space-xs);
+                padding-left: var(--space-md);
+            }
+
+            /* Make inline code more readable */
+            .article-body :not(pre) > code {
+                padding: 2px 4px;
+                font-size: 0.8em;
+                word-break: break-word;
+            }
+        }
+
+        /* Even smaller screens */
+        @media (max-width: 480px) {
+            .article-body {
+                padding: var(--space-md);
+            }
+
+            .article-body h2 {
+                font-size: 1.375rem;
+                margin: var(--space-xl) 0 var(--space-md);
+            }
+
+            .article-body h3 {
+                font-size: 1.125rem;
+                margin: var(--space-lg) 0 var(--space-sm);
+            }
+
+            .article-body pre {
                 padding: var(--space-sm);
+                font-size: 0.8rem;
+            }
+
+            .article-body pre code {
+                font-size: 0.7rem;
+            }
+
+            .comparison-table, .maintenance-table, .performance-table {
+                font-size: 0.7rem;
+            }
+
+            .comparison-table th, .maintenance-table th, .performance-table th,
+            .comparison-table td, .maintenance-table td, .performance-table td {
+                padding: 4px;
+                min-width: 80px;
+            }
+
+            .container {
+                padding: 0 8px;
+            }
+
+            .article-layout {
+                padding: 0 4px;
             }
         }
     </style>
