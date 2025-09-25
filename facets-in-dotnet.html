@@ -124,6 +124,7 @@
                     <span>Facets in .NET</span>
                 </div>
 
+
                 <div class="article-meta">
                     <span class="article-date">April 28, 2025</span>
                     <span class="article-category">Code Generation</span>
@@ -184,9 +185,16 @@
                 <!-- Main Article Body -->
                 <div class="article-body">
                     <section id="abstract">
+                        <!-- Disclaimer Notice -->
+                        <div class="article-disclaimer">
+                            <div class="disclaimer-icon">⚠️</div>
+                            <div class="disclaimer-content">
+                                <strong>Disclaimer:</strong> Facet is a fairly new library, and some things referenced in this article may be inaccurate because Facet might have had updates or changes since this was written. Please refer to the official documentation for the most current information.
+                            </div>
+                        </div>
                         <h2>Facets in .NET</h2>
                         <blockquote>
-                            "One part of an object, situation, or subject that has many parts."
+                            Facet - "One part of an object, situation, or subject that has many parts."
                         </blockquote>
 
                         <p>This blogpost presents a comprehensive analysis of Facet, a C# source generator designed to address the proliferation of boilerplate code in modern .NET applications through compile-time projection generation. I address the theoretical foundations of facetting as a software engineering concept, analyze the implementation architecture, and provide detailed performance benchmarks comparing various mapping strategies. This article demonstrates significant reductions in code maintenance overhead while maintaining zero runtime performance costs through compile-time code generation.</p>
@@ -2015,6 +2023,44 @@ public partial class UserDto
             padding: 0 var(--space-lg);
         }
 
+        .article-disclaimer {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 152, 0, 0.15));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .disclaimer-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .disclaimer-content {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .disclaimer-content strong {
+            color: #ff9800;
+            font-weight: 600;
+        }
+
+        /* Special styling for sections containing disclaimers */
+        .article-body section:first-child {
+            padding-top: 0;
+        }
+
+        .article-body section:first-child h2:first-of-type {
+            margin-top: var(--space-lg);
+        }
+
         .article-breadcrumb {
             display: flex;
             align-items: center;
@@ -2279,7 +2325,7 @@ public partial class UserDto
 
         .code-callout h4 {
             color: var(--text-primary);
-            margin: 0 0 var(--space-sm);
+            margin-bottom: var(--space-md);
         }
 
         .code-callout p {
@@ -2580,6 +2626,16 @@ public partial class UserDto
             .article-meta {
                 flex-direction: column;
                 gap: var(--space-sm);
+            }
+
+            .article-disclaimer {
+                padding: var(--space-md);
+                margin-bottom: var(--space-md);
+                font-size: 0.875rem;
+            }
+
+            .disclaimer-icon {
+                font-size: 1.1rem;
             }
 
             .sharing-buttons {
