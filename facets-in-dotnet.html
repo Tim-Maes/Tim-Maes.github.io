@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facets in .NET: A Comprehensive Analysis - Tim Maes</title>
+    <title>Facetting in .NET - Tim Maes</title>
 
     <!-- Favicon Links -->
     <link rel="icon" type="image/x-icon" href="/assets/Tim.ico">
@@ -17,8 +17,8 @@
     <meta name="author" content="Tim Maes">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Facets in .NET: A Comprehensive Analysis">
-    <meta property="og:description" content="Deep technical analysis of Facet - compile-time code generation for lightweight projections with performance benchmarks, implementation details, and advanced scenarios">
+    <meta property="og:title" content="Facetting in .NET">
+    <meta property="og:description" content="Facetting in .NET">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://tim-maes.github.io/facets-in-dotnet.html">
     <meta property="og:site_name" content="Tim Maes - Developer Blog">
@@ -41,8 +41,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Tim_Maes_">
     <meta name="twitter:creator" content="@Tim_Maes_">
-    <meta name="twitter:title" content="Facets in .NET">
-    <meta name="twitter:description" content="Deep technical analysis of Facet - compile-time code generation for lightweight projections with performance benchmarks, implementation details, and advanced scenarios">
+    <meta name="twitter:title" content="Facetting in .NET">
+    <meta name="twitter:description" content="Facetting in .NET">
     <meta name="twitter:image" content="https://github.com/Tim-Maes/Facet/raw/main/assets/facet-logo.png">
 
     <!-- Additional Meta Tags -->
@@ -124,13 +124,14 @@
                     <span>Facets in .NET</span>
                 </div>
 
+
                 <div class="article-meta">
                     <span class="article-date">April 28, 2025</span>
                     <span class="article-category">Code Generation</span>
                     <span class="article-read-time">25 min read</span>
                 </div>
 
-                <h1 class="article-title">Facets in .NET</h1>
+                <h1 class="article-title">Facetting in .NET</h1>
                 <p class="article-subtitle">
                     An in-depth technical exploration of compile-time model and projection generation, performance optimization strategies, and advanced mapping architectures in modern .NET applications.
                 </p>
@@ -184,9 +185,16 @@
                 <!-- Main Article Body -->
                 <div class="article-body">
                     <section id="abstract">
+                        <!-- Disclaimer Notice -->
+                        <div class="article-disclaimer">
+                            <div class="disclaimer-icon">⚠️</div>
+                            <div class="disclaimer-content">
+                                <strong>Disclaimer:</strong> Facet is a fairly new library, and some things referenced in this article may be inaccurate because Facet might have had updates or changes since this was written. Please refer to the official documentation for the most current information.
+                            </div>
+                        </div>
                         <h2>Facets in .NET</h2>
                         <blockquote>
-                            "One part of an object, situation, or subject that has many parts."
+                            Facet - "One part of an object, situation, or subject that has many parts."
                         </blockquote>
 
                         <p>This blogpost presents a comprehensive analysis of Facet, a C# source generator designed to address the proliferation of boilerplate code in modern .NET applications through compile-time projection generation. I address the theoretical foundations of facetting as a software engineering concept, analyze the implementation architecture, and provide detailed performance benchmarks comparing various mapping strategies. This article demonstrates significant reductions in code maintenance overhead while maintaining zero runtime performance costs through compile-time code generation.</p>
@@ -2015,6 +2023,44 @@ public partial class UserDto
             padding: 0 var(--space-lg);
         }
 
+        .article-disclaimer {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 152, 0, 0.15));
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .disclaimer-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .disclaimer-content {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .disclaimer-content strong {
+            color: #ff9800;
+            font-weight: 600;
+        }
+
+        /* Special styling for sections containing disclaimers */
+        .article-body section:first-child {
+            padding-top: 0;
+        }
+
+        .article-body section:first-child h2:first-of-type {
+            margin-top: var(--space-lg);
+        }
+
         .article-breadcrumb {
             display: flex;
             align-items: center;
@@ -2279,7 +2325,7 @@ public partial class UserDto
 
         .code-callout h4 {
             color: var(--text-primary);
-            margin: 0 0 var(--space-sm);
+            margin-bottom: var(--space-md);
         }
 
         .code-callout p {
@@ -2549,7 +2595,7 @@ public partial class UserDto
         @media (max-width: 1024px) {
             .article-layout {
                 grid-template-columns: 1fr;
-                gap: var(--space-2xl);
+                gap: var(--space-xl);
                 max-width: 100%;
                 padding: 0 var(--space-md);
             }
@@ -2565,21 +2611,93 @@ public partial class UserDto
         }
 
         @media (max-width: 768px) {
-            .article-body {
-                padding: var(--space-xl);
+            .article-header-content {
+                padding: 0 var(--space-md);
+            }
+
+            .article-content {
+                padding: var(--space-2xl) 0;
             }
 
             .article-layout {
-                padding: 0 var(--space-sm);
+                padding: 0 var(--space-xs);
+                gap: var(--space-lg);
+            }
+
+            .article-body {
+                padding: var(--space-lg);
+                margin: 0;
+                border-radius: var(--radius-md);
+            }
+
+            .article-body h2 {
+                margin: var(--space-2xl) 0 var(--space-md);
+                font-size: 1.5rem;
+            }
+
+            .article-body h3 {
+                margin: var(--space-xl) 0 var(--space-sm);
+                font-size: 1.25rem;
+            }
+
+            .article-body h4 {
+                margin: var(--space-lg) 0 var(--space-xs);
+                font-size: 1.1rem;
+            }
+
+            .article-body p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: var(--space-md);
+            }
+
+            .article-body ul,
+            .article-body ol {
+                padding-left: var(--space-lg);
+                margin-bottom: var(--space-md);
+            }
+
+            .article-body li {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: var(--space-xs);
+            }
+
+            .article-body pre {
+                padding: var(--space-md);
+                margin: var(--space-md) 0;
+                border-radius: var(--radius-md);
+                font-size: 0.85rem;
+                overflow-x: auto;
+            }
+
+            .article-body code {
+                font-size: 0.8em;
+                word-break: break-word;
+            }
+
+            .article-body blockquote {
+                padding: var(--space-md);
+                margin: var(--space-md) 0;
             }
 
             .container {
-                padding: 0 var(--space-sm);
+                padding: 0 var(--space-xs);
             }
 
             .article-meta {
                 flex-direction: column;
                 gap: var(--space-sm);
+            }
+
+            .article-disclaimer {
+                padding: var(--space-md);
+                margin-bottom: var(--space-md);
+                font-size: 0.875rem;
+            }
+
+            .disclaimer-icon {
+                font-size: 1.1rem;
             }
 
             .sharing-buttons {
@@ -2599,12 +2717,87 @@ public partial class UserDto
             }
 
             .comparison-table, .maintenance-table, .performance-table {
-                font-size: 0.875rem;
+                font-size: 0.75rem;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                border: 1px solid rgba(100, 255, 218, 0.1);
+                border-radius: var(--radius-md);
             }
 
             .comparison-table th, .maintenance-table th, .performance-table th,
             .comparison-table td, .maintenance-table td, .performance-table td {
+                padding: var(--space-xs);
+                min-width: 100px;
+            }
+
+            /* Better mobile table scrolling */
+            .comparison-table, .maintenance-table, .performance-table {
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Improve code readability on mobile */
+            .article-body pre code {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+
+            /* Reduce spacing for nested lists */
+            .article-body ul ul,
+            .article-body ol ol {
+                margin-bottom: var(--space-xs);
+                padding-left: var(--space-md);
+            }
+
+            /* Make inline code more readable */
+            .article-body :not(pre) > code {
+                padding: 2px 4px;
+                font-size: 0.8em;
+                word-break: break-word;
+            }
+        }
+
+        /* Even smaller screens */
+        @media (max-width: 480px) {
+            .article-body {
+                padding: var(--space-md);
+            }
+
+            .article-body h2 {
+                font-size: 1.375rem;
+                margin: var(--space-xl) 0 var(--space-md);
+            }
+
+            .article-body h3 {
+                font-size: 1.125rem;
+                margin: var(--space-lg) 0 var(--space-sm);
+            }
+
+            .article-body pre {
                 padding: var(--space-sm);
+                font-size: 0.8rem;
+            }
+
+            .article-body pre code {
+                font-size: 0.7rem;
+            }
+
+            .comparison-table, .maintenance-table, .performance-table {
+                font-size: 0.7rem;
+            }
+
+            .comparison-table th, .maintenance-table th, .performance-table th,
+            .comparison-table td, .maintenance-table td, .performance-table td {
+                padding: 4px;
+                min-width: 80px;
+            }
+
+            .container {
+                padding: 0 8px;
+            }
+
+            .article-layout {
+                padding: 0 4px;
             }
         }
     </style>
