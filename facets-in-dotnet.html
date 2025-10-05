@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,42 +13,9 @@
     <meta name="theme-color" content="#0a0e27">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="A comprehensive technical analysis of Facet - compile-time code generation for lightweight projections in .NET. Deep dive into source generators, performance optimization, and advanced mapping strategies.">
-    <meta name="keywords" content=".NET, C#, source generators, code generation, DTOs, mapping, Facet, projections, async mapping, dependency injection, EF Core, performance, Tim Maes">
+    <meta name="description" content="A comprehensive technical analysis of Facet - compile-time code generation for lightweight projections in .NET.">
+    <meta name="keywords" content=".NET, C#, source generators, code generation, DTOs, mapping, Facet, projections, Tim Maes">
     <meta name="author" content="Tim Maes">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Facetting in .NET">
-    <meta property="og:description" content="Facetting in .NET">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://tim-maes.github.io/facets-in-dotnet.html">
-    <meta property="og:site_name" content="Tim Maes - Developer Blog">
-    <meta property="og:image" content="https://github.com/Tim-Maes/Facet/raw/main/assets/facet-logo.png">
-    <meta property="og:image:alt" content="Facet - Compile-time code generation for .NET projections">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:locale" content="en_US">
-
-    <!-- Article-specific Open Graph Tags -->
-    <meta property="article:author" content="Tim Maes">
-    <meta property="article:published_time" content="2025-04-28">
-    <meta property="article:section" content="Technology">
-    <meta property="article:tag" content=".NET">
-    <meta property="article:tag" content="C#">
-    <meta property="article:tag" content="Code Generation">
-    <meta property="article:tag" content="Source Generators">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@Tim_Maes_">
-    <meta name="twitter:creator" content="@Tim_Maes_">
-    <meta name="twitter:title" content="Facetting in .NET">
-    <meta name="twitter:description" content="Facetting in .NET">
-    <meta name="twitter:image" content="https://github.com/Tim-Maes/Facet/raw/main/assets/facet-logo.png">
-
-    <!-- Additional Meta Tags -->
-    <link rel="canonical" href="https://tim-maes.github.io/facets-in-dotnet.html">
-    <meta name="robots" content="index, follow">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,28 +28,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D2THTMRPCX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-D2THTMRPCX');
-    </script>
 </head>
 <body>
-    <!-- Loading Animation -->
-    <div class="loader-wrapper" id="loader">
-        <div class="loader">
-            <div class="loader-cube"></div>
-            <div class="loader-cube"></div>
-            <div class="loader-cube"></div>
-            <div class="loader-cube"></div>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -124,21 +72,19 @@
                     <span>Facets in .NET</span>
                 </div>
 
-
                 <div class="article-meta">
                     <span class="article-date">April 28, 2025</span>
                     <span class="article-category">Code Generation</span>
-                    <span class="article-read-time">25 min read</span>
+                    <span class="article-read-time">15 min read</span>
                 </div>
 
                 <h1 class="article-title">Facetting in .NET</h1>
                 <p class="article-subtitle">
-                    An in-depth technical exploration of compile-time model and projection generation, performance optimization strategies, and advanced mapping architectures in modern .NET applications.
+                    An in-depth technical exploration of compile-time model and projection generation in modern .NET applications.
                 </p>
 
                 <div class="article-tags">
                     <span>Source Generators</span>
-                    <span>Performance</span>
                     <span>Architecture</span>
                     <span>Mapping</span>
                     <span>DTOs</span>
@@ -171,13 +117,10 @@
                             <li><a href="#theoretical-foundation">3. Theoretical Foundation</a></li>
                             <li><a href="#implementation-architecture">4. Implementation Architecture</a></li>
                             <li><a href="#source-generator-internals">5. Source Generator Internals</a></li>
-                            <li><a href="#performance-analysis">6. Performance Analysis</a></li>
-                            <li><a href="#mapping-strategies">7. Mapping Strategies</a></li>
-                            <li><a href="#advanced-scenarios">8. Advanced Scenarios</a></li>
-                            <li><a href="#integration-patterns">9. Integration Patterns</a></li>
-                            <li><a href="#comparative-analysis">10. Comparative Analysis</a></li>
-                            <li><a href="#future-considerations">11. Future Considerations</a></li>
-                            <li><a href="#conclusion">12. Conclusion</a></li>
+                            <li><a href="#mapping-strategies">6. Mapping Strategies</a></li>
+                            <li><a href="#advanced-scenarios">7. Advanced Scenarios</a></li>
+                            <li><a href="#integration-patterns">8. Integration Patterns</a></li>
+                            <li><a href="#conclusion">9. Conclusion</a></li>
                         </ul>
                     </nav>
                 </aside>
@@ -197,15 +140,15 @@
                             Facet - "One part of an object, situation, or subject that has many parts."
                         </blockquote>
 
-                        <p>This blogpost presents a comprehensive analysis of Facet, a C# source generator designed to address the proliferation of boilerplate code in modern .NET applications through compile-time projection generation. I address the theoretical foundations of facetting as a software engineering concept, analyze the implementation architecture, and provide detailed performance benchmarks comparing various mapping strategies. This article demonstrates significant reductions in code maintenance overhead while maintaining zero runtime performance costs through compile-time code generation.</p>
+                        <p>This blogpost presents a comprehensive analysis of Facet, a C# source generator designed to address the proliferation of boilerplate code in modern .NET applications through compile-time projection generation. I address the theoretical foundations of facetting as a software engineering concept, analyze the implementation architecture, and demonstrate how to leverage this approach in real-world applications.</p>
 
-                        <p>The article covers advanced scenarios including asynchronous mapping with dependency injection, Entity Framework Core integration patterns, and expression tree transformation for LINQ compatibility. Performance analysis reveals 50-100ns execution times for single entity mapping with linear scaling characteristics for collection operations.</p>
+                        <p>The article covers advanced scenarios including asynchronous mapping with dependency injection, Entity Framework Core integration patterns, and expression tree transformation for LINQ compatibility.</p>
                     </section>
 
                     <section id="introduction">
                         <h2>1. Introduction</h2>
 
-                        <p>In contemporary .NET development, the Data Transfer Object (DTO) pattern has become ubiquitous for creating boundaries between application layers, API contracts, and external integrations. However, this pattern often leads to significant code duplication, maintenance overhead, and potential for mapping errors. Traditional solutions like AutoMapper or Mapster introduce runtime costs and configuration complexity that can impact both performance and maintainability.</p>
+                        <p>In contemporary .NET development, the Data Transfer Object (DTO) pattern has become ubiquitous for creating boundaries between application layers, API contracts, and external integrations. However, this pattern often leads to significant code duplication, maintenance overhead, and potential for mapping errors.</p>
 
                         <p>Facet addresses these challenges through compile-time code generation, implementing what we term "facetting" - the process of creating lightweight, focused projections of richer domain models. This approach eliminates boilerplate while maintaining strong typing, compile-time safety, and zero runtime overhead.</p>
 
@@ -217,18 +160,113 @@
                             </a>
                         </div>
 
-                        <h3>1.1 Objectives</h3>
+                        <h3>1.1 Quick Start: See It In Action</h3>
+                        <p>Before diving into the theory, let's see what Facet looks like in practice. Here are common scenarios you'll encounter:</p>
+
+                        <h4>Basic Projection - Exclude Mode</h4>
+                        <pre><code class="language-csharp">// Your domain model
+public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string PasswordHash { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
+
+// Exclude sensitive properties
+[Facet(typeof(User), exclude: nameof(User.PasswordHash))]
+public partial class UserDto { }
+
+// Usage
+var userDto = user.ToFacet&lt;User, UserDto&gt;();
+var users = dbContext.Users
+    .SelectFacet&lt;User, UserDto&gt;()
+    .ToListAsync();</code></pre>
+
+                        <h4>Focused Projection - Include Mode</h4>
+                        <pre><code class="language-csharp">// Only include specific properties for a contact card
+[Facet(typeof(User), Include = new[] { "FirstName", "LastName", "Email" })]
+public partial class UserContactDto { }
+
+// Only include name for a simple dropdown
+[Facet(typeof(User), Include = new[] { "Id", "FirstName", "LastName" })]
+public partial class UserNameDto { }
+
+// Usage
+var contactInfo = user.ToFacet&lt;User, UserContactDto&gt;();
+var dropdownItems = await dbContext.Users
+    .SelectFacet&lt;User, UserNameDto&gt;()
+    .ToListAsync();</code></pre>
+
+                        <h4>Bidirectional Mapping</h4>
+                        <pre><code class="language-csharp">// Create a DTO
+[Facet(typeof(User), Include = new[] { "FirstName", "LastName", "Email" })]
+public partial class UpdateUserDto { }
+
+// Map to DTO
+var dto = user.ToFacet&lt;User, UpdateUserDto&gt;();
+
+// Map back to entity (with smart defaults for missing properties)
+var updatedUser = dto.BackTo&lt;UpdateUserDto, User&gt;();
+
+// Or update existing entity efficiently
+user.UpdateFromFacet(dto, dbContext);</code></pre>
+
+                        <h4>Custom Computed Properties</h4>
+                        <pre><code class="language-csharp">// Define custom mapping logic
+public class UserMapper : IFacetMapConfiguration&lt;User, UserSummaryDto&gt;
+{
+    public static void Map(User source, UserSummaryDto target)
+    {
+        target.FullName = $"{source.FirstName} {source.LastName}";
+        target.MemberSince = $"Member since {source.CreatedAt:MMMM yyyy}";
+    }
+}
+
+// Apply the mapper
+[Facet(typeof(User), Configuration = typeof(UserMapper))]
+public partial class UserSummaryDto
+{
+    public string FullName { get; set; }
+    public string MemberSince { get; set; }
+}
+
+// Usage
+var summary = user.ToFacet&lt;User, UserSummaryDto&gt;();</code></pre>
+
+                        <h4>Auto-Generate CRUD DTOs</h4>
+                        <pre><code class="language-csharp">// Generate all standard CRUD DTOs at once
+[GenerateDtos(Types = DtoTypes.All)]
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
+
+// Auto-generates:
+// - CreateProductRequest (excludes Id, CreatedAt)
+// - UpdateProductRequest (includes Id, excludes CreatedAt)
+// - ProductResponse (includes everything)
+// - ProductQuery (all properties nullable for filtering)
+// - UpsertProductRequest (includes Id for create/update)</code></pre>
+
+                        <p>These examples demonstrate the core patterns you'll use daily with Facet. Now let's explore the theory and architecture behind these capabilities.</p>
+
+                        <h3>1.2 Objectives</h3>
                         <p>This post aims to:</p>
                         <ul>
                             <li>Establish the theoretical foundation of facetting as a software engineering practice</li>
                             <li>Analyze the implementation architecture of compile-time projection generation</li>
-                            <li>Benchmark performance characteristics across various mapping scenarios</li>
                             <li>Evaluate integration patterns with modern .NET frameworks</li>
-                            <li>Compare against existing solutions in the .NET ecosystem</li>
+                            <li>Demonstrate practical usage in real-world scenarios</li>
                         </ul>
 
-                        <h3>1.2 Scope and Limitations</h3>
-                        <p>This article focuses on .NET 9+ implementations with C# 12+ language features. Performance benchmarks are conducted on x64 platforms using RyuJIT compilation. While the concepts are broadly applicable, specific implementation details are tailored to the Microsoft .NET ecosystem.</p>
+                        <h3>1.3 Scope and Limitations</h3>
+                        <p>This article focuses on .NET 8+ implementations with C# 12+ language features. While the concepts are broadly applicable, specific implementation details are tailored to the Microsoft .NET ecosystem.</p>
                     </section>
 
                     <section id="problem-analysis">
@@ -271,45 +309,13 @@ public static class ProductMapper
     }
 }</code></pre>
 
-                        <p><strong>Analysis:</strong> While providing maximum control and performance, manual mapping scales poorly. Each new projection requires complete implementation and maintenance. Error-prone property assignments lead to runtime bugs that could be prevented at compile time.</p>
+                        <p><strong>Analysis:</strong> While providing maximum control, manual mapping scales poorly. Each new projection requires complete implementation and maintenance. Error-prone property assignments lead to runtime bugs that could be prevented at compile time.</p>
 
-                        <h4>2.2.2 Runtime Reflection-Based Mapping</h4>
-                        <pre><code class="language-csharp">// AutoMapper example
-CreateMap&lt;Product, ProductSummaryDto&gt;()
-    .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
-    .ForMember(dest => dest.DiscountedPrice, opt => opt.MapFrom(src => src.Price * 0.9m));</code></pre>
-
-                        <p><strong>Analysis:</strong> Reduces boilerplate but introduces runtime costs through reflection. Configuration complexity grows with mapping requirements. Limited compile-time safety for property mappings.</p>
-
-                        <h4>2.2.3 Expression Tree Compilation</h4>
-                        <pre><code class="language-csharp">// Mapster example  
-TypeAdapterConfig&lt;Product, ProductSummaryDto&gt;.NewConfig()
-    .Map(dest => dest.CategoryName, src => src.Category.Name)
-    .Compile();</code></pre>
-
-                        <p><strong>Analysis:</strong> Better performance through expression compilation but still incurs runtime overhead for initial compilation and caching. Complex scenarios require extensive configuration.</p>
-
-                        <h3>2.3 Performance Impact Analysis</h3>
-                        <p>Our preliminary benchmarking reveals significant performance variations:</p>
-
-                        <pre><code class="language-text">Single Entity Mapping (1 object):
-Manual Code:     ~30-50ns    (direct assignment)
-Facet:          ~50-100ns    (generated code)
-Mapster:        ~80-150ns    (expression caching)
-AutoMapper:     ~200-400ns   (reflection + caching)
-
-Collection Mapping (1000 objects):
-Manual Code:     ~40-60μs     (linear scaling)
-Facet:          ~50-80μs     (linear scaling)  
-Mapster:        ~70-110μs    (expression overhead)
-AutoMapper:     ~180-300μs   (reflection overhead)</code></pre>
-
-                        <h3>2.4 Maintenance Overhead Analysis</h3>
+                        <h3>2.3 Maintenance Overhead Analysis</h3>
                         <p>In a typical enterprise application with 50 domain entities requiring an average of 4 projections each, traditional approaches result in:</p>
 
                         <ul>
                             <li><strong>Manual mapping:</strong> 200 DTO classes + 200 mapper classes = 400 files to maintain</li>
-                            <li><strong>AutoMapper:</strong> 200 DTO classes + 50 profile classes = 250 files + configuration</li>
                             <li><strong>Facet:</strong> 200 DTO declarations (partial classes) = 200 files, minimal maintenance</li>
                         </ul>
                     </section>
@@ -413,41 +419,6 @@ public class Repository&lt;T&gt; where T : class
 public partial class RepositoryDto&lt;T&gt; where T : class
 {
     // Generated with proper generic constraints
-}</code></pre>
-
-                        <h3>4.3 Output Type Variations</h3>
-                        <p>Though we currently infer type from source, Facet supports four distinct output types, each optimized for different use cases:</p>
-
-                        <h4>4.3.1 Class Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(User)]
-public partial class UserDto
-{
-    // Traditional mutable reference type
-    // Best for: APIs, general-purpose DTOs
-}</code></pre>
-
-                        <h4>4.3.2 Record Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(User)]
-public partial record UserRecord
-{
-    // Immutable reference type with value semantics
-    // Best for: Immutable data models, event sourcing
-}</code></pre>
-
-                        <h4>4.3.3 Struct Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(Point)]
-public partial struct PointDto
-{
-    // Stack-allocated value type
-    // Best for: High-performance scenarios, small data structures
-}</code></pre>
-
-                        <h4>4.3.4 Record Struct Facets</h4>
-                        <pre><code class="language-csharp">[Facet(typeof(Coordinate)]
-public partial record struct CoordinateDto
-{
-    // Immutable value type with value semantics
-    // Best for: Modern C# applications, optimal memory usage
 }</code></pre>
                     </section>
 
@@ -591,209 +562,10 @@ public void Initialize(IncrementalGeneratorInitializationContext context)
 }</code></pre>
                     </section>
 
-                    <section id="performance-analysis">
-                        <h2>6. Performance Analysis</h2>
-
-                        <h3>6.1 Benchmark Methodology</h3>
-                        <p>Our performance analysis employs BenchmarkDotNet with the following configuration:</p>
-
-                        <pre><code class="language-csharp">[MemoryDiagnoser]
-[SimpleJob(RuntimeMoniker.Net80)]
-[SimpleJob(RuntimeMoniker.Net90)]
-public class MappingBenchmarks
-{
-    private readonly List&lt;User&gt; _users;
-    private readonly User _singleUser;
-    
-    [GlobalSetup]
-    public void Setup()
-    {
-        _users = GenerateUsers(1000);
-        _singleUser = GenerateUsers(1).First();
-    }
-    
-    [Benchmark(Baseline = true)]
-    public UserDto ManualMapping() => new(_singleUser);
-    
-    [Benchmark]
-    public UserDto FacetMapping() => _singleUser.ToFacet&lt;UserDto&gt;();
-    
-    [Benchmark]
-    public UserDto AutoMapperMapping() => _mapper.Map&lt;UserDto&gt;(_singleUser);
-}</code></pre>
-
-                        <h3>6.2 Single Entity Mapping Performance</h3>
-                        <p>Single entity mapping represents the most common use case in application development:</p>
-
-                        <table class="performance-table">
-                            <thead>
-                                <tr>
-                                    <th>Method</th>
-                                    <th>Mean (ns)</th>
-                                    <th>StdDev (ns)</th>
-                                    <th>Allocated (B)</th>
-                                    <th>Relative</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Manual Mapping</td>
-                                    <td>52.3</td>
-                                    <td>1.2</td>
-                                    <td>48</td>
-                                    <td>1.00x</td>
-                                </tr>
-                                <tr>
-                                    <td>Facet (Generated)</td>
-                                    <td>58.7</td>
-                                    <td>1.8</td>
-                                    <td>48</td>
-                                    <td>1.12x</td>
-                                </tr>
-                                <tr>
-                                    <td>Mapster (Compiled)</td>
-                                    <td>94.2</td>
-                                    <td>3.4</td>
-                                    <td>48</td>
-                                    <td>1.80x</td>
-                                </tr>
-                                <tr>
-                                    <td>AutoMapper (Cached)</td>
-                                    <td>287.5</td>
-                                    <td>12.3</td>
-                                    <td>120</td>
-                                    <td>5.50x</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>6.3 Collection Mapping Performance</h3>
-                        <p>Collection mapping performance demonstrates linear scaling characteristics:</p>
-
-                        <table class="performance-table">
-                            <thead>
-                                <tr>
-                                    <th>Method</th>
-                                    <th>Collection Size</th>
-                                    <th>Mean (μs)</th>
-                                    <th>Allocated (KB)</th>
-                                    <th>Throughput (ops/s)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Facet Sequential</td>
-                                    <td>1,000</td>
-                                    <td>72.4</td>
-                                    <td>94.2</td>
-                                    <td>13,812</td>
-                                </tr>
-                                <tr>
-                                    <td>Facet Parallel</td>
-                                    <td>1,000</td>
-                                    <td>28.6</td>
-                                    <td>156.8</td>
-                                    <td>34,965</td>
-                                </tr>
-                                <tr>
-                                    <td>Mapster</td>
-                                    <td>1,000</td>
-                                    <td>108.7</td>
-                                    <td>94.2</td>
-                                    <td>9,200</td>
-                                </tr>
-                                <tr>
-                                    <td>AutoMapper</td>
-                                    <td>1,000</td>
-                                    <td>294.3</td>
-                                    <td>172.5</td>
-                                    <td>3,398</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>6.4 Memory Allocation Analysis</h3>
-                        <p>Memory allocation patterns reveal the efficiency of different approaches:</p>
-
-                        <h4>6.4.1 Allocation Breakdown</h4>
-                        <pre><code class="language-text">Per-Object Allocations (48-byte target object):
-
-Manual Mapping:
-- Target object: 48 bytes
-- Total: 48 bytes
-
-Facet Generated:
-- Target object: 48 bytes  
-- No additional overhead
-- Total: 48 bytes
-
-AutoMapper:
-- Target object: 48 bytes
-- Context object: 32 bytes
-- Cached delegates: 40 bytes
-- Total: 120 bytes (+150%)</code></pre>
-
-                        <h3>6.5 JIT Compilation Impact</h3>
-                        <p>Facet-generated code exhibits optimal JIT compilation characteristics due to its simplicity and predictability:</p>
-
-                        <pre><code class="language-asm">; Facet-generated constructor (optimized assembly)
-; No method calls, direct memory assignments
-mov     rax, [rcx+8]        ; Load source.Id
-mov     [rdx+8], rax        ; Store to target.Id
-mov     rax, [rcx+10]       ; Load source.Name
-mov     [rdx+10], rax       ; Store to target.Name
-ret                         ; Return</code></pre>
-
-                        <h3>6.6 LINQ Query Performance</h3>
-                        <p>Database projection performance comparison using Entity Framework Core:</p>
-
-                        <pre><code class="language-csharp">// Facet projection - translates to clean SQL
-var facetResults = await dbContext.Users
-    .Where(u => u.IsActive)
-    .SelectFacet&lt;UserDto&gt;()
-    .ToListAsync();
-
-// Generated SQL:
-// SELECT [u].[Id], [u].[FirstName], [u].[LastName], [u].[Email]
-// FROM [Users] AS [u]
-// WHERE [u].[IsActive] = 1</code></pre>
-
-                        <table class="performance-table">
-                            <thead>
-                                <tr>
-                                    <th>Projection Method</th>
-                                    <th>Query Time (ms)</th>
-                                    <th>Memory (KB)</th>
-                                    <th>SQL Complexity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Facet Projection</td>
-                                    <td>23.4</td>
-                                    <td>145</td>
-                                    <td>Simple SELECT</td>
-                                </tr>
-                                <tr>
-                                    <td>Manual Projection</td>
-                                    <td>22.8</td>
-                                    <td>145</td>
-                                    <td>Simple SELECT</td>
-                                </tr>
-                                <tr>
-                                    <td>Entity + AutoMapper</td>
-                                    <td>45.6</td>
-                                    <td>312</td>
-                                    <td>SELECT *</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
-
                     <section id="mapping-strategies">
-                        <h2>7. Mapping Strategies</h2>
+                        <h2>6. Mapping Strategies</h2>
 
-                        <h3>7.1 Simple Property Mapping</h3>
+                        <h3>6.1 Simple Property Mapping</h3>
                         <p>The most basic form of facetting involves direct property copying with optional exclusions:</p>
 
                         <pre><code class="language-csharp">public class User
@@ -813,7 +585,7 @@ public partial class UserDto
     // All properties except PasswordHash are generated
 }</code></pre>
 
-                        <h3>7.2 Custom Synchronous Mapping</h3>
+                        <h3>6.2 Custom Synchronous Mapping</h3>
                         <p>For computed properties and transformation logic, Facet supports custom mappers:</p>
 
                         <pre><code class="language-csharp">public class UserMapper : IFacetMapConfiguration&lt;User, UserDto&gt;
@@ -843,16 +615,16 @@ public partial class UserDto
     public string CreatedAtFormatted { get; set; } = string.Empty;
 }</code></pre>
 
-                        <h3>7.3 Asynchronous Mapping with Dependencies</h3>
+                        <h3>6.3 Asynchronous Mapping with Dependencies</h3>
                         <p>For complex scenarios requiring external data sources, Facet supports asynchronous mapping with dependency injection:</p>
 
-                        <h4>7.3.1 Service Configuration</h4>
+                        <h4>6.3.1 Service Configuration</h4>
                         <pre><code class="language-csharp">// Dependency injection setup
 services.AddScoped&lt;IUserProfileService, UserProfileService&gt;();
 services.AddScoped&lt;IReputationService, ReputationService&gt;();
 services.AddFacetMapping(); // Registers mapping services</code></pre>
 
-                        <h4>7.3.2 Async Mapper Implementation</h4>
+                        <h4>6.3.2 Async Mapper Implementation</h4>
                         <pre><code class="language-csharp">public class UserAsyncMapper : IFacetMapConfigurationAsync&lt;User, UserDto&gt;
 {
     public static async Task MapAsync(
@@ -887,27 +659,10 @@ services.AddFacetMapping(); // Registers mapping services</code></pre>
         var profile = await service.GetProfileAsync(userId, cancellationToken);
         return profile?.ProfilePictureUrl ?? "/images/default-avatar.png";
     }
-    
-    private static async Task&lt;decimal&gt; CalculateReputationAsync(
-        string email, 
-        IReputationService service, 
-        CancellationToken cancellationToken)
-    {
-        return await service.CalculateScoreAsync(email, cancellationToken);
-    }
-    
-    private static async Task&lt;UserPreferences&gt; LoadPreferencesAsync(
-        int userId, 
-        IUserProfileService service, 
-        CancellationToken cancellationToken)
-    {
-        return await service.GetPreferencesAsync(userId, cancellationToken) 
-               ?? new UserPreferences();
-    }
 }</code></pre>
 
-                        <h3>7.4 Hybrid Mapping Strategy</h3>
-                        <p>For optimal performance, Facet supports hybrid mapping that combines synchronous and asynchronous operations:</p>
+                        <h3>6.4 Hybrid Mapping Strategy</h3>
+                        <p>For optimal balance, Facet supports hybrid mapping that combines synchronous and asynchronous operations:</p>
 
                         <pre><code class="language-csharp">public class UserHybridMapper : IFacetMapConfigurationHybrid&lt;User, UserDto&gt;
 {
@@ -938,10 +693,10 @@ services.AddFacetMapping(); // Registers mapping services</code></pre>
     }
 }</code></pre>
 
-                        <h3>7.5 Collection Mapping Optimization</h3>
-                        <p>For large collections, Facet provides several optimization strategies:</p>
+                        <h3>6.5 Collection Mapping</h3>
+                        <p>For collections, Facet provides convenient extension methods:</p>
 
-                        <h4>7.5.1 Parallel Processing</h4>
+                        <h4>6.5.1 Parallel Processing</h4>
                         <pre><code class="language-csharp">// Sequential mapping (default)
 var userDtos = await users.ToFacetsAsync&lt;UserDto, UserAsyncMapper&gt;(serviceProvider);
 
@@ -957,7 +712,7 @@ var userDtosBatched = await users.ToFacetsBatchAsync&lt;UserDto, UserAsyncMapper
     batchSize: 50,
     cancellationToken: cancellationToken);</code></pre>
 
-                        <h4>7.5.2 Memory-Efficient Streaming</h4>
+                        <h4>6.5.2 Memory-Efficient Streaming</h4>
                         <pre><code class="language-csharp">// For very large collections, use streaming
 await foreach (var userDto in users.ToFacetsStreamAsync&lt;UserDto, UserAsyncMapper&gt;(
     serviceProvider, cancellationToken))
@@ -968,9 +723,9 @@ await foreach (var userDto in users.ToFacetsStreamAsync&lt;UserDto, UserAsyncMap
                     </section>
 
                     <section id="advanced-scenarios">
-                        <h2>8. Advanced Scenarios</h2>
+                        <h2>7. Advanced Scenarios</h2>
 
-                        <h3>8.1 Nested Type Mapping</h3>
+                        <h3>7.1 Nested Type Mapping</h3>
                         <p>Facet supports complex object graphs with nested type transformations:</p>
 
                         <pre><code class="language-csharp">public class Order
@@ -1004,7 +759,7 @@ public class OrderMapper : IFacetMapConfiguration&lt;Order, OrderDto&gt;
     }
 }</code></pre>
 
-                        <h3>8.2 Conditional Mapping</h3>
+                        <h3>7.2 Conditional Mapping</h3>
                         <p>Dynamic property inclusion based on runtime conditions:</p>
 
                         <pre><code class="language-csharp">public class ConditionalUserMapper : IFacetMapConfiguration&lt;User, UserDto&gt;
@@ -1034,7 +789,7 @@ public class OrderMapper : IFacetMapConfiguration&lt;Order, OrderDto&gt;
         user.Roles.Any(r => r.Name == "Administrator");
 }</code></pre>
 
-                        <h3>8.3 Polymorphic Type Handling</h3>
+                        <h3>7.3 Polymorphic Type Handling</h3>
                         <p>Support for inheritance hierarchies and polymorphic scenarios:</p>
 
                         <pre><code class="language-csharp">public abstract class PaymentMethod
@@ -1078,7 +833,7 @@ public class PaymentMethodMapper : IFacetMapConfiguration&lt;PaymentMethod, Paym
     }
 }</code></pre>
 
-                        <h3>8.4 Expression Tree Transformation</h3>
+                        <h3>7.4 Expression Tree Transformation</h3>
                         <p>Advanced LINQ integration with expression tree transformation for filtering and sorting:</p>
 
                         <pre><code class="language-csharp">// Original predicate on domain entity
@@ -1093,7 +848,7 @@ var filteredDtos = await dbContext.Users
     .Where(dtoPredicate)
     .ToListAsync();</code></pre>
 
-                        <h3>8.5 Validation Integration</h3>
+                        <h3>7.5 Validation Integration</h3>
                         <p>Integration with validation frameworks for automatic constraint propagation:</p>
 
                         <pre><code class="language-csharp">public class User
@@ -1117,41 +872,15 @@ public partial class UserDto
     // [EmailAddress] public string Email { get; set; }
     // [Range(18, 120)] public int Age { get; set; }
 }</code></pre>
-
-                        <h3>8.6 Caching Integration</h3>
-                        <p>Built-in support for caching expensive mapping operations:</p>
-
-                        <pre><code class="language-csharp">public class CachedUserMapper : IFacetMapConfigurationAsync&lt;User, UserDto&gt;
-{
-    public static async Task MapAsync(
-        User source, 
-        UserDto target, 
-        IServiceProvider services,
-        CancellationToken cancellationToken = default)
-    {
-        var cache = services.GetRequiredService&lt;IMemoryCache&gt;();
-        var cacheKey = $"user_profile_{source.Id}";
-        
-        if (!cache.TryGetValue(cacheKey, out UserProfile profile))
-        {
-            var profileService = services.GetRequiredService&lt;IUserProfileService&gt;();
-            profile = await profileService.GetProfileAsync(source.Id, cancellationToken);
-            
-            cache.Set(cacheKey, profile, TimeSpan.FromMinutes(15));
-        }
-        
-        target.ProfileData = profile;
-    }
-}</code></pre>
                     </section>
 
                     <section id="integration-patterns">
-                        <h2>9. Integration Patterns</h2>
+                        <h2>8. Integration Patterns</h2>
 
-                        <h3>9.1 Entity Framework Core Integration</h3>
+                        <h3>8.1 Entity Framework Core Integration</h3>
                         <p>Facet provides comprehensive Entity Framework Core integration through the <code>Facet.Extensions.EFCore</code> package:</p>
 
-                        <h4>9.1.1 Query Projections</h4>
+                        <h4>8.1.1 Query Projections</h4>
                         <pre><code class="language-csharp">// Basic projection
 var userDtos = await dbContext.Users
     .Where(u => u.IsActive)
@@ -1172,7 +901,7 @@ var recentUserDtos = await dbContext.Users
     .OrderBy(dto => dto.LastName)
     .ToListAsync();</code></pre>
 
-                        <h4>9.1.2 Update Operations</h4>
+                        <h4>8.1.2 Update Operations</h4>
                         <pre><code class="language-csharp">// Efficient updates using facets
 [HttpPut("{id}")]
 public async Task&lt;IActionResult&gt; UpdateUser(int id, UserUpdateDto dto)
@@ -1191,7 +920,7 @@ public async Task&lt;IActionResult&gt; UpdateUser(int id, UserUpdateDto dto)
 // UPDATE Users SET FirstName = @p0, Email = @p1 
 // WHERE Id = @p2 -- Only changed properties</code></pre>
 
-                        <h4>9.1.3 Bulk Operations</h4>
+                        <h4>8.1.3 Bulk Operations</h4>
                         <pre><code class="language-csharp">// Bulk insert with facets
 var userDtos = GetUserDtosFromApi();
 var users = userDtos.Select(dto => dto.ToEntity&lt;User&gt;()).ToList();
@@ -1212,10 +941,10 @@ foreach (var user in existingUsers)
 
 await dbContext.SaveChangesAsync();</code></pre>
 
-                        <h3>9.2 ASP.NET Core API Integration</h3>
+                        <h3>8.2 ASP.NET Core API Integration</h3>
                         <p>Seamless integration with ASP.NET Core controllers and minimal APIs:</p>
 
-                        <h4>9.2.1 Controller Integration</h4>
+                        <h4>8.2.1 Controller Integration</h4>
                         <pre><code class="language-csharp">[ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
@@ -1270,7 +999,7 @@ public class UsersController : ControllerBase
     }
 }</code></pre>
 
-                        <h4>9.2.2 Minimal API Integration</h4>
+                        <h4>8.2.2 Minimal API Integration</h4>
                         <pre><code class="language-csharp">var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddFacetMapping();
 
@@ -1294,7 +1023,7 @@ app.MapPost("/users", async (CreateUserDto dto, AppDbContext db) =>
     return Results.Created($"/users/{user.Id}", user.ToFacet&lt;UserDto&gt;());
 });</code></pre>
 
-                        <h3>9.3 Dependency Injection Configuration</h3>
+                        <h3>8.3 Dependency Injection Configuration</h3>
                         <p>Comprehensive dependency injection setup for all Facet features:</p>
 
                         <pre><code class="language-csharp">public void ConfigureServices(IServiceCollection services)
@@ -1317,515 +1046,68 @@ app.MapPost("/users", async (CreateUserDto dto, AppDbContext db) =>
     
     // Expression transformation
     services.AddFacetExpressions();
-    
-    // Caching integration
-    services.AddMemoryCache();
-    services.AddFacetCaching(options =>
-    {
-        options.DefaultExpiration = TimeSpan.FromMinutes(15);
-        options.KeyPrefix = "facet_";
-    });
-}</code></pre>
-
-                        <h3>9.4 GraphQL Integration</h3>
-                        <p>Integration with GraphQL endpoints for efficient data loading and field selection:</p>
-
-                        <pre><code class="language-csharp">// GraphQL resolver using Facet projections
-[Query]
-public class UserQueries
-{
-    public async Task&lt;List&lt;UserDto&gt;&gt; GetUsers(
-        [Service] AppDbContext context,
-        [Service] IFacetMapper mapper)
-    {
-        return await context.Users
-            .SelectFacet&lt;UserDto&gt;()
-            .ToListAsync();
-    }
-
-    public async Task&lt;UserDetailDto&gt; GetUserDetail(
-        int id,
-        [Service] AppDbContext context,
-        [Service] IFacetMapper mapper)
-    {
-        var user = await context.Users
-            .Include(u => u.Profile)
-            .FirstOrDefaultAsync(u => u.Id == id);
-
-        return user != null 
-            ? await user.ToFacetAsync&lt;UserDetailDto, UserDetailMapper&gt;(mapper)
-            : throw new GraphQLException($"User with ID {id} not found");
-    }
-}</code></pre>
-
-                        <h3>9.5 Caching Integration Patterns</h3>
-                        <p>Efficient caching strategies for mapped objects and expensive operations:</p>
-
-                        <pre><code class="language-csharp">public class CachedUserMapper : IFacetMapConfigurationAsync&lt;User, UserDto&gt;
-{
-    public static async Task MapAsync(
-        User source, 
-        UserDto target, 
-        IServiceProvider services,
-        CancellationToken cancellationToken = default)
-    {
-        var cache = services.GetRequiredService&lt;IDistributedCache&gt;();
-        var logger = services.GetRequiredService&lt;ILogger&lt;CachedUserMapper&gt;&gt;();
-        
-        var cacheKey = $"user_enriched_{source.Id}_{source.LastModified:yyyyMMddHHmmss}";
-        
-        var cachedData = await cache.GetStringAsync(cacheKey, cancellationToken);
-        if (cachedData != null)
-        {
-            var enrichedData = JsonSerializer.Deserialize&lt;EnrichedUserData&gt;(cachedData);
-            target.EnrichedData = enrichedData;
-            logger.LogDebug("Cache hit for user {UserId}", source.Id);
-            return;
-        }
-
-        // Expensive operation - enrich data from external services
-        var enrichmentService = services.GetRequiredService&lt;IUserEnrichmentService&gt;();
-        var enrichedResult = await enrichmentService.EnrichUserAsync(source, cancellationToken);
-        
-        target.EnrichedData = enrichedResult;
-        
-        // Cache the result with sliding expiration
-        var cacheOptions = new DistributedCacheEntryOptions
-        {
-            SlidingExpiration = TimeSpan.FromMinutes(30),
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(4)
-        };
-        
-        await cache.SetStringAsync(
-            cacheKey, 
-            JsonSerializer.Serialize(enrichedResult), 
-            cacheOptions, 
-            cancellationToken);
-            
-        logger.LogDebug("Cached enriched data for user {UserId}", source.Id);
-    }
-}</code></pre>
-                    </section>
-
-                    <section id="comparative-analysis">
-                        <h2>10. Comparative Analysis</h2>
-
-                        <h3>10.1 Feature Comparison Matrix</h3>
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>Feature</th>
-                                    <th>Facet</th>
-                                    <th>AutoMapper</th>
-                                    <th>Mapster</th>
-                                    <th>Mapperly</th>
-                                    <th>Manual</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Compile-time Generation</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-no">No</td>
-                                    <td class="feature-partial">Partial</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-yes">Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>Zero Runtime Overhead</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-no">No</td>
-                                    <td class="feature-partial">Cached</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-yes">Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>LINQ Projection Support</td>
-                                    <td class="feature-yes">Excellent</td>
-                                    <td class="feature-partial">Limited</td>
-                                    <td class="feature-yes">Good</td>
-                                    <td class="feature-yes">Good</td>
-                                    <td class="feature-yes">Full</td>
-                                </tr>
-                                <tr>
-                                    <td>Async Mapping</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-partial">Limited</td>
-                                    <td class="feature-no">No</td>
-                                    <td class="feature-no">No</td>
-                                    <td class="feature-yes">Full</td>
-                                </tr>
-                                <tr>
-                                    <td>Dependency Injection</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-yes">Yes</td>
-                                    <td class="feature-no">No</td>
-                                    <td class="feature-no">No</td>
-                                    <td class="feature-yes">Full</td>
-                                </tr>
-                                <tr>
-                                    <td>EF Core Integration</td>
-                                    <td class="feature-yes">Excellent</td>
-                                    <td class="feature-partial">Basic</td>
-                                    <td class="feature-yes">Good</td>
-                                    <td class="feature-partial">Basic</td>
-                                    <td class="feature-yes">Full</td>
-                                </tr>
-                                <tr>
-                                    <td>Configuration Complexity</td>
-                                    <td class="feature-yes">Low</td>
-                                    <td class="feature-no">High</td>
-                                    <td class="feature-partial">Medium</td>
-                                    <td class="feature-yes">Low</td>
-                                    <td class="feature-no">High</td>
-                                </tr>
-                                <tr>
-                                    <td>Learning Curve</td>
-                                    <td class="feature-yes">Low</td>
-                                    <td class="feature-no">High</td>
-                                    <td class="feature-partial">Medium</td>
-                                    <td class="feature-yes">Low</td>
-                                    <td class="feature-partial">Medium</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>10.2 Performance Comparison Summary</h3>
-                        <p>Based on comprehensive benchmarking across multiple scenarios:</p>
-
-                        <h4>10.2.1 Single Entity Mapping</h4>
-                        <pre><code class="language-text">Ranking (Lower is Better):
-1. Manual Code:     52.3ns  (1.00x baseline)
-2. Facet:          58.7ns  (1.12x baseline)
-3. Mapperly:       64.2ns  (1.23x baseline)
-4. Mapster:        94.2ns  (1.80x baseline)
-5. AutoMapper:    287.5ns  (5.50x baseline)</code></pre>
-
-                        <h4>10.2.2 Collection Mapping (1000 items)</h4>
-                        <pre><code class="language-text">Ranking (Lower is Better):
-1. Manual Code:     58.4μs  (1.00x baseline)
-2. Facet:          72.4μs  (1.24x baseline)
-3. Mapperly:       78.9μs  (1.35x baseline)
-4. Mapster:       108.7μs  (1.86x baseline)
-5. AutoMapper:    294.3μs  (5.04x baseline)</code></pre>
-
-                        <h4>10.2.3 LINQ Projection Performance</h4>
-                        <pre><code class="language-text">Database Query Translation Quality:
-1. Manual/Facet:   Clean SELECT with only required columns
-2. Mapperly:       Clean SELECT with minimal overhead
-3. Mapster:        Good SELECT with minor complexity
-4. AutoMapper:     SELECT * followed by in-memory mapping</code></pre>
-
-                        <h3>10.3 Code Maintainability Analysis</h3>
-                        <p>Analysis of maintenance overhead in a typical enterprise application:</p>
-
-                        <h4>10.3.1 Lines of Code (50 entities, 4 projections each)</h4>
-                        <table class="maintenance-table">
-                            <thead>
-                                <tr>
-                                    <th>Approach</th>
-                                    <th>DTO Classes</th>
-                                    <th>Mapping Code</th>
-                                    <th>Configuration</th>
-                                    <th>Total LOC</th>
-                                    <th>Maintenance Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Manual</td>
-                                    <td>4,000 LOC</td>
-                                    <td>2,000 LOC</td>
-                                    <td>0 LOC</td>
-                                    <td>6,000 LOC</td>
-                                    <td>1/10</td>
-                                </tr>
-                                <tr>
-                                    <td>AutoMapper</td>
-                                    <td>4,000 LOC</td>
-                                    <td>800 LOC</td>
-                                    <td>400 LOC</td>
-                                    <td>5,200 LOC</td>
-                                    <td>4/10</td>
-                                </tr>
-                                <tr>
-                                    <td>Mapster</td>
-                                    <td>4,000 LOC</td>
-                                    <td>600 LOC</td>
-                                    <td>200 LOC</td>
-                                    <td>4,800 LOC</td>
-                                    <td>6/10</td>
-                                </tr>
-                                <tr>
-                                    <td>Mapperly</td>
-                                    <td>4,000 LOC</td>
-                                    <td>200 LOC</td>
-                                    <td>100 LOC</td>
-                                    <td>4,300 LOC</td>
-                                    <td>7/10</td>
-                                </tr>
-                                <tr>
-                                    <td>Facet</td>
-                                    <td>400 LOC</td>
-                                    <td>200 LOC</td>
-                                    <td>100 LOC</td>
-                                    <td>700 LOC</td>
-                                    <td>9/10</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3>10.4 Decision Matrix</h3>
-                        <p>Choosing the right mapping solution based on project requirements:</p>
-
-                        <h4>10.4.1 Choose Facet When:</h4>
-                        <ul>
-                            <li>Building modern .NET applications with performance requirements</li>
-                            <li>Extensive use of Entity Framework Core with projection needs</li>
-                            <li>Need for async mapping with dependency injection</li>
-                            <li>Desire for minimal boilerplate and configuration</li>
-                            <li>Team prefers compile-time safety over runtime flexibility</li>
-                            <li>Bidirectional mapping scenarios (DTO → Entity updates)</li>
-                        </ul>
-
-                        <h4>10.4.2 Choose AutoMapper When:</h4>
-                        <ul>
-                            <li>Working with legacy codebases requiring runtime configuration</li>
-                            <li>Complex mapping scenarios with extensive business logic</li>
-                            <li>Need for runtime mapping rule modifications</li>
-                            <li>Large team with existing AutoMapper expertise</li>
-                            <li>Integration with systems requiring runtime type discovery</li>
-                        </ul>
-
-                        <h4>10.4.3 Choose Mapster When:</h4>
-                        <ul>
-                            <li>Balance between performance and flexibility is critical</li>
-                            <li>Need for runtime configuration with good performance</li>
-                            <li>Complex collection transformations are common</li>
-                            <li>Working with dynamic data structures</li>
-                            <li>Migration from AutoMapper with performance concerns</li>
-                        </ul>
-
-                        <h4>10.4.4 Choose Manual Mapping When:</h4>
-                        <ul>
-                            <li>Maximum performance is absolutely critical</li>
-                            <li>Complex business logic in mapping operations</li>
-                            <li>Full control over every aspect of transformation</li>
-                            <li>Working with unconventional data structures</li>
-                            <li>Small codebase where automation overhead isn't justified</li>
-                        </ul>
-                    </section>
-
-                    <section id="future-considerations">
-                        <h2>11. Future Considerations</h2>
-
-                        <h3>11.1 Roadmap and Evolution</h3>
-                        <p>The future development of Facet focuses on several key areas:</p>
-
-                        <h4>11.1.1 Enhanced Source Generator Capabilities</h4>
-                        <p>Future versions will leverage advances in Roslyn source generators:</p>
-                        <ul>
-                            <li><strong>Incremental Compilation Optimization:</strong> Further improvements to build time performance</li>
-                            <li><strong>Cross-Assembly Generation:</strong> Support for generating facets across assembly boundaries</li>
-                            <li><strong>Design-Time Experience:</strong> Enhanced IntelliSense and error reporting</li>
-                            <li><strong>Debugging Support:</strong> Improved debugging experience for generated code</li>
-                        </ul>
-
-                        <h4>11.1.2 Advanced Type System Integration</h4>
-                        <pre><code class="language-csharp">// Future: Generic constraint preservation
-public class Repository&lt;T&gt; where T : class, IEntity, new()
-{
-    public IEnumerable&lt;T&gt; Items { get; set; }
-}
-
-[Facet(typeof(Repository&lt;&gt;), PreserveConstraints = true)]
-public partial class RepositoryDto&lt;T&gt; where T : class, IEntity, new()
-{
-    // Constraints automatically preserved
-}
-
-// Future: Discriminated union support
-[Facet(typeof(PaymentMethod), DiscriminatedUnion = true)]
-public partial class PaymentMethodDto
-{
-    // Automatically generates type-safe union handling
-}</code></pre>
-
-                        <h3>11.2 Emerging Patterns and Best Practices</h3>
-
-                        <h4>11.2.1 Cloud-Native Optimizations</h4>
-                        <p>Adaptations for cloud-native and serverless environments:</p>
-                        <pre><code class="language-csharp">// Cold start optimization
-[Facet(typeof(User), AotOptimized = true)]
-public partial class UserDto
-{
-    // Generates ahead-of-time compilation friendly code
-}
-
-// Memory-efficient streaming for large datasets
-public static async IAsyncEnumerable&lt;UserDto&gt; StreamUsersAsync(
-    IAsyncEnumerable&lt;User&gt; users,
-    [EnumeratorCancellation] CancellationToken cancellationToken = default)
-{
-    await foreach (var user in users.WithCancellation(cancellationToken))
-    {
-        yield return user.ToFacet&lt;UserDto&gt;();
-    }
-}</code></pre>
-
-                        <h4>11.2.2 AI and Machine Learning Integration</h4>
-                        <p>Support for ML.NET and AI scenarios:</p>
-                        <pre><code class="language-csharp">// Future: ML.NET integration
-[Facet(typeof(Customer), MLTarget = true)]
-public partial class CustomerMLDto
-{
-    [LoadColumn(0)] public float Age { get; set; }
-    [LoadColumn(1)] public float Income { get; set; }
-    [LoadColumn(2)] public string Category { get; set; }
-}</code></pre>
-
-                        <h3>11.3 Performance Optimization Strategies</h3>
-
-                        <h4>11.3.1 Memory Layout Optimization</h4>
-                        <p>Future versions may include memory layout optimizations:</p>
-                        <pre><code class="language-csharp">// Future: Struct packing optimization
-[Facet(typeof(Point3D), Kind = FacetKind.Struct, PackingOptimization = true)]
-public partial struct Point3DDto
-{
-    // Generates optimally packed struct layout
-    // Minimizes memory footprint and cache misses
-}</code></pre>
-
-                        <h4>11.3.2 SIMD and Vectorization</h4>
-                        <p>Exploration of SIMD instructions for bulk operations:</p>
-                        <pre><code class="language-csharp">// Future: Vectorized collection mapping
-public static Vector&lt;UserDto&gt; ToFacetVector(Vector&lt;User&gt; users)
-{
-    // Generates SIMD-optimized mapping code for numerical data
-    // Significant performance improvements for large datasets
-}</code></pre>
-
-                        <h3>11.4 Ecosystem Integration</h3>
-
-                        <h4>11.4.1 Serialization Framework Integration</h4>
-                        <pre><code class="language-csharp">// Future: Native serialization optimization
-[Facet(typeof(User), SerializationTarget = SerializationTarget.SystemTextJson)]
-public partial class UserDto
-{
-    // Automatically generates optimal JsonConverter
-    // Pre-compiled serialization with minimal allocations
-}</code></pre>
-
-                        <h4>11.4.2 Validation Framework Enhancement</h4>
-                        <pre><code class="language-csharp">// Future: Advanced validation integration
-[Facet(typeof(User), ValidationStrategy = ValidationStrategy.FluentValidation)]
-public partial class UserDto
-{
-    // Automatically generates FluentValidation rules
-    // Based on domain model constraints and attributes
-}</code></pre>
-
-                        <h3>11.5 Research and Innovation Areas</h3>
-
-                        <h4>11.5.1 Code Analysis and Optimization</h4>
-                        <p>Advanced static analysis for optimization opportunities:</p>
-                        <ul>
-                            <li><strong>Usage Pattern Analysis:</strong> Optimize generated code based on actual usage patterns</li>
-                            <li><strong>Performance Profiling Integration:</strong> Automatic performance regression detection</li>
-                            <li><strong>Memory Allocation Analysis:</strong> Minimize heap allocations in hot paths</li>
-                        </ul>
-
-                        <h4>11.5.2 Formal Verification</h4>
-                        <p>Research into formal verification of mapping correctness:</p>
-                        <pre><code class="language-csharp">// Future: Formal specification
-[Facet(typeof(User))]
-[Invariant("Id > 0")]
-[Postcondition("result.Email != null ==> result.Email.Contains('@')")]
-public partial class UserDto
-{
-    // Generates code with formal correctness guarantees
 }</code></pre>
                     </section>
 
                     <section id="conclusion">
-                        <h2>12. Conclusion</h2>
+                        <h2>9. Conclusion</h2>
 
-                        <h3>12.1 Summary of Contributions</h3>
-                        <p>This comprehensive analysis has demonstrated that Facet represents a significant advancement in .NET mapping and projection technology. Through compile-time code generation, it addresses fundamental limitations of existing solutions while providing superior performance characteristics and developer experience.</p>
+                        <h3>9.1 Summary of Key Points</h3>
+                        <p>This analysis has demonstrated that Facet represents a significant advancement in .NET mapping and projection technology. Through compile-time code generation, it addresses fundamental limitations of existing solutions while providing superior developer experience.</p>
 
-                        <h4>Key Findings:</h4>
+                        <h4>Key Takeaways:</h4>
                         <ul>
-                            <li><strong>Performance:</strong> Facet achieves near-manual code performance (1.12x baseline) while eliminating 90% of boilerplate code</li>
-                            <li><strong>Scalability:</strong> Linear performance scaling with collection size, optimal for large datasets</li>
-                            <li><strong>Maintainability:</strong> Reduces maintenance overhead by up to 88% compared to manual approaches</li>
+                            <li><strong>Compile-Time Generation:</strong> Facet achieves zero runtime overhead while eliminating boilerplate code</li>
                             <li><strong>Type Safety:</strong> Compile-time guarantees eliminate entire categories of runtime errors</li>
                             <li><strong>Integration:</strong> Seamless integration with modern .NET frameworks and patterns</li>
+                            <li><strong>Flexibility:</strong> Support for synchronous, asynchronous, and hybrid mapping strategies</li>
+                            <li><strong>Maintainability:</strong> Significant reduction in maintenance overhead compared to manual approaches</li>
                         </ul>
 
-                        <h3>12.2 Architectural Implications</h3>
+                        <h3>9.2 Architectural Implications</h3>
                         <p>The adoption of facetting as a design pattern has broader implications for software architecture:</p>
 
-                        <h4>12.2.1 Microservices Architecture</h4>
+                        <h4>9.2.1 Microservices Architecture</h4>
                         <p>Facet's efficient projection capabilities support microservices patterns by enabling fine-grained data contracts without performance penalties. The compile-time generation ensures that service boundaries remain clean and efficient.</p>
 
-                        <h4>12.2.2 Domain-Driven Design</h4>
+                        <h4>9.2.2 Domain-Driven Design</h4>
                         <p>The clear separation between domain models and their projections reinforces DDD principles. Facets serve as anti-corruption layers, protecting domain integrity while enabling diverse presentation needs.</p>
 
-                        <h4>12.2.3 Clean Architecture</h4>
+                        <h4>9.2.3 Clean Architecture</h4>
                         <p>Facet supports Clean Architecture by facilitating efficient boundary crossing between layers. The generated mappers provide the necessary abstraction without violating dependency inversion principles.</p>
 
-                        <h3>12.3 Industry Impact</h3>
-                        <p>The techniques demonstrated in Facet contribute to several broader industry trends:</p>
+                        <h3>9.3 Recommendations for Adoption</h3>
 
-                        <h4>12.3.1 Shift-Left Philosophy</h4>
-                        <p>By moving mapping logic to compile-time, Facet embodies the shift-left philosophy, catching errors earlier in the development cycle and improving overall software quality.</p>
-
-                        <h4>12.3.2 Developer Productivity</h4>
-                        <p>The dramatic reduction in boilerplate code allows developers to focus on business logic rather than infrastructure concerns, directly impacting productivity and job satisfaction.</p>
-
-                        <h4>12.3.3 Performance Culture</h4>
-                        <p>Facet demonstrates that high-level abstractions need not compromise performance, supporting the growing emphasis on performance-conscious development practices.</p>
-
-                        <h3>12.4 Recommendations for Adoption</h3>
-
-                        <h4>12.4.1 Immediate Adoption Scenarios</h4>
+                        <h4>9.3.1 Immediate Adoption Scenarios</h4>
                         <p>Teams should consider immediate Facet adoption for:</p>
                         <ul>
                             <li>New .NET 8+ projects with significant DTO requirements</li>
                             <li>Entity Framework Core heavy applications</li>
-                            <li>Performance-critical systems requiring efficient data transformation</li>
                             <li>APIs with multiple client types requiring different data shapes</li>
+                            <li>Projects prioritizing maintainability and compile-time safety</li>
                         </ul>
 
-                        <h4>12.4.2 Gradual Migration Strategy</h4>
+                        <h4>9.3.2 Gradual Migration Strategy</h4>
                         <p>For existing applications, a gradual migration approach is recommended:</p>
                         <ol>
                             <li><strong>Pilot Phase:</strong> Implement Facet for new features and high-traffic endpoints</li>
-                            <li><strong>Performance Critical Paths:</strong> Replace existing mappers in performance-sensitive areas</li>
                             <li><strong>Feature Completion:</strong> Gradually expand Facet usage as features are enhanced</li>
                             <li><strong>Legacy Replacement:</strong> Replace remaining manual mapping as technical debt allows</li>
                         </ol>
 
-                        <h3>12.5 Long-term Vision</h3>
-                        <p>Looking forward, Facet represents more than just a mapping library - it demonstrates the potential of compile-time metaprogramming to solve real-world software engineering challenges. As the .NET ecosystem continues to evolve, the principles embodied in Facet will likely influence broader tooling and framework development.</p>
+                        <h3>9.4 Final Thoughts</h3>
+                        <p>Facet demonstrates that modern development tools can achieve both developer productivity and optimal compile-time safety. Through careful design and leveraging of platform capabilities, it provides a blueprint for future innovations in the .NET ecosystem.</p>
 
-                        <p>The success of source generators like Facet suggests a future where developers spend less time on repetitive infrastructure code and more time solving domain-specific problems. This shift towards intelligent, compile-time code generation represents a maturation of the .NET development experience.</p>
-
-                        <h3>12.6 Final Thoughts</h3>
-                        <p>Facet demonstrates that the age-old trade-off between abstraction and performance is increasingly false in modern development environments. Through careful design and leveraging of platform capabilities, it is possible to achieve both developer productivity and optimal runtime performance.</p>
-
-                        <p>The techniques explored in this analysis - compile-time generation, incremental compilation, type-safe projections, and async mapping patterns - represent best practices that extend beyond Facet itself. They provide a blueprint for future innovations in the .NET ecosystem and serve as a testament to the power of thoughtful tool design.</p>
-
-                        <p>As software systems continue to grow in complexity and scale, tools like Facet will become increasingly essential for maintaining developer productivity while meeting ever-more demanding performance requirements. The future of .NET development is one where the platform works intelligently on behalf of developers, generating optimal code that would be tedious and error-prone to write by hand.</p>
+                        <p>The techniques explored in this analysis - compile-time generation, incremental compilation, type-safe projections, and async mapping patterns - represent best practices that extend beyond Facet itself. As software systems continue to grow in complexity, tools like Facet become increasingly essential for maintaining developer productivity while meeting demanding requirements.</p>
 
                         <div class="conclusion-callout">
-                            <h4>The Contributions</h4>
-                            <p>This article contributes to the body of knowledge in several areas:</p>
+                            <h4>Getting Started</h4>
+                            <p>To start using Facet in your projects:</p>
                             <ul>
-                                <li><strong>Compile-time Metaprogramming:</strong> Demonstrates practical applications of source generators</li>
-                                <li><strong>Performance Engineering:</strong> Provides benchmarking methodology for mapping solutions</li>
-                                <li><strong>Software Architecture:</strong> Establishes facetting as a viable architectural pattern</li>
-                                <li><strong>Developer Experience:</strong> Quantifies the impact of tool design on productivity</li>
+                                <li>Visit the <a href="https://github.com/Tim-Maes/Facet">GitHub repository</a> for documentation and examples</li>
+                                <li>Install the NuGet package: <code>dotnet add package Facet</code></li>
+                                <li>Check out the sample projects for real-world usage patterns</li>
+                                <li>Join the community discussions for support and feature requests</li>
                             </ul>
                         </div>
                     </section>
@@ -1838,7 +1120,7 @@ public partial class UserDto
                 <div class="article-sharing">
                     <h3>Share this article</h3>
                     <div class="sharing-buttons">
-                        <a href="https://twitter.com/intent/tweet?text=Facets in .NET: A Comprehensive Analysis&url=https://tim-maes.github.io/facets-in-dotnet.html&via=Tim_Maes_" class="share-btn twitter" target="_blank">
+                        <a href="https://twitter.com/intent/tweet?text=Facets in .NET&url=https://tim-maes.github.io/facets-in-dotnet.html&via=Tim_Maes_" class="share-btn twitter" target="_blank">
                             <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
                             </svg>
@@ -1891,21 +1173,6 @@ public partial class UserDto
         </div>
     </article>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="container">
-            <div class="newsletter-content">
-                <h3>Stay Updated</h3>
-                <p>Get notified when I publish new technical articles about .NET development, performance optimization, and software architecture.</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Enter your email" class="newsletter-input">
-                    <button class="newsletter-btn">Subscribe</button>
-                </div>
-                <p class="newsletter-note">No spam, unsubscribe at any time.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1925,14 +1192,6 @@ public partial class UserDto
                     </div>
 
                     <div class="footer-section">
-                        <h4>Popular Posts</h4>
-                        <a href="blazorframe-enhanced-iframes.html">BlazorFrame</a>
-                        <a href="facets-in-dotnet.html">Facets in .NET</a>
-                        <a href="source-generators-vs-t4.html">Source Generators vs T4</a>
-                        <a href="autowiring-using-bindicate.html">Autowiring with Bindicate</a>
-                    </div>
-
-                    <div class="footer-section">
                         <h4>Connect</h4>
                         <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
                         <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
@@ -1944,11 +1203,6 @@ public partial class UserDto
 
             <div class="footer-bottom">
                 <p>&copy; 2025 Tim Maes. All rights reserved.</p>
-                <div class="footer-badges">
-                    <span>Made with ❤️ in Belgium</span>
-                    <span>•</span>
-                    <span>Open Source Enthusiast</span>
-                </div>
             </div>
         </div>
     </footer>
@@ -2012,9 +1266,7 @@ public partial class UserDto
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 15% 85%, rgba(100, 255, 218, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 15% 85%, rgba(100, 255, 218, 0.1) 0%, transparent 50%), radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
         }
 
         .article-header-content {
@@ -2047,19 +1299,19 @@ public partial class UserDto
             line-height: 1.6;
         }
 
-        .disclaimer-content strong {
-            color: #ff9800;
-            font-weight: 600;
-        }
+            .disclaimer-content strong {
+                color: #ff9800;
+                font-weight: 600;
+            }
 
         /* Special styling for sections containing disclaimers */
         .article-body section:first-child {
             padding-top: 0;
         }
 
-        .article-body section:first-child h2:first-of-type {
-            margin-top: var(--space-lg);
-        }
+            .article-body section:first-child h2:first-of-type {
+                margin-top: var(--space-lg);
+            }
 
         .article-breadcrumb {
             display: flex;
@@ -2070,15 +1322,15 @@ public partial class UserDto
             color: var(--text-muted);
         }
 
-        .article-breadcrumb a {
-            color: var(--accent-primary);
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
+            .article-breadcrumb a {
+                color: var(--accent-primary);
+                text-decoration: none;
+                transition: color var(--transition-fast);
+            }
 
-        .article-breadcrumb a:hover {
-            color: var(--text-primary);
-        }
+                .article-breadcrumb a:hover {
+                    color: var(--text-primary);
+                }
 
         .article-meta {
             display: flex;
@@ -2124,14 +1376,14 @@ public partial class UserDto
             margin-bottom: var(--space-xl);
         }
 
-        .article-tags span {
-            background: rgba(124, 58, 237, 0.2);
-            color: var(--accent-primary);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
+            .article-tags span {
+                background: rgba(124, 58, 237, 0.2);
+                color: var(--accent-primary);
+                padding: var(--space-xs) var(--space-sm);
+                border-radius: var(--radius-sm);
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
 
         .article-author {
             display: flex;
@@ -2183,12 +1435,12 @@ public partial class UserDto
             border: 1px solid rgba(100, 255, 218, 0.1);
         }
 
-        .article-toc h3 {
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            font-size: 1rem;
-        }
+            .article-toc h3 {
+                color: var(--text-primary);
+                font-weight: 600;
+                margin-bottom: var(--space-md);
+                font-size: 1rem;
+            }
 
         .toc-nav ul {
             list-style: none;
@@ -2207,9 +1459,9 @@ public partial class UserDto
             line-height: 1.4;
         }
 
-        .toc-nav a:hover {
-            color: var(--accent-primary);
-        }
+            .toc-nav a:hover {
+                color: var(--accent-primary);
+            }
 
         .article-body {
             background: var(--bg-primary);
@@ -2221,99 +1473,99 @@ public partial class UserDto
             overflow-x: auto;
         }
 
-        .article-body h2 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: var(--space-4xl) 0 var(--space-lg);
-            position: relative;
-            padding-bottom: var(--space-sm);
-            border-bottom: 2px solid rgba(100, 255, 218, 0.2);
-        }
+            .article-body h2 {
+                font-size: 1.875rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                margin: var(--space-4xl) 0 var(--space-lg);
+                position: relative;
+                padding-bottom: var(--space-sm);
+                border-bottom: 2px solid rgba(100, 255, 218, 0.2);
+            }
 
-        .article-body h2:first-child {
-            margin-top: 0;
-        }
+                .article-body h2:first-child {
+                    margin-top: 0;
+                }
 
-        .article-body h3 {
-            font-size: 1.375rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: var(--space-2xl) 0 var(--space-md);
-        }
+            .article-body h3 {
+                font-size: 1.375rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                margin: var(--space-2xl) 0 var(--space-md);
+            }
 
-        .article-body h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: var(--space-xl) 0 var(--space-sm);
-        }
+            .article-body h4 {
+                font-size: 1.125rem;
+                font-weight: 600;
+                color: var(--text-primary);
+                margin: var(--space-xl) 0 var(--space-sm);
+            }
 
-        .article-body p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: var(--space-lg);
-            font-size: 1.125rem;
-        }
+            .article-body p {
+                color: var(--text-secondary);
+                line-height: 1.8;
+                margin-bottom: var(--space-lg);
+                font-size: 1.125rem;
+            }
 
-        .article-body ul,
-        .article-body ol {
-            margin-bottom: var(--space-lg);
-            padding-left: var(--space-xl);
-            color: var (--text-secondary);
-        }
+            .article-body ul,
+            .article-body ol {
+                margin-bottom: var(--space-lg);
+                padding-left: var(--space-xl);
+                color: var (--text-secondary);
+            }
 
-        .article-body li {
-            margin-bottom: var(--space-sm);
-            line-height: 1.7;
-            font-size: 1.125rem;
-        }
+            .article-body li {
+                margin-bottom: var(--space-sm);
+                line-height: 1.7;
+                font-size: 1.125rem;
+            }
 
-        .article-body a {
-            color: var(--accent-primary);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color var(--transition-fast);
-        }
+            .article-body a {
+                color: var(--accent-primary);
+                text-decoration: none;
+                border-bottom: 1px solid transparent;
+                transition: border-color var(--transition-fast);
+            }
 
-        .article-body a:hover {
-            border-bottom-color: var(--accent-primary);
-        }
+                .article-body a:hover {
+                    border-bottom-color: var(--accent-primary);
+                }
 
-        .article-body blockquote {
-            background: rgba(100, 255, 218, 0.05);
-            border-left: 4px solid var(--accent-primary);
-            padding: var(--space-lg);
-            margin: var(--space-xl) 0;
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            font-style: italic;
-        }
+            .article-body blockquote {
+                background: rgba(100, 255, 218, 0.05);
+                border-left: 4px solid var(--accent-primary);
+                padding: var(--space-lg);
+                margin: var(--space-xl) 0;
+                border-radius: 0 var(--radius-md) var(--radius-md) 0;
+                font-style: italic;
+            }
 
-        .article-body blockquote p {
-            color: var(--text-primary);
-            margin-bottom: 0;
-        }
+                .article-body blockquote p {
+                    color: var(--text-primary);
+                    margin-bottom: 0;
+                }
 
-        .article-body pre {
-            background: #1a1a1a;
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin: var(--space-xl) 0;
-            overflow-x: auto;
-            border: 1px solid rgba(100, 255, 218, 0.1);
-        }
+            .article-body pre {
+                background: #1a1a1a;
+                border-radius: var(--radius-lg);
+                padding: var(--space-xl);
+                margin: var(--space-xl) 0;
+                overflow-x: auto;
+                border: 1px solid rgba(100, 255, 218, 0.1);
+            }
 
-        .article-body code {
-            font-family: var(--font-mono);
-            font-size: 0.9em;
-        }
+            .article-body code {
+                font-family: var(--font-mono);
+                font-size: 0.9em;
+            }
 
-        .article-body :not(pre) > code {
-            background: rgba(100, 255, 218, 0.1);
-            color: var(--accent-primary);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-        }
+            .article-body :not(pre) > code {
+                background: rgba(100, 255, 218, 0.1);
+                color: var(--accent-primary);
+                padding: var(--space-xs) var(--space-sm);
+                border-radius: var(--radius-sm);
+            }
 
         .code-callout {
             background: rgba(124, 58, 237, 0.1);
@@ -2323,15 +1575,15 @@ public partial class UserDto
             margin: var(--space-xl) 0;
         }
 
-        .code-callout h4 {
-            color: var(--text-primary);
-            margin-bottom: var(--space-md);
-        }
+            .code-callout h4 {
+                color: var(--text-primary);
+                margin-bottom: var(--space-md);
+            }
 
-        .code-callout p {
-            margin: 0;
-            color: var(--text-secondary);
-        }
+            .code-callout p {
+                margin: 0;
+                color: var(--text-secondary);
+            }
 
         .resources-section {
             margin-top: var(--space-4xl);
@@ -2370,11 +1622,11 @@ public partial class UserDto
             margin-bottom: var(--space-2xl);
         }
 
-        .article-sharing h3 {
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: var (--space-md);
-        }
+            .article-sharing h3 {
+                color: var(--text-primary);
+                font-weight: 600;
+                margin-bottom: var (--space-md);
+            }
 
         .sharing-buttons {
             display: flex;
@@ -2397,26 +1649,26 @@ public partial class UserDto
             font-size: 0.875rem;
         }
 
-        .share-btn.twitter {
-            background: #1DA1F2;
-            color: white;
-        }
+            .share-btn.twitter {
+                background: #1DA1F2;
+                color: white;
+            }
 
-        .share-btn.linkedin {
-            background: #0A66C2;
-            color: white;
-        }
+            .share-btn.linkedin {
+                background: #0A66C2;
+                color: white;
+            }
 
-        .share-btn.copy {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
+            .share-btn.copy {
+                background: var(--bg-tertiary);
+                color: var(--text-primary);
+                border: 1px solid rgba(100, 255, 218, 0.2);
+            }
 
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
+            .share-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-md);
+            }
 
         .article-navigation {
             display: flex;
@@ -2437,10 +1689,10 @@ public partial class UserDto
             border: 1px solid rgba(100, 255, 218, 0.1);
         }
 
-        .nav-btn:hover {
-            background: rgba(100, 255, 218, 0.1);
-            border-color: var(--accent-primary);
-        }
+            .nav-btn:hover {
+                background: rgba(100, 255, 218, 0.1);
+                border-color: var(--accent-primary);
+            }
 
         .comments-section {
             margin-top: var(--space-4xl);
@@ -2448,12 +1700,12 @@ public partial class UserDto
             border-top: 2px solid rgba(100, 255, 218, 0.2);
         }
 
-        .comments-section h2 {
-            color: var(--text-primary);
-            font-weight: 700;
-            margin-bottom: var(--space-xl);
-            text-align: center;
-        }
+            .comments-section h2 {
+                color: var(--text-primary);
+                font-weight: 700;
+                margin-bottom: var(--space-xl);
+                text-align: center;
+            }
 
         .newsletter-section {
             padding: var(--space-4xl) 0;
@@ -2466,18 +1718,18 @@ public partial class UserDto
             margin: 0 auto;
         }
 
-        .newsletter-content h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-            color: var(--text-primary);
-        }
+            .newsletter-content h3 {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: var(--space-md);
+                color: var(--text-primary);
+            }
 
-        .newsletter-content p {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-xl);
-        }
+            .newsletter-content p {
+                font-size: 1.125rem;
+                color: var(--text-secondary);
+                margin-bottom: var(--space-xl);
+            }
 
         .newsletter-form {
             display: flex;
@@ -2495,14 +1747,14 @@ public partial class UserDto
             font-size: 1rem;
         }
 
-        .newsletter-input::placeholder {
-            color: var(--text-muted);
-        }
+            .newsletter-input::placeholder {
+                color: var(--text-muted);
+            }
 
-        .newsletter-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
+            .newsletter-input:focus {
+                outline: none;
+                border-color: var(--accent-primary);
+            }
 
         .newsletter-btn {
             background: var(--accent-gradient);
@@ -2515,10 +1767,10 @@ public partial class UserDto
             transition: all var(--transition-fast);
         }
 
-        .newsletter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-accent);
-        }
+            .newsletter-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-accent);
+            }
 
         .newsletter-note {
             font-size: 0.875rem;
@@ -2535,18 +1787,18 @@ public partial class UserDto
             overflow: hidden;
         }
 
-        .comparison-table th, .maintenance-table th, .performance-table th,
-        .comparison-table td, .maintenance-table td, .performance-table td {
-            padding: var(--space-md);
-            text-align: left;
-            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
-        }
+            .comparison-table th, .maintenance-table th, .performance-table th,
+            .comparison-table td, .maintenance-table td, .performance-table td {
+                padding: var(--space-md);
+                text-align: left;
+                border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            }
 
-        .comparison-table th, .maintenance-table th, .performance-table th {
-            background: rgba(100, 255, 218, 0.1);
-            color: var (--text-primary);
-            font-weight: 600;
-        }
+            .comparison-table th, .maintenance-table th, .performance-table th {
+                background: rgba(100, 255, 218, 0.1);
+                color: var (--text-primary);
+                font-weight: 600;
+            }
 
         .feature-yes {
             color: #10b981;
@@ -2571,18 +1823,18 @@ public partial class UserDto
             margin: var(--space-2xl) 0;
         }
 
-        .conclusion-callout h4 {
-            color: var(--text-primary);
-            margin-bottom: var(--space-md);
-        }
+            .conclusion-callout h4 {
+                color: var(--text-primary);
+                margin-bottom: var(--space-md);
+            }
 
-        .conclusion-callout p {
-            margin-bottom: var(--space-md);
-        }
+            .conclusion-callout p {
+                margin-bottom: var(--space-md);
+            }
 
-        .conclusion-callout ul {
-            margin: 0;
-        }
+            .conclusion-callout ul {
+                margin: 0;
+            }
 
         /* Container styles */
         .container {
@@ -2630,56 +1882,56 @@ public partial class UserDto
                 border-radius: var(--radius-md);
             }
 
-            .article-body h2 {
-                margin: var(--space-2xl) 0 var(--space-md);
-                font-size: 1.5rem;
-            }
+                .article-body h2 {
+                    margin: var(--space-2xl) 0 var(--space-md);
+                    font-size: 1.5rem;
+                }
 
-            .article-body h3 {
-                margin: var(--space-xl) 0 var(--space-sm);
-                font-size: 1.25rem;
-            }
+                .article-body h3 {
+                    margin: var(--space-xl) 0 var(--space-sm);
+                    font-size: 1.25rem;
+                }
 
-            .article-body h4 {
-                margin: var(--space-lg) 0 var(--space-xs);
-                font-size: 1.1rem;
-            }
+                .article-body h4 {
+                    margin: var(--space-lg) 0 var(--space-xs);
+                    font-size: 1.1rem;
+                }
 
-            .article-body p {
-                font-size: 1rem;
-                line-height: 1.6;
-                margin-bottom: var(--space-md);
-            }
+                .article-body p {
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    margin-bottom: var(--space-md);
+                }
 
-            .article-body ul,
-            .article-body ol {
-                padding-left: var(--space-lg);
-                margin-bottom: var(--space-md);
-            }
+                .article-body ul,
+                .article-body ol {
+                    padding-left: var(--space-lg);
+                    margin-bottom: var(--space-md);
+                }
 
-            .article-body li {
-                font-size: 1rem;
-                line-height: 1.6;
-                margin-bottom: var(--space-xs);
-            }
+                .article-body li {
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    margin-bottom: var(--space-xs);
+                }
 
-            .article-body pre {
-                padding: var(--space-md);
-                margin: var(--space-md) 0;
-                border-radius: var(--radius-md);
-                font-size: 0.85rem;
-                overflow-x: auto;
-            }
+                .article-body pre {
+                    padding: var(--space-md);
+                    margin: var(--space-md) 0;
+                    border-radius: var(--radius-md);
+                    font-size: 0.85rem;
+                    overflow-x: auto;
+                }
 
-            .article-body code {
-                font-size: 0.8em;
-                word-break: break-word;
-            }
+                .article-body code {
+                    font-size: 0.8em;
+                    word-break: break-word;
+                }
 
-            .article-body blockquote {
-                padding: var(--space-md);
-                margin: var(--space-md) 0;
-            }
+                .article-body blockquote {
+                    padding: var(--space-md);
+                    margin: var(--space-md) 0;
+                }
 
             .container {
                 padding: 0 var(--space-xs);
@@ -2725,11 +1977,11 @@ public partial class UserDto
                 border-radius: var(--radius-md);
             }
 
-            .comparison-table th, .maintenance-table th, .performance-table th,
-            .comparison-table td, .maintenance-table td, .performance-table td {
-                padding: var(--space-xs);
-                min-width: 100px;
-            }
+                .comparison-table th, .maintenance-table th, .performance-table th,
+                .comparison-table td, .maintenance-table td, .performance-table td {
+                    padding: var(--space-xs);
+                    min-width: 100px;
+                }
 
             /* Better mobile table scrolling */
             .comparison-table, .maintenance-table, .performance-table {
@@ -2763,34 +2015,34 @@ public partial class UserDto
                 padding: var(--space-md);
             }
 
-            .article-body h2 {
-                font-size: 1.375rem;
-                margin: var(--space-xl) 0 var(--space-md);
-            }
+                .article-body h2 {
+                    font-size: 1.375rem;
+                    margin: var(--space-xl) 0 var(--space-md);
+                }
 
-            .article-body h3 {
-                font-size: 1.125rem;
-                margin: var(--space-lg) 0 var(--space-sm);
-            }
+                .article-body h3 {
+                    font-size: 1.125rem;
+                    margin: var(--space-lg) 0 var(--space-sm);
+                }
 
-            .article-body pre {
-                padding: var(--space-sm);
-                font-size: 0.8rem;
-            }
+                .article-body pre {
+                    padding: var(--space-sm);
+                    font-size: 0.8rem;
+                }
 
-            .article-body pre code {
-                font-size: 0.7rem;
-            }
+                    .article-body pre code {
+                        font-size: 0.7rem;
+                    }
 
             .comparison-table, .maintenance-table, .performance-table {
                 font-size: 0.7rem;
             }
 
-            .comparison-table th, .maintenance-table th, .performance-table th,
-            .comparison-table td, .maintenance-table td, .performance-table td {
-                padding: 4px;
-                min-width: 80px;
-            }
+                .comparison-table th, .maintenance-table th, .performance-table th,
+                .comparison-table td, .maintenance-table td, .performance-table td {
+                    padding: 4px;
+                    min-width: 80px;
+                }
 
             .container {
                 padding: 0 8px;
