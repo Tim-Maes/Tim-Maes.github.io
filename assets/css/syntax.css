@@ -1,0 +1,348 @@
+/* Syntax Highlighting - Rouge/Pygments Compatible */
+/* Based on One Dark theme for better readability */
+
+.highlight {
+  background-color: #282c34;
+  color: #abb2bf;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  overflow-x: auto;
+}
+
+.highlight pre {
+  margin: 0;
+  padding: 1rem;
+  background-color: transparent;
+  overflow: visible;
+}
+
+.highlight code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Line numbers */
+.highlight .lineno {
+  color: #5c6370;
+  padding-right: 1rem;
+  user-select: none;
+  border-right: 1px solid #3e4451;
+  margin-right: 1rem;
+  display: inline-block;
+  min-width: 2.5rem;
+  text-align: right;
+}
+
+.highlight .gutter {
+  border-right: 1px solid #3e4451;
+  background-color: #21252b;
+  padding: 0.5rem;
+  user-select: none;
+}
+
+.highlight .code {
+  padding: 0.5rem;
+}
+
+/* Comments */
+.highlight .c,      /* Comment */
+.highlight .cm,     /* Comment.Multiline */
+.highlight .cp,     /* Comment.Preproc */
+.highlight .c1,     /* Comment.Single */
+.highlight .cs {    /* Comment.Special */
+  color: #5c6370;
+  font-style: italic;
+}
+
+/* Keywords */
+.highlight .k,      /* Keyword */
+.highlight .kc,     /* Keyword.Constant */
+.highlight .kd,     /* Keyword.Declaration */
+.highlight .kn,     /* Keyword.Namespace */
+.highlight .kp,     /* Keyword.Pseudo */
+.highlight .kr,     /* Keyword.Reserved */
+.highlight .kt {    /* Keyword.Type */
+  color: #c678dd;
+  font-weight: 600;
+}
+
+/* Names */
+.highlight .na {    /* Name.Attribute */
+  color: #d19a66;
+}
+
+.highlight .nb,     /* Name.Builtin */
+.highlight .bp {    /* Name.Builtin.Pseudo */
+  color: #e5c07b;
+}
+
+.highlight .nc {    /* Name.Class */
+  color: #e5c07b;
+  font-weight: 600;
+}
+
+.highlight .no {    /* Name.Constant */
+  color: #e06c75;
+}
+
+.highlight .nd {    /* Name.Decorator */
+  color: #61afef;
+}
+
+.highlight .ni {    /* Name.Entity */
+  color: #e06c75;
+}
+
+.highlight .nf,     /* Name.Function */
+.highlight .fm {    /* Name.Function.Magic */
+  color: #61afef;
+  font-weight: 600;
+}
+
+.highlight .nl {    /* Name.Label */
+  color: #e06c75;
+}
+
+.highlight .nn {    /* Name.Namespace */
+  color: #e5c07b;
+}
+
+.highlight .nx {    /* Name.Other */
+  color: #abb2bf;
+}
+
+.highlight .py {    /* Name.Property */
+  color: #e06c75;
+}
+
+.highlight .nt {    /* Name.Tag */
+  color: #e06c75;
+  font-weight: 600;
+}
+
+.highlight .nv,     /* Name.Variable */
+.highlight .vc,     /* Name.Variable.Class */
+.highlight .vg,     /* Name.Variable.Global */
+.highlight .vi {    /* Name.Variable.Instance */
+  color: #e06c75;
+}
+
+/* Operators */
+.highlight .o,      /* Operator */
+.highlight .ow {    /* Operator.Word */
+  color: #56b6c2;
+}
+
+/* Numbers */
+.highlight .m,      /* Number */
+.highlight .mf,     /* Number.Float */
+.highlight .mh,     /* Number.Hex */
+.highlight .mi,     /* Number.Integer */
+.highlight .mo,     /* Number.Oct */
+.highlight .mb,     /* Number.Bin */
+.highlight .il {    /* Number.Integer.Long */
+  color: #d19a66;
+}
+
+/* Strings */
+.highlight .s,      /* String */
+.highlight .sb,     /* String.Backtick */
+.highlight .sc,     /* String.Char */
+.highlight .sd,     /* String.Doc */
+.highlight .s2,     /* String.Double */
+.highlight .se,     /* String.Escape */
+.highlight .sh,     /* String.Heredoc */
+.highlight .si,     /* String.Interpol */
+.highlight .sx,     /* String.Other */
+.highlight .sr,     /* String.Regex */
+.highlight .s1,     /* String.Single */
+.highlight .ss {    /* String.Symbol */
+  color: #98c379;
+}
+
+/* Generic */
+.highlight .gd {    /* Generic.Deleted */
+  color: #e06c75;
+  background-color: #3c1f1e;
+}
+
+.highlight .ge {    /* Generic.Emph */
+  font-style: italic;
+}
+
+.highlight .gr {    /* Generic.Error */
+  color: #e06c75;
+}
+
+.highlight .gh {    /* Generic.Heading */
+  color: #61afef;
+  font-weight: bold;
+}
+
+.highlight .gi {    /* Generic.Inserted */
+  color: #98c379;
+  background-color: #1e3122;
+}
+
+.highlight .go {    /* Generic.Output */
+  color: #5c6370;
+}
+
+.highlight .gp {    /* Generic.Prompt */
+  color: #5c6370;
+  font-weight: bold;
+}
+
+.highlight .gs {    /* Generic.Strong */
+  font-weight: bold;
+}
+
+.highlight .gu {    /* Generic.Subheading */
+  color: #56b6c2;
+  font-weight: bold;
+}
+
+.highlight .gt {    /* Generic.Traceback */
+  color: #e06c75;
+}
+
+/* Errors */
+.highlight .err {   /* Error */
+  color: #e06c75;
+  background-color: #3c1f1e;
+}
+
+/* Special */
+.highlight .w {     /* Text.Whitespace */
+  color: #abb2bf;
+}
+
+/* Language-specific improvements */
+.highlight .language-csharp .k,
+.highlight .language-cs .k {
+  color: #569cd6;
+}
+
+.highlight .language-csharp .kt,
+.highlight .language-cs .kt {
+  color: #4ec9b0;
+}
+
+.highlight .language-json .na {
+  color: #61afef;
+}
+
+.highlight .language-json .s2 {
+  color: #98c379;
+}
+
+.highlight .language-bash .nv,
+.highlight .language-sh .nv {
+  color: #e06c75;
+}
+
+/* Table-based line numbers (if used) */
+.highlight table {
+  margin: 0;
+  border: none;
+  width: 100%;
+}
+
+.highlight table td {
+  padding: 0;
+  border: none;
+}
+
+.highlight table pre {
+  margin: 0;
+  padding: 0;
+}
+
+.highlight table .gutter {
+  width: 3rem;
+  text-align: right;
+  padding-right: 1rem;
+  border-right: 1px solid #3e4451;
+}
+
+.highlight table .code {
+  padding-left: 1rem;
+}
+
+/* Copy button styling (optional future enhancement) */
+.highlight-wrapper {
+  position: relative;
+}
+
+.copy-code-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  background-color: #3e4451;
+  color: #abb2bf;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.highlight-wrapper:hover .copy-code-button {
+  opacity: 1;
+}
+
+.copy-code-button:hover {
+  background-color: #4b5263;
+}
+
+.copy-code-button:active {
+  background-color: #2c313a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .highlight {
+    border-radius: 6px;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+  
+  .highlight pre {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .highlight .lineno,
+  .highlight .gutter {
+    min-width: 2rem;
+    padding-right: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .highlight table .code {
+    padding-left: 0.5rem;
+  }
+}
+
+/* Smooth scrolling for wide code blocks */
+.highlight::-webkit-scrollbar {
+  height: 8px;
+}
+
+.highlight::-webkit-scrollbar-track {
+  background-color: #21252b;
+  border-radius: 0 0 8px 8px;
+}
+
+.highlight::-webkit-scrollbar-thumb {
+  background-color: #4b5263;
+  border-radius: 4px;
+}
+
+.highlight::-webkit-scrollbar-thumb:hover {
+  background-color: #5c6370;
+}
