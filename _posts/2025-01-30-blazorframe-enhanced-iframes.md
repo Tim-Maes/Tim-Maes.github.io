@@ -28,12 +28,12 @@ BlazorFrame is a Blazor component that wraps iframes with enterprise-grade secur
 
 ### Key Features
 
-- ?? **Advanced Security** - Built-in XSS and clickjacking protection
-- ? **CSP Integration** - Content Security Policy compliance
-- ?? **Real-time Monitoring** - Track iframe lifecycle and security events
-- ? **High Performance** - Optimized rendering with minimal overhead
-- ?? **Origin Validation** - Whitelist trusted domains
-- ??? **Sandbox Controls** - Fine-grained permission management
+- **Advanced Security** - Built-in XSS and clickjacking protection
+- **CSP Integration** - Content Security Policy compliance
+- **Real-time Monitoring** - Track iframe lifecycle and security events
+- **High Performance** - Optimized rendering with minimal overhead
+- **Origin Validation** - Whitelist trusted domains
+- **Sandbox Controls** - Fine-grained permission management
 
 ## Getting Started
 

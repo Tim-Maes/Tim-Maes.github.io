@@ -4,8 +4,6 @@ title: Projects
 permalink: /projects/
 ---
 
-# My Projects
-
 A collection of developer tools, libraries, and solutions that I've created to solve real-world problems. From security-focused Blazor components to productivity-enhancing developer tools.
 
 <div class="projects-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; margin: 2rem 0; text-align: center;">
@@ -14,11 +12,11 @@ A collection of developer tools, libraries, and solutions that I've created to s
     <span style="color: #586069;">Active Projects</span>
   </div>
   <div>
-    <strong style="font-size: 2rem; color: var(--link-color); display: block;">50K+</strong>
+    <strong style="font-size: 2rem; color: var(--link-color); display: block;">100K+</strong>
     <span style="color: #586069;">Downloads</span>
   </div>
   <div>
-    <strong style="font-size: 2rem; color: var(--link-color); display: block;">600+</strong>
+    <strong style="font-size: 2rem; color: var(--link-color); display: block;">1000+</strong>
     <span style="color: #586069;">GitHub Stars</span>
   </div>
   <div>
@@ -34,17 +32,17 @@ A collection of developer tools, libraries, and solutions that I've created to s
 ### Facet
 **2025** | [GitHub](https://github.com/Tim-Maes/Facet) | [NuGet](https://www.nuget.org/packages/Facet) | [Blog Post](/blog/2025/01/30/facets-in-dotnet/)
 
-Powerful source generator for compile-time DTOs, LINQ projections, and ViewModels. Zero runtime overhead with full async support. The go-to solution for developers who demand performance without sacrificing developer experience.
+Powerful source generator for compile-time Facets, DTOs, LINQ projections, Mappers and ViewModels from your complex domain models. Zero runtime overhead with full async support. The go-to solution for developers who demand performance without sacrificing developer experience.
 
 **Features:**
-- ? Zero Runtime Cost
-- ? Async Support
-- ? Type Safety
-- ? Auto-Generated
+- Zero Runtime Cost
+- Async Support
+- Type Safety
+- Auto-Generated
 
 **Technologies:** Source Generators, DTOs, LINQ, Performance
 
-**Stats:** ? 600+ Stars | ?? Multiple Packages | ?? Community Favorite
+**Stats:** 600+ Stars | Multiple Packages | Community Favorite
 
 ---
 
@@ -54,10 +52,10 @@ Powerful source generator for compile-time DTOs, LINQ projections, and ViewModel
 A security-first iframe component for Blazor applications. Built with comprehensive security features including origin validation, sandbox controls, CSP integration, and real-time monitoring. Trusted by developers who prioritize security without sacrificing functionality.
 
 **Features:**
-- ?? Advanced Security
-- ? CSP Integration
-- ?? Real-time Monitoring
-- ? High Performance
+- Advanced Security
+- CSP Integration
+- Real-time Monitoring
+- High Performance
 
 **Technologies:** Blazor, Security, Components, C#
 
@@ -72,7 +70,7 @@ Revolutionary browser extension that converts any HTML element into reusable Bla
 
 **Technologies:** Browser Extension, HTML Conversion, Developer Tools, JavaScript
 
-**Features:** ?? Chrome & Edge | ??? Right-click Convert | ?? Dual Modes
+**Features:** Chrome & Edge | Right-click Convert | Dual Modes
 
 ---
 
@@ -83,7 +81,7 @@ Modern dependency injection library that simplifies service registration through
 
 **Technologies:** Dependency Injection, Attributes, Autowiring, .NET
 
-**Features:** ?? NuGet Package | ? Production Ready | ? High Performance
+**Features:** NuGet Package | Production Ready | High Performance
 
 ---
 
@@ -94,7 +92,7 @@ Revolutionary Visual Studio extension that transforms T4 template development. P
 
 **Technologies:** Visual Studio, T4 Templates, IntelliSense, Editor
 
-**Stats:** ?? 50K+ Downloads | ?? VS Extension | ? Syntax Highlighting
+**Stats:** 50K+ Downloads | VS Extension | Syntax Highlighting
 
 ---
 
@@ -105,7 +103,7 @@ Intelligent Visual Studio extension for managing T4 template execution during bu
 
 **Technologies:** Visual Studio, T4 Templates, Build Automation, Workflow
 
-**Features:** ?? VS Extension | ?? Build Integration | ?? Configurable
+**Features:** VS Extension | Build Integration | Configurable
 
 ---
 
@@ -116,7 +114,7 @@ Enterprise-grade REST API service for Zebra printer management. Automatically di
 
 **Technologies:** REST API, Zebra Printers, ZPL, Service
 
-**Features:** ?? Industrial Ready | ?? Batch Processing | ?? Enterprise
+**Features:** Industrial Ready | Batch Processing | Enterprise
 
 ---
 

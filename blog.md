@@ -19,7 +19,7 @@ permalink: /blog/
         </div>
       {% endif %}
       <p>{{ post.excerpt }}</p>
-      <a href="{{ post.url | relative_url }}" class="read-more">Read more ?</a>
+      <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
     </article>
   {% endfor %}
 </div>

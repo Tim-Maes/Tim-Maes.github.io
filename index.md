@@ -37,11 +37,11 @@ title: Home
           </div>
         {% endif %}
         <p>{{ post.excerpt }}</p>
-        <a href="{{ post.url | relative_url }}" class="read-more">Read more ?</a>
+        <a href="{{ post.url | relative_url }}" class="read-more">Read more !</a>
       </article>
     {% endfor %}
   </div>
   <div class="view-all">
-    <a href="/blog/" class="btn btn-outline">View All Posts ?</a>
+    <a href="/blog/" class="btn btn-outline">View All Posts</a>
   </div>
 </section>

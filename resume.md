@@ -8,12 +8,12 @@ permalink: /resume/
   <img src="/assets/images/TimMountain.png" alt="Tim Maes" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--link-color); margin-bottom: 1rem;">
   <h1 style="margin: 0.5rem 0;">Tim Maes</h1>
   <h2 style="font-size: 1.25rem; font-weight: 500; color: #586069; margin: 0.5rem 0;">.NET Developer & Open Source Contributor</h2>
-  <p style="color: #586069; margin: 0.5rem 0;">?? Harelbeke, Belgium</p>
+  <p style="color: #586069; margin: 0.5rem 0;">Harelbeke, Belgium</p>
   
   <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
-    <a href="mailto:tim.maes91@gmail.com">?? tim.maes91@gmail.com</a>
-    <a href="https://linkedin.com/in/tim-maes" target="_blank">?? LinkedIn</a>
-    <a href="https://github.com/Tim-Maes" target="_blank">?? GitHub</a>
+    <a href="mailto:tim.maes91@gmail.com">tim.maes91@gmail.com</a>
+    <a href="https://linkedin.com/in/tim-maes" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Tim-Maes" target="_blank">GitHub</a>
   </div>
 </div>
 
@@ -21,7 +21,7 @@ permalink: /resume/
 
 ## Professional Summary
 
-Passionate .NET developer from Belgium with extensive experience in enterprise manufacturing systems and a strong commitment to open source development. Creator of multiple widely-used developer tools and libraries, including **BlazorFrame**, **Facet**, and **T4Editor**, with over **50,000+ downloads** across various projects.
+Passionate .NET developer from Belgium with extensive experience in enterprise manufacturing systems and a strong commitment to open source development. Creator of multiple widely-used developer tools and libraries, including **BlazorFrame**, **Facet**, and **T4Editor**, with over **100,000+ downloads** across various projects.
 
 Specialized in building secure, efficient solutions with modern .NET technologies, focusing on Blazor components, code generation, and developer productivity tools. Strong advocate for security-first development practices and clean, maintainable code architecture.
 
@@ -62,33 +62,32 @@ Specialized in building secure, efficient solutions with modern .NET technologie
 - **Open Source Development**
 - **Component Libraries**
 
----
 
-## Open Source Projects
+# Open Source Projects
 
-### BlazorFrame
+## BlazorFrame
 **2025**
 
 Security-first iframe component for Blazor applications with comprehensive security features, CSP integration, and real-time monitoring.
 
 **Achievements:**
-- ?? NuGet Package
-- ?? Security Focus
-- ?? Comprehensive Documentation
+- NuGet Package
+- Security Focus
+- Comprehensive Documentation
 
 [View on GitHub](https://github.com/Tim-Maes/BlazorFrame) | [NuGet Package](https://www.nuget.org/packages/BlazorFrame)
 
 ---
 
-### Facet
+## Facet
 **2025**
 
 Source generator for compile-time DTOs, LINQ projections, and ViewModels with zero runtime overhead and full async support.
 
 **Achievements:**
-- ? 600+ GitHub Stars
-- ?? Multiple NuGet Packages
-- ? High Performance
+- 800+ GitHub Stars
+- Multiple NuGet Packages
+- High Performance
 
 [View on GitHub](https://github.com/Tim-Maes/Facet) | [NuGet Package](https://www.nuget.org/packages/Facet)
 
@@ -100,9 +99,9 @@ Source generator for compile-time DTOs, LINQ projections, and ViewModels with ze
 Enhanced Visual Studio extension for T4 templates with syntax highlighting, IntelliSense, and advanced editing features.
 
 **Achievements:**
-- ?? 50K+ Downloads
-- ?? VS Marketplace
-- ? Rich Editor Experience
+- 50K+ Downloads
+- VS Marketplace
+- Rich Editor Experience
 
 [View on Marketplace](https://marketplace.visualstudio.com/items?itemName=TimMaes.t4editor)
 
@@ -114,9 +113,9 @@ Enhanced Visual Studio extension for T4 templates with syntax highlighting, Inte
 Modern dependency injection library with attribute-based service registration, decorators, and automatic discovery.
 
 **Achievements:**
-- ? Production Ready
-- ?? Advanced Features
-- ? High Performance
+- Production Ready
+- Advanced Features
+- High Performance
 
 [View on GitHub](https://github.com/Tim-Maes/Bindicate) | [NuGet Package](https://www.nuget.org/packages/Bindicate)
 
@@ -136,10 +135,9 @@ Lead developer on mission-critical manufacturing systems built on .NET technolog
 - Led security initiatives implementing industry best practices and compliance standards
 - Mentored junior developers and established coding standards and review processes
 
----
 
 ### Open Source Contributor & Maintainer
-**2019 - Present** | Independent
+**2017 - Present** | Independent
 
 Creator and maintainer of multiple open source projects in the .NET ecosystem, focusing on developer productivity and security.
 
@@ -150,8 +148,6 @@ Creator and maintainer of multiple open source projects in the .NET ecosystem, f
 - Authored technical articles on .NET development and modern software practices
 - Active contributor to the .NET community through speaking and knowledge sharing
 
----
-
 ## Education & Learning
 
 ### Continuous Learning & Professional Development
@@ -159,6 +155,7 @@ Creator and maintainer of multiple open source projects in the .NET ecosystem, f
 Self-taught developer with a passion for staying current with the latest .NET technologies and security practices. Regularly participates in conferences, online courses, and community events.
 
 **Current Focus Areas:**
+
 - Advanced Blazor patterns and security
 - Source generators and code analysis
 - Modern DevOps practices
@@ -169,16 +166,16 @@ Self-taught developer with a passion for staying current with the latest .NET te
 
 ## Personal Interests
 
-### ?? Fitness & Health
+### Fitness & Health
 Regular gym enthusiast who believes in maintaining physical and mental well-being
 
-### ??????????? Family Time
+### Family Time
 Devoted father who enjoys spending quality time with family and creating lasting memories
 
-### ?? Music Enthusiast
+### Music Enthusiast
 Passionate Rammstein fan with appreciation for powerful music and artistic expression
 
-### ?? Open Source Advocacy
+### Open Source Advocacy
 Strong believer in the power of open source to drive innovation and community growth
 
 ---
@@ -198,6 +195,6 @@ I'm always interested in working together on interesting projects or discussing 
     This resume is available in multiple formats. Contact me for a PDF version or additional information.
   </p>
   <button onclick="window.print()" style="background-color: var(--link-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 500; cursor: pointer; margin-top: 1rem;">
-    ??? Print Resume
+    Print Resume
   </button>
 </div>
