@@ -1,17 +1,19 @@
 ---
 layout: post
-title: "Facetting in .NET"
-date: 2025-04-28 14:00:00 +0000
+title: "Facets in .NET"
+date: 2025-09-28 14:00:00 +0000
 tags: [source-generators, architecture, mapping, dtos, linq, csharp, dotnet]
 ---
 
-> **Disclaimer:** Facet is a fairly new library, and some things referenced in this article may be inaccurate because Facet might have had updates or changes since this was written. Please refer to the official documentation for the most current information.
-
 <div style="text-align: center; margin: 2rem 0;">
-  <a href="https://www.github.com/Tim-Maes/Facet">
-    <img src="https://raw.githubusercontent.com/Tim-Maes/Facet/master/assets/Facet.png" alt="Facet logo" style="max-width: 100%; width: 600px; border-radius: 6px;">
+  <a href="https://www.github.com/Tim-Maes/Facet" target="_blank">
+    <img src="https://github.com/Tim-Maes/Facet/blob/master/assets/Facet.png?raw=true" alt="Facet Logo" style="max-width: 100%; width: 600px; height: auto; display: block; margin: 0 auto; border-radius: 8px;" />
   </a>
 </div>
+
+
+> **Disclaimer:** Facet is a fairly new library, and some things referenced in this article may be inaccurate because Facet might have had updates or changes since this was written. Please refer to the official documentation for the most current information.
+
 
 ## Facets in .NET
 

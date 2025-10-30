@@ -10,8 +10,7 @@ title: Home
       <h1>Hi, I'm Tim Maes</h1>
       <p class="tagline">.NET Developer | Software Engineer | Tech Enthusiast</p>
       <p class="intro">
-        I'm a passionate software developer specializing in .NET technologies. 
-        I love building clean, maintainable solutions and sharing what I learn along the way.
+        Crafting innovative developer tools and secure solutions with Blazor, C#, and code generation. Creator of Facet, BlazorFrame, T4Editor, and other open source projects trusted by thousands of developers worldwide.
       </p>
       <div class="hero-buttons">
         <a href="/blog/" class="btn btn-primary">Read My Blog</a>
