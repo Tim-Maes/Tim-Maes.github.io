@@ -17,14 +17,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
-# Kramdown settings for better code highlighting
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    block:
-      line_numbers: true
-
 # Permalink structure
 permalink: /blog/:year/:month/:day/:title/
 
