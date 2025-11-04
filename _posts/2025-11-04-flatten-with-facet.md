@@ -15,7 +15,17 @@ tags: [source-generators, architecture, mapping, dtos, linq, csharp, dotnet]
 
 I'm excited to introduce the newest addition to the [Facet](https://github.com/Tim-Maes/Facet) library: the **Flatten attribute**! This powerful source generator automatically transforms hierarchical object structures into flat DTOs, eliminating the tedious manual work of creating denormalized data transfer objects.
 
-If you've ever found yourself manually writing DTOs like this:
+## What is Flatten?
+
+The `[Flatten]` attribute is a source generator that automatically discovers all properties in a nested object hierarchy and generates a flat DTO with all nested properties promoted to the top level. It handles:
+
+- **Automatic Property Discovery**: Recursively traverses your domain model to find all flattenable properties
+- **Null-Safe Access**: Generates code with null-conditional operators (`?.`) to prevent NullReferenceExceptions
+- **LINQ Projection Support**: Creates static `Expression` properties for efficient Entity Framework queries
+- **Flexible Configuration**: Control depth, exclude specific paths, and customize naming strategies
+- **ID Filtering**: Optionally exclude foreign keys and nested IDs for cleaner API responses
+
+You probably have created flat DTOs before, something like:
 
 ```csharp
 public class PersonDto
@@ -52,17 +62,7 @@ public PersonDto(Person person)
 ```
 
 You know how tedious and error-prone this can be. The Flatten attribute solves this problem completely.
-
-## What is Flatten?
-
-The `[Flatten]` attribute is a source generator that automatically discovers all properties in a nested object hierarchy and generates a flat DTO with all nested properties promoted to the top level. It handles:
-
-- **Automatic Property Discovery**: Recursively traverses your domain model to find all flattenable properties
-- **Null-Safe Access**: Generates code with null-conditional operators (`?.`) to prevent NullReferenceExceptions
-- **LINQ Projection Support**: Creates static `Expression` properties for efficient Entity Framework queries
-- **Flexible Configuration**: Control depth, exclude specific paths, and customize naming strategies
-- **ID Filtering**: Optionally exclude foreign keys and nested IDs for cleaner API responses
-
+ 
 ## Why Flatten Objects?
 
 Flattening is useful in several real-world scenarios:
