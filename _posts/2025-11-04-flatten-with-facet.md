@@ -553,8 +553,8 @@ dotnet add package Facet
 
 ## Resources
 
-- [GitHub Repository](https://github.com/facet-tools/Facet)
-- [Full Documentation](https://github.com/facet-tools/Facet/blob/master/docs/11_FlattenAttribute.md)
+- [GitHub Repository](https://github.com/Tim-Maes/Facet)
+- [Full Documentation](https://github.com/Tim-MaesFacet/blob/master/docs/11_FlattenAttribute.md)
 - [NuGet Package](https://www.nuget.org/packages/Facet)
 
 Happy flattening!
