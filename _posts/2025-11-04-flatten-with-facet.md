@@ -1,19 +1,52 @@
 ---
 layout: post
-title: "Flatten with Facet in .NET"
-date: 2025-11-04 14:00:00 +0000
-tags: [source-generators, architecture, mapping, dtos, linq, csharp, dotnet]
+title: "Introducing Flatten: Automatic Object Flattening with Facet"
+date: 2025-01-04
+categories: [dotnet, csharp, source-generators]
+tags: [facet, dto, api, source-generation, entity-framework]
 ---
-
-<div style="text-align: center; margin: 2rem 0;">
-  <a href="https://www.github.com/Tim-Maes/Facet" target="_blank">
-    <img src="https://github.com/Tim-Maes/Facet/blob/master/assets/Facet.png?raw=true" alt="Facet Logo" style="max-width: 100%; width: 600px; height: auto; display: block; margin: 0 auto; border-radius: 8px;" />
-  </a>
-</div>
 
 ## Introduction
 
-I'm excited to introduce the newest addition to the [Facet](https://github.com/Tim-Maes/Facet) library: the **Flatten attribute**! This powerful source generator automatically transforms hierarchical object structures into flat DTOs, eliminating the tedious manual work of creating denormalized data transfer objects.
+I'm excited to introduce the newest addition to the [Facet](https://github.com/facet-tools/Facet) library: the **Flatten attribute**! This powerful source generator automatically transforms hierarchical object structures into flat DTOs, eliminating the tedious manual work of creating denormalized data transfer objects.
+
+If you've ever found yourself manually writing DTOs like this:
+
+```csharp
+public class PersonDto
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string AddressStreet { get; set; }
+    public string AddressCity { get; set; }
+    public string AddressState { get; set; }
+    public string AddressZipCode { get; set; }
+    public string AddressCountryName { get; set; }
+    public string AddressCountryCode { get; set; }
+    // ... and on and on
+}
+```
+
+Then writing a constructor to map all these properties:
+
+```csharp
+public PersonDto(Person person)
+{
+    Id = person.Id;
+    FirstName = person.FirstName;
+    LastName = person.LastName;
+    AddressStreet = person.Address?.Street;
+    AddressCity = person.Address?.City;
+    AddressState = person.Address?.State;
+    AddressZipCode = person.Address?.ZipCode;
+    AddressCountryName = person.Address?.Country?.Name;
+    AddressCountryCode = person.Address?.Country?.Code;
+    // ... and on and on
+}
+```
+
+You know how tedious and error-prone this can be. The Flatten attribute solves this problem completely.
 
 ## What is Flatten?
 
@@ -24,7 +57,8 @@ The `[Flatten]` attribute is a source generator that automatically discovers all
 - **LINQ Projection Support**: Creates static `Expression` properties for efficient Entity Framework queries
 - **Flexible Configuration**: Control depth, exclude specific paths, and customize naming strategies
 - **ID Filtering**: Optionally exclude foreign keys and nested IDs for cleaner API responses
- 
+- **FK Clash Detection**: Eliminate duplicate foreign key data automatically
+
 ## Why Flatten Objects?
 
 Flattening is useful in several real-world scenarios:
@@ -234,8 +268,6 @@ public class Customer
     public int Id { get; set; }  // Nested ID
     public string Name { get; set; }
     public string Email { get; set; }
-    public int? PreferredAddressId { get; set; }  // Another FK
-    public Address PreferredAddress { get; set; }
 }
 
 [Flatten(typeof(Order), IgnoreNestedIds = true)]
@@ -247,14 +279,87 @@ The generated DTO will include:
 - `OrderDate`
 - `CustomerName`
 - `CustomerEmail`
-- `CustomerPreferredAddressStreet`, `CustomerPreferredAddressCity`, etc.
 
 But will exclude:
 - `CustomerId` (foreign key)
-- `CustomerId` (nested ID)
-- `CustomerPreferredAddressId` (nested foreign key)
+- `Customer.Id` (nested ID)
 
 This creates much cleaner API responses focused on display data rather than relational database implementation details.
+
+### Ignoring Foreign Key Clashes
+
+Entity Framework models often have both foreign key properties AND navigation properties, leading to duplicate data when flattened. The new `IgnoreForeignKeyClashes` feature solves this elegantly!
+
+#### The Problem
+
+Consider this common EF pattern:
+
+```csharp
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int? AddressId { get; set; }  // Foreign key
+    public Address Address { get; set; }  // Navigation property
+}
+
+public class Address
+{
+    public int Id { get; set; }
+    public string Line1 { get; set; }
+    public string City { get; set; }
+}
+```
+
+Without `IgnoreForeignKeyClashes`, flattening creates duplicate ID data:
+
+```csharp
+[Flatten(typeof(Person))]
+public partial class PersonFlatDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int? AddressId { get; set; }   // FK property
+    public int? AddressId2 { get; set; }  // Address.Id (collision!)
+    public string AddressLine1 { get; set; }
+    public string AddressCity { get; set; }
+}
+```
+
+Notice `AddressId2` - this is `Address.Id` being flattened, but it represents the same data as `AddressId`!
+
+#### The Solution
+
+Enable `IgnoreForeignKeyClashes` to automatically detect and skip these duplicates:
+
+```csharp
+[Flatten(typeof(Person), IgnoreForeignKeyClashes = true)]
+public partial class PersonFlatDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int? AddressId { get; set; }  // FK kept
+    public string AddressLine1 { get; set; }
+    public string AddressCity { get; set; }
+    // Address.Id is automatically skipped!
+}
+```
+
+#### How It Works
+
+The generator intelligently:
+1. **Detects FK patterns**: Identifies properties ending with "Id" that have matching navigation properties
+2. **Skips nested IDs**: When flattening a navigation property, skips its `Id` if it would clash with a FK
+3. **Handles deep nesting**: Works at ALL depths, not just one level
+4. **Preserves root FKs**: Root-level foreign keys are always included for reference
+
+#### When to Use Each Feature
+
+| Feature | Use When | Result |
+|---------|----------|--------|
+| `IgnoreNestedIds = true` | Pure display DTOs, no relationships needed | Removes ALL IDs except root |
+| `IgnoreForeignKeyClashes = true` | Need FKs for relationships, avoid duplicates | Keeps root FKs, removes clashing nested IDs |
+| Both together | Ultra-clean display DTOs | Same as IgnoreNestedIds alone |
 
 ### Naming Strategies
 
@@ -290,22 +395,17 @@ public partial class PersonFlatDto { }
 // Email
 ```
 
-If there are collisions, numeric suffixes are added automatically:
-
-```csharp
-// If Person.Name and Address.Country.Name both exist:
-// Name    (from Person.Name)
-// Name2   (from Address.Country.Name)
-```
+If there are collisions, numeric suffixes are added automatically (`Name`, `Name2`, `Name3`).
 
 ## How It Works
 
 The Flatten attribute uses C# source generators to analyze your domain models at compile time and generate optimized code. Here's what happens behind the scenes:
 
 1. **Discovery**: The generator recursively walks your source type's property tree
-2. **Filtering**: Properties are filtered based on exclusion rules, depth limits, and type classifications
-3. **Naming**: Property names are generated using your chosen naming strategy
-4. **Code Generation**: Three things are generated:
+2. **FK Detection**: When `IgnoreForeignKeyClashes` is enabled, it pre-scans to find all FK patterns at all depths
+3. **Filtering**: Properties are filtered based on exclusion rules, depth limits, FK clashes, and type classifications
+4. **Naming**: Property names are generated using your chosen naming strategy
+5. **Code Generation**: Three things are generated:
    - Properties with XML documentation showing the source path
    - A constructor that uses null-conditional operators for safe access
    - A LINQ `Expression` for database projections
@@ -314,8 +414,8 @@ The Flatten attribute uses C# source generators to analyze your domain models at
 
 The generator intelligently classifies types:
 
-- **Leaf Types** (flattened as properties): primitives, strings, enums, DateTime, Guid, Decimal, simple value types (0-2 properties)
-- **Complex Types** (recursed into): reference types with properties, value types with 3+ properties
+- **Leaf Types** (flattened as properties): primitives, strings, enums, DateTime, Guid, Decimal, simple value types
+- **Complex Types** (recursed into): reference types with properties, complex value types
 - **Collections** (completely ignored): Lists, Arrays, IEnumerable, etc.
 
 ### Safety Features
@@ -324,6 +424,7 @@ The generator intelligently classifies types:
 - **Recursion Protection**: Tracks visited types to prevent infinite loops
 - **Depth Limiting**: Default max depth of 3, with a hard safety limit of 10
 - **Collision Handling**: Automatically adds numeric suffixes when property names collide
+- **FK Deduplication**: Prevents duplicate foreign key data
 
 ## Flatten vs. Facet with NestedFacets
 
@@ -352,17 +453,16 @@ var dtos = await dbContext.People
     .ToListAsync();
 
 // Not optimal - loads entire object graphs into memory first
-var dtos = await dbContext.People
+var people = await dbContext.People
     .Include(p => p.Address)
         .ThenInclude(a => a.Country)
-    .ToListAsync()
-    .Select(p => new PersonFlatDto(p))
-    .ToList();
+    .ToListAsync();
+var dtos = people.Select(p => new PersonFlatDto(p)).ToList();
 ```
 
 ### 2. Limit Depth Appropriately
 
-Don't flatten too deep unless necessary. Deep nesting can create DTOs with dozens of properties:
+Don't flatten too deep unless necessary:
 
 ```csharp
 // Usually sufficient
@@ -379,63 +479,62 @@ Always exclude sensitive information from API DTOs:
 public partial class EmployeePublicDto { }
 ```
 
-### 4. Use IgnoreNestedIds for Display DTOs
+### 4. Use IgnoreForeignKeyClashes for EF Models
 
-Clean up your API responses by filtering out implementation details:
+Clean up your API responses from duplicate FK data:
 
 ```csharp
-[Flatten(typeof(Order), IgnoreNestedIds = true)]
+[Flatten(typeof(Order), IgnoreForeignKeyClashes = true)]
 public partial class OrderDisplayDto { }
 ```
 
-### 5. Avoid Collections
-
-Collections are not flattened (by design). If your source type has collections, they will be completely ignored:
+### 5. Combine Features for Cleaner APIs
 
 ```csharp
-public class Company
-{
-    public string Name { get; set; }
-    public List<Employee> Employees { get; set; }  // This will be ignored
-}
+// Ultra-clean public API
+[Flatten(typeof(Product),
+    IgnoreNestedIds = true,         // No FKs exposed
+    exclude: new[] { "InternalNotes", "CostPrice" })]  // No internal data
+public partial class ProductPublicDto { }
 
-[Flatten(typeof(Company))]
-public partial class CompanyFlatDto { }
-// Only has: Name property
+// Admin API with relationships
+[Flatten(typeof(Product),
+    IgnoreForeignKeyClashes = true,  // Keep FKs, avoid duplicates
+    MaxDepth = 2)]                   // Limit depth
+public partial class ProductAdminDto { }
 ```
-
-If you need collection data, use nested DTOs or the regular `[Facet]` attribute instead.
 
 ## Troubleshooting
 
 ### Name Collisions
 
-If you see properties like `Name2`, `Name3`, etc., you have naming collisions. Consider:
+If you see properties like `Name2`, `Name3`, you have naming collisions. Consider:
 - Using the Prefix naming strategy (default)
 - Excluding one of the conflicting properties
-- Using `UseFullName = true` to include the full type name in the prefix
+- Using `UseFullName = true`
 
 ### Missing Properties
 
 If properties aren't being generated:
 - Check if they exceed your `MaxDepth` setting
 - Verify they're not in your `Exclude` list
-- Ensure the type isn't a collection (collections are always excluded)
-- Check if `IgnoreNestedIds = true` is filtering them out
+- Ensure the type isn't a collection
+- Check if `IgnoreNestedIds` or `IgnoreForeignKeyClashes` is filtering them
 
 ### Circular References
 
-The generator tracks visited types to prevent infinite loops. If you have circular references in your domain model, the generator will stop recursing when it detects the cycle.
+The generator tracks visited types to prevent infinite loops. Circular references are handled automatically.
 
 ## Conclusion
 
-The Flatten attribute is a powerful addition to the Facet library that eliminates the tedious work of creating flat DTOs. Whether you're building APIs, generating reports, or optimizing database queries, Flatten can save you time and reduce errors.
+The Flatten attribute is a powerful addition to the Facet library that eliminates the tedious work of creating flat DTOs. With the new `IgnoreForeignKeyClashes` feature, it's now even better at handling Entity Framework models with foreign key relationships.
 
 Key benefits:
 - **Zero Boilerplate**: No manual DTO property definitions or mapping code
 - **Type Safe**: Compile-time code generation means no runtime reflection
 - **Null Safe**: Generated code handles null nested objects automatically
 - **Efficient**: LINQ projections enable optimal database queries
+- **Smart FK Handling**: Eliminates duplicate foreign key data automatically
 - **Flexible**: Extensive configuration options for every use case
 
 Try it out in your next project and let me know what you think!
@@ -448,8 +547,8 @@ dotnet add package Facet
 
 ## Resources
 
-- [GitHub Repository](https://github.com/Tim-Maes/Facet)
-- [Full Documentation](https://github.com/Tim-Maes/Facet/blob/master/docs/11_FlattenAttribute.md)
+- [GitHub Repository](https://github.com/facet-tools/Facet)
+- [Full Documentation](https://github.com/facet-tools/Facet/blob/master/docs/11_FlattenAttribute.md)
 - [NuGet Package](https://www.nuget.org/packages/Facet)
 
 Happy flattening!
