@@ -1,10 +1,16 @@
 ---
 layout: post
-title: "Introducing Flatten: Automatic Object Flattening with Facet"
+title: "Introducing: Flatten with Facet"
 date: 2025-11-04
 categories: [dotnet, csharp, source-generators]
 tags: [facet, dto, api, source-generation, entity-framework]
 ---
+
+<div style="text-align: center; margin: 2rem 0;">
+  <a href="https://www.github.com/Tim-Maes/Facet" target="_blank">
+    <img src="https://github.com/Tim-Maes/Facet/blob/master/assets/Facet.png?raw=true" alt="Facet Logo" style="max-width: 100%; width: 600px; height: auto; display: block; margin: 0 auto; border-radius: 8px;" />
+  </a>
+</div>
 
 ## Introduction
 
