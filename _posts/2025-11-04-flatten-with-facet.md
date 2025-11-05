@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Introducing Flatten: Automatic Object Flattening with Facet"
-date: 2025-01-04
+date: 2025-11-04
 categories: [dotnet, csharp, source-generators]
 tags: [facet, dto, api, source-generation, entity-framework]
 ---
