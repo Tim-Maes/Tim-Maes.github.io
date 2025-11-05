@@ -14,7 +14,7 @@ tags: [facet, dto, api, source-generation, entity-framework]
 
 ## Introduction
 
-I'm excited to introduce the newest addition to the [Facet](https://github.com/facet-tools/Facet) library: the **Flatten attribute**! This powerful source generator automatically transforms hierarchical object structures into flat DTOs, eliminating the tedious manual work of creating denormalized data transfer objects.
+I'm excited to introduce the newest addition to the [Facet](https://www.github.com/Tim-Maes/Facet) library: the **Flatten attribute**! This powerful source generator automatically transforms hierarchical object structures into flat DTOs, eliminating the tedious manual work of creating denormalized data transfer objects.
 
 If you've ever found yourself manually writing DTOs like this:
 
