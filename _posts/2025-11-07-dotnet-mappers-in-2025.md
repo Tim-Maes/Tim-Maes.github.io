@@ -51,6 +51,14 @@ Traditional mapping libraries like AutoMapper, Mapster, and Mapperly have solved
 
 ## Introducing Facet: Generate DTOs, Not Just Mappings
 
+### What is Facetting?
+
+Think of a **diamond**. The whole stone is your domain model—it contains everything about the entity. But when you view it from different angles, you see different **facets**: specific views that show only what matters from that perspective.
+
+**Facet (noun):** *"One part of an object, situation, or subject that has many parts."*
+
+In software terms, **facetting is the process of defining focused, compile-time views of your domain models**. Instead of manually creating DTOs and mappers, you declare what you want, and Facet generates everything at compile-time using C# source generators.
+
 Facet is a .NET source generator that takes a fundamentally different approach: instead of mapping between DTOs you've already written, **Facet generates the DTOs for you** from your domain models.
 
 Here's the same example with Facet:
@@ -75,7 +83,7 @@ public partial record UserDto;
 public partial record AddressDto;
 ```
 
-That's it. **No step #3.** Facet generates both the DTO class and the mapping logic at compile time.
+That's it. **No step #3. No step #4.** Facet generates both the DTO class and the mapping logic at compile time.
 
 ## How Facet Competes with Traditional Mappers
 
@@ -92,7 +100,7 @@ Here's how Facet stacks up:
 | Mapper Config | You (Profile) | You (optional) | You (partial class) | Generated |
 | **Lines of Code** | ~50+ | ~30+ | ~40+ | **~3** |
 
-Facet eliminates 80-90% of the boilerplate by generating both the DTO and the mapping.
+Facet eliminates 85-95% of the boilerplate by generating the DTO, mapping, **and handling EF includes automatically**.
 
 ### Feature Comparison: Where Facet Pulls Ahead
 
@@ -199,23 +207,65 @@ public partial class OrderFlatDto;
 
 This is a **unique feature** - no other mapping library handles this scenario automatically.
 
-### 5. EF Core Query Projections (Zero N+1 Queries)
+### 5. EF Core Query Projections - No `.Include()` Required!
 
-**Traditional Mapper (AutoMapper):**
+This is one of Facet's **most powerful features**: automatic JOIN generation for nested objects.
+
+**The Traditional EF Core Pain:**
+
+With traditional mappers, you MUST remember to `.Include()` every navigation property:
+
 ```csharp
+// AutoMapper, Mapperly, Mapster - ALL require explicit includes:
 var users = await dbContext.Users
+    .Include(u => u.Address)           // Required! Forget = null reference
+    .Include(u => u.Orders)            // Required! Forget = N+1 queries
+        .ThenInclude(o => o.Items)     // Nested includes get complex fast
+    .Include(u => u.Department)        // Required!
+        .ThenInclude(d => d.Manager)   // More nesting...
+    .Where(u => u.IsActive)
     .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
     .ToListAsync();
+
+// Forget ONE .Include()?
+// → Null reference exception
+// → N+1 query performance hell
+// → Runtime production bugs
 ```
 
-**Facet:**
+**The Facet Solution:**
+
 ```csharp
+// Define once what nested objects you need
+[Facet(typeof(User),
+    NestedFacets = [typeof(AddressDto), typeof(OrderDto), typeof(DepartmentDto)])]
+public partial record UserDto;
+
+[Facet(typeof(Order), NestedFacets = [typeof(OrderItemDto)])]
+public partial record OrderDto;
+
+// Query ANYWHERE without includes
 var users = await dbContext.Users
-    .SelectFacet<UserDto>()
-    .ToListAsync();
+    .Where(u => u.IsActive)
+    .SelectFacet<UserDto>()            // Automatically includes ALL nested facets
+    .ToListAsync();                    // → Address, Orders, Items, Department, Manager
 ```
 
-Both generate efficient SQL, but Facet doesn't require a configuration provider reference. The projection expression is generated as a static property on the Facet.
+**What Facet does automatically:**
+1. Analyzes the Facet definition at compile time
+2. Detects all `NestedFacets` (including nested-nested facets)
+3. Generates optimal SQL projection with proper JOINs
+4. Eliminates N+1 queries entirely
+5. Returns fully populated DTOs in a single database round-trip
+
+**Benefits:**
+- **Zero** `.Include()` calls to remember
+- **Zero** N+1 query risk
+- **Compile-time safety** (add a nested facet → SQL updates automatically)
+- **Consistent queries** across your codebase
+- **Add new navigation properties** → update Facet → all queries fixed
+
+This alone can eliminate debugging time and **countless production issues**.
 
 ### 6. Custom Mapping Logic When You Need It
 
@@ -361,16 +411,23 @@ public class UserMappingProfile : Profile
 
 **Usage:**
 ```csharp
-// Controller
+// Controller - Must remember ALL includes
 var user = await _dbContext.Users
-    .Include(u => u.Address)
-    .Include(u => u.Orders)
-    .FirstOrDefaultAsync(u => u.Id == id);
+    .Include(u => u.Address)         
+    .Include(u => u.Orders)          
+    .Where(u => u.Id == id)
+    .FirstOrDefaultAsync();
 
-var dto = _mapper.Map<UserDto>(user);  // N+1 risk if not careful with includes
+var dto = _mapper.Map<UserDto>(user);
+
+// Or with ProjectTo (still requires knowing about navigation properties)
+var dto = await _dbContext.Users
+    .Where(u => u.Id == id)
+    .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
+    .FirstOrDefaultAsync();
 ```
 
-**Total:** 3 files, ~80 lines of code
+**Total:** 3 files, ~90 lines of code, manual `.Include()` management
 
 ### After (Facet)
 
@@ -390,17 +447,18 @@ public partial record OrderSummaryDto;
 
 **Usage:**
 ```csharp
-// Controller - using EF projection (no N+1 queries)
+// Controller - NO .Include() needed!
 var dto = await _dbContext.Users
-    .SelectFacet<UserDto>()
-    .FirstOrDefaultAsync(u => u.Id == id);
+    .Where(u => u.Id == id)
+    .SelectFacet<UserDto>()            // Automatically includes Address & Orders
+    .FirstOrDefaultAsync();            // Single optimized SQL query with JOINs
 
 // Or with loaded entity
 var user = await _dbContext.Users.FindAsync(id);
 var dto = new UserDto(user);
 ```
 
-**Total:** 1 file, ~10 lines of code (89% reduction)
+**Total:** 1 file, ~10 lines of code (89% reduction), **zero `.Include()` management**
 
 ### Migration Effort
 
@@ -408,9 +466,10 @@ var dto = new UserDto(user);
 |--------|--------|-------|
 | Simple DTOs | Very Low | Replace DTO class with `[Facet]` attribute |
 | Nested Objects | Low | Add `NestedFacets` parameter |
-| Custom Logic |  Medium | Convert resolvers to `IFacetMapConfiguration` |
+| Custom Logic | Medium | Convert resolvers to `IFacetMapConfiguration` |
 | Validation Attributes | Auto | Facet copies them automatically |
 | EF Projections | Improved | Replace `ProjectTo<>()` with `SelectFacet<>()` |
+| .Include() Calls | **Eliminated** | Remove all `.Include()` - Facet handles automatically |
 
 Most AutoMapper code migrates in **minutes to hours**, not days.
 
@@ -543,14 +602,17 @@ public partial record ProductDto;
 var product = await _dbContext.Products.FindAsync(id);
 var dto = new ProductDto(product);
 
-// EF projection
+// Map back to entity
+var updatedProduct = dto.BackTo<Product>;
+
+// EF projection (no .Include() needed even with nested objects!)
 var products = await _dbContext.Products
     .Where(p => p.Price > 100)
     .SelectFacet<ProductDto>()
     .ToListAsync();
 ```
 
-That's it. No profiles, no mapper classes, no configuration.
+That's it. No profiles, no mapper classes, no configuration, **no `.Include()` calls**.
 
 ### Learning Path
 
@@ -567,13 +629,15 @@ That's it. No profiles, no mapper classes, no configuration.
 | Criteria | Traditional Mappers | Facet |
 |----------|-------------------|-------|
 | **Files to maintain** | 3+ (model, DTO, mapper) | 1 (model + attribute) |
-| **Lines of code** | High | Low |
+| **Lines of code** | High | Low|
 | **Boilerplate** | Significant | Minimal |
 | **Compile-time safety** | Varies | Full |
 | **Performance** | Varies (slow to fast) | Fastest (source gen) |
 | **Bidirectional** | Manual configuration | Automatic |
 | **Nested objects** | Manual configuration | Automatic |
 | **EF projections** | Supported | Automatic + optimized |
+| **.Include() management** | **Manual (error-prone)** | **Automatic (zero config)** |
+| **N+1 query risk** | **High (if .Include() forgotten)** | **Zero (auto JOINs)** |
 | **Learning curve** | Medium | Low |
 | **Flexibility** | High (you write everything) | Medium (convention-based) |
 | **Best for** | Complex custom mappings | Standard projections/DTOs |
@@ -595,7 +659,7 @@ Facet embodies all four trends while competing head-to-head with established map
 **For individual developers:**
 - Write less code
 - Ship faster
-- Fewer bugs (compile-time safety)
+- Fewer bugs
 - Better performance (source generation)
 
 **For teams:**
@@ -635,7 +699,7 @@ That's the wrong question.
 
 Yes.
 
-And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive�it's **the future of DTO management in .NET**.
+And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive—it's **the future of DTO management in .NET**.
 
 ---
 
@@ -644,6 +708,7 @@ And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing sou
 - **GitHub Repository:** [github.com/Tim-Maes/Facet](https://github.com/Tim-Maes/Facet)
 - **Documentation:** [Full docs with examples](https://github.com/Tim-Maes/Facet/tree/master/docs)
 - **NuGet Package:** `dotnet add package Facet`
+- **EF Core Extensions:** `dotnet add package Facet.Extensions.EFCore`
 - **Performance Benchmarks:** [Community benchmarks](https://github.com/mjebrahimi/Benchmark.netCoreMappers)
 
 ---
