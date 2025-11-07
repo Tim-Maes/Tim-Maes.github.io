@@ -6,7 +6,7 @@ categories: [dotnet, csharp, source-generators, dto]
 tags: [facet, automapper, mapperly, mapster, object-mapping, source-generation]
 ---
 
-## The Mapper Problem We've Been Solving Wrong
+## The Mapper Problem
 
 For over a decade, .NET developers have been writing the same code three times:
 
@@ -49,7 +49,7 @@ Traditional mapping libraries like AutoMapper, Mapster, and Mapperly have solved
 
 **What if we could eliminate step #2 entirely?**
 
-## Introducing Facet: Generate DTOs, Not Just Mappings
+## Introducing Facet: Generate everything at Compile Time
 
 ### What is Facetting?
 
@@ -75,9 +75,14 @@ public class User
     public Address Address { get; set; }
 }
 
-// 2. Tell Facet what you want
+// 2. Tell Facet what you don't want (exclusive)
 [Facet(typeof(User), exclude: ["PasswordHash", "Salary"], NestedFacets = [typeof(AddressDto)])]
 public partial record UserDto;
+
+// Or tell Facet what you do want (inclusive)
+[Facet(typeof(User), include: ["FirstName", "LastName"], NestedFacets = [typeof(AddressDto)])]
+public partial record UserDto;
+
 
 [Facet(typeof(Address))]
 public partial record AddressDto;
