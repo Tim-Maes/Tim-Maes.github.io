@@ -233,9 +233,9 @@ var users = await dbContext.Users
     .ToListAsync();
 
 // Forget ONE .Include()?
-// → Null reference exception
-// → N+1 query performance hell
-// → Runtime production bugs
+// - Null reference exception
+// - N+1 query performance
+// - Runtime production bugs
 ```
 
 **The Facet Solution:**
