@@ -94,7 +94,7 @@ That's it. **No step #3. No step #4.** Facet generates both the DTO class and th
 
 ## How Facet Competes with Traditional Mappers
 
-Let's be clear about what Facet is competing with: AutoMapper, Mapster, and Mapperly are the main players in .NET object mapping. AutoMapper (296M+ downloads) went commercial in April 2025. Mapster (7.4M downloads) has an uncertain development future. Mapperly is the rising star with active development and adoption by major frameworks like ABP.
+Let's be clear about what Facet is now competing with: AutoMapper, Mapster, and Mapperly are the main players in .NET object mapping. AutoMapper (296M+ downloads) went commercial in April 2025. Mapster (7.4M downloads) has an uncertain development future. Mapperly is the rising star with active development and adoption by major frameworks like ABP.
 
 Here's how Facet stacks up:
 
