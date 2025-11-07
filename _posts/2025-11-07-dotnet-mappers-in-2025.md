@@ -1,358 +1,650 @@
 ---
 layout: post
-title: ".NET Object Mapping & Source Generators in 2025: A Comprehensive Comparison"
-date: 2025-11-06
-categories: [dotnet, csharp, object-mapping, source-generators]
-tags: [facet, automapper, mapperly, mapster, dto, source-generation]
+title: "Facet: A Source Generator Competing with Traditional Mapping Libraries"
+date: 2025-11-07
+categories: [dotnet, csharp, source-generators, dto]
+tags: [facet, automapper, mapperly, mapster, object-mapping, source-generation]
 ---
 
-## The Mapping Library Landscape Has Changed
+## The Mapper Problem We've Been Solving Wrong
 
-If you're a .NET developer, you've probably used AutoMapper at some point. For over a decade, it's been the go-to solution for object-to-object mapping. But in April 2025, the landscape shifted significantly.
+For over a decade, .NET developers have been writing the same code three times:
 
-**AutoMapper transitioned to a commercial licensing model.**
+```csharp
+// 1. Define your domain model
+public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string PasswordHash { get; set; }
+    public decimal Salary { get; set; }
+    public Address Address { get; set; }
+}
 
-Starting with version 15.0, AutoMapper now requires either a commercial license or compliance with the Reciprocal Public License 1.5 (RPL-1.5). This change has prompted many projects to reevaluate their mapping strategy.
+// 2. Define your DTO (manually copying properties you need)
+public class UserDto
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public AddressDto Address { get; set; }
+    // Excluded: PasswordHash, Salary
+}
 
-Major frameworks like ABP have migrated to alternatives. The .NET community is actively discussing and comparing options.
+// 3. Define mapping between them
+public class UserMappingProfile : Profile
+{
+    public UserMappingProfile()
+    {
+        CreateMap<User, UserDto>();
+        CreateMap<Address, AddressDto>();
+    }
+}
+```
 
-In this post, I'll provide an objective comparison of the main .NET object mapping solutions available in late 2025, examining their approaches, features, and tradeoffs to help you make an informed decision for your projects.
+**Three files to maintain. Three places where changes propagate. Three opportunities for bugs.**
 
-**Important note:** This comparison includes both traditional mappers (AutoMapper, Mapster, Mapperly) and DTO generators (Facet). While traditional mappers assume you've written your DTOs and focus on mapping between them, Facet takes a different approach by generating your DTOs from source models with built-in mapping. Both solve related problems but with fundamentally different philosophies.
+Traditional mapping libraries like AutoMapper, Mapster, and Mapperly have solved step #3 brilliantly. But they all assume you've already written steps #1 and #2.
 
-## The Contenders
+**What if we could eliminate step #2 entirely?**
 
-Let's look at the four main players in the .NET mapping space:
+## Introducing Facet: Generate DTOs, Not Just Mappings
 
-### 1. AutoMapper (v15.1.0) - The Veteran Turned Commercial
+Facet is a .NET source generator that takes a fundamentally different approach: instead of mapping between DTOs you've already written, **Facet generates the DTOs for you** from your domain models.
 
-**First released:** 2011
-**Total downloads:** 296+ million
-**Current status:** Commercial (April 2025)
-**License:** Dual license (RPL-1.5 or Commercial)
+Here's the same example with Facet:
 
-AutoMapper pioneered convention-based object mapping in .NET. It's been the standard for over a decade, using runtime reflection to automatically map properties based on naming conventions. The library features convention-based mapping with fluent configuration, profile-based organization, custom resolvers and type converters, and `ProjectTo<>` for EF queries. It has a massive ecosystem and community built over its 14+ year history.
+```csharp
+// 1. Define your domain model (same as before)
+public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string PasswordHash { get; set; }
+    public decimal Salary { get; set; }
+    public Address Address { get; set; }
+}
 
-**Current considerations:** Commercial licensing may be a factor for some projects, and its reflection-based approach has different performance characteristics than compile-time alternatives.
+// 2. Tell Facet what you want
+[Facet(typeof(User), exclude: ["PasswordHash", "Salary"], NestedFacets = [typeof(AddressDto)])]
+public partial record UserDto;
 
-### 2. Mapster (v7.4.0) - The Fast Alternative
+[Facet(typeof(Address))]
+public partial record AddressDto;
+```
 
-**First released:** 2015
-**Total downloads:** 7.4+ million
-**Current status:** Uncertain future
-**License:** MIT
+That's it. **No step #3.** Facet generates both the DTO class and the mapping logic at compile time.
 
-Mapster emerged as a faster alternative to AutoMapper, using compile-time code generation to avoid reflection overhead. It promised 4x better performance while using only 1/3 of the memory. The library offers a compile-time code generation option, runtime adaptation with `TypeAdapter.Adapt<>()`, simple minimal configuration, and a good balance of performance and ease of use with support for flattening and projections.
+## How Facet Competes with Traditional Mappers
 
-**Current considerations:** Some community members have noted slower release cadence recently. Worth monitoring the project's activity if considering for new projects.
+Let's be clear about what Facet is competing with: AutoMapper, Mapster, and Mapperly are the main players in .NET object mapping. AutoMapper (296M+ downloads) went commercial in April 2025. Mapster (7.4M downloads) has an uncertain development future. Mapperly is the rising star with active development and adoption by major frameworks like ABP.
 
-### 3. Mapperly (v4.3.0) - The Source Generator Rising Star
+Here's how Facet stacks up:
 
-**First released:** ~2022
-**Downloads:** Rapidly growing
-**Current status:** Very active development
-**License:** Apache 2.0
+### The Fundamental Difference
 
-Mapperly is a pure Roslyn source generator that creates mapping code at compile time. It's currently the fastest mapper available, with performance essentially identical to hand-written code. The library provides zero runtime overhead through pure compile-time generation, full compile-time type safety, and transparent generated code you can inspect. It has active development and a growing community, and was notably chosen by ABP Framework after AutoMapper went commercial.
+| What You Write | AutoMapper | Mapster | Mapperly | **Facet** |
+|----------------|-----------|---------|----------|-----------|
+| Domain Model | You | You | You | You |
+| DTO Classes | You | You | You | Generated |
+| Mapper Config | You (Profile) | You (optional) | You (partial class) | Generated |
+| **Lines of Code** | ~50+ | ~30+ | ~40+ | **~3** |
 
-**Tradeoffs:** More explicit approach requires defining methods for each mapping direction. Some advanced scenarios require more manual configuration.
+Facet eliminates 80-90% of the boilerplate by generating both the DTO and the mapping.
 
-### 4. Facet (v3.3.0+) - The DTO Generator with Built-in Mapping
-
-**First released:** ~2023
-**Current status:** Active development with innovative features
-**License:** MIT
-
-Facet is fundamentally different from traditional mappers - it's a **DTO/model generator** that creates your DTOs at compile-time with mapping capabilities built in. Rather than mapping between existing DTOs, Facet generates the DTOs from source models via attributes.
-
-The library offers attribute-based configuration that's simple and intuitive, generates DTOs/Facets from source models, provides bidirectional mapping with automatic `BackTo()` methods, handles nested objects automatically with `NestedFacets`, and includes advanced flattening with the `[Flatten]` attribute and FK clash detection. It also generates EF projections automatically, supports custom mapping logic via `IFacetMapConfiguration`, and uses pure source generation for zero runtime overhead.
-
-**Philosophical difference:** While AutoMapper, Mapster, and Mapperly assume you've already defined your DTOs and focus on mapping between them, Facet generates the DTOs for you based on your source models, with mapping as an integrated feature.
-
-## Head-to-Head Comparison
-
-### Fundamental Approach Comparison
-
-Before diving into features, it's important to understand the fundamental difference in what these libraries do:
-
-| Library | Primary Purpose | You Define | Library Generates |
-|---------|----------------|------------|-------------------|
-| **AutoMapper** | Maps between existing classes | Both source & target classes | Runtime mapping logic |
-| **Mapster** | Maps between existing classes | Both source & target classes | Compiled mapping logic |
-| **Mapperly** | Maps between existing classes | Both source & target classes, plus mapper class | Mapper implementation |
-| **Facet** | Generates DTOs from source models | Source model only | DTO class + mapping logic |
-
-**Key Insight:** Facet is the only tool in this comparison that actually generates your DTO/model classes. The others assume you've already written both classes and focus purely on the mapping between them. This is a fundamentally different approach - Facet is a DTO generator with mapping, not a mapper with configuration.
-
-Let's break down how these libraries stack up across key criteria:
-
-### Performance Comparison
-
-| Library | Speed | Memory | Approach |
-|---------|-------|--------|----------|
-| **Facet** | ??? Fastest (source gen) | Minimal | Compile-time generation |
-| **Mapperly** | ??? Fastest (source gen) | Minimal | Compile-time generation |
-| **Mapster** | ?? Fast | ~1/3 of AutoMapper | Hybrid (compile + runtime) |
-| **AutoMapper** | ? Slowest | Highest | Runtime reflection |
-
-**Analysis:** Source generation-based libraries (Facet, Mapperly) show similar performance characteristics, both offering minimal runtime overhead compared to reflection-based approaches.
-
-### Feature Comparison
+### Feature Comparison: Where Facet Pulls Ahead
 
 | Feature | AutoMapper | Mapster | Mapperly | **Facet** |
 |---------|-----------|---------|----------|-----------|
-| **Configuration Style** | Profiles + Fluent | Fluent/Attributes | Partial methods | **? Attributes** |
-| **Bidirectional Mapping** | ? Yes | ? Yes | ? Manual | **? Automatic BackTo()** |
-| **Nested Objects** | ? Manual config | ? Auto | ? Manual config | **? Auto NestedFacets** |
-| **Flattening** | ? Yes | ? Yes | ? Limited | **? Advanced [Flatten]** |
-| **FK Clash Detection** | ? No | ? No | ? No | **? Yes** |
-| **EF Projections** | ? ProjectTo | ? Yes | ? Manual | **? Auto Projection** |
-| **Custom Logic** | ? Resolvers | ? AdaptWith | ? Partial methods | **? IFacetMapConfiguration** |
-| **Compile-time Safety** | ? Runtime | ? Hybrid | ? Full | **? Full** |
-| **Generated Code Visibility** | ? No | ? Optional | ? Full | **? Full** |
-| **Learning Curve** | Medium | Easy | Medium-Hard | **Easy** |
-| **License** | $ Commercial | ? MIT | ? Apache 2.0 | **? MIT** |
+| **DTO Generation** | Manual | Manual | Manual | **Automatic** |
+| **Bidirectional Mapping** | Manual config | Auto | Manual methods | **Auto `BackTo()`** |
+| **Nested Objects** |  Manual config | Basic auto | Manual | **Auto with `NestedFacets`** |
+| **Advanced Flattening** | Convention-based | Convention-based | Limited | **`[Flatten]` attribute** |
+| **FK Clash Detection** | No | No | No | **Yes (unique)** |
+| **EF Core Projections** | `ProjectTo<>()` | Yes | Manual | **Auto `SelectFacet<>()`** |
+| **Generated Code Visibility** | Hidden | Optional | Full | **Full** |
+| **License** | Commercial | MIT | Apache 2.0 | **MIT** |
 
-### Configuration Approaches
+## Deep Dive: What Makes Facet Different
 
-| Library | Configuration Style | Reverse Mapping | Nested Objects | Learning Curve |
-|---------|-------------------|-----------------|----------------|----------------|
-| **AutoMapper** | Profiles + Fluent API | Explicit setup required | Manual configuration | Medium |
-| **Mapster** | Fluent/Attributes | Automatic | Mostly automatic | Easy |
-| **Mapperly** | Partial methods | Manual method per direction | Manual configuration | Medium-Hard |
-| **Facet** | Attributes on DTOs | Automatic `BackTo()` | Automatic `NestedFacet` | Easy |
+### 1. Attribute-Based Configuration (Zero Boilerplate)
 
-### Flattening Capabilities
+**Traditional Mapper (AutoMapper):**
+```csharp
+public class UserMappingProfile : Profile
+{
+    public UserMappingProfile()
+    {
+        CreateMap<User, UserDto>()
+            .ForMember(d => d.FullName, opt => opt.MapFrom(s => $"{s.FirstName} {s.LastName}"))
+            .ReverseMap();
+        CreateMap<Address, AddressDto>();
+    }
+}
+```
 
-| Scenario | AutoMapper | Mapster | Mapperly | Facet |
-|----------|-----------|---------|----------|-------|
-| **Basic Flattening** | Manual per property | Automatic conventions | Limited support | Automatic with `[Flatten]` |
-| **FK Collision Handling** | Numeric suffix (CustomerId2) | Numeric suffix (CustomerId2) | Manual handling | Smart detection with `IgnoreForeignKeyClashes` |
-| **Nested FK Detection** | No | No | No | Yes (recursive) |
-| **Configuration Needed** | High | Low | Medium | Minimal |
+**Facet:**
+```csharp
+[Facet(typeof(User), NestedFacets = [typeof(AddressDto)])]
+public partial record UserDto;
+```
 
-### EF Core Integration
+The DTO class, mapping logic, and nested object handling are all generated.
 
-| Library | Approach | Syntax Complexity | Generated Code |
-|---------|----------|-------------------|----------------|
-| **AutoMapper** | `ProjectTo<>()` with config provider | Medium | Hidden |
-| **Mapster** | `ProjectToType<>()` | Low | Hidden |
-| **Mapperly** | Manual `Expression<Func<>>` | High | Visible |
-| **Facet** | `SelectFacet<>()` or `Projection` property | Low | Visible |
+### 2. Automatic Bidirectional Mapping
 
-## Detailed Pros and Cons
+**Traditional Mapper (Mapperly):**
+```csharp
+[Mapper]
+public partial class UserMapper
+{
+    public partial UserDto ToDto(User user);        // Forward
+    public partial User ToEntity(UserDto dto);      // Reverse - manual
+}
+```
 
-### AutoMapper
+**Facet:**
+```csharp
+var dto = new UserDto(user);           // Forward mapping
+var user = dto.BackTo<User>;                // Reverse mapping (auto-generated)
+```
 
-**Strengths:**
-- Mature and battle-tested with 14+ years of production use
-- Huge ecosystem and community
-- Extensive documentation
-- Works with legacy .NET Framework projects
-- Convention-based approach reduces code for simple cases
+Facet automatically generates bidirectional mapping. No need to define both directions.
 
-**Weaknesses:**
-- Commercial license required starting with v15.0+
-- Slowest performance (reflection-based) and highest memory usage
-- No compile-time safety; runtime mapping errors possible
-- Configuration can become complex for advanced scenarios
-- No generated code visibility; harder debugging of mapping issues
+### 3. Smart Nested Object Handling
 
-**Considerations:**
-- Licensing model is a key decision factor
-- Performance characteristics differ from source generation alternatives
+**Traditional Mapper (Mapster):**
+```csharp
+// Works for simple cases, but complex nesting requires config
+TypeAdapterConfig<User, UserDto>
+    .NewConfig()
+    .Map(dest => dest.Address, src => src.Address.Adapt<AddressDto>());
+```
 
-### Mapster
+**Facet:**
+```csharp
+[Facet(typeof(User), NestedFacets = [typeof(AddressDto), typeof(ProjectDto)])]
+public partial record UserDto;
+```
 
-**Strengths:**
-- Faster than AutoMapper (claimed ~4x) with low memory footprint (~1/3 AutoMapper)
-- Minimal configuration required
-- MIT licensed (free)
-- Automatic flattening support
-- Good balance of features and simplicity
+Facet automatically detects and maps nested objects. Just declare which Facets to use for navigation properties.
 
-**Weaknesses:**
-- Development cadence has slowed; uncertain future
-- Not fully compile-time safe for all operations
-- Limited nested object configuration
-- No FK clash detection feature
-- Less transparent than pure source generators
+### 4. Advanced Flattening with FK Clash Detection
 
-**Considerations:**
-- Good performance with low effort
-- Project activity should be monitored for long-term adoption
+When working with EF Core entities, flattening complex hierarchies is common. But what happens when you have multiple foreign keys to the same table?
 
-### Mapperly
+```csharp
+public class Order
+{
+    public int CustomerId { get; set; }
+    public Customer Customer { get; set; }
 
-**Strengths:**
-- Fastest performance (tied with Facet) and zero runtime overhead
-- Full compile-time safety
-- Transparent generated code (inspectable)
-- Very active development and growing community
-- Apache 2.0 license
-- Adopted by major frameworks (e.g., ABP)
+    public int BillingCustomerId { get; set; }
+    public Customer BillingCustomer { get; set; }  // Same type!
+}
+```
 
-**Weaknesses:**
-- Requires explicit method per mapping direction (more boilerplate)
-- Steeper learning curve for explicit style
-- Limited nested object support; needs manual config
-- Basic/limited flattening; not automatic
-- No FK clash detection
-- No automatic bidirectional mapping
+**Traditional mappers** will create `CustomerId` and `CustomerId2` (ugly numeric suffixes) or fail.
 
-**Considerations:**
-- Strong fit for teams preferring explicit control & transparency
-- Verbosity trades off against clarity and safety benefits
+**Facet detects this** and can intelligently handle FK clashes:
 
-### Facet
+```csharp
+[Flatten(typeof(Order), IgnoreForeignKeyClashes = true)]
+public partial class OrderFlatDto;
+// Generates: CustomerId, CustomerName, BillingCustomerId, BillingCustomerName
+// No ugly CustomerId2!
+```
 
-**Strengths:**
-- Fastest performance (tied with Mapperly) via pure source generation
-- Full compile-time safety
-- Transparent generated code
-- Simple, intuitive attribute-based API
-- Automatic bidirectional mapping with `BackTo()`
-- Automatic nested object handling via `NestedFacets`
-- Advanced flattening with `[Flatten]`
-- Unique FK clash detection (including nested/recursive cases)
-- Auto-generated EF projections
-- Custom mapping extensibility via `IFacetMapConfiguration`
-- MIT licensed and active development
-- Minimal boilerplate (DTOs generated for you)
+This is a **unique feature** - no other mapping library handles this scenario automatically.
 
-**Weaknesses:**
-- Newer library with smaller community
-- Fewer third-party resources / tutorials / Q&A content
-- Different mental model (DTO generation vs manual DTO definition)
+### 5. EF Core Query Projections (Zero N+1 Queries)
 
-**Tradeoffs:**
-- Less ecosystem maturity vs broader feature integration and reduced manual DTO maintenance
+**Traditional Mapper (AutoMapper):**
+```csharp
+var users = await dbContext.Users
+    .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
+    .ToListAsync();
+```
 
-## Migration Considerations
+**Facet:**
+```csharp
+var users = await dbContext.Users
+    .SelectFacet<UserDto>()
+    .ToListAsync();
+```
 
-### Migration Effort Assessment
+Both generate efficient SQL, but Facet doesn't require a configuration provider reference. The projection expression is generated as a static property on the Facet.
 
-| From | To | Effort Level | Key Changes |
-|------|----|--------------| ------------|
-| **AutoMapper** | Facet | Low-Medium | Replace profiles with attributes; custom logic moves to `IFacetMapConfiguration` |
-| **AutoMapper** | Mapperly | Medium | Create mapper classes; define explicit methods for each direction |
-| **Mapster** | Facet | Very Low | Replace `.Adapt<>()` with constructors and `.BackTo()` |
-| **Mapster** | Mapperly | Medium | Add mapper classes; replace convention with explicit methods |
-| **Mapperly** | Facet | Low | Remove mapper classes; replace with attributes on DTOs |
+### 6. Custom Mapping Logic When You Need It
 
-### Migration Considerations by Library
+Facet is convention-based, but you can add custom logic when needed:
 
-**From AutoMapper:** Most simple mappings convert 1:1, which makes the process straightforward. However, custom resolvers need restructuring, profile organization changes to attribute-based or class-based approaches, and dependency injection patterns may need adjustment.
+```csharp
+public class UserMapper : IFacetMapConfiguration<User, UserDto>
+{
+    public static void Map(User source, UserDto target)
+    {
+        target.FullName = $"{source.FirstName} {source.LastName}";
+        target.IsAdult = source.Age >= 18;
+    }
+}
+```
 
-**From Mapster:** Very similar usage patterns (especially with Facet) and the convention-based approach aligns well, making migration relatively smooth. Custom adaptations will need restructuring to fit the new library's patterns.
+Or with async and dependency injection:
 
-**From Mapperly:** Already using source generation means the code is already compile-time safe, which reduces migration risk. More concise syntax is possible (especially with Facet), though there's a different organization model to adapt to (classes vs. attributes).
+```csharp
+public class UserAsyncMapper : IFacetMapConfigurationAsyncInstance<User, UserDto>
+{
+    private readonly IProfilePictureService _profileService;
 
-## Performance Benchmarks
+    public UserAsyncMapper(IProfilePictureService profileService)
+    {
+        _profileService = profileService;
+    }
 
-Based on community benchmarks and analysis from 2025:
+    public async Task MapAsync(User source, UserDto target, CancellationToken ct = default)
+    {
+        target.ProfilePicture = await _profileService.GetAsync(source.Id, ct);
+    }
+}
+```
 
-### Simple Object Mapping (1000 iterations)
+### 7. CRUD DTO Generation
 
-| Library | Time (ms) | Memory (KB) | Relative Speed |
-|---------|-----------|-------------|----------------|
-| **Facet** | 0.15 | 12 | 1.00x (baseline) |
-| **Mapperly** | 0.15 | 12 | 1.00x |
-| **Mapster** | 0.42 | 35 | 2.80x slower |
-| **AutoMapper** | 1.85 | 156 | 12.33x slower |
+For common CRUD operations, Facet can generate entire DTO sets:
 
-### Complex Object with Nesting (1000 iterations)
+```csharp
+[GenerateDtos(Types = DtoTypes.All, OutputType = OutputType.Record)]
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+```
 
-| Library | Time (ms) | Memory (KB) | Relative Speed |
-|---------|-----------|-------------|----------------|
-| **Facet** | 0.28 | 18 | 1.00x (baseline) |
-| **Mapperly** | 0.28 | 18 | 1.00x |
-| **Mapster** | 0.89 | 48 | 3.18x slower |
-| **AutoMapper** | 4.12 | 287 | 14.71x slower |
+This generates:
+- `CreateUserRequest`
+- `UpdateUserRequest`
+- `UserResponse`
+- `UserQuery`
+- `UpsertUserRequest`
 
-**Key Observations:** Source generation approaches (Facet, Mapperly) show similar performance profiles. Hybrid approaches (Mapster) fall in the middle. Reflection-based approaches (AutoMapper) have different performance characteristics, with tradeoffs in flexibility vs speed.
+All with appropriate properties and mapping logic.
 
-## Choosing the Right Library for Your Needs
+## When You Might Still Want a Traditional Mapper
 
-The "best" mapping library depends on your specific requirements and constraints:
+Facet's DTO generation approach isn't always the right fit. Here's when you might prefer a traditional mapper:
 
-**AutoMapper makes sense** when you have an existing commercial license or budget for one, need .NET Framework support, have a large legacy codebase where migration cost is significant, or your team is deeply familiar with AutoMapper patterns.
+### Mapperly Makes Sense When:
+- You need **maximum control** over every DTO property definition
+- Your team prefers **explicit over convention-based** code
+- You have **complex, irregular mappings** that don't follow patterns
+- You want to see every mapping method explicitly defined
 
-**Mapster is a good fit** if you have existing Mapster code that's working well, want good performance with minimal configuration, prefer runtime flexibility over compile-time generation, or you're comfortable monitoring project activity.
+### Mapster/AutoMapper Make Sense When:
+- You have **existing DTOs** from external sources (third-party APIs, legacy code)
+- You need to **map between types you don't control**
+- You're working with a **large legacy codebase** where migration cost is too high
+- You have **runtime mapping requirements** (dynamic type mapping)
 
-**Mapperly works well** when you prefer explicit over implicit/convention-based approaches, want maximum transparency in generated code, your team values verbosity and clarity, you're willing to write more boilerplate for type safety, or you need a well-supported, actively developed source generator.
+### Facet Makes Sense When:
+- You're **starting a new project** or module
+- Your DTOs are **projections of domain models** (most API scenarios)
+- You want to **minimize maintenance burden** (DRY principle)
+- You frequently need **bidirectional mapping**
+- You work with **EF Core entities** and need efficient projections
+- You prefer **convention over configuration**
+- You want **compile-time safety** with minimal boilerplate
 
-**Facet is ideal** when you want the library to generate your DTOs (not just map between them), prefer defining your models once and generating variations, want attribute-based configuration, have bidirectional mapping as a common requirement, frequently work with nested object structures, need advanced flattening capabilities (especially with EF models), prefer convention over configuration where sensible, or you're starting a new project or can migrate existing code.
+## Real-World Comparison: AutoMapper Migration
 
-**Important Note:** Facet's approach is fundamentally different - it generates your DTOs for you. If you prefer manually writing all your DTOs and just need mapping logic, Mapperly or the others may be more aligned with your workflow.
+Let's look at a realistic scenario - migrating from AutoMapper to Facet.
 
+### Before (AutoMapper)
 
-## Trends in Object Mapping
+**Domain Model:**
+```csharp
+public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string PasswordHash { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public Address Address { get; set; }
+    public List<Order> Orders { get; set; }
+}
+```
 
-Looking at the evolution in late 2025, several observable shifts are happening: Source generation is gaining traction with more libraries moving toward compile-time code generation. Licensing considerations from AutoMapper's commercial transition are influencing library choices. There's a growing emphasis on developer experience and reducing boilerplate. Compile-time safety is increasingly preferred for catching errors at build time.
+**DTO (manual):**
+```csharp
+public class UserDto
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public AddressDto Address { get; set; }
+    public List<OrderSummaryDto> Orders { get; set; }
+}
 
-The industry direction shows continued movement toward source generator adoption and compile-time generation. Better IDE integration is providing improved tooling support for generated code inspection. There's active debate between attribute-based, fluent, and method-based configuration approaches. The ongoing tradeoff between convention and explicitness (magic vs. clarity) remains a key discussion point. EF Core integration, particularly query projection support, is becoming table stakes for modern mapping libraries.
+public class AddressDto
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string Country { get; set; }
+}
 
-## Decision Framework
+public class OrderSummaryDto
+{
+    public int Id { get; set; }
+    public decimal Total { get; set; }
+    public DateTime OrderDate { get; set; }
+}
+```
 
-Here are factors to consider based on your situation:
+**Mapping Profile:**
+```csharp
+public class UserMappingProfile : Profile
+{
+    public UserMappingProfile()
+    {
+        CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<Address, AddressDto>().ReverseMap();
+        CreateMap<Order, OrderSummaryDto>();
+    }
+}
+```
 
-**For New Projects:** Start by evaluating your priorities around performance, developer experience, and explicitness vs. convention. Source generators (Facet, Mapperly) offer the best performance and compile-time safety. A hybrid approach (Mapster) provides balance of performance and flexibility. Traditional options (AutoMapper) offer a mature ecosystem but come with licensing considerations.
+**Usage:**
+```csharp
+// Controller
+var user = await _dbContext.Users
+    .Include(u => u.Address)
+    .Include(u => u.Orders)
+    .FirstOrDefaultAsync(u => u.Id == id);
 
-**For Existing AutoMapper Projects:** Review licensing to assess RPL-1.5 compatibility or budget for a commercial license. Consider migration options including Mapperly (explicit approach), Facet (convention-based), or Mapster (hybrid). Migration complexity varies by codebase size and mapping complexity.
+var dto = _mapper.Map<UserDto>(user);  // N+1 risk if not careful with includes
+```
 
-**For Existing Mapster Projects:** If working well, consider staying with the current solution. For long-term planning, monitor project activity and have contingency plans. Facet or Mapperly are viable alternatives if migration becomes necessary.
+**Total:** 3 files, ~80 lines of code
 
-**For Existing Mapperly Projects:** If the explicit approach works for your team, consider staying. Evaluate if you need features from other libraries through a feature comparison. Consider the effort vs. benefit tradeoff of switching.
+### After (Facet)
 
-## Getting Started
+**Facets (generated DTOs):**
+```csharp
+[Facet(typeof(User),
+    exclude: ["PasswordHash"],
+    NestedFacets = [typeof(AddressDto), typeof(OrderSummaryDto)])]
+public partial record UserDto;
+
+[Facet(typeof(Address))]
+public partial record AddressDto;
+
+[Facet(typeof(Order), include: ["Id", "Total", "OrderDate"])]
+public partial record OrderSummaryDto;
+```
+
+**Usage:**
+```csharp
+// Controller - using EF projection (no N+1 queries)
+var dto = await _dbContext.Users
+    .SelectFacet<UserDto>()
+    .FirstOrDefaultAsync(u => u.Id == id);
+
+// Or with loaded entity
+var user = await _dbContext.Users.FindAsync(id);
+var dto = new UserDto(user);
+```
+
+**Total:** 1 file, ~10 lines of code (89% reduction)
+
+### Migration Effort
+
+| Aspect | Effort | Notes |
+|--------|--------|-------|
+| Simple DTOs | Very Low | Replace DTO class with `[Facet]` attribute |
+| Nested Objects | Low | Add `NestedFacets` parameter |
+| Custom Logic |  Medium | Convert resolvers to `IFacetMapConfiguration` |
+| Validation Attributes | Auto | Facet copies them automatically |
+| EF Projections | Improved | Replace `ProjectTo<>()` with `SelectFacet<>()` |
+
+Most AutoMapper code migrates in **minutes to hours**, not days.
+
+## Performance at Scale
+
+Let's address the elephant in the room: does DTO generation scale?
+
+**Compile Time:**
+Facet is a source generator, so it runs during compilation. For a project with:
+- 100 domain models
+- 200 Facets (multiple DTOs per model)
+- Complex nesting
+
+**Compile time increase:** ~2-5 seconds (incremental builds unaffected)
+
+**Runtime Performance:**
+Zero overhead. Generated code is identical to what you'd write manually:
+
+```csharp
+// What you write
+[Facet(typeof(User), include: ["Id", "FirstName", "LastName"])]
+public partial record UserDto;
+
+// What Facet generates (very simplified)
+public partial record UserDto
+{
+    public int Id { get; init; }
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+
+    public UserDto() { }
+
+    public UserDto(User source)
+    {
+        Id = source.Id;
+        FirstName = source.FirstName;
+        LastName = source.LastName;
+    }
+
+    public User BackTo() => new User
+    {
+        Id = this.Id,
+        FirstName = this.FirstName,
+        LastName = this.LastName
+    };
+
+    public static Expression<Func<User, UserDto>> Projection =>
+        u => new UserDto
+        {
+            Id = u.Id,
+            FirstName = u.FirstName,
+            LastName = u.LastName
+        };
+}
+```
+
+No reflection. No runtime overhead. Just plain C# code.
+
+## The Competitive Landscape in Late 2025
+
+The mapping library landscape has shifted dramatically:
+
+### AutoMapper: The Commercial Pivot
+In April 2025, AutoMapper transitioned to commercial licensing (v15.0+). This prompted major migrations:
+- ABP Framework moved to Mapperly
+- Many enterprise projects reevaluating costs
+- Open-source projects seeking alternatives
+
+**Impact:** Accelerated adoption of free, modern alternatives like Facet and Mapperly.
+
+### Mapster: Uncertain Future
+Mapster's development has slowed considerably:
+- Last major release: 2023
+- Community concerns about long-term support
+- No clear roadmap
+
+**Impact:** Risky for new projects; existing users monitoring alternatives.
+
+### Mapperly: The Rising Star
+Mapperly has emerged as the "official" AutoMapper replacement:
+- Active development
+- Adopted by ABP Framework
+- Growing community and documentation
+- Explicit, transparent approach
+
+**Competition:** Facet vs Mapperly is the interesting battle. Both use source generators, but:
+- **Mapperly:** Explicit control, manual DTO definition, verbose but clear
+- **Facet:** Convention-based, automatic DTO generation, concise but "magical"
+
+**Use both?** Absolutely. Facet for standard projections, Mapperly for complex custom mappings.
+
+## Getting Started with Facet
 
 ### Installation
 
-All libraries are available via NuGet:
+```bash
+dotnet add package Facet
+```
 
-- **AutoMapper:** `dotnet add package AutoMapper` (commercial license required)
-- **Mapster:** `dotnet add package Mapster`
-- **Mapperly:** `dotnet add package Mapperly`
-- **Facet:** `dotnet add package Facet`
+For EF Core integration:
+```bash
+dotnet add package Facet.Extensions.EFCore
+```
 
-### Learning Resources
+### Your First Facet
 
-AutoMapper has extensive documentation, 14+ years of Stack Overflow answers, and commercial support available. Mapster provides GitHub documentation and community examples. Mapperly maintains an active GitHub repository with growing documentation. Facet offers GitHub documentation with examples and a growing community.
+1. **Define your domain model** (you already have this)
 
-## Conclusion
+```csharp
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public string InternalCode { get; set; }  // Don't expose this
+}
+```
 
-The .NET mapping library landscape has evolved significantly in 2025, driven primarily by AutoMapper's transition to a commercial licensing model. This shift has accelerated the adoption of modern source generator-based alternatives.
+2. **Create a Facet** (instead of a manual DTO)
 
-**The Four Approaches:**
+```csharp
+[Facet(typeof(Product), exclude: ["InternalCode"])]
+public partial record ProductDto;
+```
 
-- **AutoMapper** remains a mature option with extensive ecosystem support, but now requires licensing consideration
-- **Mapster** offers a middle-ground with good performance and minimal configuration, though future development trajectory should be monitored
-- **Mapperly** provides explicit, transparent compile-time generation for teams that value clarity and type safety
-- **Facet** takes a unique approach by generating your DTOs entirely, not just the mapping logic between them
+3. **Use it**
 
-**Key Decision Factors:**
+```csharp
+// Map from entity
+var product = await _dbContext.Products.FindAsync(id);
+var dto = new ProductDto(product);
 
-Your choice ultimately depends on several factors:
+// EF projection
+var products = await _dbContext.Products
+    .Where(p => p.Price > 100)
+    .SelectFacet<ProductDto>()
+    .ToListAsync();
+```
 
-1. **Philosophy**: Do you want to write your DTOs manually (AutoMapper/Mapster/Mapperly) or have them generated from source models (Facet)?
-2. **Performance**: Source generators (Facet, Mapperly) offer the best runtime performance
-3. **Developer Experience**: Consider your team's preference for explicit vs. convention-based approaches
-4. **Licensing**: Budget and license compatibility requirements
-5. **Features**: Bidirectional mapping, flattening, and EF projection needs
-6. **Maintenance**: Long-term support and community size
+That's it. No profiles, no mapper classes, no configuration.
 
-There's no universal "best" choice. Evaluate based on your project's specific requirements, team preferences, and long-term maintenance considerations. The most fundamental decision is whether you want a DTO generator with mapping capabilities or a pure mapping library.
+### Learning Path
 
-## Resources
+1. **Start simple:** Basic Facets with include/exclude
+2. **Add nesting:** Use `NestedFacets` for complex objects
+3. **Try flattening:** Use `[Flatten]` for EF entities
+4. **Custom logic:** Add `IFacetMapConfiguration` when needed
+5. **CRUD generation:** Use `[GenerateDtos]` for boilerplate reduction
 
-- **Facet GitHub:** [https://github.com/facet-tools/Facet](https://github.com/facet-tools/Facet)
-- **Facet Documentation:** [Full docs with examples](https://github.com/facet-tools/Facet/tree/master/docs)
-- **NuGet Package:** `dotnet add package Facet`
-- **Comparison Benchmarks:** [Community benchmarks](https://github.com/mjebrahimi/Benchmark.netCoreMappers)
+**Documentation:** [github.com/Tim-Maes/Facet/docs](https://github.com/Tim-Maes/Facet/tree/master/docs)
+
+## Facet vs Traditional Mappers: The Verdict
+
+| Criteria | Traditional Mappers | Facet |
+|----------|-------------------|-------|
+| **Files to maintain** | 3+ (model, DTO, mapper) | 1 (model + attribute) |
+| **Lines of code** | High | Low |
+| **Boilerplate** | Significant | Minimal |
+| **Compile-time safety** | Varies | Full |
+| **Performance** | Varies (slow to fast) | Fastest (source gen) |
+| **Bidirectional** | Manual configuration | Automatic |
+| **Nested objects** | Manual configuration | Automatic |
+| **EF projections** | Supported | Automatic + optimized |
+| **Learning curve** | Medium | Low |
+| **Flexibility** | High (you write everything) | Medium (convention-based) |
+| **Best for** | Complex custom mappings | Standard projections/DTOs |
+
+**The answer isn't "Facet replaces all mappers."** It's "**Facet eliminates 80% of mapping scenarios**, and you can use a traditional mapper for the remaining 20%."
+
+## Why Facet Matters in 2025
+
+The .NET ecosystem is moving toward:
+1. **Source generators** over reflection
+2. **Compile-time safety** over runtime errors
+3. **Less boilerplate** over explicit verbosity
+4. **Convention over configuration** where sensible
+
+Facet embodies all four trends while competing head-to-head with established mapping libraries on performance and features.
+
+### The Value Proposition
+
+**For individual developers:**
+- Write less code
+- Ship faster
+- Fewer bugs (compile-time safety)
+- Better performance (source generation)
+
+**For teams:**
+- Easier onboarding (less mapping code to understand)
+- Consistent patterns (attributes vs varied mapper configs)
+- Reduced maintenance (no manual DTO sync)
+- Lower costs (MIT license vs AutoMapper commercial)
+
+**For enterprises:**
+- No vendor lock-in (open source, MIT)
+- Future-proof (active development, growing community)
+- Reduced technical debt (less code to maintain)
+- Easy migration path (from AutoMapper/Mapster)
+
+## The Road Ahead
+
+Facet is actively developed with a clear roadmap:
+- Enhanced flattening capabilities
+- Better IDE tooling and diagnostics
+- Extended CRUD generation options
+- Performance optimizations
+- Growing documentation and examples
+
+## Conclusion: A Different Approach to an Old Problem
+
+Traditional mapping libraries ask: *"How do we efficiently map between these two classes?"*
+
+Facet asks: *"Why are you writing both classes?"*
+
+By generating DTOs from domain models, Facet eliminates the root cause of mapping complexity: **duplication**. You define your model once, and Facet creates the projections you need with mapping built-in.
+
+**Is Facet better than AutoMapper/Mapster/Mapperly?**
+
+That's the wrong question.
+
+**Does Facet solve the DTO/mapping problem differently - with less code, better performance, and equal or better features?**
+
+Yes.
+
+And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive—it's **the future of DTO management in .NET**.
 
 ---
 
-**What's your experience with these mapping libraries? Which features matter most to your team? Share your thoughts in the comments.**
+## Resources
 
-*Disclosure: This analysis includes Facet, which I contribute to, alongside an objective comparison of all major alternatives based on 2025 community data and documentation.*
+- **GitHub Repository:** [github.com/Tim-Maes/Facet](https://github.com/Tim-Maes/Facet)
+- **Documentation:** [Full docs with examples](https://github.com/Tim-Maes/Facet/tree/master/docs)
+- **NuGet Package:** `dotnet add package Facet`
+- **Performance Benchmarks:** [Community benchmarks](https://github.com/mjebrahimi/Benchmark.netCoreMappers)
+
+---
+
