@@ -78,12 +78,12 @@ public class User
 [Facet(typeof(User), exclude: [nameof(User.PasswordHash)], NestedFacets = [typeof(AddressDto)])]
 public partial record UserDto;
 
-// Or tell Facet what you do want (inclusive)
+// Or tell Facet exactly you do want (inclusive)
 [Facet(
     typeof(User), 
     include: [nameof(User.FirstName), nameof(User.LastName)],
     NestedFacets = [typeof(AddressDto)])]
-public partial record UserDto;
+public partial record UserInfoDto;
 
 
 [Facet(typeof(Address))]
