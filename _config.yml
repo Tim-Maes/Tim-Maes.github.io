@@ -12,11 +12,17 @@ author:
 # Build settings
 markdown: kramdown
 theme: minima
+encoding: utf-8
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  hard_wrap: false
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jemoji
 
 # Permalink structure
 permalink: /blog/:year/:month/:day/:title/

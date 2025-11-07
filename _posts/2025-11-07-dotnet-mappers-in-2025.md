@@ -90,10 +90,10 @@ Let's break down how these libraries stack up across key criteria:
 
 | Library | Speed | Memory | Approach |
 |---------|-------|--------|----------|
-| **Facet** | :zap::zap::zap: Fastest (source gen) | :green_heart: Minimal | Compile-time generation |
-| **Mapperly** | :zap::zap::zap: Fastest (source gen) | :green_heart: Minimal | Compile-time generation |
-| **Mapster** | :zap::zap: Fast | :yellow_heart: ~1/3 of AutoMapper | Hybrid (compile + runtime) |
-| **AutoMapper** | :zap: Slowest | :heart: Highest | Runtime reflection |
+| **Facet** | ??? Fastest (source gen) | Minimal | Compile-time generation |
+| **Mapperly** | ??? Fastest (source gen) | Minimal | Compile-time generation |
+| **Mapster** | ?? Fast | ~1/3 of AutoMapper | Hybrid (compile + runtime) |
+| **AutoMapper** | ? Slowest | Highest | Runtime reflection |
 
 **Analysis:** Source generation-based libraries (Facet, Mapperly) show similar performance characteristics, both offering minimal runtime overhead compared to reflection-based approaches.
 
@@ -101,17 +101,17 @@ Let's break down how these libraries stack up across key criteria:
 
 | Feature | AutoMapper | Mapster | Mapperly | **Facet** |
 |---------|-----------|---------|----------|-----------|
-| **Configuration Style** | Profiles + Fluent | Fluent/Attributes | Partial methods | **:white_check_mark: Attributes** |
-| **Bidirectional Mapping** | :white_check_mark: Yes | :white_check_mark: Yes | :warning: Manual | **:white_check_mark: Automatic BackTo()** |
-| **Nested Objects** | :warning: Manual config | :white_check_mark: Auto | :warning: Manual config | **:white_check_mark: Auto NestedFacets** |
-| **Flattening** | :white_check_mark: Yes | :white_check_mark: Yes | :warning: Limited | **:white_check_mark: Advanced [Flatten]** |
-| **FK Clash Detection** | :x: No | :x: No | :x: No | **:white_check_mark: Yes** |
-| **EF Projections** | :white_check_mark: ProjectTo | :white_check_mark: Yes | :warning: Manual | **:white_check_mark: Auto Projection** |
-| **Custom Logic** | :white_check_mark: Resolvers | :white_check_mark: AdaptWith | :warning: Partial methods | **:white_check_mark: IFacetMapConfiguration** |
-| **Compile-time Safety** | :x: Runtime | :warning: Hybrid | :white_check_mark: Full | **:white_check_mark: Full** |
-| **Generated Code Visibility** | :x: No | :warning: Optional | :white_check_mark: Full | **:white_check_mark: Full** |
+| **Configuration Style** | Profiles + Fluent | Fluent/Attributes | Partial methods | **? Attributes** |
+| **Bidirectional Mapping** | ? Yes | ? Yes | ? Manual | **? Automatic BackTo()** |
+| **Nested Objects** | ? Manual config | ? Auto | ? Manual config | **? Auto NestedFacets** |
+| **Flattening** | ? Yes | ? Yes | ? Limited | **? Advanced [Flatten]** |
+| **FK Clash Detection** | ? No | ? No | ? No | **? Yes** |
+| **EF Projections** | ? ProjectTo | ? Yes | ? Manual | **? Auto Projection** |
+| **Custom Logic** | ? Resolvers | ? AdaptWith | ? Partial methods | **? IFacetMapConfiguration** |
+| **Compile-time Safety** | ? Runtime | ? Hybrid | ? Full | **? Full** |
+| **Generated Code Visibility** | ? No | ? Optional | ? Full | **? Full** |
 | **Learning Curve** | Medium | Easy | Medium-Hard | **Easy** |
-| **License** | :moneybag: Commercial | :white_check_mark: MIT | :white_check_mark: Apache 2.0 | **:white_check_mark: MIT** |
+| **License** | $ Commercial | ? MIT | ? Apache 2.0 | **? MIT** |
 
 ### Configuration Approaches
 
