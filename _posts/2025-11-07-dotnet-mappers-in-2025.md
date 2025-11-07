@@ -53,7 +53,7 @@ Traditional mapping libraries like AutoMapper, Mapster, and Mapperly have solved
 
 ### What is Facetting?
 
-Think of a **diamond**. The whole stone is your domain model—it contains everything about the entity. But when you view it from different angles, you see different **facets**: specific views that show only what matters from that perspective.
+Think of a **diamond**. The whole stone is your domain model, it contains everything about the entity. But when you view it from different angles, you see different **facets**: specific views that show only what matters from that perspective.
 
 **Facet (noun):** *"One part of an object, situation, or subject that has many parts."*
 
@@ -699,7 +699,7 @@ That's the wrong question.
 
 Yes.
 
-And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive—it's **the future of DTO management in .NET**.
+And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive, it might be **the future of DTO management in .NET**.
 
 ---
 
