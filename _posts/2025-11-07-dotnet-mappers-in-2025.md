@@ -144,35 +144,89 @@ Let's break down how these libraries stack up across key criteria:
 
 ### AutoMapper
 
-**Strengths:** AutoMapper is mature and battle-tested with 14+ years of production use. It has a huge ecosystem and community, extensive documentation, and works with legacy .NET Framework projects. The convention-based approach means less code for simple cases.
+**Strengths:**
+- Mature and battle-tested with 14+ years of production use
+- Huge ecosystem and community
+- Extensive documentation
+- Works with legacy .NET Framework projects
+- Convention-based approach reduces code for simple cases
 
-**Weaknesses:** Commercial license is required starting with v15.0+. Performance is the slowest among these options due to reflection-based implementation, with the highest memory usage. Runtime errors can occur since there's no compile-time safety. Configuration can become complex, there's no generated code visibility, and mapping issues can be difficult to debug.
+**Weaknesses:**
+- Commercial license required starting with v15.0+
+- Slowest performance (reflection-based) and highest memory usage
+- No compile-time safety; runtime mapping errors possible
+- Configuration can become complex for advanced scenarios
+- No generated code visibility; harder debugging of mapping issues
 
-**Considerations:** Mature option with extensive ecosystem. Licensing model is a key decision factor. Performance characteristics differ from source generation alternatives.
+**Considerations:**
+- Licensing model is a key decision factor
+- Performance characteristics differ from source generation alternatives
 
 ### Mapster
 
-**Strengths:** Fast performance (4x faster than AutoMapper) with a low memory footprint (1/3 of AutoMapper). Minimal configuration needed, MIT licensed (free), automatic flattening, and a good balance of features and simplicity.
+**Strengths:**
+- Faster than AutoMapper (claimed ~4x) with low memory footprint (~1/3 AutoMapper)
+- Minimal configuration required
+- MIT licensed (free)
+- Automatic flattening support
+- Good balance of features and simplicity
 
-**Weaknesses:** Development appears stalled with an uncertain future. No compile-time safety for all operations, limited nested object configuration, no FK clash detection, community concerns about maintenance, and less transparent than pure source generators.
+**Weaknesses:**
+- Development cadence has slowed; uncertain future
+- Not fully compile-time safe for all operations
+- Limited nested object configuration
+- No FK clash detection feature
+- Less transparent than pure source generators
 
-**Considerations:** Offers good performance with minimal configuration. Project activity worth monitoring for long-term planning.
+**Considerations:**
+- Good performance with low effort
+- Project activity should be monitored for long-term adoption
 
 ### Mapperly
 
-**Strengths:** Fastest performance (tied with Facet) with zero runtime overhead. Full compile-time safety, transparent generated code, very active development, and Apache 2.0 licensed. Chosen by major frameworks like ABP, with a growing community.
+**Strengths:**
+- Fastest performance (tied with Facet) and zero runtime overhead
+- Full compile-time safety
+- Transparent generated code (inspectable)
+- Very active development and growing community
+- Apache 2.0 license
+- Adopted by major frameworks (e.g., ABP)
 
-**Weaknesses:** Requires manual method per mapping with a steeper learning curve. Limited nested object support, basic flattening (not automatic), no FK clash detection, no automatic bidirectional mapping, and more boilerplate code needed.
+**Weaknesses:**
+- Requires explicit method per mapping direction (more boilerplate)
+- Steeper learning curve for explicit style
+- Limited nested object support; needs manual config
+- Basic/limited flattening; not automatic
+- No FK clash detection
+- No automatic bidirectional mapping
 
-**Considerations:** Strong choice for teams preferring explicit control. Active development and growing adoption. More verbose than convention-based alternatives but offers transparency.
+**Considerations:**
+- Strong fit for teams preferring explicit control & transparency
+- Verbosity trades off against clarity and safety benefits
 
 ### Facet
 
-**Strengths:** Fastest performance through pure source generation with zero runtime overhead. Full compile-time safety and transparent generated code. Attribute-based API is simple and intuitive. Automatic bidirectional mapping with BackTo methods, automatic nested object handling with NestedFacets, advanced flattening with the [Flatten] attribute, unique FK clash detection feature, auto-generated EF projections, and custom mapping logic support via IFacetMapConfiguration. MIT licensed with active development and minimal boilerplate.
+**Strengths:**
+- Fastest performance (tied with Mapperly) via pure source generation
+- Full compile-time safety
+- Transparent generated code
+- Simple, intuitive attribute-based API
+- Automatic bidirectional mapping with `BackTo()`
+- Automatic nested object handling via `NestedFacets`
+- Advanced flattening with `[Flatten]`
+- Unique FK clash detection (including nested/recursive cases)
+- Auto-generated EF projections
+- Custom mapping extensibility via `IFacetMapConfiguration`
+- MIT licensed and active development
+- Minimal boilerplate (DTOs generated for you)
 
-**Weaknesses:** Smaller community as a newer library. Less Stack Overflow content available, fewer third-party resources and tutorials, and a different mental model from traditional mappers since it generates DTOs rather than just mapping between them.
+**Weaknesses:**
+- Newer library with smaller community
+- Fewer third-party resources / tutorials / Q&A content
+- Different mental model (DTO generation vs manual DTO definition)
 
-**Tradeoffs:** Newer library with less ecosystem maturity, but offers modern source generation approach with comprehensive built-in features.
+**Tradeoffs:**
+- Less ecosystem maturity vs broader feature integration and reduced manual DTO maintenance
 
 ## Migration Considerations
 
