@@ -71,16 +71,18 @@ public class User
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string PasswordHash { get; set; }
-    public decimal Salary { get; set; }
     public Address Address { get; set; }
 }
 
 // 2. Tell Facet what you don't want (exclusive)
-[Facet(typeof(User), exclude: [nameof(User.PasswordHash), nameof(User.Salary)], NestedFacets = [typeof(AddressDto)])]
+[Facet(typeof(User), exclude: [nameof(User.PasswordHash)], NestedFacets = [typeof(AddressDto)])]
 public partial record UserDto;
 
 // Or tell Facet what you do want (inclusive)
-[Facet(typeof(User), include: [nameof(User.FirstName), nameof(User.LastName)], NestedFacets = [typeof(AddressDto)])]
+[Facet(
+    typeof(User), 
+    include: [nameof(User.FirstName), nameof(User.LastName)],
+    NestedFacets = [typeof(AddressDto)])]
 public partial record UserDto;
 
 
