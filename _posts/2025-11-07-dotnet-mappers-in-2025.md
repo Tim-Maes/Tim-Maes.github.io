@@ -322,15 +322,27 @@ AutoMapper has extensive documentation, 14+ years of Stack Overflow answers, and
 
 ## Conclusion
 
-The .NET mapping library landscape evolved significantly in 2025. AutoMapper's licensing change prompted many teams to reevaluate their options, leading to increased interest in alternative approaches.
+The .NET mapping library landscape has evolved significantly in 2025, driven primarily by AutoMapper's transition to a commercial licensing model. This shift has accelerated the adoption of modern source generator-based alternatives.
 
-AutoMapper remains a mature, feature-rich mapper with commercial licensing considerations. Mapster offers good performance with minimal configuration, worth monitoring for activity. Mapperly provides explicit, transparent source generation for mapping. Facet is fundamentally different as a DTO generator with integrated mapping capabilities.
+**The Four Approaches:**
 
-Each library makes different tradeoffs around generation vs. mapping (Facet generates DTOs; others map between existing ones), explicitness vs. convention (Mapperly vs. Facet/Mapster), runtime vs. compile-time (AutoMapper vs. source generators), verbosity vs. magic (spectrum across all libraries), and maturity vs. modern features (AutoMapper vs. newer alternatives).
+- **AutoMapper** remains a mature option with extensive ecosystem support, but now requires licensing consideration
+- **Mapster** offers a middle-ground with good performance and minimal configuration, though future development trajectory should be monitored
+- **Mapperly** provides explicit, transparent compile-time generation for teams that value clarity and type safety
+- **Facet** takes a unique approach by generating your DTOs entirely, not just the mapping logic between them
 
-Your choice should depend on whether you want generated DTOs or manual DTOs (Facet generates; others map), team preferences (explicit vs. implicit), performance requirements, licensing constraints, feature needs (bidirectional, flattening, etc.), existing codebase considerations, and long-term maintenance concerns.
+**Key Decision Factors:**
 
-There's no universal "best" choice - evaluate based on your specific context and constraints. The most fundamental question is whether you want a tool that generates your DTOs (Facet) or a tool that maps between DTOs you've already written (all the others).
+Your choice ultimately depends on several factors:
+
+1. **Philosophy**: Do you want to write your DTOs manually (AutoMapper/Mapster/Mapperly) or have them generated from source models (Facet)?
+2. **Performance**: Source generators (Facet, Mapperly) offer the best runtime performance
+3. **Developer Experience**: Consider your team's preference for explicit vs. convention-based approaches
+4. **Licensing**: Budget and license compatibility requirements
+5. **Features**: Bidirectional mapping, flattening, and EF projection needs
+6. **Maintenance**: Long-term support and community size
+
+There's no universal "best" choice. Evaluate based on your project's specific requirements, team preferences, and long-term maintenance considerations. The most fundamental decision is whether you want a DTO generator with mapping capabilities or a pure mapping library.
 
 ## Resources
 
