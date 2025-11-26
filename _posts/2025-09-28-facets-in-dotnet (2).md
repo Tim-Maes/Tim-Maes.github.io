@@ -62,7 +62,7 @@ This pattern is repetitive, error-prone, and becomes a maintenance nightmare as 
 
 ## What is Facetting?
 
-Think of a diamond. The whole stone is your domain model—it contains everything about the entity. But when you view it from different angles, you see different **facets**, specific views that show only what matters from that perspective.
+Think of a diamond. The whole stone is your domain model, it contains everything about the entity. But when you view it from different angles, you see different **facets**, specific views that show only what matters from that perspective.
 
 > **Facet** - "One part of an object, situation, or subject that has many parts."
 
@@ -761,7 +761,7 @@ public partial record UserAutocomplete;
 
 ### 4. Keep Mappers Focused
 
-Don't put business logic in mappers—keep them for presentation concerns only:
+Don't put business logic in mappers, keep them for presentation concerns only:
 
 ```csharp
 // ✅ Good - presentation logic
@@ -798,7 +798,7 @@ Facet is built for performance:
 
 ### Benchmark Results
 
-All libraries perform within ~10% of each other—the real benefit of Facet is developer productivity and maintainability.
+All libraries perform within ~10% of each other, the real benefit of Facet is developer productivity and maintainability.
 
 **Single object mapping:**
 

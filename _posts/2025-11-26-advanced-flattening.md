@@ -16,7 +16,7 @@ tags: [facet, dto, api, source-generation, entity-framework]
 
 If you've ever found yourself writing DTOs with properties like `CustomerAddressStreet`, `CustomerAddressCity`, `ShippingAddressLine1`, and `ShippingAddressZipCode`, you know the pain of manually flattening nested object structures. It's tedious, error-prone, and clutters your codebase with boilerplate.
 
-What if I told you there's a better way? With Facet's flattening features, you can transform complex hierarchical models into flat, denormalized DTOs automatically—perfect for API responses, reports, exports, and any scenario where you need a simplified view of your data.
+What if I told you there's a better way? With Facet's flattening features, you can transform complex hierarchical models into flat, denormalized DTOs automatically, perfect for API responses, reports, exports, and any scenario where you need a simplified view of your data.
 
 Let's dive into everything Facet can do with flattening.
 
@@ -130,7 +130,7 @@ public partial class PersonFlatDto
 }
 ```
 
-Notice the **null-conditional operators** (`?.`) in the constructor—no more null reference exceptions when a nested object is missing!
+Notice the **null-conditional operators** (`?.`) in the constructor, no more null reference exceptions when a nested object is missing!
 
 ## Naming Strategies: Prefix, LeafOnly, and SmartLeaf
 
@@ -138,7 +138,7 @@ Facet offers three naming strategies for flattened properties, each with differe
 
 ### 1. Prefix Strategy (Default)
 
-The safest option—concatenates the full path to create unique property names:
+The safest option, concatenates the full path to create unique property names:
 
 ```csharp
 [Flatten(typeof(Person), NamingStrategy = FlattenNamingStrategy.Prefix)]
@@ -156,7 +156,7 @@ public partial class PersonFlatDto { }
 
 ### 2. LeafOnly Strategy
 
-Uses only the final property name—shorter but risky:
+Uses only the final property name, shorter but risky:
 
 ```csharp
 [Flatten(typeof(Person), NamingStrategy = FlattenNamingStrategy.LeafOnly)]
@@ -202,7 +202,7 @@ Facet handles collisions automatically by adding numeric suffixes, but `Name2` a
 
 ### 3. SmartLeaf Strategy ⭐ (The Sweet Spot)
 
-The best of both worlds—uses leaf names by default but adds the immediate parent prefix when collisions occur:
+The best of both worlds, uses leaf names by default but adds the immediate parent prefix when collisions occur:
 
 ```csharp
 public class DataItem
@@ -486,7 +486,7 @@ When both are enabled, `IgnoreNestedIds` takes precedence since it removes all I
 
 ## FlattenTo: Unpacking Collections into Rows
 
-While `[Flatten]` collapses nested objects into properties, **`FlattenTo`** unpacks collection properties into multiple rows—perfect for reports and exports!
+While `[Flatten]` collapses nested objects into properties, **`FlattenTo`** unpacks collection properties into multiple rows, perfect for reports and exports!
 
 ### The Scenario
 
