@@ -1,7 +1,7 @@
 ﻿---
 layout: post
 title: "Advanced Flattening with Facet .NET"
-date: 2025-11-04
+date: 2025-11-26
 categories: [dotnet, csharp, source-generators]
 tags: [facet, dto, api, source-generation, entity-framework]
 ---
