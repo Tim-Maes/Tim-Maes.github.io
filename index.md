@@ -41,40 +41,6 @@ title: Home
   </div>
 </div>
 
-<section class="tech-stack" style="padding: 2rem 0; text-align: center;">
-  <h2 style="margin-bottom: 2rem; font-size: 2rem;">Tech Stack</h2>
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 800px; margin: 0 auto;">
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 32 32" fill="none"><path d="M16 2L3 7v9c0 7.33 5.06 14.18 13 16 7.94-1.82 13-8.67 13-16V7L16 2z" fill="#512BD4"/><path d="M16 2v28c7.94-1.82 13-8.67 13-16V7L16 2z" fill="#380094"/></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">.NET</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#178600"/><text x="50%" y="50%" text-anchor="middle" dy=".35em" fill="white" font-family="monospace" font-size="18" font-weight="bold">C#</text></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">C#</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#512BD4"/><text x="50%" y="50%" text-anchor="middle" dy=".35em" fill="white" font-family="monospace" font-size="14" font-weight="bold">BLZ</text></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">Blazor</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 32 32"><path d="M2 2h28v28H2z" fill="#F7DF1E"/><path d="M20.34 23.28c.39.66.9 1.15 1.8 1.15.76 0 1.24-.38 1.24-.9 0-.63-.5-.85-1.33-1.22l-.46-.2c-1.32-.56-2.2-1.26-2.2-2.75 0-1.37 1.04-2.41 2.67-2.41 1.16 0 2 .4 2.6 1.46l-1.42.92c-.31-.56-.65-.78-1.18-.78-.54 0-.88.34-.88.78 0 .55.34.77 1.13 1.11l.46.2c1.56.67 2.44 1.35 2.44 2.88 0 1.65-1.3 2.55-3.04 2.55-1.7 0-2.8-.81-3.34-1.87l1.51-.88zm-7.23.13c.29.5.55.92 1.18.92.6 0 .98-.24.98-.1.17v-6.53h1.86v6.56c0 1.74-1.02 2.53-2.5 2.53-1.34 0-2.12-.69-2.52-1.52l1.5-.86z" fill="#323330"/></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">JavaScript</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#3178C6"/><text x="50%" y="50%" text-anchor="middle" dy=".35em" fill="white" font-family="monospace" font-size="16" font-weight="bold">TS</text></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">TypeScript</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" style="color: var(--text-color);"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">GitHub</span>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <svg width="48" height="48" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" fill="#0078D7"/><path d="M16 8l-4 4h3v4h2v-4h3l-4-4zm-4 12l4 4 4-4h-3v-4h-2v4h-3z" fill="white"/></svg>
-      <span style="color: var(--text-color); font-size: 0.9rem;">DevOps</span>
-    </div>
-  </div>
-</section>
-
 <section class="what-i-do" style="padding: 1rem 0;">
   <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">What I Do</h2>
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
