@@ -101,7 +101,7 @@ title: Home
         <a href="https://github.com/Tim-Maes/Facet" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Facet</a>
       </h3>
       <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-color);">
-        <span>600+ Stars</span>
+        <span>1k+ Stars</span>
         <span>NuGet Package</span>
       </div>
       <p style="color: var(--text-color); margin-bottom: 1rem;">Powerful source generator for compile-time Facets, DTOs, and LINQ projections. Zero runtime overhead with full async support.</p>
