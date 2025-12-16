@@ -15,7 +15,7 @@ If you've ever built an e-commerce site, a product catalog, or any application w
 
 **What if all of that was generated automatically from your domain models?**
 
-That's exactly what [Facet.Search](https://github.com/Tim-Maes/Facet.Search) does. It uses C# source generators to create type-safe filter classes, LINQ extensions, facet aggregations, and frontend metadata—all at compile time, with zero runtime overhead.
+That's exactly what [Facet.Search](https://github.com/Tim-Maes/Facet.Search) does. It uses C# source generators to create type-safe filter classes, LINQ extensions, facet aggregations, and frontend metadata, all at compile time, with zero runtime overhead.
 
 ## The Problem: Faceted Search is Boilerplate Hell
 
@@ -118,10 +118,10 @@ public class Product
 
 **That's it.** The source generator creates everything else:
 
-- `ProductSearchFilter` — A filter class with all the right properties
-- `ProductSearchExtensions` — LINQ extension methods that apply filters
-- `ProductFacetAggregations` — Aggregation result types
-- `ProductSearchMetadata` — Facet metadata for your frontend
+- `ProductSearchFilter` ï¿½ A filter class with all the right properties
+- `ProductSearchExtensions` ï¿½ LINQ extension methods that apply filters
+- `ProductFacetAggregations` ï¿½ Aggregation result types
+- `ProductSearchMetadata` ï¿½ Facet metadata for your frontend
 
 ## Using the Generated Code
 
@@ -181,7 +181,7 @@ foreach (var facet in ProductSearchMetadata.Facets)
 // CreatedAt: Created Date (DateRange)
 ```
 
-This is perfect for building dynamic filter UIs—your frontend can discover what facets exist without hardcoding them.
+This is perfect for building dynamic filter UIsï¿½your frontend can discover what facets exist without hardcoding them.
 
 ## It's Real SQL, Not In-Memory Filtering
 
@@ -432,12 +432,12 @@ public class Product
 
 You might wonder: why source generators instead of runtime reflection?
 
-1. **Zero runtime overhead** — All code is generated at compile time
-2. **Full IntelliSense** — Generated types are real C# classes
-3. **Compile-time safety** — Typos and misconfigurations fail the build
-4. **No magic strings** — Everything is strongly typed
-5. **AOT compatible** — Works with Native AOT compilation
-6. **Debuggable** — You can step through the generated code
+1. **Zero runtime overhead** ï¿½ All code is generated at compile time
+2. **Full IntelliSense** ï¿½ Generated types are real C# classes
+3. **Compile-time safety** ï¿½ Typos and misconfigurations fail the build
+4. **No magic strings** ï¿½ Everything is strongly typed
+5. **AOT compatible** ï¿½ Works with Native AOT compilation
+6. **Debuggable** ï¿½ You can step through the generated code
 
 The generated files live in your `obj` folder and you can inspect them anytime:
 
