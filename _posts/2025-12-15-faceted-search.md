@@ -485,8 +485,6 @@ Give it a try on your next project:
 - **NuGet**: [Facet.Search](https://www.nuget.org/packages/Facet.Search) | [Facet.Search.EFCore](https://www.nuget.org/packages/Facet.Search.EFCore)
 - **Discord**: [Join the community](https://discord.gg/yGDBhGuNMB)
 
-Happy searching! ??
-
 ---
 
 *Have questions or feedback? Open an issue on GitHub or join the Discord!*
