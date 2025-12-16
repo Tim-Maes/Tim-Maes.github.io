@@ -2,7 +2,7 @@
 layout: post
 title: "Faceted search in .NET"
 date: 2025-12-15 12:00:00 +0000
-tags: [facet, search, faceted, dotnet, source, generator]
+tags: [facet, search, faceted, dotnet, generator]
 ---
 
 # Faceted Search in .NET Made Easy: Introducing Facet.Search
