@@ -471,13 +471,13 @@ dotnet add package Facet.Search.EFCore
 
 Facet.Search eliminates the tedious boilerplate of building faceted search while keeping you in full control. You define *what* is searchable through attributes, and the source generator handles the *how*.
 
-- ? Type-safe filter classes
-- ? LINQ extensions that translate to SQL
-- ? Facet aggregations
-- ? Frontend metadata
-- ? Full-text search with multiple strategies
-- ? EF Core async support
-- ? Zero runtime overhead
+- Type-safe filter classes
+- LINQ extensions that translate to SQL
+- Facet aggregations
+- Frontend metadata
+- Full-text search with multiple strategies
+- EF Core async support
+- Zero runtime overhead
 
 Give it a try on your next project:
 
