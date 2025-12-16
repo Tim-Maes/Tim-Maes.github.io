@@ -11,7 +11,7 @@ tags: [facet, search, faceted, dotnet, generator]
 
 ---
 
-If you've ever built an e-commerce site, a product catalog, or any application with advanced filtering, you know the pain: writing endless filter classes, mapping query parameters, building dynamic LINQ expressions, aggregating facet counts, and keeping everything in sync. It's tedious, error-prone, and a maintenance nightmare.
+If you're building an e-commerce site, a product catalog, or any application with advanced filtering, you know the pain: writing endless filter classes, mapping query parameters, building dynamic LINQ expressions, aggregating facet counts, and keeping everything in sync. It's tedious, error-prone, and a maintenance nightmare.
 
 **What if all of that was generated automatically from your domain models?**
 
@@ -432,12 +432,12 @@ public class Product
 
 You might wonder: why source generators instead of runtime reflection?
 
-1. **Zero runtime overhead** � All code is generated at compile time
-2. **Full IntelliSense** � Generated types are real C# classes
-3. **Compile-time safety** � Typos and misconfigurations fail the build
-4. **No magic strings** � Everything is strongly typed
-5. **AOT compatible** � Works with Native AOT compilation
-6. **Debuggable** � You can step through the generated code
+1. **Zero runtime overhead** - All code is generated at compile time
+2. **Full IntelliSense** - Generated types are real C# classes
+3. **Compile-time safety** - Typos and misconfigurations fail the build
+4. **No magic strings** - Everything is strongly typed
+5. **AOT compatible** - Works with Native AOT compilation
+6. **Debuggable** - You can step through the generated code
 
 The generated files live in your `obj` folder and you can inspect them anytime:
 
