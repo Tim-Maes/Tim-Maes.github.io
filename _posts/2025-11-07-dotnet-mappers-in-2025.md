@@ -49,11 +49,11 @@ Traditional mapping libraries like AutoMapper, Mapster, and Mapperly have solved
 
 **What if we could eliminate step #2 entirely?**
 
-## Introducing Facet: Generate everything at Compile Time
+## Introducing Facet: Generate Everything at Compile Time
 
 ### What is Facetting?
 
-Think of a **diamond**. The whole stone is your domain model, it contains everything about the entity. But when you view it from different angles, you see different **facets**: specific views that show only what matters from that perspective.
+Think of a **diamond**. The whole stone is your domain model - it contains everything about the entity. But when you view it from different angles, you see different **facets**: specific views that show only what matters from that perspective.
 
 **Facet (noun):** *"One part of an object, situation, or subject that has many parts."*
 
@@ -75,16 +75,14 @@ public class User
 }
 
 // 2. Tell Facet what you don't want (exclusive)
-[Facet(typeof(User), exclude: [nameof(User.PasswordHash)], NestedFacets = [typeof(AddressDto)])]
+[Facet(typeof(User), nameof(User.PasswordHash), NestedFacets = [typeof(AddressDto)])]
 public partial record UserDto;
 
-// Or tell Facet exactly you do want (inclusive)
-[Facet(
-    typeof(User), 
-    include: [nameof(User.FirstName), nameof(User.LastName)],
+// Or tell Facet exactly what you do want (inclusive)
+[Facet(typeof(User), 
+    Include = [nameof(User.FirstName), nameof(User.LastName)],
     NestedFacets = [typeof(AddressDto)])]
 public partial record UserInfoDto;
-
 
 [Facet(typeof(Address))]
 public partial record AddressDto;
@@ -114,11 +112,14 @@ Facet eliminates 85-95% of the boilerplate by generating the DTO, mapping, **and
 | Feature | AutoMapper | Mapster | Mapperly | **Facet** |
 |---------|-----------|---------|----------|-----------|
 | **DTO Generation** | Manual | Manual | Manual | **Automatic** |
-| **Bidirectional Mapping** | Manual config | Auto | Manual methods | **Auto `BackTo()`** |
-| **Nested Objects** |  Manual config | Basic auto | Manual | **Auto with `NestedFacets`** |
+| **Bidirectional Mapping** | Manual config | Auto | Manual methods | **Auto `ToSource()`** |
+| **Nested Objects** | Manual config | Basic auto | Manual | **Auto with `NestedFacets`** |
 | **Advanced Flattening** | Convention-based | Convention-based | Limited | **`[Flatten]` attribute** |
 | **FK Clash Detection** | No | No | No | **Yes (unique)** |
 | **EF Core Projections** | `ProjectTo<>()` | Yes | Manual | **Auto `SelectFacet<>()`** |
+| **Property Renaming** | ForMember config | Config | Manual | **`[MapFrom]` attribute** |
+| **Conditional Mapping** | Custom config | Custom config | Manual | **`[MapWhen]` attribute** |
+| **Breaking Change Detection** | No | No | No | **`SourceSignature` (unique)** |
 | **Generated Code Visibility** | Hidden | Optional | Full | **Full** |
 | **License** | Commercial | MIT | Apache 2.0 | **MIT** |
 
@@ -162,11 +163,16 @@ public partial class UserMapper
 
 **Facet:**
 ```csharp
+// Enable bidirectional mapping
+[Facet(typeof(User), GenerateToSource = true)]
+public partial record UserDto;
+
+// Usage
 var dto = new UserDto(user);           // Forward mapping
-var user = dto.BackTo<User>;                // Reverse mapping (auto-generated)
+var user = dto.ToSource();             // Reverse mapping (auto-generated)
 ```
 
-Facet automatically generates bidirectional mapping. No need to define both directions.
+Facet automatically generates bidirectional mapping when `GenerateToSource = true`. No need to define both directions.
 
 ### 3. Smart Nested Object Handling
 
@@ -186,7 +192,54 @@ public partial record UserDto;
 
 Facet automatically detects and maps nested objects. Just declare which Facets to use for navigation properties.
 
-### 4. Advanced Flattening with FK Clash Detection
+### 4. Declarative Property Mapping with `[MapFrom]`
+
+Need to rename a property or access nested values? Use the `[MapFrom]` attribute:
+
+```csharp
+[Facet(typeof(User), GenerateToSource = true)]
+public partial class UserDto
+{
+    // Simple property rename with reverse mapping
+    [MapFrom(nameof(User.FirstName), Reversible = true)]
+    public string Name { get; set; } = string.Empty;
+
+    // Access nested property
+    [MapFrom("Company.Name")]
+    public string CompanyName { get; set; } = string.Empty;
+
+    // Computed expression (one-way only)
+    [MapFrom("FirstName + \" \" + LastName")]
+    public string FullName { get; set; } = string.Empty;
+}
+```
+
+### 5. Conditional Mapping with `[MapWhen]`
+
+Map properties only when conditions are met - perfect for status-dependent fields:
+
+```csharp
+[Facet(typeof(Order))]
+public partial class OrderDto
+{
+    public OrderStatus Status { get; set; }
+
+    // Only map when order is completed
+    [MapWhen("Status == OrderStatus.Completed")]
+    public DateTime? CompletedAt { get; set; }
+
+    // Boolean condition
+    [MapWhen("IsActive")]
+    public string? Email { get; set; }
+
+    // Multiple conditions (AND logic)
+    [MapWhen("IsActive")]
+    [MapWhen("Status != OrderStatus.Cancelled")]
+    public string? TrackingNumber { get; set; }
+}
+```
+
+### 6. Advanced Flattening with FK Clash Detection
 
 When working with EF Core entities, flattening complex hierarchies is common. But what happens when you have multiple foreign keys to the same table?
 
@@ -214,7 +267,7 @@ public partial class OrderFlatDto;
 
 This is a **unique feature** - no other mapping library handles this scenario automatically.
 
-### 5. EF Core Query Projections - No `.Include()` Required!
+### 7. EF Core Query Projections - No `.Include()` Required!
 
 This is one of Facet's **most powerful features**: automatic JOIN generation for nested objects.
 
@@ -255,7 +308,7 @@ public partial record OrderDto;
 var users = await dbContext.Users
     .Where(u => u.IsActive)
     .SelectFacet<UserDto>()            // Automatically includes ALL nested facets
-    .ToListAsync();                    // → Address, Orders, Items, Department, Manager
+    .ToListAsync();                    // -> Address, Orders, Items, Department, Manager
 ```
 
 **What Facet does automatically:**
@@ -268,13 +321,13 @@ var users = await dbContext.Users
 **Benefits:**
 - **Zero** `.Include()` calls to remember
 - **Zero** N+1 query risk
-- **Compile-time safety** (add a nested facet → SQL updates automatically)
+- **Compile-time safety** (add a nested facet -> SQL updates automatically)
 - **Consistent queries** across your codebase
-- **Add new navigation properties** → update Facet → all queries fixed
+- **Add new navigation properties** -> update Facet -> all queries fixed
 
 This alone can eliminate debugging time and **countless production issues**.
 
-### 6. Custom Mapping Logic When You Need It
+### 8. Custom Mapping Logic When You Need It
 
 Facet is convention-based, but you can add custom logic when needed:
 
@@ -286,6 +339,14 @@ public class UserMapper : IFacetMapConfiguration<User, UserDto>
         target.FullName = $"{source.FirstName} {source.LastName}";
         target.IsAdult = source.Age >= 18;
     }
+}
+
+// Link the custom mapper via the Configuration property
+[Facet(typeof(User), Configuration = typeof(UserMapper))]
+public partial class UserDto
+{
+    public string FullName { get; set; } = string.Empty;
+    public bool IsAdult { get; set; }
 }
 ```
 
@@ -308,7 +369,7 @@ public class UserAsyncMapper : IFacetMapConfigurationAsyncInstance<User, UserDto
 }
 ```
 
-### 7. CRUD DTO Generation
+### 9. CRUD DTO Generation
 
 For common CRUD operations, Facet can generate entire DTO sets:
 
@@ -322,13 +383,56 @@ public class User
 ```
 
 This generates:
-- `CreateUserRequest`
-- `UpdateUserRequest`
-- `UserResponse`
-- `UserQuery`
-- `UpsertUserRequest`
+- `CreateUserRequest` (excludes Id)
+- `UpdateUserRequest` (includes Id)
+- `UserResponse` (includes all)
+- `UserQuery` (all properties nullable for filtering)
+- `UpsertUserRequest` (for create/update operations)
+- `PatchUserRequest` (for partial updates)
 
 All with appropriate properties and mapping logic.
+
+### 10. Breaking Change Detection with SourceSignature
+
+Track changes to your source entities and get compile-time warnings when the structure changes:
+
+```csharp
+// Add a signature to lock the API contract
+[Facet(typeof(User), SourceSignature = "a83684c8")]
+public partial class UserDto;
+```
+
+When someone modifies the `User` entity, you'll get a compile-time warning:
+```
+warning FAC022: Source entity 'User' structure has changed.
+Update SourceSignature to 'e5f6g7h8' to acknowledge this change.
+```
+
+This prevents:
+- New sensitive fields silently appearing in API responses
+- Breaking changes going unnoticed
+- Accidental data exposure
+
+### 11. Reference-Based Wrappers
+
+Need a facade that delegates to the source object instead of copying values? Use `[Wrapper]`:
+
+```csharp
+// Hide sensitive properties with a facade
+[Wrapper(typeof(User), nameof(User.Password), nameof(User.Salary))]
+public partial class PublicUserWrapper { }
+
+// Usage - changes propagate to source!
+var user = new User { Id = 1, FirstName = "John", Password = "secret" };
+var wrapper = new PublicUserWrapper(user);
+
+wrapper.FirstName = "Jane";
+Console.WriteLine(user.FirstName);  // "Jane" - source is modified!
+
+// Read-only wrappers for immutable facades
+[Wrapper(typeof(Product), ReadOnly = true)]
+public partial class ReadOnlyProductView { }
+```
 
 ## When You Might Still Want a Traditional Mapper
 
@@ -372,10 +476,10 @@ Zero overhead. Generated code is identical to what you'd write manually:
 
 ```csharp
 // What you write
-[Facet(typeof(User), include: ["Id", "FirstName", "LastName"])]
+[Facet(typeof(User), Include = ["Id", "FirstName", "LastName"], GenerateToSource = true)]
 public partial record UserDto;
 
-// What Facet generates (very simplified)
+// What Facet generates (simplified)
 public partial record UserDto
 {
     public int Id { get; init; }
@@ -391,7 +495,7 @@ public partial record UserDto
         LastName = source.LastName;
     }
 
-    public User BackTo() => new User
+    public User ToSource() => new User
     {
         Id = this.Id,
         FirstName = this.FirstName,
@@ -451,9 +555,19 @@ Mapperly has emerged as the "official" AutoMapper replacement:
 dotnet add package Facet
 ```
 
+For LINQ helpers:
+```bash
+dotnet add package Facet.Extensions
+```
+
 For EF Core integration:
 ```bash
 dotnet add package Facet.Extensions.EFCore
+```
+
+For advanced mapping with DI support:
+```bash
+dotnet add package Facet.Mapping
 ```
 
 ### Your First Facet
@@ -473,7 +587,7 @@ public class Product
 2. **Create a Facet** (instead of a manual DTO)
 
 ```csharp
-[Facet(typeof(Product), exclude: ["InternalCode"])]
+[Facet(typeof(Product), nameof(Product.InternalCode), GenerateToSource = true)]
 public partial record ProductDto;
 ```
 
@@ -485,7 +599,7 @@ var product = await _dbContext.Products.FindAsync(id);
 var dto = new ProductDto(product);
 
 // Map back to entity
-var updatedProduct = dto.BackTo<Product>;
+var updatedProduct = dto.ToSource();
 
 // EF projection (no .Include() needed even with nested objects!)
 var products = await _dbContext.Products
@@ -500,18 +614,21 @@ That's it. No profiles, no mapper classes, no configuration, **no `.Include()` c
 
 1. **Start simple:** Basic Facets with include/exclude
 2. **Add nesting:** Use `NestedFacets` for complex objects
-3. **Try flattening:** Use `[Flatten]` for EF entities
-4. **Custom logic:** Add `IFacetMapConfiguration` when needed
-5. **CRUD generation:** Use `[GenerateDtos]` for boilerplate reduction
+3. **Property mapping:** Use `[MapFrom]` for renaming and expressions
+4. **Conditional mapping:** Use `[MapWhen]` for status-dependent fields
+5. **Try flattening:** Use `[Flatten]` for EF entities
+6. **Custom logic:** Add `IFacetMapConfiguration` when needed
+7. **CRUD generation:** Use `[GenerateDtos]` for boilerplate reduction
+8. **Breaking detection:** Add `SourceSignature` before release
 
-**Documentation:** [github.com/Tim-Maes/Facet/docs](https://github.com/Tim-Maes/Facet/tree/master/docs)
+**Documentation:** [github.com/Tim-Maes/Facet/wiki](https://github.com/Tim-Maes/Facet/wiki)
 
 ## Facet vs Traditional Mappers: The Verdict
 
 | Criteria | Traditional Mappers | Facet |
 |----------|-------------------|-------|
 | **Files to maintain** | 3+ (model, DTO, mapper) | 1 (model + attribute) |
-| **Lines of code** | High | Low|
+| **Lines of code** | High | Low |
 | **Boilerplate** | Significant | Minimal |
 | **Compile-time safety** | Varies | Full |
 | **Performance** | Varies (slow to fast) | Fastest (source gen) |
@@ -520,6 +637,9 @@ That's it. No profiles, no mapper classes, no configuration, **no `.Include()` c
 | **EF projections** | Supported | Automatic + optimized |
 | **.Include() management** | **Manual (error-prone)** | **Automatic (zero config)** |
 | **N+1 query risk** | **High (if .Include() forgotten)** | **Zero (auto JOINs)** |
+| **Property renaming** | ForMember config | **`[MapFrom]` attribute** |
+| **Conditional mapping** | Custom code | **`[MapWhen]` attribute** |
+| **Breaking change detection** | None | **SourceSignature** |
 | **Learning curve** | Medium | Low |
 | **Flexibility** | High (you write everything) | Medium (convention-based) |
 | **Best for** | Complex custom mappings | Standard projections/DTOs |
@@ -581,17 +701,19 @@ That's the wrong question.
 
 Yes.
 
-And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive, it might be **the future of DTO management in .NET**.
+And in 2025, with AutoMapper now commercial and the .NET ecosystem embracing source generators, Facet's approach isn't just competitive - it might be **the future of DTO management in .NET**.
 
 ---
 
 ## Resources
 
 - **GitHub Repository:** [github.com/Tim-Maes/Facet](https://github.com/Tim-Maes/Facet)
-- **Documentation:** [Full docs with examples](https://github.com/Tim-Maes/Facet/tree/master/docs)
-- **NuGet Package:** `dotnet add package Facet`
-- **EF Core Extensions:** `dotnet add package Facet.Extensions.EFCore`
+- **Documentation:** [Full docs with examples](https://github.com/Tim-Maes/Facet/wiki)
+- **NuGet Packages:**
+  - `dotnet add package Facet` (core generator)
+  - `dotnet add package Facet.Extensions` (LINQ helpers)
+  - `dotnet add package Facet.Extensions.EFCore` (EF Core async)
+  - `dotnet add package Facet.Mapping` (custom mappers with DI)
 - **Performance Benchmarks:** [Community benchmarks](https://github.com/mjebrahimi/Benchmark.netCoreMappers)
 
 ---
-
