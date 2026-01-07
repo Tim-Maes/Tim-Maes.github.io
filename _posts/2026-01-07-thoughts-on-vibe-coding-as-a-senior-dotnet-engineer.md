@@ -5,11 +5,9 @@ date: 2026-01-07 12:00:00 +0000
 tags: [ai, vibe-coding, agents, claude, dotnet, software-engineering]
 ---
 
-# Thoughts on Vibe Coding as a Senior .NET Engineer
-
 *My take on where we are, where we are headed, and how to stay relevant.*
 
----
+
 
 I have been using Claude and other AI coding agents daily for a while now. As someone with over a decade of experience in .NET development, I have been watching the "vibe coding" phenomenon with a mix of fascination and professional curiosity. Here are my thoughts on the current state and what it means for us as engineers.
 
