@@ -3,6 +3,7 @@ layout: post
 title: "Faceted search in .NET"
 date: 2025-12-15 12:00:00 +0000
 tags: [facet, search, faceted, dotnet, generator]
+excerpt: Eliminate boilerplate and build powerful, type-safe search experiences with source generators.
 ---
 
 # Faceted Search in .NET Made Easy: Introducing Facet.Search

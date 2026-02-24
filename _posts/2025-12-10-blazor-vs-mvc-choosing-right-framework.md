@@ -3,6 +3,7 @@ layout: post
 title: "Blazor vs MVC: Why Developers Still Choose MVC in 2025"
 date: 2025-12-10 12:00:00 +0000
 tags: [blazor, mvc, aspnetcore, dotnet, web-development]
+excerpt: 'Recently, I came across a fascinating discussion in the .NET community that made me pause and reflect. A developer behind Blazorise asked a simple but profound question: "Why would anyone still choose MVC over Blazor with server-side rendering?" As someone who spends significant time in the .NET ecosystem, I found the responses enlightening and worth exploring.'
 ---
 
 Recently, I came across a fascinating discussion in the .NET community that made me pause and reflect. A developer behind [Blazorise](https://github.com/Megabit/Blazorise) asked a simple but profound question: "Why would anyone still choose MVC over Blazor with server-side rendering?" As someone who spends significant time in the .NET ecosystem, I found the responses enlightening and worth exploring.

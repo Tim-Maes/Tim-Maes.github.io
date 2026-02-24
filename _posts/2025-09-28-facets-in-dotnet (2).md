@@ -3,6 +3,7 @@ layout: post
 title: "Facets in .NET"
 date: 2025-09-28 14:00:00 +0000
 tags: [source-generators, architecture, mapping, dtos, linq, csharp, dotnet]
+excerpt: In this post, I want to highlight Facet's features and demonstrate how to use them with concrete examples. From generating your DTOs and projections, mappers and even EF Core integration, to advanced features and best practices. After covering practical usage, we'll dive deep into the theoretical foundations and implementation details.
 ---
 
 <div style="text-align: center; margin: 2rem 0;">
