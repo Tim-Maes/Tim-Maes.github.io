@@ -4,6 +4,7 @@ title: "Facet: A Source Generator Competing with Traditional Mapping Libraries"
 date: 2025-11-07 14:00:00 +0000
 categories: [dotnet, csharp, source-generators, dto]
 tags: [facet, automapper, mapperly, mapster, object-mapping, source-generation]
+excerpt: "A look at Facet, as we discover how source generation is changing the mapping landscape."
 ---
 
 ## The Mapper Problem
