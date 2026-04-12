@@ -67,7 +67,7 @@ title: Home
         <a href="https://github.com/Tim-Maes/Facet" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Facet</a>
       </h3>
       <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-color);">
-        <span>1k+ Stars</span>
+        <span>1.1k+ Stars</span>
         <span>NuGet Package</span>
       </div>
       <p style="color: var(--text-color); margin-bottom: 1rem;">Powerful source generator for compile-time Facets, DTOs, and LINQ projections. Zero runtime overhead with full async support.</p>
@@ -91,6 +91,21 @@ title: Home
         <span style="background: var(--tertiary-background); padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; color: var(--link-color); border: 1px solid var(--border-color);">Security</span>
       </div>
       <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display: inline-block; text-decoration: none;">View on GitHub →</a>
+    </div>
+    <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; background: var(--secondary-background); transition: transform 0.2s, box-shadow 0.2s;">
+      <h3 style="margin-top: 0; color: var(--link-color); font-size: 1.5rem;">
+        <a href="https://github.com/Tim-Maes/Facet.Search" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Facet.Search</a>
+      </h3>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-color);">
+        <span>NuGet Package</span>
+        <span>EF Core</span>
+      </div>
+      <p style="color: var(--text-color); margin-bottom: 1rem;">Compile-time faceted search generation for .NET. Zero boilerplate, type-safe filters, SQL-translated queries, and full-text search — all generated at compile time with no runtime overhead.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+        <span style="background: var(--tertiary-background); padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; color: var(--link-color); border: 1px solid var(--border-color);">Source Generators</span>
+        <span style="background: var(--tertiary-background); padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; color: var(--link-color); border: 1px solid var(--border-color);">Search</span>
+      </div>
+      <a href="https://github.com/Tim-Maes/Facet.Search" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display: inline-block; text-decoration: none;">View on GitHub →</a>
     </div>
     <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; background: var(--secondary-background); transition: transform 0.2s, box-shadow 0.2s;">
       <h3 style="margin-top: 0; color: var(--link-color); font-size: 1.5rem;">
