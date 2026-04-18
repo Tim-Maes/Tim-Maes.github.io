@@ -3,6 +3,7 @@ layout: post
 title: "Pick and Omit in C# with Facet .NET: TypeScript Utility Types for .NET"
 date: 2026-04-17 16:00:00 +0000
 tags: [csharp, dotnet, typescript, source-generators, facet, utilities, types]
+excerpt: "If you’ve worked with TypeScript, you know how powerful utility types like Pick<T, K> and Omit<T, K> are. They let you create new types by selecting or excluding properties from existing types, all at compile-time with full type safety."
 ---
 
 <div style="text-align: center; margin: 2rem 0;">
