@@ -43,7 +43,7 @@ type UserSafeDto = Omit<User, 'passwordHash' | 'salary'>;
 // Result: All properties except passwordHash and salary
 ```
 
-These are **compile-time transformations** - no runtime overhead, full IntelliSense support, and type safety guaranteed.
+These are **compile-time transformations**: no runtime overhead, full IntelliSense support, and type safety guaranteed.
 
 ### Why Pick and Omit Are So Useful
 
@@ -53,7 +53,7 @@ These are **compile-time transformations** - no runtime overhead, full IntelliSe
 4. **Database Projections** - Select only needed columns
 5. **Type Narrowing** - Create focused interfaces
 
-## The C# Problem: Manual DTO Hell
+## The C# issue: manual DTOs
 
 C# developers have been writing this pattern for years:
 
