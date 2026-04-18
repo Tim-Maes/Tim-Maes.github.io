@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Pick and Omit in C# with Facet .NET: TypeScript Utility Types for .NET"
-date: 2026-04-18 16:00:00 +0000
+date: 2026-04-17 16:00:00 +0000
 tags: [csharp, dotnet, typescript, source-generators, facet, utilities, types]
 ---
 
