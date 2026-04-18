@@ -7,6 +7,8 @@ tags: [source-generators, t4-templates, dotnet, csharp, code-generation, roslyn]
 
 In the evolving landscape of .NET Development, code generation has been a cornerstone for creating boilerplate code, improving developer productivity and automating processes. [T4 (Text Template Transformation Toolkit)](https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates) has been the go-to solution for well over a decade for this purpose, offering a powerful but also a somewhat underappreciated templating engine right inside Visual Studio. They have enabled developers to generate everything from data models to fully fledged API clients.
 
+<!--more-->
+
 But, working with T4 has had issues since the start. There is no easy way to work with them, since there is no proper editor experience for them. They are hard to debug and by default you find yourself working in a 'plain text' environment, having no intellisense, syntax highlighting or language support. The open source community provided some solutions for this, but often they are incomplete.
 
 I myself have been developing tools the past few years that provide some support when working with T4 templates. T4Editor provides a minimal editor experience, and T4Executer helps you control the execution of T4 templates during build time.

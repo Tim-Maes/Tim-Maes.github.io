@@ -41,6 +41,7 @@ defaults:
     values:
       layout: "post"
       comments: true
+      categories: ["blog"]
 
 # Exclude from processing
 exclude:
@@ -52,3 +53,11 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - .vs/
+
+feed:
+  path: feed.xml
+  excerpt_only: true
+  categories:
+    - blog
+
+excerpt_separator: "<!--more-->"

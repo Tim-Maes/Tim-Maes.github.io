@@ -3,6 +3,7 @@ layout: post
 title: "BlazorFrame: Enhanced iframes in Blazor"
 date: 2025-09-13 12:00:00 +0000
 tags: [blazor, security, components, csharp, dotnet, web-safety]
+excerpt: Iframes (inline frames) are one of the most powerful yet dangerous features of the modern web. They allow us to embed third-party content into our applications, but they also open the door to a host of security vulnerabilities that can compromise our users and data.
 ---
 
 <div style="text-align: center; margin: 2rem 0;">
@@ -12,6 +13,8 @@ tags: [blazor, security, components, csharp, dotnet, web-safety]
 </div>
 
 Iframes (inline frames) are one of the most powerful yet dangerous features of the modern web. They allow us to embed third-party content into our applications, but they also open the door to a host of security vulnerabilities that can compromise our users and data.
+
+<!--more-->
 
 As I was implementing an iframe for a project, I was surprised there was no solution for this available. Many Blazor component libraries are available, yet none had a solution for an iframe component. This is why I started working on a custom wrapper.
 
