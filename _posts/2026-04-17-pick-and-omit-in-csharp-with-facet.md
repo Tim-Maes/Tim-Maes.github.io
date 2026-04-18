@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Pick and Omit in C# with Facet - TypeScript Utility Types for .NET"
-date: 2026-04-17 16:00:00 +0000
+title: "Pick and Omit in C# with Facet .NET: TypeScript Utility Types for .NET"
+date: 2026-04-18 16:00:00 +0000
 tags: [csharp, dotnet, typescript, source-generators, facet, utilities, types]
 ---
 
@@ -71,7 +71,7 @@ public class User
     public DateTime CreatedAt { get; set; }
 }
 
-// Manual "Pick" - only specific properties
+// Manual "Pick": only specific properties
 public class UserPublicProfile
 {
     public int Id { get; set; }
@@ -80,7 +80,7 @@ public class UserPublicProfile
     public string Email { get; set; }
 }
 
-// Manual "Omit" - everything except sensitive fields
+// Manual "Omit": everything except sensitive fields
 public class UserSafeDto
 {
     public int Id { get; set; }
@@ -99,7 +99,7 @@ public class UserSafeDto
 - Easy to get out of sync
 - Tedious to maintain
 
-## Enter Facet: Pick and Omit for C#
+## Facet: Pick and Omit for C#
 
 Facet brings TypeScript-style utility types to C# using source generators:
 
@@ -120,11 +120,11 @@ public class User
     public DateTime CreatedAt { get; set; }
 }
 
-// ✨ Pick - Include only specific properties
+// Pick - Include only specific properties
 [Facet(typeof(User), Include = ["Id", "FirstName", "LastName", "Email"])]
 public partial record UserPublicProfile;
 
-// ✨ Omit - Exclude specific properties
+// Omit - Exclude specific properties
 [Facet(typeof(User), "PasswordHash", "Salary")]
 public partial record UserSafeDto;
 ```
@@ -182,7 +182,7 @@ var contact = new UserContactInfo(user);  // Constructor generated!
 var contact = user.ToFacet<User, UserContactInfo>();
 ```
 
-**TypeScript doesn't generate constructors or mapping logic** - you still write that manually.
+**TypeScript doesn't generate constructors or mapping logic**, you still write that manually.
 
 ### 2. LINQ Projections for EF Core
 
@@ -202,7 +202,7 @@ var users = await dbContext.Users
 // WHERE u.IsActive = 1
 ```
 
-**TypeScript can't optimize database queries** - it's a compile-time-only language.
+**TypeScript can't optimize database queries**, it's a compile-time-only language.
 
 ### 3. Nested Object Support
 
@@ -290,272 +290,6 @@ public partial record OrderDto
 }
 ```
 
-## Real-World Examples
-
-### Example 1: API Response Models
-
-**Problem:** You need different representations of the same entity for different endpoints.
-
-**TypeScript:**
-```typescript
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  passwordHash: string;
-  role: string;
-  salary: number;
-}
-
-// Public profile
-type UserProfile = Pick<User, 'id' | 'firstName' | 'lastName'>;
-
-// Admin view
-type UserAdmin = Omit<User, 'passwordHash'>;
-
-// Authentication response
-type UserAuth = Pick<User, 'id' | 'email' | 'role'>;
-```
-
-**C# with Facet:**
-```csharp
-public class User
-{
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string PasswordHash { get; set; }
-    public string Role { get; set; }
-    public decimal Salary { get; set; }
-}
-
-// Public profile - Pick specific fields
-[Facet(typeof(User), Include = ["Id", "FirstName", "LastName"])]
-public partial record UserProfile;
-
-// Admin view - Omit sensitive field
-[Facet(typeof(User), "PasswordHash")]
-public partial record UserAdmin;
-
-// Authentication response
-[Facet(typeof(User), Include = ["Id", "Email", "Role"])]
-public partial record UserAuth;
-
-// Use them in API endpoints
-[HttpGet("profile/{id}")]
-public async Task<UserProfile> GetProfile(int id)
-{
-    return await dbContext.Users
-        .Where(u => u.Id == id)
-        .SelectFacet<UserProfile>()
-        .FirstOrDefaultAsync();
-}
-
-[HttpGet("admin/users")]
-[Authorize(Roles = "Admin")]
-public async Task<List<UserAdmin>> GetAllUsers()
-{
-    return await dbContext.Users
-        .SelectFacet<UserAdmin>()
-        .ToListAsync();
-}
-```
-
-### Example 2: Search Filters
-
-**Problem:** Create a filter DTO with nullable properties for optional search criteria.
-
-**TypeScript:**
-```typescript
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  inStock: boolean;
-  createdAt: Date;
-}
-
-// All properties nullable for optional filtering
-type ProductFilter = Partial<Pick<Product, 'name' | 'category' | 'inStock'>>;
-```
-
-**C# with Facet:**
-```csharp
-public class Product
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Category { get; set; }
-    public decimal Price { get; set; }
-    public bool InStock { get; set; }
-    public DateTime CreatedAt { get; set; }
-}
-
-// Pick filterable properties + make them nullable
-[Facet(typeof(Product),
-    Include = ["Name", "Category", "InStock"],
-    NullableProperties = true,
-    GenerateToSource = false)]
-public partial record ProductFilter;
-
-// Use in search
-public async Task<List<Product>> SearchProducts(ProductFilter filter)
-{
-    var query = dbContext.Products.AsQueryable();
-
-    if (filter.Name != null)
-        query = query.Where(p => p.Name.Contains(filter.Name));
-
-    if (filter.Category != null)
-        query = query.Where(p => p.Category == filter.Category);
-
-    if (filter.InStock.HasValue)
-        query = query.Where(p => p.InStock == filter.InStock.Value);
-
-    return await query.ToListAsync();
-}
-```
-
-### Example 3: Form Models
-
-**Problem:** Create DTOs for create/update operations that exclude generated fields.
-
-**TypeScript:**
-```typescript
-interface BlogPost {
-  id: number;
-  title: string;
-  content: string;
-  authorId: number;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-}
-
-// Omit auto-generated fields for create
-type CreateBlogPost = Omit<BlogPost, 'id' | 'createdAt' | 'updatedAt'>;
-
-// Omit auto-generated fields for update (but include id)
-type UpdateBlogPost = Omit<BlogPost, 'createdAt' | 'updatedAt'>;
-```
-
-**C# with Facet:**
-```csharp
-public class BlogPost
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Content { get; set; }
-    public int AuthorId { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
-    public DateTime? PublishedAt { get; set; }
-}
-
-// Omit auto-generated fields for create
-[Facet(typeof(BlogPost),
-    "Id", "CreatedAt", "UpdatedAt",
-    GenerateToSource = true)]
-public partial record CreateBlogPost;
-
-// Omit auto-generated fields for update
-[Facet(typeof(BlogPost),
-    "CreatedAt", "UpdatedAt",
-    GenerateToSource = true)]
-public partial record UpdateBlogPost;
-
-// Use in API
-[HttpPost]
-public async Task<IActionResult> CreatePost(CreateBlogPost dto)
-{
-    var post = dto.ToSource();
-    post.CreatedAt = DateTime.UtcNow;
-    post.UpdatedAt = DateTime.UtcNow;
-
-    dbContext.BlogPosts.Add(post);
-    await dbContext.SaveChangesAsync();
-
-    return CreatedAtAction(nameof(GetPost), new { id = post.Id }, post);
-}
-
-[HttpPut("{id}")]
-public async Task<IActionResult> UpdatePost(int id, UpdateBlogPost dto)
-{
-    var post = await dbContext.BlogPosts.FindAsync(id);
-    if (post == null) return NotFound();
-
-    post.ApplyFacet(dto, dbContext);
-    post.UpdatedAt = DateTime.UtcNow;
-
-    await dbContext.SaveChangesAsync();
-    return NoContent();
-}
-```
-
-### Example 4: Combining Pick and Omit with Nested Objects
-
-**Problem:** Work with complex object graphs while controlling visibility.
-
-```csharp
-public class Employee
-{
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string SSN { get; set; }         // Sensitive
-    public decimal Salary { get; set; }     // Sensitive
-    public Department Department { get; set; }
-    public Address Address { get; set; }
-}
-
-public class Department
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Budget { get; set; }      // Sensitive
-    public Manager Manager { get; set; }
-}
-
-public class Address
-{
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string ZipCode { get; set; }
-}
-
-// Pick only public address fields
-[Facet(typeof(Address), Include = ["City", "State"])]
-public partial record AddressPublic;
-
-// Omit sensitive department info
-[Facet(typeof(Department), "Budget")]
-public partial record DepartmentPublic;
-
-// Omit sensitive employee fields + use nested facets
-[Facet(typeof(Employee),
-    "SSN", "Salary",
-    NestedFacets = [typeof(DepartmentPublic), typeof(AddressPublic)])]
-public partial record EmployeePublic;
-
-// Use in API
-[HttpGet("employees/{id}/public")]
-public async Task<EmployeePublic> GetEmployeePublic(int id)
-{
-    return await dbContext.Employees
-        .Where(e => e.Id == id)
-        .SelectFacet<EmployeePublic>()
-        .FirstOrDefaultAsync();
-}
-
-// Result: Employee with no SSN/Salary, Department with no Budget,
-// Address with only City/State
-```
-
 ## Advanced: TypeScript's Utility Types in C#
 
 Facet enables even more TypeScript-style patterns:
@@ -608,28 +342,6 @@ Just like TypeScript's utility types, Facet operates **entirely at compile-time*
 - ✅ No performance penalty
 - ✅ Same speed as hand-written code
 - ✅ Optimal SQL for EF Core queries
-
-**Benchmark Results:**
-
-| Method | Mean (ns) | Ratio | Allocated |
-|--------|-----------|-------|-----------|
-| Facet | 5.922 | baseline | 40 B |
-| Mapperly | 6.227 | 1.05x slower | 40 B |
-| Mapster | 13.243 | 2.24x slower | 40 B |
-| AutoMapper | 31.459 | 5.31x slower | 40 B |
-
-## Migration Guide: TypeScript → C# with Facet
-
-Here's a quick reference for converting TypeScript utility types to Facet:
-
-| TypeScript | C# with Facet | Notes |
-|------------|---------------|-------|
-| `Pick<User, 'id' \| 'name'>` | `[Facet(typeof(User), Include = ["Id", "Name"])]` | Include only specified properties |
-| `Omit<User, 'password'>` | `[Facet(typeof(User), "Password")]` | Exclude specified properties |
-| `Partial<User>` | `[Facet(typeof(User), NullableProperties = true)]` | All properties nullable |
-| `Readonly<User>` | `[Wrapper(typeof(User), ReadOnly = true)]` | Read-only wrapper |
-| `Required<User>` | `[Facet(typeof(User), PreserveRequiredProperties = true)]` | Required properties preserved |
-| `Record<Keys, Type>` | Use record types | C# records |
 
 ## Getting Started
 
@@ -691,8 +403,4 @@ If you love TypeScript's `Pick` and `Omit` utility types, you'll love Facet. It 
 - [Discord Community](https://discord.gg/yGDBhGuNMB)
 
 **Previous posts:**
-- [Facets in .NET: Eliminate DTO Boilerplate with Source Generators]({% post_url 2025-09-28-facets-in-dotnet (2) %})
-
----
-
-*Coming from TypeScript? Let me know in the comments what other TS features you'd like to see in C#!*
+- [Facets in .NET]({% post_url 2025-09-28-facets-in-dotnet (2) %})
