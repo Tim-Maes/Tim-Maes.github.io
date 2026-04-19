@@ -386,12 +386,12 @@ var dto = product.ToFacet<Product, ProductDto>();
 
 If you love TypeScript's `Pick` and `Omit` utility types, you'll love Facet. It brings the same **declarative, type-safe approach** to C#, but with additional runtime benefits:
 
-✅ **Compile-time generation** (like TypeScript)
-✅ **Runtime mapping code** (better than TypeScript)
-✅ **EF Core LINQ projections** (impossible in TypeScript)
-✅ **Nested object handling** (more powerful than TypeScript)
-✅ **Zero performance overhead** (like TypeScript)
-✅ **Full IntelliSense support** (like TypeScript)
+- ✅ **Compile-time generation** (like TypeScript)
+- ✅ **Runtime mapping code** (better than TypeScript)
+- ✅ **EF Core LINQ projections** (impossible in TypeScript)
+- ✅ **Nested object handling** (more powerful than TypeScript)
+- ✅ **Zero performance overhead** (like TypeScript)
+- ✅ **Full IntelliSense support** (like TypeScript)
 
 **Stop writing repetitive DTOs. Start using Facet.**
 
