@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "When the Code Writes Itself, What Is the Sprint For?"
+title: "Coffee Break Features and Afternoon-Long Reviews"
 date: 2026-10-13 00:00:00 +0000
 tags: [ai, agents, spec-driven-development, scrum, agile, software-engineering]
 excerpt: If AI agents can implement software faster than we can safely validate it, do our sprints still fit the work?
