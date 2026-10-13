@@ -5,7 +5,7 @@ permalink: /resume/
 ---
 
 <div style="text-align: center; margin: 2rem 0;">
-  <img src="/assets/images/TimMountain.png" alt="Tim Maes" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--link-color); margin-bottom: 1rem;">
+  <img src="/assets/images/TimAvatar.jpg" alt="Tim Maes" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--link-color); margin-bottom: 1rem;">
   <h1 style="margin: 0.5rem 0;">Tim Maes</h1>
   <h2 style="font-size: 1.25rem; font-weight: 500; color: #586069; margin: 0.5rem 0;">.NET Developer & Open Source Contributor</h2>
   <p style="color: #586069; margin: 0.5rem 0;">Harelbeke, Belgium</p>
