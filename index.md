@@ -3,15 +3,17 @@ layout: home
 title: Home
 ---
 
-<section class="hero-section">
-  <div class="hero-content">
-    <img src="/assets/images/TimAvatar.jpg" alt="Tim Maes" class="profile-image">
-    <div class="hero-text">
-      <p class="eyebrow">Hi, I'm</p>
+<section class="intro-block">
+  <div class="intro-head">
+    <img src="/assets/images/TimAvatar.jpg" alt="Tim Maes" class="avatar">
+    <div>
       <h1>Tim Maes</h1>
-      <p class="tagline">.NET Developer &middot; Software Engineer &middot; Open Source Maintainer</p>
+      <p class="role"><span class="dot"></span>.NET developer &amp; open source maintainer, Belgium</p>
+    </div>
+  </div>
+  <div class="hero-text">
       <p class="intro">
-        I write about .NET, code generation, Blazor and how AI is changing the way we build software. Creator of Facet, BlazorFrame, T4Editor and other open source tools with over 1.1 million NuGet downloads.
+        I write about .NET, code generation, Blazor and how AI is changing the way we build software. I also maintain <a href="https://github.com/Tim-Maes/Facet">Facet</a>, <a href="https://github.com/Tim-Maes/BlazorFrame">BlazorFrame</a>, <a href="https://marketplace.visualstudio.com/items?itemName=TimMaes.t4editor">T4Editor</a> and a few other open source tools.
       </p>
       <div class="social-links">
         <a href="https://github.com/Tim-Maes" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -32,72 +34,45 @@ title: Home
         <a href="mailto:tim.maes91@gmail.com" aria-label="Email">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/></svg>
         </a>
-        <a href="https://github.com/Tim-Maes?tab=repositories" target="_blank" rel="noopener noreferrer" class="stars-badge">
-          <img src="https://img.shields.io/github/stars/Tim-Maes?affiliations=OWNER&style=social&label=Total%20Stars" alt="GitHub stars">
-        </a>
       </div>
-    </div>
   </div>
 </section>
 
 <section class="home-section">
   <div class="section-heading">
-    <h2>Latest posts</h2>
-    <a href="{{ '/blog/' | relative_url }}" class="section-link">All posts &rarr;</a>
+    <h2>Writing</h2>
+    <a href="{{ '/blog/' | relative_url }}" class="section-link">All posts</a>
   </div>
 
   {% assign latest = site.posts.first %}
   {% if latest %}
-  <a href="{{ latest.url | relative_url }}" class="post-feature">
-    <span class="badge">New</span>
-    <time datetime="{{ latest.date | date_to_xmlschema }}">{{ latest.date | date: "%B %d, %Y" }}</time>
-    <h3>{{ latest.title }}</h3>
+  <article class="post-lead">
+    <time datetime="{{ latest.date | date_to_xmlschema }}">{{ latest.date | date: "%B %-d, %Y" }}</time>
+    <h3><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h3>
     <p>{{ latest.excerpt | strip_html | truncate: 220 }}</p>
-    {% if latest.tags %}
-    <div class="tags">
-      {% for tag in latest.tags limit: 4 %}<span class="tag">{{ tag }}</span>{% endfor %}
-    </div>
-    {% endif %}
-  </a>
+  </article>
   {% endif %}
 
-  <div class="post-grid">
-    {% for post in site.posts offset: 1 limit: 6 %}
-    <a href="{{ post.url | relative_url }}" class="post-card">
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d, %Y" }}</time>
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
-    </a>
+  <ul class="post-list">
+    {% for post in site.posts offset: 1 limit: 8 %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %Y" }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
     {% endfor %}
-  </div>
+  </ul>
 </section>
 
 <section class="home-section">
   <div class="section-heading">
-    <h2>Featured projects</h2>
-    <a href="{{ '/projects/' | relative_url }}" class="section-link">All projects &rarr;</a>
+    <h2>Projects</h2>
+    <a href="{{ '/projects/' | relative_url }}" class="section-link">All projects</a>
   </div>
 
-  <div class="project-grid">
-    <a href="https://github.com/Tim-Maes/Facet" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>Facet</h3>
-      <p>Source generator for compile-time DTOs, facets and LINQ projections. Zero runtime overhead.</p>
-      <span class="project-meta">1.2k+ stars &middot; NuGet</span>
-    </a>
-    <a href="https://github.com/Tim-Maes/BlazorFrame" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>BlazorFrame</h3>
-      <p>Security-first iframe component for Blazor with origin validation, sandboxing and CSP integration.</p>
-      <span class="project-meta">Blazor &middot; NuGet</span>
-    </a>
-    <a href="https://github.com/Tim-Maes/Facet.Search" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>Facet.Search</h3>
-      <p>Compile-time faceted search generation for .NET with type-safe filters and SQL-translated queries.</p>
-      <span class="project-meta">EF Core &middot; NuGet</span>
-    </a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=TimMaes.t4editor" target="_blank" rel="noopener noreferrer" class="project-card">
-      <h3>T4Editor</h3>
-      <p>Visual Studio extension with syntax highlighting and IntelliSense for T4 templates.</p>
-      <span class="project-meta">50K+ downloads &middot; VS Extension</span>
-    </a>
-  </div>
+  <ul class="project-list">
+    <li><a href="https://github.com/Tim-Maes/Facet">Facet</a><span>Source generator for DTOs, mappings and LINQ projections.</span></li>
+    <li><a href="https://github.com/Tim-Maes/Facet.Search">Facet.Search</a><span>Compile-time faceted search for EF Core.</span></li>
+    <li><a href="https://github.com/Tim-Maes/BlazorFrame">BlazorFrame</a><span>Security-first iframe component for Blazor.</span></li>
+    <li><a href="https://marketplace.visualstudio.com/items?itemName=TimMaes.t4editor">T4Editor</a><span>IntelliSense and highlighting for T4 in Visual Studio.</span></li>
+  </ul>
 </section>

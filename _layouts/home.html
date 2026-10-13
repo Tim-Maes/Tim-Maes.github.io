@@ -2,6 +2,66 @@
 layout: default
 ---
 
+<div id="splash" class="splash" role="dialog" aria-label="Welcome">
+  <script>
+    // Skip splash if already seen this session (unless ?splash is in the URL)
+    try {
+      if (sessionStorage.getItem('splashSeen') && !location.search.includes('splash')) {
+        document.getElementById('splash').remove();
+      } else {
+        document.documentElement.classList.add('splash-open');
+      }
+    } catch (e) {}
+  </script>
+  <div class="splash-inner">
+    <div class="splash-avatar">
+      <img src="/assets/images/TimAvatar.jpg" alt="Tim Maes">
+    </div>
+    <h1 class="splash-name">Tim Maes<span>.</span></h1>
+    <p class="splash-role">.NET developer &middot; open source maintainer</p>
+    <p class="splash-line"><span class="prompt">&gt;</span> <span id="splash-typed"></span><span class="caret"></span></p>
+    <button type="button" class="splash-enter" id="splash-enter">
+      Enter <span aria-hidden="true">&rarr;</span>
+    </button>
+    <p class="splash-hint">or press any key</p>
+  </div>
+</div>
+
 <div class="home">
   {{ content }}
 </div>
+
+<script>
+(function () {
+  var splash = document.getElementById('splash');
+  if (!splash) return;
+
+  var lines = ['writing about .NET, Blazor & AI', 'building Facet, BlazorFrame, T4Editor', '1.1M+ NuGet downloads and counting'];
+  var el = document.getElementById('splash-typed');
+  var li = 0, ci = 0, deleting = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function tick() {
+    if (!document.getElementById('splash')) return;
+    var line = lines[li];
+    if (reduce) { el.textContent = line; return; }
+    el.textContent = line.slice(0, ci);
+    if (!deleting && ci < line.length) { ci++; setTimeout(tick, 45); }
+    else if (!deleting) { deleting = true; setTimeout(tick, 1600); }
+    else if (ci > 0) { ci--; setTimeout(tick, 20); }
+    else { deleting = false; li = (li + 1) % lines.length; setTimeout(tick, 300); }
+  }
+  tick();
+
+  function enter() {
+    try { sessionStorage.setItem('splashSeen', '1'); } catch (e) {}
+    splash.classList.add('splash-leaving');
+    document.documentElement.classList.remove('splash-open');
+    setTimeout(function () { splash.remove(); }, 700);
+    document.removeEventListener('keydown', enter);
+  }
+
+  document.getElementById('splash-enter').addEventListener('click', enter);
+  document.addEventListener('keydown', enter);
+})();
+</script>

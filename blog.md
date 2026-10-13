@@ -1,23 +1,23 @@
 ---
 layout: page
-title: Blog
+title: Writing
 permalink: /blog/
 ---
 
-<div class="posts-list">
-  {% for post in site.posts %}
-    <article class="post-item">
-      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
-      {% if post.tags %}
-        <div class="tags">
-          {% for tag in post.tags %}
-            <span class="tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
-      <p>{{ post.excerpt }}</p>
-      <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
-    </article>
-  {% endfor %}
-</div>
+{% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+{% for year in years %}
+<section class="year-group">
+  <h2 class="year">{{ year.name }}</h2>
+  <ul class="post-list post-list--full">
+    {% for post in year.items %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d" }}</time>
+      <div>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
