@@ -4,43 +4,43 @@ title: About
 permalink: /about/
 ---
 
-# About Me
+<div class="intro-head">
+  <img src="/assets/images/TimAvatar.jpg" alt="Tim Maes" class="avatar" width="84" height="84">
+  <div>
+    <p class="role" style="margin:0"><span class="dot"></span>.NET developer &amp; open source maintainer, Belgium</p>
+  </div>
+</div>
 
-I'm Tim Maes, a passionate .NET developer with a love for clean code, software architecture, and continuous learning.
+I'm Tim Maes, a .NET developer who cares about clean code, good architecture and tools that remove boilerplate so developers can focus on the problem they're actually solving.
 
-## My Journey
+## What I work on
 
-I've been working with .NET technologies for several years, building everything from web applications to microservices. I believe in writing code that is not just functional, but also maintainable, testable, and scalable.
+Most of my open source work revolves around **code generation**. [Facet](https://github.com/Tim-Maes/Facet) generates DTOs, mappings and LINQ projections at compile time, [Facet.Search](https://github.com/Tim-Maes/Facet.Search) does the same for faceted search, and [T4Editor](https://marketplace.visualstudio.com/items?itemName=TimMaes.t4editor) brings IntelliSense to T4 templates in Visual Studio. On the Blazor side I built [BlazorFrame](https://github.com/Tim-Maes/BlazorFrame), a security-first iframe component.
 
-## What Drives Me
+Together these projects have passed **1.1 million NuGet downloads**. See all of them on the [projects page](/projects/).
 
-- **Clean Code:** I'm passionate about writing code that other developers (including future me) can easily understand and maintain
-- **Continuous Learning:** Technology evolves rapidly, and I enjoy staying up-to-date with the latest developments in the .NET ecosystem
-- **Sharing Knowledge:** Through this blog, I aim to share what I've learned and help other developers on their journey
+## What I write about
 
-## Skills & Technologies
+- **.NET and C#:** source generators, mapping, EF Core, API design
+- **Architecture:** patterns that keep codebases simple as they grow
+- **AI and agentic development:** how it's changing the way we build software and work in teams
 
-**Core Expertise:**
+## Skills & technologies
+
 - **Languages:** C#, SQL, JavaScript/TypeScript
-- **Frameworks:** .NET 6/7/8, ASP.NET Core, Entity Framework Core, Blazor
-- **Databases:** SQL Server, PostgreSQL, MongoDB
+- **Frameworks:** .NET, ASP.NET Core, Entity Framework Core, Blazor
+- **Databases:** SQL Server, PostgreSQL
 - **Cloud & DevOps:** Azure, Docker, CI/CD pipelines
-- **Practices:** Clean Architecture, Domain-Driven Design, TDD, SOLID principles
+- **Practices:** Clean Architecture, Domain-Driven Design, source generation, SOLID
 
-## Beyond Code
+## Let's connect
 
-When I'm not coding, I enjoy [your hobbies/interests]. I'm also an advocate for [causes you care about].
-
-## Let's Connect
-
-I'm always happy to connect with fellow developers, discuss technology, or explore collaboration opportunities.
+I'm always happy to talk .NET, open source or collaboration.
 
 - **GitHub:** [github.com/Tim-Maes](https://github.com/Tim-Maes)
-- **LinkedIn:** [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- **Email:** your-email@example.com
-
-Feel free to reach out if you want to discuss .NET development, collaborate on a project, or just chat about tech!
+- **LinkedIn:** [in/tim-maes-93a82112a](https://www.linkedin.com/in/tim-maes-93a82112a/)
+- **Email:** [tim.maes91@gmail.com](mailto:tim.maes91@gmail.com)
 
 ---
 
-*This blog is built with Jekyll, uses Rouge for syntax highlighting, and is hosted on GitHub Pages.*
+*This site is built with Jekyll and hosted on GitHub Pages.*

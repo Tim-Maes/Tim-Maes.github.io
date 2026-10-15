@@ -2,12 +2,12 @@
 title: Tim Maes
 description: A blog about .NET development, software engineering, and tech insights
 baseurl: ""
-url: "https://Tim-Maes.github.io"
+url: "https://tim-maes.com"
 
 # Author settings
 author:
   name: Tim Maes
-  email: your-email@example.com
+  email: tim.maes91@gmail.com
 
 # Build settings
 markdown: kramdown
@@ -23,6 +23,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 # Permalink structure
 permalink: /blog/:year/:month/:day/:title/
@@ -42,6 +43,12 @@ defaults:
       layout: "post"
       comments: true
       categories: ["blog"]
+      image: /assets/images/og-default.png
+  # Social preview image for all other pages. Override per post/page with `image:`.
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-default.png
 
 # Exclude from processing
 exclude:
@@ -61,3 +68,11 @@ feed:
     - blog
 
 excerpt_separator: "<!--more-->"
+
+
+# Giscus comments (https://giscus.app). Fill in repo_id and category_id to enable.
+giscus:
+  repo: Tim-Maes/Tim-Maes.github.io
+  repo_id: "R_kgDOLh2FHw"
+  category: Announcements
+  category_id: "DIC_kwDOLh2FH84DIfI9"

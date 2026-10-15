@@ -2,7 +2,10 @@
 layout: post
 title: "Facets in .NET"
 date: 2025-09-28 14:00:00 +0000
-tags: [source-generators, architecture, mapping, dtos, linq, csharp, dotnet, efcore]
+tags: [facet, source-generators, architecture, mapping, dtos, linq, csharp, dotnet, efcore]
+series: Facet
+redirect_from:
+  - /blog/2025/09/28/facets-in-dotnet-(2)/
 ---
 
 <div style="text-align: center; margin: 2rem 0;">

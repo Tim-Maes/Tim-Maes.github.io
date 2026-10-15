@@ -90,6 +90,7 @@ Source generators work by analyzing a program's structure, including its syntax 
 
 Just like in the T4 example above, we want to generate DTOs based on existing entities. In this example, any class that implements `IModelEntity` will have a corresponding DTO class generated for it at compile time. The generated DTOs will be placed in the *.DTOs namespace and will include properties that mirror those of the original model classes.
 
+{% raw %}
 ```csharp
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -149,6 +150,7 @@ public class DtoGenerator : ISourceGenerator
     }
 }
 ```
+{% endraw %}
 
 This is 100% C# code and requires no other syntax compared to the T4 example. In other words, any C# developer can hop right in and start using Source Generators.
 

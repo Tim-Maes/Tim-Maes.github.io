@@ -1,9 +1,10 @@
-﻿---
+---
 layout: post
 title: "Advanced Flattening with Facet .NET"
 date: 2025-11-26
 categories: [dotnet, csharp, source-generators]
 tags: [facet, dto, api, source-generation, entity-framework]
+series: Facet
 excerpt: "If you've ever found yourself writing DTOs with properties like CustomerAddressStreet, CustomerAddressCity, ShippingAddressLine1, and ShippingAddressZipCode, you know the pain of manually flattening nested object structures. It's tedious, error-prone, and clutters your codebase with boilerplate."
 ---
 

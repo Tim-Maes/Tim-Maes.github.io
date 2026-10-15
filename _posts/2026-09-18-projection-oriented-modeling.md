@@ -3,6 +3,7 @@ layout: post
 title: "Projection-Oriented Modeling: Stop Mapping, Start Projecting"
 date: 2026-09-18 10:00:00 +0000
 tags: [dotnet, csharp, architecture, design-patterns, source-generators, ef-core, facet]
+series: Facet
 excerpt: "Object mapping treats different representations as separate models that need translation. Projection-Oriented Modeling treats consumer-specific models as views of an existing source model - and that shift changes how you design your application."
 ---
 
